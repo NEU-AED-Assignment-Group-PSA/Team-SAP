@@ -51,6 +51,7 @@ public ManageAirlinersJPanel(javax.swing.JPanel spane, AirlinerDirectory sd) {
         btnNewAirliner = new javax.swing.JButton();
         btnViewAirliner = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        btnmngAirplane = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Manage Airliners");
@@ -93,6 +94,14 @@ public ManageAirlinersJPanel(javax.swing.JPanel spane, AirlinerDirectory sd) {
             }
         });
 
+        btnmngAirplane.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnmngAirplane.setText("Manage Airplane");
+        btnmngAirplane.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnmngAirplaneActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +118,10 @@ public ManageAirlinersJPanel(javax.swing.JPanel spane, AirlinerDirectory sd) {
                         .addComponent(btnNewAirliner)
                         .addGap(123, 123, 123)
                         .addComponent(btnViewAirliner))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(btnmngAirplane)))
                 .addContainerGap(201, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -126,7 +138,9 @@ public ManageAirlinersJPanel(javax.swing.JPanel spane, AirlinerDirectory sd) {
                             .addComponent(btnNewAirliner)
                             .addComponent(btnViewAirliner)))
                     .addComponent(btnBack))
-                .addContainerGap(232, Short.MAX_VALUE))
+                .addGap(90, 90, 90)
+                .addComponent(btnmngAirplane)
+                .addContainerGap(111, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -138,11 +152,16 @@ public ManageAirlinersJPanel(javax.swing.JPanel spane, AirlinerDirectory sd) {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnmngAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnmngAirplaneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnmngAirplaneActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNewAirliner;
     private javax.swing.JButton btnViewAirliner;
+    private javax.swing.JButton btnmngAirplane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblAirliner;
