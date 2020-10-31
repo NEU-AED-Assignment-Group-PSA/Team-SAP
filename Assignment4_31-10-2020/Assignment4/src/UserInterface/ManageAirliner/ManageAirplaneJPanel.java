@@ -35,13 +35,12 @@ public ManageAirplaneJPanel(javax.swing.JPanel spane, Airliner airliner, Airline
     airlinerdirectory = sd;
     this.airliner= airliner;
     this.airplaneDir=airplaneDir;
+    lblAirlinerName.setText(airliner.getAirLinerName());
     
     if(!airplaneDir.getAirplaneList().isEmpty()){
-    populateAirplaneList();
+        populateAirplaneList();
     }
     
-    
-    lblAirlinerName.setText(airliner.getAirLinerName());
 }
 
 
@@ -55,13 +54,13 @@ public void populateAirplaneList()
             //check airline name in airplane
             if(s.getAirlinerName().equals(airliner.getAirLinerName()))
             {
-            Object row[] = new Object[5];
-            row[0] = s;
-            row[1] = s.getWindowSeatCount();
-            row[2] = s.getMiddleSeatCount();
-            row[3] = s.getAisleSeatCount();
-            row[4] = s.getModelNum();
-            model.addRow(row); 
+                Object row[] = new Object[5];
+                row[0] = s;
+                row[1] = s.getWindowSeatCount();
+                row[2] = s.getMiddleSeatCount();
+                row[3] = s.getAisleSeatCount();
+                row[4] = s.getModelNum();
+                model.addRow(row); 
             }
             
         }
@@ -139,34 +138,39 @@ public void populateAirplaneList()
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(btnBack)
-                .addGap(131, 131, 131)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(87, 87, 87)
+                        .addGap(33, 33, 33)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnBack)
+                                .addGap(625, 625, 625))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(btnNewAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnViewAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(308, 308, 308)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNewAirplane)
-                        .addGap(123, 123, 123)
-                        .addComponent(btnViewAirplane))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(149, Short.MAX_VALUE))
+                        .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(4, 4, 4)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(22, 22, 22)
+                        .addGap(68, 68, 68)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(59, 59, 59)
+                        .addGap(42, 42, 42)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnNewAirplane)
                             .addComponent(btnViewAirplane)))
@@ -188,8 +192,6 @@ public void populateAirplaneList()
         ViewAirplane msjp = new ViewAirplane (userProcessContainer,airplane, airliner);
         userProcessContainer.add("ViewAirplane",msjp); //any name will do
         ((java.awt.CardLayout)userProcessContainer.getLayout()).next(userProcessContainer);
-        
-        
         
     }//GEN-LAST:event_btnViewAirplaneActionPerformed
 

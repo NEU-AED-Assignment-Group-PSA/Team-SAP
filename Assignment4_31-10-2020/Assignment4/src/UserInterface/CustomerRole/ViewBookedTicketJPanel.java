@@ -90,6 +90,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Customer Name:");
 
         tblTickets.setModel(new javax.swing.table.DefaultTableModel(
@@ -114,7 +115,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         jLabel1.setText("View Ticket");
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnCancel.setText("Cancel");
+        btnCancel.setText("Cancel Ticket");
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
@@ -133,6 +134,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         lblName.setText("jLabel2");
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Customer ID:");
 
         lblID.setText("jLabel2");
@@ -140,6 +142,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         lblMobile.setText("jLabel2");
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Mobile:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -158,9 +161,6 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(205, 205, 205)
-                                .addComponent(btnCancel))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -174,7 +174,10 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(328, 328, 328)
+                        .addComponent(btnCancel)))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -198,9 +201,9 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(79, 79, 79)
+                .addGap(18, 18, 18)
                 .addComponent(btnCancel)
-                .addContainerGap(139, Short.MAX_VALUE))
+                .addContainerGap(200, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -231,7 +234,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         }
         
         Ticket t= (Ticket)  tblTickets.getValueAt(row,0);
-        t.setStatus("Cancel");
+        t.setStatus("Canceled");
         JOptionPane.showMessageDialog(null,"Ticket Cancelled!");
         populateTickets();
         

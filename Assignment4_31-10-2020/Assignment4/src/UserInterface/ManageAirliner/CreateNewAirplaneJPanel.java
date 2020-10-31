@@ -60,25 +60,30 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         lblAirlinerName = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Create New Airplane for: ");
+        jLabel1.setText("Create New Airplane for");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Name:");
 
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Window Seat Count:");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Middle Seat Count:");
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Aisle Seat Count:");
 
         txtModel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Model Number:");
 
         btnCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -100,13 +105,13 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         });
 
         cmbWindow.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
+        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
 
         cmbMiddle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
+        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
 
         cmbAisle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
+        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
 
         lblAirlinerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblAirlinerName.setText("Airliner");
@@ -116,38 +121,32 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(btnBack)
+                .addGap(181, 181, 181)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(106, 106, 106))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(106, 106, 106)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(88, 88, 88))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(106, 106, 106)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnCreate)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addGap(70, 70, 70)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtModel, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
-                            .addComponent(cmbWindow, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbMiddle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cmbAisle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addComponent(btnBack)
-                        .addGap(181, 181, 181)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(106, Short.MAX_VALUE))
+                    .addComponent(btnCreate)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txtName)
+                        .addComponent(cmbWindow, 0, 215, Short.MAX_VALUE)
+                        .addComponent(cmbMiddle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmbAisle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtModel)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,25 +164,25 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cmbWindow)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
-                .addGap(40, 40, 40)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbWindow, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbMiddle))
-                .addGap(45, 45, 45)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cmbAisle))
-                .addGap(38, 38, 38)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65)
+                .addGap(44, 44, 44)
                 .addComponent(btnCreate)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(180, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -194,8 +193,10 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         //validate values->
-        if(txtName.getText()==null || "".equals(txtName.getText())){
-            JOptionPane.showMessageDialog(null, "Please enter Airplane Name");
+        if(txtName.getText().isEmpty() || cmbWindow.getSelectedIndex() == 0 || 
+               cmbMiddle.getSelectedIndex() == 0 ||  cmbAisle.getSelectedIndex() == 0 
+                || txtModel.getText().isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please fill data");
             return;
         }
         
@@ -203,10 +204,10 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         int midSeat =Integer.parseInt(cmbMiddle.getItemAt(cmbMiddle.getSelectedIndex()));
         int aisleSeat =Integer.parseInt(cmbAisle.getItemAt(cmbAisle.getSelectedIndex()));
         
-        if(txtModel.getText()==null || "".equals(txtModel.getText())){
-            JOptionPane.showMessageDialog(null, "Please enter Model number");
-            return;
-        }
+//        if(txtModel.getText()==null || "".equals(txtModel.getText())){
+//            JOptionPane.showMessageDialog(null, "Please enter Model number");
+//            return;
+//        }
         
         //Aplha only
         boolean match = txtName.getText().matches("[a-zA-Z0-9]+");
@@ -233,15 +234,16 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         a.setMiddleSeatCount(midSeat);
         a.setAisleSeatCount(aisleSeat);
         a.setModelNum(model);
+        a.setAirlinerName(airliner.getAirLinerName());
         
         airplaneList.addAirplane(a);
         JOptionPane.showMessageDialog(null, "Airplane added successfully!");
-
         
-        
-        
-        
-        
+        txtName.setText("");
+        txtModel.setText("");
+        cmbWindow.setSelectedIndex(0);
+        cmbMiddle.setSelectedIndex(0);  
+        cmbAisle.setSelectedIndex(0);
     }//GEN-LAST:event_btnCreateActionPerformed
                                   
     
@@ -253,7 +255,6 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         ms.populateAirplaneList();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
-    
     } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
