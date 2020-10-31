@@ -8,6 +8,7 @@ package UserInterface.ManageAirliner;
 import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.Airplane;
+import Business.Fleet;
 import Business.Flight;
 import Business.FlightSchedule;
 import java.awt.CardLayout;
@@ -32,7 +33,8 @@ public class ManageFlightJPanel extends javax.swing.JPanel {
  AirlinerDirectory airlinerDir;
  List<Flight> flightList;
  List<FlightSchedule> flightSchedule;
-    public ManageFlightJPanel(JPanel UserProcessContainer,  Airliner airliner,AirlinerDirectory ad,List<Flight> flightList, List<FlightSchedule> flightSchedule) {
+ Fleet airplaneList;
+    public ManageFlightJPanel(JPanel UserProcessContainer,  Airliner airliner,AirlinerDirectory ad,List<Flight> flightList, List<FlightSchedule> flightSchedule,Fleet airplaneList) {
         initComponents();
         this.airliner=airliner;
         this.userProcessContainer=UserProcessContainer;
@@ -40,6 +42,7 @@ public class ManageFlightJPanel extends javax.swing.JPanel {
         this.flightList=flightList;
         this.flightSchedule=flightSchedule;
         lblAirlinerName.setText(airliner.getAirLinerName());
+        this.airplaneList=airplaneList;
         if(!flightList.isEmpty())
         {
             populateFlightTable();
@@ -202,7 +205,7 @@ public class ManageFlightJPanel extends javax.swing.JPanel {
         Flight flight= (Flight)  tblFlight.getValueAt(row,0);
         AirlinerDirectory ad = airlinerDir;
         //UserProcessContainer.removeAll();
-        ManageFlightSchedule msjp = new ManageFlightSchedule (userProcessContainer,flight, airliner, flightSchedule);
+        ManageFlightSchedule msjp = new ManageFlightSchedule (userProcessContainer,flight, airliner, flightSchedule, airplaneList);
         userProcessContainer.add("ManageFlightSchedule",msjp); //any name will do
         ((java.awt.CardLayout)userProcessContainer.getLayout()).next(userProcessContainer);
         

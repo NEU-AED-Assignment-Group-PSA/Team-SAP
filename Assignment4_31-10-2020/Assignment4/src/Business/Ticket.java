@@ -12,7 +12,7 @@ package Business;
 public class Ticket {
     //TicketID, Person, SeatNo, FlightNo(FlightSchedule)
     private String ticketID;
-    private Seat seat;    // for seat number
+    private RowSeat seat;    // for seat number
     private int customerID;
     private Flight flight; // for flight number 
     private String status; //cancel,booked
@@ -22,7 +22,25 @@ public class Ticket {
     private String time;
     private String flightNum;
     private double price;
+    private String seatNumber;
+    private String flightID;
 
+    public String getFlightID() {
+        return flightID;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
+    }
+
+    public String getSeatNumber() {
+        return seatNumber;
+    }
+
+    public void setSeatNumber(String seatNumber) {
+        this.seatNumber = seatNumber;
+    }
+    
     public double getPrice() {
         return price;
     }
@@ -117,11 +135,11 @@ public class Ticket {
         this.ticketID = ticketID;
     }
 
-    public Seat getSeat() {
+    public RowSeat getSeat() {
         return seat;
     }
 
-    public void setSeat(Seat seat) {
+    public void setSeat(RowSeat seat) {
         this.seat = seat;
     }
 

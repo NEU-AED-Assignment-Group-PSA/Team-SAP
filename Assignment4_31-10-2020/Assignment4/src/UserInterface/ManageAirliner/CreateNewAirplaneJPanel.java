@@ -105,13 +105,13 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         });
 
         cmbWindow.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
+        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
 
         cmbMiddle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
+        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
 
         cmbAisle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
+        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
 
         lblAirlinerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblAirlinerName.setText("Airliner");
@@ -230,9 +230,9 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         
         Airplane a = new Airplane();
         a.setAirplaneName(name);
-        a.setWindowSeatCount(windowSeat);
-        a.setMiddleSeatCount(midSeat);
-        a.setAisleSeatCount(aisleSeat);
+        //a.setWindowSeatCount(windowSeat);
+       // a.setMiddleSeatCount(midSeat);
+        //a.setAisleSeatCount(aisleSeat);
         a.setModelNum(model);
         a.setAirlinerName(airliner.getAirLinerName());
         

@@ -38,11 +38,11 @@ public class ViewAirplane extends javax.swing.JPanel {
 
     public void populate(){
         txtName.setText(airplane.getAirplaneName());
-        int i= (airplane.getWindowSeatCount())/10 ;
+        int i= 0;//(airplane.getWindowSeatCount())/10 - 1;
         cmbWindow.setSelectedIndex(i);
-        i= (airplane.getMiddleSeatCount())/10 ;
+        i= 0;//(airplane.getMiddleSeatCount())/10 -1;
         cmbMiddle.setSelectedIndex(i);
-        i= (airplane.getAisleSeatCount())/10 ;
+        i= 0;//(airplane.getAisleSeatCount())/10 -1;
         cmbAisle.setSelectedIndex(i);
         txtModel.setText(airplane.getModelNum());
         txtName.setEnabled(false);
@@ -134,13 +134,13 @@ public class ViewAirplane extends javax.swing.JPanel {
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         cmbWindow.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
+        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
 
         cmbMiddle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
+        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
 
         cmbAisle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "10", "20", "30" }));
+        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
 
         lblAirplane.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblAirplane.setText("Airliner");
@@ -296,9 +296,9 @@ public class ViewAirplane extends javax.swing.JPanel {
         
         //Airplane a = new Airplane();
         airplane.setAirplaneName(name);
-        airplane.setWindowSeatCount(windowSeat);
-        airplane.setMiddleSeatCount(midSeat);
-        airplane.setAisleSeatCount(aisleSeat);
+        //airplane.setWindowSeatCount(25);
+        //airplane.setMiddleSeatCount(25);
+       // airplane.setAisleSeatCount(25);
         airplane.setModelNum(model);
         //airliner.getAirplaneList().remove(airplane);
         //airliner.getAirplaneList().add(a);

@@ -16,9 +16,27 @@ public class Airplane {
     private String airlinerName;
 
     private String airplaneName;
-    private int windowSeatCount;  // passenger capacity
-    private int middleSeatCount; 
-    private int aisleSeatCount;
+    private List<RowSeat> availableSeats;  
+
+    public List<RowSeat> getSeats() {
+        return availableSeats;
+    }
+
+    public void setSeats(List<RowSeat> seats) {
+        this.availableSeats = seats;
+    }
+
+    public int getSeatCount() {
+        return seatCount;
+    }
+
+    public void setSeatCount(int seatCount) {
+        this.seatCount = seatCount;
+    }
+    
+    
+    private int seatCount; 
+   
     //private String planeClass;
     //private List<Person> crew;
     //private double fuelCapacity;
@@ -30,8 +48,19 @@ public class Airplane {
     
     
     public Airplane(){
-        //new Seat();
+        //new RowSeat();
         //this.flightList = flightList;
+
+        availableSeats= new ArrayList<>();
+        for(int i=0;i<25;i++)
+        {
+            RowSeat s = new RowSeat();
+            availableSeats.add(s);
+    }
+
+        this.setSeatCount(25*6);
+
+
     }
 
     public String getAirplaneName() {
@@ -42,29 +71,7 @@ public class Airplane {
         this.airplaneName = airplaneName;
     }
 
-    public int getWindowSeatCount() {
-        return windowSeatCount;
-    }
 
-    public void setWindowSeatCount(int windowSeatCount) {
-        this.windowSeatCount = windowSeatCount;
-    }
-
-    public int getMiddleSeatCount() {
-        return middleSeatCount;
-    }
-
-    public void setMiddleSeatCount(int middleSeatCount) {
-        this.middleSeatCount = middleSeatCount;
-    }
-
-    public int getAisleSeatCount() {
-        return aisleSeatCount;
-    }
-
-    public void setAisleSeatCount(int aisleSeatCount) {
-        this.aisleSeatCount = aisleSeatCount;
-    }
 
     public String getModelNum() {
         return modelNum;

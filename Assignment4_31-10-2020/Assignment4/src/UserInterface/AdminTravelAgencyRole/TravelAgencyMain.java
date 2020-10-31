@@ -49,6 +49,12 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         flightList= new ArrayList<>();
         ticketList= new ArrayList<>();
         flightScheduleList = new ArrayList<>();
+          populateAirlineFromFile();
+        populateAirplaneFromFile();
+        populateFlightFromFile();
+        populateFlightScheduleFromFile();
+        populatCustomerFIle();
+        populateTicketsFile();
         
     }
 
@@ -192,6 +198,16 @@ public class TravelAgencyMain extends javax.swing.JFrame {
             fs.setDate(dt);
             fs.setTime((d[4]));
             fs.setPrice(Double.parseDouble(d[5]));
+            for(Airplane a: airplanelist.getAirplaneList())
+             {
+                if(a.getAirplaneName().equals(d[6]))
+                {
+                    fs.setAirplane(a);
+                    break;
+                }
+            }
+            
+            
             flightScheduleList.add(fs);
         
         }//end while
@@ -222,10 +238,10 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         
             airplaneNew.setAirlinerName(airlinerName);
             airplaneNew.setAirplaneName(d[1]);            
-            airplaneNew.setWindowSeatCount(Integer.parseInt(d[2]));
-            airplaneNew.setMiddleSeatCount(Integer.parseInt(d[3]));
-            airplaneNew.setAisleSeatCount(Integer.parseInt(d[4]));
-            airplaneNew.setModelNum(d[5]);
+            //airplaneNew.setWindowSeatCount(Integer.parseInt(d[2]));
+            //airplaneNew.setMiddleSeatCount(Integer.parseInt(d[3]));
+            //airplaneNew.setAisleSeatCount(Integer.parseInt(d[4]));
+            airplaneNew.setModelNum(d[2]);
             airplanelist.addAirplane(airplaneNew);
         
         }//end while

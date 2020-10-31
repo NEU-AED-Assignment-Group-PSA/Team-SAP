@@ -9,6 +9,7 @@ import Business.Airliner;
 import Business.AirlinerDirectory;
 import Business.Customer;
 import Business.CustomerDirectory;
+import Business.FlightSchedule;
 import Business.Ticket;
 import java.awt.CardLayout;
 import java.util.List;
@@ -31,14 +32,15 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
     CustomerDirectory custDir;
     Customer customer;
     List<Ticket> ticketList;
-    public ViewBookedTicketJPanel(JPanel UserProcessContainer, AirlinerDirectory airlinerDir, CustomerDirectory custDir, Customer c, List<Ticket> ticketList) {
+    List<FlightSchedule> fsList;
+    public ViewBookedTicketJPanel(JPanel UserProcessContainer, AirlinerDirectory airlinerDir, CustomerDirectory custDir, Customer c, List<Ticket> ticketList,List<FlightSchedule> fsList) {
         initComponents();
         this.UserProcessContainer = UserProcessContainer;
         this.airlinerDir= airlinerDir;
         this.custDir=custDir;
         this.customer=c;
         this.ticketList=ticketList;
-        
+        this.fsList=fsList;
         populateTickets();
         
     }
@@ -55,7 +57,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         for (Ticket s : ticketList) {
             if(s.getCustomerID() == customer.getCustomerID())
             {
-            Object row[] = new Object[7];
+            Object row[] = new Object[8];
             row[0] = s;
             row[1] = s.getFlightNum();
             row[2] = s.getSource();
@@ -63,6 +65,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
             row[4] = s.getDate();
             row[5] = s.getTime();
             row[6] = s.getStatus();
+            row[7] = s.getSeatNumber();
             model.addRow(row);
         }
         }
@@ -98,11 +101,11 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "ID", "Flight Number", "Source", "Destination", "Date", "Time", "Status"
+                "ID", "Flight Number", "Source", "Destination", "Date", "Time", "Status", "Seat Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -234,7 +237,28 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         }
         
         Ticket t= (Ticket)  tblTickets.getValueAt(row,0);
-        t.setStatus("Canceled");
+        if(t.getStatus().equals("Cancel"))
+        {
+            JOptionPane.showMessageDialog(null, "Ticket is already canceled, please select other row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+        
+        String flightNum= t.getFlightNum();
+        
+        for(FlightSchedule fs:fsList)
+        {
+            if(fs.getFlightNum().equals(flightNum)&& fs.getFsID().equals(t.getFlightID()))
+            {
+                //String[] seatType=t.getSeatNumber().split("_");
+                fs.cancelTicket(t.getSeatNumber());
+            }
+        }
+        
+        
+        
+        t.setStatus("Cancel");
         JOptionPane.showMessageDialog(null,"Ticket Cancelled!");
         populateTickets();
         

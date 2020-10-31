@@ -224,11 +224,10 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         FL.setAirlinerName(airliner.getAirLinerName());
         txtFName.setText("");
         txtFNumber.setText("");
-        flightList.add(flight);
+        flightList.add(FL);
         JOptionPane.showMessageDialog(null, "Flight sucessfully added"); 
         Populate();
         }
-    
     }//GEN-LAST:event_btnCreateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed

@@ -279,7 +279,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         
         Customer c= (Customer)  tblCustomer.getValueAt(row,0);
         
-        ViewBookedTicketJPanel msjp = new ViewBookedTicketJPanel (UserProcessContainer, airlinerDir,custDir, c, ticketList);
+        ViewBookedTicketJPanel msjp = new ViewBookedTicketJPanel (UserProcessContainer, airlinerDir,custDir, c, ticketList, flightSchList);
         UserProcessContainer.add("ViewBookedTicketJPanel",msjp); //any name will do
         ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
         

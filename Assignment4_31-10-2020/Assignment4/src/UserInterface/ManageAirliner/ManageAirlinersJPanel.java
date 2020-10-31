@@ -253,7 +253,7 @@ public ManageAirlinersJPanel(javax.swing.JPanel spane, AirlinerDirectory airline
         
         AirlinerDirectory ad = airlinerdirectory;
         //UserProcessContainer.removeAll();
-        ManageFlightJPanel msjp = new ManageFlightJPanel (UserProcessContainer, airliner, ad, flightList,flightScheduleList);
+        ManageFlightJPanel msjp = new ManageFlightJPanel (UserProcessContainer, airliner, ad, flightList,flightScheduleList, airplaneDir);
         UserProcessContainer.add("ManageFlightJPanel",msjp); //any name will do
         ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
         

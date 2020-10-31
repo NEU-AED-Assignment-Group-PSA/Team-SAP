@@ -167,11 +167,11 @@ public class BookTickets extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight Name", "Source", "Destination", "Date", "Time", "Price", "Airliner", "FlightNum"
+                "Flight Name", "Source", "Destination", "Date", "Time", "Price", "Airliner", "FlightNum", "Available Seat"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -355,6 +355,12 @@ public class BookTickets extends javax.swing.JPanel {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
+        populateSearchResults();
+    }                                         
+
+    
+    
+    void populateSearchResults(){
         try{
         /*if(txtSrc.getText() == null || txtSrc.getText().equals(""))
         {
@@ -368,11 +374,18 @@ public class BookTickets extends javax.swing.JPanel {
             return;
         }
         */
+         java.util.Date date=null;
+         SimpleDateFormat sdfrmt;
+        if(txtDate.getText().equals("") || txtDate.getText()==null)
+        {
         
-        SimpleDateFormat sdfrmt= new SimpleDateFormat("mm/dd/yyyy");
+        }
+        else{
+         sdfrmt= new SimpleDateFormat("MM/dd/yyyy");
         sdfrmt.setLenient(false);
-        Date date = sdfrmt.parse(txtDate.getText());
+               date = sdfrmt.parse(txtDate.getText());
                 
+        }
         
         String source = cmbSrc.getItemAt(cmbSrc.getSelectedIndex());//txtSrc.getText();
         String dest= cmbDest.getItemAt(cmbSrc.getSelectedIndex());//txtDestination.getText();
@@ -404,6 +417,21 @@ public class BookTickets extends javax.swing.JPanel {
         
         FlightSchedule fsch= (FlightSchedule)  tblFlightSchedule.getValueAt(row,7);
         
+        
+         //check seat
+        String seatType= cmbSeatType.getItemAt(cmbSeatType.getSelectedIndex());
+        String seatNumber=fsch.bookTicket(seatType);
+        if(seatNumber.equals("Not Available"))
+        {
+            JOptionPane.showMessageDialog(null, "Not Available, please other", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+            
+        }
+        
+        
+        
+        
+        //create ticket
         Ticket t = new Ticket();
         ticketList.add(t);
         t.setCustomerID(customer.getCustomerID());
@@ -414,8 +442,11 @@ public class BookTickets extends javax.swing.JPanel {
         t.setPrice(fsch.getPrice());
         t.setTime(fsch.getTime());
         t.setStatus("Booked");
+        t.setSeatNumber(seatNumber);
+        t.setFlightID(fsch.getFsID());
         //t.setFlight(flight);
-        
+        JOptionPane.showMessageDialog(null, "Booked with Seat "+seatNumber );
+        populateSearchResults();
     }//GEN-LAST:event_btnBookActionPerformed
 
     
@@ -424,7 +455,8 @@ public class BookTickets extends javax.swing.JPanel {
        // String tableDateExpired = "2012-03-18";
         try{
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        
+        DefaultTableModel model = (DefaultTableModel) tblFlightSchedule.getModel();
+        model.setRowCount(0);
         for(FlightSchedule fs : flightSchList)
         {
             String fDate ;//= fs.getDate();
@@ -435,7 +467,7 @@ public class BookTickets extends javax.swing.JPanel {
                    &&
                fs.getDestination().equals(dest)&&
                    (fDate.equals(dateS)  )&&
-                   fs.getTime().equals(time)  )
+                   fs.getTime().equals(time) && fs.getFlightSeatCount()>0 )
            {
               
                
@@ -450,11 +482,10 @@ public class BookTickets extends javax.swing.JPanel {
                    }
                }
                
-                DefaultTableModel model = (DefaultTableModel) tblFlightSchedule.getModel();
-        model.setRowCount(0);
+                
         //List<FlightSchedule> flightSchList = flight.getFlightSchedule();
         
-            Object row[] = new Object[8];
+            Object row[] = new Object[9];
             row[0] = flight.getFlightName();
             row[1] = source;
             row[2] = dest;
@@ -463,6 +494,7 @@ public class BookTickets extends javax.swing.JPanel {
             row[5] = fs.getPrice();//flight.getFlightNum();
             row[6]= flight.getAirlinerName();
             row[7] = fs;
+            row[8] = fs.getFlightSeatCount();
             model.addRow(row); 
             
            }
@@ -481,7 +513,9 @@ public class BookTickets extends javax.swing.JPanel {
        // String tableDateExpired = "2012-03-18";
         try{
     //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        
+        boolean flag=false;
+        DefaultTableModel model = (DefaultTableModel) tblFlightSchedule.getModel();
+        model.setRowCount(0);
         for(FlightSchedule fs : flightSchList)
         {
            // String fDate ;//= fs.getDate();
@@ -492,7 +526,7 @@ public class BookTickets extends javax.swing.JPanel {
                    &&
                fs.getDestination().equals(dest)&&
                   // (fDate.equals(dateS)  )&&
-                   fs.getTime().equals(time)  )
+                   fs.getTime().equals(time) && fs.getFlightSeatCount()>0 )
            {
               
                
@@ -502,16 +536,15 @@ public class BookTickets extends javax.swing.JPanel {
                    if(f.getFlightNum().equals(fs.getFlightNum()))
                    {
                        flight=f;
-                       break;
+                      // break;
                        
                    }
                }
                
-                DefaultTableModel model = (DefaultTableModel) tblFlightSchedule.getModel();
-        model.setRowCount(0);
+                
         //List<FlightSchedule> flightSchList = flight.getFlightSchedule();
         
-            Object row[] = new Object[8];
+            Object row[] = new Object[9];
             row[0] = flight.getFlightName();
             row[1] = source;
             row[2] = dest;
@@ -520,9 +553,17 @@ public class BookTickets extends javax.swing.JPanel {
             row[5] = fs.getPrice();//flight.getFlightNum();
             row[6]= flight.getAirlinerName();
             row[7]=fs;
+            row[8] = fs.getFlightSeatCount();
             model.addRow(row); 
-            
+            flag=true;
            }
+        }
+         //  }
+       // }
+        if(flag==false)
+        {
+            JOptionPane.showMessageDialog(null, "Refine search criteria");
+            return;
         }
         }
        

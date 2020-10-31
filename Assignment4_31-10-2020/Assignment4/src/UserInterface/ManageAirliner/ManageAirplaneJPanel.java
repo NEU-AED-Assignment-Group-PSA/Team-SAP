@@ -56,9 +56,9 @@ public void populateAirplaneList()
             {
                 Object row[] = new Object[5];
                 row[0] = s;
-                row[1] = s.getWindowSeatCount();
-                row[2] = s.getMiddleSeatCount();
-                row[3] = s.getAisleSeatCount();
+             row[1] = 25;//s.getAirplaneName;
+            row[2] = 25;//s.getMiddleSeatCount();
+            row[3] = 25;//s.getAisleSeatCount();
                 row[4] = s.getModelNum();
                 model.addRow(row); 
             }
