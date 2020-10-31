@@ -5,6 +5,21 @@
  */
 package UserInterface.CustomerRole;
 
+import Business.Airliner;
+import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
+import Business.Flight;
+import Business.FlightSchedule;
+import Business.Ticket;
+import UserInterface.AdminTravelAgencyRole.TravelAgencyJPnael;
+import UserInterface.ManageAirliner.ManageAirplaneJPanel;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aditi
@@ -14,9 +29,36 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     /**
      * Creates new form BookTicketJPanel
      */
-    public ManageCustomerJPanel() {
+    JPanel UserProcessContainer;
+    AirlinerDirectory airlinerDir;
+    CustomerDirectory custDir;
+    List<Ticket> ticketList;
+    List<FlightSchedule> flightSchList;
+    List<Flight> flightList;
+    public ManageCustomerJPanel(JPanel UserProcessContainer, AirlinerDirectory ad,CustomerDirectory custDir, List<Ticket> ticketList, List<FlightSchedule> flightSchList,List<Flight> flightList)
+    {
         initComponents();
+        this.UserProcessContainer = UserProcessContainer;
+        this.airlinerDir= ad;
+        this.custDir=custDir;
+        this.ticketList=ticketList;
+        this.flightList=flightList;
+        this.flightSchList=flightSchList;
+        populateCustomer();
     }
+
+    public void populateCustomer(){
+        DefaultTableModel model = (DefaultTableModel) tblCustomer.getModel();
+        model.setRowCount(0);
+        for (Customer s : custDir.getCustomerList()) {
+            Object row[] = new Object[3];
+            row[0] = s.getfName() + " " + s.getlName();
+            row[1]= s.getMoblieNum();
+            row[2]=s;
+            model.addRow(row);
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,12 +75,19 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         btnAddCustomer = new javax.swing.JButton();
         btnViewCustomer = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCustomer = new javax.swing.JTable();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Manage Customer");
 
         btnViewBooked.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnViewBooked.setText("View Booked Ticket");
+        btnViewBooked.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewBookedActionPerformed(evt);
+            }
+        });
 
         btnBookTicket.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnBookTicket.setText("Book Ticket");
@@ -73,25 +122,43 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
+        tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Customer Name", "Mobile Number", "ID"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblCustomer);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnViewBooked, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
-                            .addComponent(btnAddCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnViewCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(btnBack)))
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addGap(30, 30, 30)
+                .addComponent(btnBack)
+                .addGap(219, 219, 219)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(300, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(138, 138, 138)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnViewBooked, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                    .addComponent(btnAddCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnViewCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(135, 135, 135)
@@ -101,17 +168,22 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(btnBack)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(171, 171, 171)
-                .addComponent(btnViewBooked)
-                .addGap(57, 57, 57)
-                .addComponent(btnAddCustomer)
-                .addGap(44, 44, 44)
-                .addComponent(btnViewCustomer)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(btnViewBooked)
+                        .addGap(57, 57, 57)
+                        .addComponent(btnAddCustomer)
+                        .addGap(44, 44, 44)
+                        .addComponent(btnViewCustomer))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(29, 29, 29)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(80, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(191, 191, 191)
@@ -123,19 +195,87 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     private void btnBookTicketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookTicketActionPerformed
         // TODO add your handling code here:
         //call bookTickets.java
+        int row = tblCustomer.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Customer c= (Customer)  tblCustomer.getValueAt(row,2);
+        
+        BookTickets msjp = new BookTickets (UserProcessContainer, airlinerDir,custDir, c, flightSchList,flightList, ticketList);
+        UserProcessContainer.add("BookTickets",msjp); //any name will do
+        ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
+        
+        
+        
     }//GEN-LAST:event_btnBookTicketActionPerformed
 
     private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         // TODO add your handling code here:
+        //AirlinerDirectory ad = airlinerDir;
+        //UserProcessContainer.removeAll();
+        AddCustomerJPanel msjp = new AddCustomerJPanel (UserProcessContainer, airlinerDir,custDir);
+        UserProcessContainer.add("AddCustomerJPanel",msjp); //any name will do
+        ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
+        
+        
+        
     }//GEN-LAST:event_btnAddCustomerActionPerformed
 
     private void btnViewCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewCustomerActionPerformed
         // TODO add your handling code here:
+        //AirlinerDirectory ad = airlinerDir;
+        //UserProcessContainer.removeAll();
+        int row = tblCustomer.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Customer c= (Customer)  tblCustomer.getValueAt(row,2);
+        
+        ViewCustomerJPanel msjp;
+        msjp = new ViewCustomerJPanel (UserProcessContainer, airlinerDir,custDir,c);
+        UserProcessContainer.add("ViewCustomerJPanel",msjp); //any name will do
+        ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
+        
     }//GEN-LAST:event_btnViewCustomerActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+ backAction();
+    }                                       
+
+    private void backAction(){
+        UserProcessContainer.remove(this);
+        //Component [] componentArray = userProcessContainer.getComponents();
+        //Component c = componentArray[componentArray.length-1];
+        //TravelAgencyJPnael ms = (TravelAgencyJPnael) c;
+        //ms.populateAirlinerList();
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.previous(UserProcessContainer);
+    
+    
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnViewBookedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBookedActionPerformed
+        // TODO add your handling code here:
+        
+         int row = tblCustomer.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Customer c= (Customer)  tblCustomer.getValueAt(row,2);
+        
+        ViewBookedTicketJPanel msjp = new ViewBookedTicketJPanel (UserProcessContainer, airlinerDir,custDir, c, ticketList);
+        UserProcessContainer.add("ViewBookedTicketJPanel",msjp); //any name will do
+        ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
+        
+    }//GEN-LAST:event_btnViewBookedActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -145,5 +285,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnViewBooked;
     private javax.swing.JButton btnViewCustomer;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblCustomer;
     // End of variables declaration//GEN-END:variables
 }

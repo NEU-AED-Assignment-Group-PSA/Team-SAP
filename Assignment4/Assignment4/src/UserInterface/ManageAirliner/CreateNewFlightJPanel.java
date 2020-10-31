@@ -5,6 +5,15 @@
  */
 package UserInterface.ManageAirliner;
 
+import Business.Airliner;
+import Business.Flight;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aditi
@@ -14,8 +23,33 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateNewFlightJPanel
      */
-    public CreateNewFlightJPanel() {
+    //private Flight flight;
+    private Airliner airliner;
+    private JPanel userProcessContainer;
+    private List<Flight> flightList;
+    
+    public CreateNewFlightJPanel(JPanel userProcessContainer, Airliner airliner, List<Flight> flightList) {
         initComponents();
+        this.userProcessContainer=userProcessContainer;
+        this.airliner=airliner;
+        this.flightList=flightList;
+        Populate();
+     }
+
+    
+        
+    public void Populate(){
+         DefaultTableModel dtm = (DefaultTableModel)flightsTable.getModel();
+        dtm.setRowCount(0);        
+        String airlinerName= airliner.getAirLinerName();
+        for(Flight flight : flightList){
+            if(flight.getAirlinerName().equals(airlinerName)){
+            Object[] row = new Object[dtm.getColumnCount()];
+            row[0]=flight;
+            row[1]=flight.getFlightName();
+            dtm.addRow(row);
+            }
+        }
     }
 
     /**
@@ -29,23 +63,31 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
+        txtFName = new javax.swing.JTextField();
         btnCreate = new javax.swing.JButton();
         btnBack1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtNumber = new javax.swing.JTextField();
+        txtFNumber = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        flightsTable = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Create New Flight");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Name:");
+        jLabel3.setText("Flight Name:");
 
-        txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtFName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         btnCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnCreate.setText("Create");
         btnCreate.setToolTipText("");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnBack1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnBack1.setText("<Back");
@@ -57,36 +99,73 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel4.setText("Number:");
+        jLabel4.setText("Flight Number:");
 
-        txtNumber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtFNumber.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+
+        flightsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Flight Number", "Flight Name"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(flightsTable);
+        if (flightsTable.getColumnModel().getColumnCount() > 0) {
+            flightsTable.getColumnModel().getColumn(0).setResizable(false);
+            flightsTable.getColumnModel().getColumn(1).setResizable(false);
+        }
+
+        btnDelete.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setToolTipText("");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(btnBack1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGap(97, 97, 97)
                                 .addComponent(jLabel1))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(txtFNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(36, 36, 36)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(215, 215, 215)
-                        .addComponent(btnCreate)))
-                .addContainerGap(458, Short.MAX_VALUE))
+                        .addComponent(btnCreate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -96,32 +175,86 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(btnBack1))
                 .addGap(39, 39, 39)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(39, 39, 39)
-                .addComponent(btnCreate)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCreate)
+                    .addComponent(btnDelete))
                 .addContainerGap(330, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBack1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBack1ActionPerformed
-        // TODO add your handling code here:
+       
+        backAction();
+    }                                       
+
+    private void backAction(){
+        userProcessContainer.remove(this);
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageFlightJPanel ms = (ManageFlightJPanel) c;
+        ms.populateFlightTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);  
+       
+       
     }//GEN-LAST:event_btnBack1ActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        String name=txtFName.getText();
+        String model=txtFNumber.getText();
+        if(model.equals("") || name.equals(""))
+        {
+           JOptionPane.showMessageDialog(null, "Fields cannot be empty"); 
+        }
+        else
+        {Flight FL= new Flight();
+        FL.setFlightName(name);
+        FL.setFlightNum(model);
+        FL.setAirlinerName(airliner.getAirLinerName());
+        txtFName.setText("");
+        txtFNumber.setText("");
+        flightList.add(FL);
+        JOptionPane.showMessageDialog(null, "Flight sucessfully added"); 
+        Populate();
+        }
+    
+    }//GEN-LAST:event_btnCreateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+       int selectedrow=flightsTable.getSelectedRow();
+        if(selectedrow>=0)
+        {Flight flight=(Flight)flightsTable.getValueAt(selectedrow, 0);
+        flightList.remove(flight);
+        JOptionPane.showMessageDialog(null, "Entry successfully deleted");
+        Populate();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "please select an entry");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnBack1;
     private javax.swing.JButton btnCreate;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JTable flightsTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtNumber;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtFName;
+    private javax.swing.JTextField txtFNumber;
     // End of variables declaration//GEN-END:variables
 }

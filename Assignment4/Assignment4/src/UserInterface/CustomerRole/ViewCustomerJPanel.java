@@ -5,6 +5,15 @@
  */
 package UserInterface.CustomerRole;
 
+import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.UUID;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author aditi
@@ -14,9 +23,33 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewCustomerJPanel
      */
-    public ViewCustomerJPanel() {
+    JPanel userProcessContainer;
+    AirlinerDirectory airlinerDir;
+    CustomerDirectory custDir;
+    Customer customer;
+    public ViewCustomerJPanel(JPanel UserProcessContainer, AirlinerDirectory airlinerDir, CustomerDirectory custDir, Customer c) {
         initComponents();
+         this.userProcessContainer = UserProcessContainer;
+        this.airlinerDir= airlinerDir;
+        this.custDir=custDir;
+        this.customer=c;
+        populate();
     }
+
+ public void populate(){
+     txtFirstName.setText(customer.getfName());
+     txtLastName.setText(customer.getlName());
+     txtEmail.setText(customer.getEmail());
+     txtMobile.setText(customer.getMoblieNum());
+     txtCustId.setText(customer.getCustomerID());
+        txtFirstName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtMobile.setEnabled(false);
+        txtCustId.setEnabled(false);
+         btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+ }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,14 +110,25 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         btnSave.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSave.setText("Save");
         btnSave.setToolTipText("");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnUpdate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnUpdate.setText("Update");
         btnUpdate.setToolTipText("");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Customer id:");
 
+        txtCustId.setEditable(false);
         txtCustId.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -100,32 +144,31 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(232, 232, 232)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtCustId, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGap(49, 49, 49)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(49, 49, 49)
-                                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                                .addComponent(txtCustId, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(49, 49, 49)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMobile)
+                                    .addComponent(txtLastName)
+                                    .addComponent(txtFirstName)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(49, 49, 49)
+                                .addComponent(txtEmail))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(288, 288, 288)
                         .addComponent(btnSave)
                         .addGap(58, 58, 58)
                         .addComponent(btnUpdate)))
-                .addContainerGap(306, Short.MAX_VALUE))
+                .addGap(220, 220, 220))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +207,59 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+ backAction();
+    }                                       
+
+    private void backAction(){
+        userProcessContainer.remove(this);
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageCustomerJPanel ms = (ManageCustomerJPanel) c;
+        ms.populateCustomer();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    
+   
+        
+        
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+       btnSave.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        txtFirstName.setEnabled(true);
+        txtLastName.setEnabled(true);
+        txtEmail.setEnabled(true);
+        txtMobile.setEnabled(true);
+        txtCustId.setEnabled(true);
+        
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+          Customer c=customer;
+        c.setfName(txtFirstName.getText());
+        c.setlName(txtLastName.getText());
+        c.setEmail(txtEmail.getText());
+        c.setMoblieNum(txtMobile.getText());
+        //UUID idOne = UUID.randomUUID();
+        //String uid=(String.valueOf(idOne));
+        
+        //c.setCustomerID(cus);
+        //custDir.addCustomer(c);
+        
+        JOptionPane.showMessageDialog(null, "Customer updated!!");
+        btnSave.setEnabled(false);
+        btnUpdate.setEnabled(true);
+        txtFirstName.setEnabled(false);
+        txtLastName.setEnabled(false);
+        txtEmail.setEnabled(false);
+        txtMobile.setEnabled(false);
+        txtCustId.setEnabled(false);
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

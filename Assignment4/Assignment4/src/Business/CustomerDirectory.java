@@ -5,7 +5,10 @@
  */
 package Business;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -14,9 +17,28 @@ import java.util.List;
 public class CustomerDirectory {
     private List<Customer> customerList;
     
+    public List<Customer> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<Customer> customerList) {
+        this.customerList = customerList;
+    }
+    
+    public CustomerDirectory(){
+        customerList = new ArrayList<>();
+        
+    }    
     public void addCustomer(Customer c)
     {
         this.customerList.add(c);
     }
     
+     public void removeCustomer(Customer c)
+    {
+        this.customerList.remove(c);
+    }
+ 
+     
+     
 }

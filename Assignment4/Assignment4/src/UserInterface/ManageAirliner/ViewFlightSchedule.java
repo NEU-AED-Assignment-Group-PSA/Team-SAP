@@ -5,6 +5,10 @@
  */
 package UserInterface.ManageAirliner;
 
+import Business.Airliner;
+import Business.FlightSchedule;
+import javax.swing.JPanel;
+
 /**
  *
  * @author aditi
@@ -16,6 +20,10 @@ public class ViewFlightSchedule extends javax.swing.JPanel {
      */
     public ViewFlightSchedule() {
         initComponents();
+    }
+
+    ViewFlightSchedule(JPanel userProcessContainer, FlightSchedule fs, Airliner airliner) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

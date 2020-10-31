@@ -5,6 +5,17 @@
  */
 package UserInterface.CustomerRole;
 
+import Business.Airliner;
+import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
+import Business.Ticket;
+import java.awt.CardLayout;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author aditi
@@ -14,10 +25,49 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ViewBookedTicketJPanel
      */
-    public ViewBookedTicketJPanel() {
+    
+    JPanel UserProcessContainer;
+    AirlinerDirectory airlinerDir;
+    CustomerDirectory custDir;
+    Customer customer;
+    List<Ticket> ticketList;
+    public ViewBookedTicketJPanel(JPanel UserProcessContainer, AirlinerDirectory airlinerDir, CustomerDirectory custDir, Customer c, List<Ticket> ticketList) {
         initComponents();
+        this.UserProcessContainer = UserProcessContainer;
+        this.airlinerDir= airlinerDir;
+        this.custDir=custDir;
+        this.customer=c;
+        this.ticketList=ticketList;
+        
+        populateTickets();
+        
     }
 
+    
+     public void populateTickets(){
+        lblID.setText(customer.getCustomerID());
+        lblName.setText(customer.getfName() +" " + customer.getlName());
+        lblMobile.setText(customer.getMoblieNum());
+        
+        
+        DefaultTableModel model = (DefaultTableModel) tblTickets.getModel();
+        model.setRowCount(0);
+        for (Ticket s : ticketList) {
+            if(s.getCustomerID().equals(customer.getCustomerID()))
+            {
+            Object row[] = new Object[7];
+            row[0] = s;
+            row[1] = s.getFlightNum();
+            row[2] = s.getSource();
+            row[3] = s.getDestination();
+            row[4] = s.getDate();
+            row[5] = s.getTime();
+            row[6] = s.getStatus();
+            model.addRow(row);
+        }
+        }
+    }
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,30 +77,27 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        cmbCustomerID = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFlightSchedule = new javax.swing.JTable();
+        tblTickets = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         btnCancel = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-
-        cmbCustomerID.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbCustomerID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Customerid1", "CustomerID2" }));
+        lblName = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblMobile = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel6.setText("Customer ID:");
+        jLabel6.setText("Customer Name:");
 
-        btnSearch.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnSearch.setText("Search");
-
-        tblFlightSchedule.setModel(new javax.swing.table.DefaultTableModel(
+        tblTickets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Flight Name", "Source", "Destination", "Date", "Time", "Price", "Status"
+                "ID", "Flight Number", "Source", "Destination", "Date", "Time", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -61,13 +108,18 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblFlightSchedule);
+        jScrollPane1.setViewportView(tblTickets);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("View Ticket");
 
         btnCancel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnCancel.setText("Cancel");
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnBack.setText("<Back");
@@ -77,6 +129,18 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+
+        lblName.setText("jLabel2");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel7.setText("Customer ID:");
+
+        lblID.setText("jLabel2");
+
+        lblMobile.setText("jLabel2");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setText("Mobile:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -92,17 +156,25 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(74, 74, 74)
-                                .addComponent(btnSearch))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(205, 205, 205)
-                                .addComponent(btnCancel)))))
+                                .addComponent(btnCancel))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(142, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -112,32 +184,73 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnBack))
-                .addGap(100, 100, 100)
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMobile, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmbCustomerID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch))
+                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(79, 79, 79)
                 .addComponent(btnCancel)
-                .addContainerGap(141, Short.MAX_VALUE))
+                .addContainerGap(139, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+       backAction();
+    }                                       
+
+    private void backAction(){
+        UserProcessContainer.remove(this);
+        //Component [] componentArray = UserProcessContainer.getComponents();
+        //Component c = componentArray[componentArray.length-1];
+       // ManageAirlinersJPanel ms = (ManageAirlinersJPanel) c;
+        //ms.populateAirlinerList();
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.previous(UserProcessContainer);
+    
+      
+        
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        // TODO add your handling code here:
+        int row = tblTickets.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Ticket t= (Ticket)  tblTickets.getValueAt(row,0);
+        t.setStatus("Cancel");
+        JOptionPane.showMessageDialog(null,"Ticket Cancelled!");
+        populateTickets();
+        
+        
+        
+    }//GEN-LAST:event_btnCancelActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox<String> cmbCustomerID;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblFlightSchedule;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblMobile;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JTable tblTickets;
     // End of variables declaration//GEN-END:variables
 }

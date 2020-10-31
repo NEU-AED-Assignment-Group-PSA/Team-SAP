@@ -16,15 +16,24 @@ public class Flight {
     private String flightNum;
     private String flightName;
     //private int seatCount;
-    
-    private List<FlightSchedule> flightSchedule;
+    private String airlinerName;
 
-    
-    public Flight(int seatCount){
-       
-       flightSchedule= new ArrayList<>();
+    public String getAirlinerName() {
+        return airlinerName;
     }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
+    }
+    //private List<FlightSchedule> flightSchedule;
+    //private FlightSchedule flightSchedule;
     
+    public Flight(){
+       //flightSchedule= new FlightSchedule();
+     //  flightSchedule= new ArrayList<>();
+      
+    }
+   
     
     public String getFlightNum() {
         return flightNum;
@@ -42,6 +51,29 @@ public class Flight {
         this.flightName = flightName;
     }
 
+    /*public FlightSchedule getFlightSchedule() {
+        return flightSchedule;
+    }
+
+    public void setFlightSchedule(FlightSchedule flightSchedule) {
+        this.flightSchedule = flightSchedule;
+    }*/
     
+    
+    /* public List<FlightSchedule> getFlightSchedule() {
+        return flightSchedule;
+    }
+
+    public void setFlightSchedule(List<FlightSchedule> flightSchedule) {
+        this.flightSchedule = flightSchedule;
+    }
+    */
+    
+    
+     @Override
+    public String toString()
+    {
+        return this.getFlightNum();
+    }
    
 }

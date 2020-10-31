@@ -13,6 +13,8 @@ import java.util.List;
  * @author aditi
  */
 public class Airplane {
+    private String airlinerName;
+
     private String airplaneName;
     private int windowSeatCount;  // passenger capacity
     private int middleSeatCount; 
@@ -22,14 +24,14 @@ public class Airplane {
     //private double fuelCapacity;
     //private String model;
     private String modelNum;
-    private List<Flight> flightList;
+    //private List<Flight> flightList;
     //private Date nextMaintDate;
     //private List<FlightSchedule> flightSchedule;
     
     
     public Airplane(){
         //new Seat();
-        flightList = new ArrayList<>();
+        //this.flightList = flightList;
     }
 
     public String getAirplaneName() {
@@ -40,12 +42,56 @@ public class Airplane {
         this.airplaneName = airplaneName;
     }
 
-    
-    public String getSerialNum() {
+    public int getWindowSeatCount() {
+        return windowSeatCount;
+    }
+
+    public void setWindowSeatCount(int windowSeatCount) {
+        this.windowSeatCount = windowSeatCount;
+    }
+
+    public int getMiddleSeatCount() {
+        return middleSeatCount;
+    }
+
+    public void setMiddleSeatCount(int middleSeatCount) {
+        this.middleSeatCount = middleSeatCount;
+    }
+
+    public int getAisleSeatCount() {
+        return aisleSeatCount;
+    }
+
+    public void setAisleSeatCount(int aisleSeatCount) {
+        this.aisleSeatCount = aisleSeatCount;
+    }
+
+    public String getModelNum() {
         return modelNum;
     }
 
-    public void setSerialNum(String serialNum) {
-        this.modelNum = serialNum;
+    public void setModelNum(String modelNum) {
+        this.modelNum = modelNum;
+    }
+
+    /*public List<Flight> getFlightList() {
+        return flightList;
+    }
+
+    public void setFlightList(List<Flight> flightList) {
+        this.flightList = flightList;
+    }*/
+
+    
+    public String getAirlinerName() {
+        return airlinerName;
+    }
+
+    public void setAirlinerName(String airlinerName) {
+        this.airlinerName = airlinerName;
+    }
+     @Override
+    public String toString(){
+        return this.getAirplaneName();
     }
 }

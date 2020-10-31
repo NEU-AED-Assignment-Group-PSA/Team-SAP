@@ -5,22 +5,32 @@
  */
 package Business;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
  * @author aditi
  */
-public class Customer extends Person {
+public class Customer //extends Person 
+{
     private String customerID;
-    private String address;
+    //private String address;
     private String email;
     private String card;
-    private List<Ticket> tickets;
+    //private List<Ticket> tickets;
+
+   /* public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
+    }*/
     private String fName;
     private String lName;
     //private String role; //customer, crew, travelAgent
-    private long moblieNum;
+    private String moblieNum;
     //private String password;
 
     public String getfName() {
@@ -39,14 +49,19 @@ public class Customer extends Person {
         this.lName = lName;
     }
 
-    public long getMoblieNum() {
+    
+    public String getMoblieNum() {
         return moblieNum;
     }
 
-    public void setMoblieNum(long moblieNum) {
+    public void setMoblieNum(String moblieNum) {
         this.moblieNum = moblieNum;
     }
     
+    public String toString()
+    {
+        return this.customerID;
+    }
      
     public String getCustomerID() {
         return customerID;
@@ -56,14 +71,7 @@ public class Customer extends Person {
         this.customerID = customerID;
     }
 
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
+   
     public String getEmail() {
         return email;
     }
@@ -84,7 +92,8 @@ public class Customer extends Person {
      
      public Customer()
      {
-         super("Customer");
+        // super("Customer");
+        // tickets= ;//new ArrayList<>();
      }
     
     //

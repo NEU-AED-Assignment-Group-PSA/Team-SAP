@@ -23,7 +23,27 @@ public class FlightSchedule {
     private Date date;  //
     private List<Seat> seatList;
     private String time; //morning, evening, night
+    private String flightNum;
+
+    public String toString(){
+        return this.flightNum;
+    }
     
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getFlightNum() {
+        return flightNum;
+    }
+
+    public void setFlightNum(String flightName) {
+        this.flightNum = flightName;
+    }
        
      public List<Seat> getSeatList() {
         return seatList;
@@ -65,7 +85,13 @@ public class FlightSchedule {
         
     }
     
-    
+    public FlightSchedule()
+    {
+        //this.flight=flight;
+        //schedule = new ArrayList<>();
+       // customerList = new ArrayList<>();
+        
+    }
 
     public double getPrice() {
         return price;

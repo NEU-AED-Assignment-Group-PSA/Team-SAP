@@ -5,6 +5,15 @@
  */
 package UserInterface.ManageAirliner;
 
+import Business.Airliner;
+import Business.AirlinerDirectory;
+import Business.Airplane;
+import Business.Fleet;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author aditi
@@ -14,9 +23,17 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
     /**
      * Creates new form CreateNewAirplaneJPanel
      */
-    public CreateNewAirplaneJPanel() {
+    Airliner airliner;
+    Fleet airplaneList;
+    JPanel userProcessContainer;
+    public CreateNewAirplaneJPanel(JPanel upc , Airliner airliner,Fleet airplaneList) {
         initComponents();
+        this.userProcessContainer=upc;
+        this.airliner=airliner;
+        this.lblAirlinerName.setText(airliner.getAirLinerName());
+        this.airplaneList=airplaneList;
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,18 +48,19 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtWindowCount = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtMiddleCount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtName3 = new javax.swing.JTextField();
-        txtName4 = new javax.swing.JTextField();
+        txtModel = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         btnCreate = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
+        cmbWindow = new javax.swing.JComboBox<>();
+        cmbMiddle = new javax.swing.JComboBox<>();
+        cmbAisle = new javax.swing.JComboBox<>();
+        lblAirlinerName = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("Create New Airplane");
+        jLabel1.setText("Create New Airplane for: ");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Name:");
@@ -52,19 +70,13 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Window Seat Count:");
 
-        txtWindowCount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setText("Middle Seat Count:");
-
-        txtMiddleCount.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel6.setText("Aisle Seat Count:");
 
-        txtName3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-
-        txtName4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtModel.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setText("Model Number:");
@@ -72,6 +84,11 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         btnCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnCreate.setText("Create");
         btnCreate.setToolTipText("");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnBack.setText("<Back");
@@ -81,6 +98,18 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+
+        cmbWindow.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
+
+        cmbMiddle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
+
+        cmbAisle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "20", "30" }));
+
+        lblAirlinerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lblAirlinerName.setText("Airliner");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,21 +134,20 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
                                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(70, 70, 70)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName4, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(txtName3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMiddleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txtWindowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtModel, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 135, Short.MAX_VALUE)
+                            .addComponent(cmbWindow, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbMiddle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbAisle, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(63, 63, 63)
                         .addComponent(btnBack)
                         .addGap(181, 181, 181)
-                        .addComponent(jLabel1)))
-                .addContainerGap(321, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +155,9 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(22, 22, 22)
-                        .addComponent(jLabel1))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(lblAirlinerName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(btnBack)))
@@ -135,22 +165,22 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtWindowCount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbWindow)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMiddleCount, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
+                    .addComponent(cmbMiddle))
+                .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
+                    .addComponent(cmbAisle))
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtModel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(65, 65, 65)
                 .addComponent(btnCreate)
                 .addContainerGap(69, Short.MAX_VALUE))
@@ -159,24 +189,87 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        backAction();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        //validate values->
+        if(txtName.getText()==null || "".equals(txtName.getText())){
+            JOptionPane.showMessageDialog(null, "Please enter Airplane Name");
+            return;
+        }
+        
+        int windowSeat =Integer.parseInt(cmbWindow.getItemAt(cmbWindow.getSelectedIndex()));
+        int midSeat =Integer.parseInt(cmbMiddle.getItemAt(cmbMiddle.getSelectedIndex()));
+        int aisleSeat =Integer.parseInt(cmbAisle.getItemAt(cmbAisle.getSelectedIndex()));
+        
+        if(txtModel.getText()==null || "".equals(txtModel.getText())){
+            JOptionPane.showMessageDialog(null, "Please enter Model number");
+            return;
+        }
+        
+        //Aplha only
+        boolean match = txtName.getText().matches("[a-zA-Z0-9]+");
+        if(match == false){
+            JOptionPane.showMessageDialog(null, "Enter Name correctly ([a-zA-Z0-9]+) ");
+            return;
+        }
+        
+        //Aplha only
+        match = txtModel.getText().matches("[a-zA-Z0-9]+");
+        if(match == false){
+            JOptionPane.showMessageDialog(null, "Enter Model number correctly");
+            return;
+
+        }
+        
+        String name=txtName.getText();
+        //rating =cmbRating.getSelectedIndex();
+        String model = txtModel.getText();
+        
+        Airplane a = new Airplane();
+        a.setAirplaneName(name);
+        a.setWindowSeatCount(windowSeat);
+        a.setMiddleSeatCount(midSeat);
+        a.setAisleSeatCount(aisleSeat);
+        a.setModelNum(model);
+        a.setAirlinerName(airliner.getAirLinerName());
+        airplaneList.addAirplane(a);
+        JOptionPane.showMessageDialog(null, "Airplane added successfully!");
+
+        
+        
+        
+        
+        
+    }//GEN-LAST:event_btnCreateActionPerformed
+                                  
+    
+    private void backAction(){
+        userProcessContainer.remove(this);
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageAirplaneJPanel ms = (ManageAirplaneJPanel) c;
+        ms.populateAirplaneList();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBack1;
-    private javax.swing.JButton btnBack2;
     private javax.swing.JButton btnCreate;
+    private javax.swing.JComboBox<String> cmbAisle;
+    private javax.swing.JComboBox<String> cmbMiddle;
+    private javax.swing.JComboBox<String> cmbWindow;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField txtMiddleCount;
+    private javax.swing.JLabel lblAirlinerName;
+    private javax.swing.JTextField txtModel;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtName3;
-    private javax.swing.JTextField txtName4;
-    private javax.swing.JTextField txtWindowCount;
     // End of variables declaration//GEN-END:variables
 }

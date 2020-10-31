@@ -5,6 +5,16 @@
  */
 package UserInterface.CustomerRole;
 
+import Business.AirlinerDirectory;
+import Business.Customer;
+import Business.CustomerDirectory;
+import UserInterface.ManageAirliner.ManageAirlinersJPanel;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.util.UUID;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author aditi
@@ -14,9 +24,17 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddCustomer
      */
-    public AddCustomerJPanel() {
+    JPanel UserProcessContainer;
+    AirlinerDirectory airlinerDir;
+    CustomerDirectory custDir;
+    public AddCustomerJPanel(JPanel UserProcessContainer, AirlinerDirectory airlinerDir, CustomerDirectory custDir) {
         initComponents();
+        this.UserProcessContainer = UserProcessContainer;
+        this.airlinerDir= airlinerDir;
+        this.custDir=custDir;
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -64,6 +82,11 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
         btnCreate.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnCreate.setText("Create");
         btnCreate.setToolTipText("");
+        btnCreate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("First Name:");
@@ -138,7 +161,39 @@ public class AddCustomerJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+        backAction();
+                                     
+    }
+    private void backAction(){
+        UserProcessContainer.remove(this);
+        Component [] componentArray = UserProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageCustomerJPanel ms = (ManageCustomerJPanel) c;
+        ms.populateCustomer();
+        CardLayout layout = (CardLayout) UserProcessContainer.getLayout();
+        layout.previous(UserProcessContainer);
+    
+    
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
+        // TODO add your handling code here:
+        
+        Customer c= new Customer();
+        c.setfName(txtFirstName.getText());
+        c.setlName(txtLastName.getText());
+        c.setEmail(txtEmail.getText());
+        c.setMoblieNum(txtMobile.getText());
+        UUID idOne = UUID.randomUUID();
+        String uid=(String.valueOf(idOne));
+        
+        c.setCustomerID(uid);
+        custDir.addCustomer(c);
+        
+        JOptionPane.showMessageDialog(null, "Customer added!!");
+        
+    }//GEN-LAST:event_btnCreateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

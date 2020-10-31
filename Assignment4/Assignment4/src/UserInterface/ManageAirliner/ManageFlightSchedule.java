@@ -5,6 +5,25 @@
  */
 package UserInterface.ManageAirliner;
 
+import Business.Airliner;
+import Business.Flight;
+import Business.FlightSchedule;
+import java.awt.CardLayout;
+import java.awt.Component;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Properties;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+import org.jdatepicker.DateModel;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 /**
  *
  * @author aditi
@@ -14,9 +33,73 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
     /**
      * Creates new form ManageFlightSchedule
      */
-    public ManageFlightSchedule() {
+    
+    JPanel userProcessContainer; 
+    Flight flight; 
+    Airliner airliner;
+    List<FlightSchedule> flightScheduleList;
+    FlightSchedule flightSchGlobal;
+    public ManageFlightSchedule(JPanel userProcessContainer, Flight fs, Airliner airliner, List<FlightSchedule> fsl) {
         initComponents();
+        this.flightScheduleList=fsl;
+        this.flight=fs;
+        this.userProcessContainer=userProcessContainer;
+        this.airliner=airliner;
+       // addDateComponent();
+        schedulePanel.setVisible(false);
+        vsPanel.setVisible(false);
+        
+        populateFlightSchedule();
     }
+
+    public void populateFlightSchedule(){
+        //lblAirlinerName.setText(airliner.getAirLinerName());
+        //populate table
+         DefaultTableModel model = (DefaultTableModel) tblFlightSchedule.getModel();
+        model.setRowCount(0);
+        //List<FlightSchedule> flightSchList = flight.getFlightSchedule();
+        for (FlightSchedule s : flightScheduleList) {
+            //check airline name in airplane
+            if(s.getFlightNum().equals(flight.getFlightNum()))
+            {
+            Object row[] = new Object[6];
+            row[0] = flight.getFlightName();
+            row[1] = s.getSrc();
+            row[2] = s.getDestination();
+            row[3] = s.getDate();
+            row[4] = s.getTime();
+            row[5] = s;//flight.getFlightNum();
+            
+            model.addRow(row); 
+            }
+            
+        }
+    }
+    
+    
+    
+    public void addDateComponent(){
+        UtilDateModel model = new UtilDateModel();
+        model.setDate(1990, 8, 24);
+        //model.addPropertyChangeListener(listener);
+        JDatePanelImpl datePanel;
+        Properties prop= new Properties();
+        datePanel = new JDatePanelImpl((UtilDateModel)model, prop);
+        JDatePickerImpl datePicker = new JDatePickerImpl(datePanel,new JFormattedTextField.AbstractFormatter() {
+            @Override
+            public Object stringToValue(String string) throws ParseException {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public String valueToString(Object o) throws ParseException {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+ 
+        this.add(datePicker);
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -33,6 +116,28 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
         btnViewSchedule = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
+        schedulePanel = new javax.swing.JPanel();
+        fromfield = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        tofield = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        saveButton = new javax.swing.JButton();
+        closebtn = new javax.swing.JButton();
+        datefield = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        cmbTime = new javax.swing.JComboBox<>();
+        vsPanel = new javax.swing.JPanel();
+        fromfield1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        tofield1 = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        datefield1 = new javax.swing.JTextField();
+        closeButton = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        cmbTimeUpdate = new javax.swing.JComboBox<>();
+        jLabel9 = new javax.swing.JLabel();
 
         tblFlightSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -54,6 +159,11 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
 
         btnNewSchedule.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnNewSchedule.setText("New Schedule");
+        btnNewSchedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewScheduleActionPerformed(evt);
+            }
+        });
 
         btnViewSchedule.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnViewSchedule.setText("View Schedule");
@@ -75,6 +185,170 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
             }
         });
 
+        schedulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("From:");
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("To:");
+
+        jLabel4.setText("Date:");
+
+        saveButton.setText("Save");
+        saveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveButtonActionPerformed(evt);
+            }
+        });
+
+        closebtn.setText("Close");
+        closebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closebtnActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("Time:");
+
+        cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening", "Night" }));
+
+        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
+        schedulePanel.setLayout(schedulePanelLayout);
+        schedulePanelLayout.setHorizontalGroup(
+            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(schedulePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cmbTime, 0, 105, Short.MAX_VALUE)
+                    .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(datefield, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                        .addComponent(tofield)
+                        .addComponent(fromfield)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedulePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(saveButton)
+                    .addComponent(closebtn))
+                .addGap(54, 54, 54))
+        );
+        schedulePanelLayout.setVerticalGroup(
+            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(schedulePanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fromfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tofield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(datefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(saveButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addComponent(closebtn))
+        );
+
+        vsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Schedule"));
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("From:");
+
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("To:");
+
+        jLabel7.setText("Date:");
+
+        closeButton.setText("Close");
+        closeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                closeButtonActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        cmbTimeUpdate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening", "Night" }));
+
+        jLabel9.setText("Time:");
+
+        javax.swing.GroupLayout vsPanelLayout = new javax.swing.GroupLayout(vsPanel);
+        vsPanel.setLayout(vsPanelLayout);
+        vsPanelLayout.setHorizontalGroup(
+            vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vsPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jLabel7))
+                    .addGroup(vsPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(4, 4, 4)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(fromfield1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
+                    .addComponent(tofield1)
+                    .addComponent(datefield1))
+                .addGap(22, 22, 22))
+            .addGroup(vsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(closeButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(btnUpdate)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vsPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cmbTimeUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        vsPanelLayout.setVerticalGroup(
+            vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vsPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fromfield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tofield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(datefield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTimeUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(closeButton)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -82,19 +356,27 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(btnBack)
                         .addGap(167, 167, 167)
                         .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(166, 166, 166)
-                        .addComponent(btnNewSchedule)
-                        .addGap(123, 123, 123)
-                        .addComponent(btnViewSchedule)))
-                .addContainerGap(171, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(225, 225, 225)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(225, 225, 225)
+                                    .addComponent(btnNewSchedule))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(197, 197, 197)
+                                    .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(vsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(105, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,31 +385,240 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(btnBack))
-                .addGap(45, 45, 45)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewSchedule)
-                    .addComponent(btnViewSchedule))
-                .addGap(173, 173, 173))
+                    .addComponent(btnNewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(51, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnViewScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewScheduleActionPerformed
-        // TODO add your handling code here:
+        int select=tblFlightSchedule.getSelectedRow();
+        if(select>=0)
+        {   
+           
+           viewschedule();
+           /*Fleet fleet=(Fleet)flightsTable.getValueAt(select, 0);
+           fromfield1.setText(fleet.getSchedule().getSrc());
+           tofield1.setText(fleet.getSchedule().getDest());
+           String date=fleet.getSchedule().getDate().toString();
+           datefield1.setText(date);  
+           //JOptionPane.showMessageDialog(null, "schedule added successfully");*/
+            
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "Please select a flight");          
+            }
     }//GEN-LAST:event_btnViewScheduleActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
+        
+        
+         backAction();
+    }                                       
+
+    private void backAction(){
+        userProcessContainer.remove(this);
+        Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        ManageFlightJPanel ms = (ManageFlightJPanel) c;
+        ms.populateFlightTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    
+   
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnNewScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewScheduleActionPerformed
+        //int selectedrow=tblFlightSchedule.getSelectedRow();
+        //if(selectedrow>=0)
+        //{   
+           schedulePanel.setVisible(true);        
+                    
+        //}
+       // else {
+         //   JOptionPane.showMessageDialog(null, "Please select a flight");
+            
+       // }
+    }//GEN-LAST:event_btnNewScheduleActionPerformed
 
+    private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+        if(fromfield.getText().equals("") || tofield.getText().equals("") || datefield.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "fields cannot be empty");
+        }
+        else{
+            try {
+                //int selectedrow=tblFlightSchedule.getSelectedRow();
+                //Flight flight=(Flight)tblFlightSchedule.getValueAt(selectedrow, 0);
+                FlightSchedule flightSch =new FlightSchedule();
+                String from=fromfield.getText();
+                String to=tofield.getText();
+                //Date date=Date.valueOf(datefield.getText());
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+                sdfrmt.setLenient(false);
+                java.util.Date date = sdfrmt.parse(datefield.getText());
+                
+                
+                
+                flightSch.setSrc(from);
+                flightSch.setDestination(to);
+                flightSch.setDate(date);
+                flightSch.setFlightNum(flight.getFlightNum());
+                flightSch.setTime(cmbTime.getItemAt(cmbTime.getSelectedIndex()));
+                flightScheduleList.add(flightSch);
+                
+                JOptionPane.showMessageDialog(null, "schedule added successfully");
+                schedulePanel.setVisible(false);
+                fromfield.setText("");
+                tofield.setText("");
+                datefield.setText("");
+                populateFlightSchedule();
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Date must be entered in MM/dd/yyyy format");
+                System.out.println(e);
+            }
+        }
+    }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
+        schedulePanel.setVisible(false);
+    }//GEN-LAST:event_closebtnActionPerformed
+
+    private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed
+        vsPanel.setVisible(false);
+    }//GEN-LAST:event_closeButtonActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        //flightSchGlobal.setDate(date);
+        if(fromfield1.getText().equals("") || tofield1.getText().equals("") || datefield1.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "fields cannot be empty");
+        }
+        else{
+            try {
+                //int selectedrow=tblFlightSchedule.getSelectedRow();
+                //Flight flight=(Flight)tblFlightSchedule.getValueAt(selectedrow, 0);
+                FlightSchedule flightSch =flightSchGlobal;
+                String from=fromfield1.getText();
+                String to=tofield1.getText();
+                //Date date=Date.valueOf(datefield.getText());
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+                sdfrmt.setLenient(false);
+                java.util.Date date = sdfrmt.parse(datefield1.getText());
+                
+                
+                
+                flightSch.setSrc(from);
+                flightSch.setDestination(to);
+                flightSch.setDate(date);
+                flightSch.setFlightNum(flight.getFlightNum());
+                flightSch.setTime(cmbTimeUpdate.getItemAt(cmbTimeUpdate.getSelectedIndex()));
+                //flight.getFlightSchedule().add(flightSch);
+                
+                JOptionPane.showMessageDialog(null, "schedule added successfully");
+                //vsPanel.setVisible(false);
+                //fromfield.setText("");
+                //tofield.setText("");
+                //datefield.setText("");
+                populateFlightSchedule();
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Date must be entered in MM/dd/yyyy format");
+                System.out.println(e);
+            }
+        }
+        
+        
+    }//GEN-LAST:event_btnUpdateActionPerformed
+    
+    public void viewschedule()
+    {
+        try { 
+        vsPanel.setVisible(true);
+        int select=tblFlightSchedule.getSelectedRow();
+        FlightSchedule flightsch=(FlightSchedule)tblFlightSchedule.getValueAt(select, 5);
+        flightSchGlobal=flightsch;
+        fromfield1.setText(flightsch.getSrc());
+        tofield1.setText(flightsch.getDestination());
+        //String date=flight.getFlightSchedule().getDate().toString();
+        datefield1.setText(flightsch.getDate().toString());
+        String timing = flightsch.getTime();
+        if(timing.equals("Morning")) {  cmbTimeUpdate.setSelectedIndex(0);}
+        else if(timing.equals("Night")) {  cmbTimeUpdate.setSelectedIndex(2);}
+        else if(timing.equals("Evening")) {  cmbTimeUpdate.setSelectedIndex(1);}
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Flight is not scheduled");
+            System.out.println(e);
+        }
+    }
+
+    
+    /*private void OldshowflightbuttonActionPerformed(java.awt.event.ActionEvent evt) {                                                 
+        try{
+            Airliner air=(Airliner)airlinerCombobox.getSelectedItem();
+            DefaultTableModel dtm = (DefaultTableModel)tblFlightSchedule.getModel();
+            dtm.setRowCount(0);
+            for(Flight flight : air.getfArrayList()){
+                Object[] row = new Object[dtm.getColumnCount()];
+                row[0]=flight;
+                row[1]=flight.getFlightNum();
+                dtm.addRow(row);
+            }
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Please select an airline");
+        }
+
+    }  */
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNewSchedule;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JButton btnViewSchedule;
+    private javax.swing.JButton closeButton;
+    private javax.swing.JButton closebtn;
+    private javax.swing.JComboBox<String> cmbTime;
+    private javax.swing.JComboBox<String> cmbTimeUpdate;
+    private javax.swing.JTextField datefield;
+    private javax.swing.JTextField datefield1;
+    private javax.swing.JTextField fromfield;
+    private javax.swing.JTextField fromfield1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton saveButton;
+    private javax.swing.JPanel schedulePanel;
     private javax.swing.JTable tblFlightSchedule;
+    private javax.swing.JTextField tofield;
+    private javax.swing.JTextField tofield1;
+    private javax.swing.JPanel vsPanel;
     // End of variables declaration//GEN-END:variables
 }
+
+
