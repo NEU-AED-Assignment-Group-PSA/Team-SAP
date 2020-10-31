@@ -131,6 +131,8 @@ public class BookTickets extends javax.swing.JPanel {
         cmbDest = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Book Ticket");
 
@@ -168,11 +170,11 @@ public class BookTickets extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Flight Name", "Source", "Destination", "Date", "Time", "Price", "Airliner", "FlightNum", "Available Seat"
+                "Flight Name", "Source", "Destination", "Date", "Time", "Airliner", "FlightNum", "Available Seat"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -393,7 +395,7 @@ public class BookTickets extends javax.swing.JPanel {
         }
         
         String source = cmbSrc.getItemAt(cmbSrc.getSelectedIndex());//txtSrc.getText();
-        String dest= cmbDest.getItemAt(cmbSrc.getSelectedIndex());//txtDestination.getText();
+        String dest= cmbDest.getItemAt(cmbDest.getSelectedIndex());//txtDestination.getText();
         String time = cmbTime.getItemAt(cmbTime.getSelectedIndex());
         if(date==null)
         {
@@ -420,7 +422,7 @@ public class BookTickets extends javax.swing.JPanel {
             return;
         }
         
-        FlightSchedule fsch= (FlightSchedule)  tblFlightSchedule.getValueAt(row,7);
+        FlightSchedule fsch= (FlightSchedule)  tblFlightSchedule.getValueAt(row,6);
         
         
          //check seat
@@ -490,16 +492,16 @@ public class BookTickets extends javax.swing.JPanel {
                 
         //List<FlightSchedule> flightSchList = flight.getFlightSchedule();
         
-            Object row[] = new Object[9];
+            Object row[] = new Object[8];
             row[0] = flight.getFlightName();
             row[1] = source;
             row[2] = dest;
             row[3] = fs.getDate();
             row[4] = fs.getTime();
-            row[5] = fs.getPrice();//flight.getFlightNum();
-            row[6]= flight.getAirlinerName();
-            row[7] = fs;
-            row[8] = fs.getFlightSeatCount();
+            //row[5] = fs.getPrice();//flight.getFlightNum();
+            row[5]= flight.getAirlinerName();
+            row[6] = fs;
+            row[7] = fs.getFlightSeatCount();
             model.addRow(row); 
             
            }
@@ -545,20 +547,29 @@ public class BookTickets extends javax.swing.JPanel {
                        
                    }
                }
+               String date = "";
+               try{
+                   SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+                        sdfrmt.setLenient(false);
+                        date = sdfrmt.format(fs.getDate());
+               }catch(Exception e){
+                   date = fs.getDate().toString();
+               }
+               
                
                 
         //List<FlightSchedule> flightSchList = flight.getFlightSchedule();
         
-            Object row[] = new Object[9];
+            Object row[] = new Object[8];
             row[0] = flight.getFlightName();
             row[1] = source;
             row[2] = dest;
-            row[3] = fs.getDate();
+            row[3] = date;
             row[4] = fs.getTime();
-            row[5] = fs.getPrice();//flight.getFlightNum();
-            row[6]= flight.getAirlinerName();
-            row[7]=fs;
-            row[8] = fs.getFlightSeatCount();
+            //row[5] = fs.getPrice();//flight.getFlightNum();
+            row[5]= flight.getAirlinerName();
+            row[6]=fs;
+            row[7] = fs.getFlightSeatCount();
             model.addRow(row); 
             flag=true;
            }

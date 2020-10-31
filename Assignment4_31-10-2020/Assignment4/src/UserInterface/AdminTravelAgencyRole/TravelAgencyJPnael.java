@@ -57,6 +57,8 @@ public class TravelAgencyJPnael extends javax.swing.JPanel {
         btnCustomer = new javax.swing.JButton();
         btnViewMTSch = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Manage Travel Agency");
 

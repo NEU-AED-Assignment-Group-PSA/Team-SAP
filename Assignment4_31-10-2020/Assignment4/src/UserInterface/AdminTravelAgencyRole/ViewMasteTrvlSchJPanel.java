@@ -13,6 +13,7 @@ import Business.Fleet;
 import Business.Flight;
 import Business.FlightSchedule;
 import java.awt.CardLayout;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -76,6 +77,11 @@ public class ViewMasteTrvlSchJPanel extends javax.swing.JPanel {
                         time=fs.getTime();
                         date1=fs.getDate().toString();
                         
+                        SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+                        sdfrmt.setLenient(false);
+                        String date = sdfrmt.format(fs.getDate());
+
+                        
                         //populate 1 rowi n tabel
                         Object row[] = new Object[7];
             row[0] = airlinerName;
@@ -83,7 +89,7 @@ public class ViewMasteTrvlSchJPanel extends javax.swing.JPanel {
             row[2] = flightName;
             row[3] = source;
             row[4] = destination;
-            row[5] = date1;
+            row[5] = date;
             row[6] = time;
             
             model.addRow(row); 
@@ -116,6 +122,8 @@ public class ViewMasteTrvlSchJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMasterSchedule = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(0, 102, 102));
 
         tblMasterSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

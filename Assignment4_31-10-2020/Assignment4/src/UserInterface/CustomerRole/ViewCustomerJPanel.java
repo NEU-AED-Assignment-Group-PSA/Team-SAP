@@ -77,6 +77,8 @@ public class ViewCustomerJPanel extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         txtCustId = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Email:");

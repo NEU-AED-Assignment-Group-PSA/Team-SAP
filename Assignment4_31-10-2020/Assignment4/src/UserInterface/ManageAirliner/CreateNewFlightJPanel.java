@@ -72,6 +72,8 @@ public class CreateNewFlightJPanel extends javax.swing.JPanel {
         flightsTable = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Manage Flight");
 

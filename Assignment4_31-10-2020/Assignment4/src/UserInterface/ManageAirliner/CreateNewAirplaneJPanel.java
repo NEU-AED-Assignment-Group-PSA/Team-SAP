@@ -59,6 +59,8 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         cmbAisle = new javax.swing.JComboBox<>();
         lblAirlinerName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Create New Airplane for");
 
@@ -105,13 +107,13 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
         });
 
         cmbWindow.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
+        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50" }));
 
         cmbMiddle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
+        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50" }));
 
         cmbAisle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
+        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50" }));
 
         lblAirlinerName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblAirlinerName.setText("Airliner");

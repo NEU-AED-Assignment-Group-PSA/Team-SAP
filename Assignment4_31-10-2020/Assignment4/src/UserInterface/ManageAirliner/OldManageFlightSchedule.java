@@ -34,6 +34,8 @@ public class OldManageFlightSchedule extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         tblFlightSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 

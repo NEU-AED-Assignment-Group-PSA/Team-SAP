@@ -35,6 +35,8 @@ public class OldCreateNewFlightJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtNumber = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Create New Flight");
 

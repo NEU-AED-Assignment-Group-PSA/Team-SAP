@@ -49,12 +49,12 @@ public class TravelAgencyMain extends javax.swing.JFrame {
         flightList= new ArrayList<>();
         ticketList= new ArrayList<>();
         flightScheduleList = new ArrayList<>();
-          populateAirlineFromFile();
-        populateAirplaneFromFile();
-        populateFlightFromFile();
-        populateFlightScheduleFromFile();
-        populatCustomerFIle();
-        populateTicketsFile();
+//          populateAirlineFromFile();
+//        populateAirplaneFromFile();
+//        populateFlightFromFile();
+//        populateFlightScheduleFromFile();
+//        populatCustomerFIle();
+//        populateTicketsFile();
         
     }
 
@@ -75,6 +75,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        leftJPanel.setBackground(new java.awt.Color(204, 255, 204));
         leftJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnTravelAgency1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -97,6 +98,7 @@ public class TravelAgencyMain extends javax.swing.JFrame {
 
         jSplitPane1.setLeftComponent(leftJPanel);
 
+        UserProcessContainer.setBackground(new java.awt.Color(0, 102, 102));
         UserProcessContainer.setLayout(new java.awt.CardLayout());
         jSplitPane1.setRightComponent(UserProcessContainer);
 

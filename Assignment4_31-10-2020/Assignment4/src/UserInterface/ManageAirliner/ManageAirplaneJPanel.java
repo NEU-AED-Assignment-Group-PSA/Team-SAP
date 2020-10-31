@@ -56,9 +56,9 @@ public void populateAirplaneList()
             {
                 Object row[] = new Object[5];
                 row[0] = s;
-             row[1] = 25;//s.getAirplaneName;
-            row[2] = 25;//s.getMiddleSeatCount();
-            row[3] = 25;//s.getAisleSeatCount();
+             row[1] = 50;//s.getAirplaneName;
+            row[2] = 50;//s.getMiddleSeatCount();
+            row[3] = 50;//s.getAisleSeatCount();
                 row[4] = s.getModelNum();
                 model.addRow(row); 
             }
@@ -83,6 +83,8 @@ public void populateAirplaneList()
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAirplane = new javax.swing.JTable();
         lblAirlinerName = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(0, 102, 102));
 
         btnNewAirplane.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnNewAirplane.setText("New Airplane");

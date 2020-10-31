@@ -75,6 +75,8 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         cmbRating = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("View Airliner");
 
@@ -155,9 +157,8 @@ public class ViewAirlinerJPanel extends javax.swing.JPanel {
                                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
                                 .addComponent(btnUpdate))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cmbRating, 0, 232, Short.MAX_VALUE)
-                                .addComponent(txtSharePrice)))))
+                            .addComponent(cmbRating, javax.swing.GroupLayout.Alignment.LEADING, 0, 232, Short.MAX_VALUE)
+                            .addComponent(txtSharePrice, javax.swing.GroupLayout.Alignment.LEADING))))
                 .addContainerGap(278, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(

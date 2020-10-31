@@ -49,7 +49,7 @@ public class CreateNewAirlinerJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         cmbRating = new javax.swing.JComboBox<>();
 
-        setBackground(new java.awt.Color(0, 204, 204));
+        setBackground(new java.awt.Color(0, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setText("Create New Airliner");

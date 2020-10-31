@@ -79,6 +79,8 @@ public class ViewAirplane extends javax.swing.JPanel {
         cmbAisle = new javax.swing.JComboBox<>();
         lblAirplane = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         jLabel7.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Model Number:");
@@ -134,13 +136,13 @@ public class ViewAirplane extends javax.swing.JPanel {
         txtName.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
 
         cmbWindow.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
+        cmbWindow.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50" }));
 
         cmbMiddle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
+        cmbMiddle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50" }));
 
         cmbAisle.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "25" }));
+        cmbAisle.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "50" }));
 
         lblAirplane.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblAirplane.setText("Airliner");

@@ -90,6 +90,8 @@ public class ManageFlightJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         lblAirlinerName = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(0, 102, 102));
+
         label1.setAlignment(java.awt.Label.RIGHT);
         label1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         label1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
