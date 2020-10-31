@@ -21,7 +21,6 @@
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="btnViewMTSch" alignment="0" pref="363" max="32767" attributes="0"/>
                   <Component id="btnCustomer" alignment="0" max="32767" attributes="0"/>
-                  <Component id="btnTravelOff" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -38,12 +37,10 @@
               <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" pref="73" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-              <Component id="btnTravelOff" min="-2" pref="63" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
               <Component id="btnCustomer" min="-2" pref="63" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
               <Component id="btnViewMTSch" min="-2" pref="63" max="-2" attributes="0"/>
-              <EmptySpace pref="260" max="32767" attributes="0"/>
+              <EmptySpace pref="398" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -56,17 +53,6 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Manage Travel Agency"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTravelOff">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="18" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Manage Travel Office"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTravelOffActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnCustomer">
       <Properties>

@@ -54,20 +54,11 @@ public class TravelAgencyJPnael extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnTravelOff = new javax.swing.JButton();
         btnCustomer = new javax.swing.JButton();
         btnViewMTSch = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Manage Travel Agency");
-
-        btnTravelOff.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        btnTravelOff.setText("Manage Travel Office");
-        btnTravelOff.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnTravelOffActionPerformed(evt);
-            }
-        });
 
         btnCustomer.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnCustomer.setText("Manage Customer");
@@ -93,8 +84,7 @@ public class TravelAgencyJPnael extends javax.swing.JPanel {
                 .addGap(86, 86, 86)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnViewMTSch, javax.swing.GroupLayout.DEFAULT_SIZE, 363, Short.MAX_VALUE)
-                    .addComponent(btnCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnTravelOff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(257, Short.MAX_VALUE)
@@ -107,28 +97,12 @@ public class TravelAgencyJPnael extends javax.swing.JPanel {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(58, 58, 58)
-                .addComponent(btnTravelOff, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
                 .addComponent(btnCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(68, 68, 68)
+                .addGap(63, 63, 63)
                 .addComponent(btnViewMTSch, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(398, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnTravelOffActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTravelOffActionPerformed
-        // TODO add your handling code here:
-        AirlinerDirectory ad = airlinerDir;
-        
-        ManageTravelOffJPanel travelOfficeJPanel = new ManageTravelOffJPanel (UserProcessContainer, ad, custDir, ticketList, flightScheduleList,flightList);
-        UserProcessContainer.add("ManageTravelOffJPanel",travelOfficeJPanel); //any name will do
-        ((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
-       // UserProcessContainer.removeAll();
-        //TravelAgencyJPnael msjp = new TravelAgencyJPnael (UserProcessContainer, ad);
-       // UserProcessContainer.add("TravelAgencyJPnael",msjp); //any name will do
-        //((java.awt.CardLayout)UserProcessContainer.getLayout()).next(UserProcessContainer);
-
-    }//GEN-LAST:event_btnTravelOffActionPerformed
 
     private void btnCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomerActionPerformed
         // TODO add your handling code here:
@@ -158,7 +132,6 @@ public class TravelAgencyJPnael extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCustomer;
-    private javax.swing.JButton btnTravelOff;
     private javax.swing.JButton btnViewMTSch;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
