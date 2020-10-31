@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Properties;
 import javax.swing.DefaultComboBoxModel;
@@ -67,7 +68,16 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
             row[0] = flight.getFlightName();
             row[1] = s.getSrc();
             row[2] = s.getDestination();
-            row[3] = s.getDate();
+            
+            try{
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+                sdfrmt.setLenient(false);
+                String date = sdfrmt.format(s.getDate());
+                row[3] = date;
+            }catch(Exception e){
+                row[3] = s.getDate();
+            }
+            
             row[4] = s.getTime();
             row[5] = s;//flight.getFlightNum();
             
@@ -171,6 +181,7 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("To:");
 
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Date:");
 
         saveButton.setText("Save");
@@ -187,10 +198,12 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
             }
         });
 
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Time:");
 
         cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening", "Night" }));
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Airplane:");
 
         cmbAirplane.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Airplane1" }));
@@ -199,31 +212,29 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
         schedulePanel.setLayout(schedulePanelLayout);
         schedulePanelLayout.setHorizontalGroup(
             schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedulePanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(saveButton)
-                    .addComponent(closebtn))
-                .addGap(54, 54, 54))
             .addGroup(schedulePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(schedulePanelLayout.createSequentialGroup()
                         .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
                         .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(cmbTime, 0, 105, Short.MAX_VALUE)
-                            .addComponent(datefield, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+                            .addComponent(datefield, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tofield, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(fromfield, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, schedulePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cmbAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(closebtn)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(saveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         schedulePanelLayout.setVerticalGroup(
@@ -242,17 +253,18 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(datefield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel8)
-                    .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(cmbAirplane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(saveButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(closebtn))
+                .addGap(18, 18, 18)
+                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(closebtn)
+                    .addComponent(saveButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
 
         vsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Schedule"));
@@ -263,6 +275,7 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("To:");
 
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Date:");
 
         closeButton.setText("Close");
@@ -281,38 +294,34 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
 
         cmbTimeUpdate.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Morning", "Evening", "Night" }));
 
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Time:");
 
         javax.swing.GroupLayout vsPanelLayout = new javax.swing.GroupLayout(vsPanel);
         vsPanel.setLayout(vsPanelLayout);
         vsPanelLayout.setHorizontalGroup(
             vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vsPanelLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6)
-                        .addComponent(jLabel7))
-                    .addGroup(vsPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(4, 4, 4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(fromfield1, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                    .addComponent(tofield1)
-                    .addComponent(datefield1))
-                .addGap(22, 22, 22))
-            .addGroup(vsPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(closeButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addComponent(btnUpdate)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vsPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cmbTimeUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vsPanelLayout.createSequentialGroup()
+                        .addContainerGap(40, Short.MAX_VALUE)
+                        .addComponent(closeButton))
+                    .addGroup(vsPanelLayout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUpdate)
+                    .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(fromfield1)
+                        .addComponent(tofield1)
+                        .addComponent(datefield1)
+                        .addComponent(cmbTimeUpdate, 0, 96, Short.MAX_VALUE)))
+                .addGap(22, 22, 22))
         );
         vsPanelLayout.setVerticalGroup(
             vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,15 +338,15 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
                 .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(datefield1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmbTimeUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                    .addComponent(jLabel9)
+                    .addComponent(cmbTimeUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
                 .addGroup(vsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(closeButton)
-                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(21, 21, 21))
+                    .addComponent(btnUpdate)
+                    .addComponent(closeButton))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -349,44 +358,47 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addComponent(btnBack)
-                        .addGap(167, 167, 167)
+                        .addGap(210, 210, 210)
                         .addComponent(jLabel1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(225, 225, 225)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(225, 225, 225)
-                                    .addComponent(btnNewSchedule))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(197, 197, 197)
-                                    .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(vsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(190, 190, 190)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(78, 78, 78)
+                                        .addComponent(btnNewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGap(38, 38, 38)
+                                        .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(33, 33, 33)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 616, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(btnBack))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnViewSchedule, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(btnNewSchedule)
+                    .addComponent(btnViewSchedule))
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(51, Short.MAX_VALUE))
+                    .addComponent(vsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -472,13 +484,33 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
             try {
                 //int selectedrow=tblFlightSchedule.getSelectedRow();
                 //Flight flight=(Flight)tblFlightSchedule.getValueAt(selectedrow, 0);
+                SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+                sdfrmt.setLenient(false);
+                java.util.Date date = sdfrmt.parse(datefield.getText());
+                
+
+               
+
+       // String strDate = formDate.format(System.currentTimeMillis()); // option 1
+               Calendar cals = Calendar.getInstance();
+//Displaying the actual date
+              //  System.out.println("The original Date: " + cals.getTime());
+//Using format() method for conversion
+            String currentDate = sdfrmt.format(cals.getTime());
+            //System.out.println("Formatted Date: " + currentDate);
+            java.util.Date dateCurrent = sdfrmt.parse(currentDate);
+            
+               if(dateCurrent.compareTo(date) > 0){
+                   JOptionPane.showMessageDialog(null, "Date must be greater than or equal to current date");
+                   return;
+               }
+                
+                
                 FlightSchedule flightSch =new FlightSchedule();
                 String from=fromfield.getText();
                 String to=tofield.getText();
                 //Date date=Date.valueOf(datefield.getText());
-                SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
-                sdfrmt.setLenient(false);
-                java.util.Date date = sdfrmt.parse(datefield.getText());
+                
                 
                 
                 
@@ -540,6 +572,19 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
                 sdfrmt.setLenient(false);
                 java.util.Date date = sdfrmt.parse(datefield1.getText());
                 
+                Calendar cals = Calendar.getInstance();
+//Displaying the actual date
+              //  System.out.println("The original Date: " + cals.getTime());
+//Using format() method for conversion
+            String currentDate = sdfrmt.format(cals.getTime());
+            //System.out.println("Formatted Date: " + currentDate);
+            java.util.Date dateCurrent = sdfrmt.parse(currentDate);
+            
+               if(dateCurrent.compareTo(date) > 0){
+                   JOptionPane.showMessageDialog(null, "Date must be greater than or equal to current date");
+                   return;
+               }
+                
                 
                 
                 flightSch.setSrc(from);
@@ -576,7 +621,12 @@ public class ManageFlightSchedule extends javax.swing.JPanel {
         fromfield1.setText(flightsch.getSrc());
         tofield1.setText(flightsch.getDestination());
         //String date=flight.getFlightSchedule().getDate().toString();
-        datefield1.setText(flightsch.getDate().toString());
+        
+        SimpleDateFormat sdfrmt = new SimpleDateFormat("MM/dd/yyyy");
+        sdfrmt.setLenient(false);
+        String date = sdfrmt.format(flightsch.getDate());
+                
+        datefield1.setText(date);
         String timing = flightsch.getTime();
         if(timing.equals("Morning")) {  cmbTimeUpdate.setSelectedIndex(0);}
         else if(timing.equals("Night")) {  cmbTimeUpdate.setSelectedIndex(2);}

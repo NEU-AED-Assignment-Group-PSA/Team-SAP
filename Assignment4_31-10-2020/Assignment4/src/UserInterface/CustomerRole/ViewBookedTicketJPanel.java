@@ -237,7 +237,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         }
         
         Ticket t= (Ticket)  tblTickets.getValueAt(row,0);
-        if(t.getStatus().equals("Cancel"))
+        if(t.getStatus().equals("Canceled"))
         {
             JOptionPane.showMessageDialog(null, "Ticket is already canceled, please select other row!!", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -258,7 +258,7 @@ public class ViewBookedTicketJPanel extends javax.swing.JPanel {
         
         
         
-        t.setStatus("Cancel");
+        t.setStatus("Canceled");
         JOptionPane.showMessageDialog(null,"Ticket Cancelled!");
         populateTickets();
         

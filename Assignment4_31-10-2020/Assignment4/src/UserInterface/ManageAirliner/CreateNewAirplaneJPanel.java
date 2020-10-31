@@ -193,9 +193,7 @@ public class CreateNewAirplaneJPanel extends javax.swing.JPanel {
 
     private void btnCreateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateActionPerformed
         //validate values->
-        if(txtName.getText().isEmpty() || cmbWindow.getSelectedIndex() == 0 || 
-               cmbMiddle.getSelectedIndex() == 0 ||  cmbAisle.getSelectedIndex() == 0 
-                || txtModel.getText().isEmpty()){
+        if(txtName.getText().isEmpty() || txtModel.getText().isEmpty()){
             JOptionPane.showMessageDialog(null, "Please fill data");
             return;
         }
