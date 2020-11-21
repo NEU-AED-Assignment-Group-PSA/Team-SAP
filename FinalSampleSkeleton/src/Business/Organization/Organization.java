@@ -25,6 +25,7 @@ public abstract class Organization {
     private static int counter=0;
     
     public enum Type{
+        Admin("Admin"),
         Dental("Dental Department"),
         ENT("ENT Department"),
         CovidCenter("Covid-19 Treatment Department"),
