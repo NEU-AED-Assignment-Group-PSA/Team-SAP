@@ -12,13 +12,14 @@ import java.util.ArrayList;
  *
  * @author raunak
  */
-public class DoctorOrganization extends Organization{
+public class DoctorOrganization //extends Organization
+{
 
     public DoctorOrganization() {
-        super(Organization.Type.Doctor.getValue());
+        //super(Organization.Type.Doctor.getValue());
     }
     
-    @Override
+   // @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
         roles.add(new DoctorRole());
