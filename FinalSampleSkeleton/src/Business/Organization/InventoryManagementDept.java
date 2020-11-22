@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business;
+package Business.Organization;
+
+import Business.Inventory;
 
 /**
  *
- * @author aditi
+ * @author preranaurs
  */
-public class Receptionist {
-    // linked with admission department
+public class InventoryManagementDept {
+    String productID;
+    Inventory inventory;
 }

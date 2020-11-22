@@ -17,6 +17,7 @@ public class Patient extends Person{
     String phoneNum;
     AppointmentDirectory appointmentList;
     LabTestDirectory labTestList;
+    String patientSex;
     
     
     void bookAppointment(Appointment app )
