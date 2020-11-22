@@ -10,11 +10,11 @@ import java.util.ArrayList;
  *
  * @author raunak
  */
-public class EmployeeDirectory {
+public class PersonDirectory {
     
     private ArrayList<Employee> employeeList;
 
-    public EmployeeDirectory() {
+    public PersonDirectory() {
         employeeList = new ArrayList();
     }
 

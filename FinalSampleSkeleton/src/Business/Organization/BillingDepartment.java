@@ -22,6 +22,8 @@ public class BillingDepartment {
     Doctor doctor;
     Appointment appointment;
     Bill bill;
+    String paymentStatus;
+    String paymentMode;
     
     
    Bill processBilling(Date date){
@@ -33,4 +35,7 @@ public class BillingDepartment {
        //generate invoice
    }
     
+   public void selectPaymentMode(){
+    //choose a payment mode
+   }
 }
