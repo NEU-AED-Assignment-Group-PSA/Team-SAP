@@ -8,21 +8,29 @@ package Business.Organization;
 import Business.Appointment;
 import Business.AppointmentDirectory;
 import Business.Bill;
+import Business.BillDirectory;
 import Business.Doctor;
+import Business.DoctorDirectory;
 import Business.Nurse;
+import Business.NurseDirectory;
 import Business.Operation;
+import Business.OperationDirectory;
 import Business.Patient;
+import Business.PatientDirectory;
 
 /**
  *
  * @author preranaurs
  */
 public class ENTDept {
-    Nurse nurse;
-    Operation operation;
-    Doctor doctor;
+    
+    BillDirectory billDirectory;
+    DoctorDirectory doctorDirectory;
+    AppointmentDirectory appointmentDirectory;
+    NurseDirectory nurseDirectory;
+    OperationDirectory operationDirectory; 
     Bed bed;
-    Appointment appointment;
+    PatientDirectory patientDirectory;
     
     public void getPatientHistory(Patient patient, AppointmentDirectory appointmnetList){
         //retrieve patient history

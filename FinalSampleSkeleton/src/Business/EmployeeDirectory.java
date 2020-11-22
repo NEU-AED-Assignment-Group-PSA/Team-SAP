@@ -10,22 +10,22 @@ import java.util.ArrayList;
  *
  * @author raunak
  */
-public class EmployeeDirectory {
+public class PersonDirectory {
     
-    private ArrayList<Person> employeeList;
+    private ArrayList<Person> personList;
 
-    public EmployeeDirectory() {
-        employeeList = new ArrayList();
+    public PersonDirectory() {
+        personList = new ArrayList();
     }
 
     public ArrayList<Person> getEmployeeList() {
-        return employeeList;
+        return personList;
     }
     
     public Person createEmployee(String name){
         Person employee = new Person();
         employee.setName(name);
-        employeeList.add(employee);
+        personList.add(employee);
         return employee;
     }
 }
