@@ -17,6 +17,7 @@ public class Bill {
     Appointment appointment;
     double totalCharges;
     String status;//paid, unpaid
+    int invoiceNumber;
     
     
     
