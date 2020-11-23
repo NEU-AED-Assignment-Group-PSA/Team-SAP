@@ -5,13 +5,10 @@
  */
 package Business.Organization;
 
-import Business.Department.Inventory;
-
 /**
  *
- * @author preranaurs
+ * @author aditi
  */
-public class InventoryManagementDept {
-    String productID;
-    Inventory inventory;
+public class PharmacyOrganization {
+    
 }

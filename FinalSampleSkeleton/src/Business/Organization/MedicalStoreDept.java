@@ -5,10 +5,10 @@
  */
 package Business.Organization;
 
-import Business.LabTest;
-import Business.Location;
-import Business.MedicineDirectory;
-import Business.Prescription;
+import Business.Lab.LabTest;
+import Business.Location.Location;
+import Business.Medicine.MedicineDirectory;
+import Business.Appointment.Prescription;
 import java.util.List;
 
 /**

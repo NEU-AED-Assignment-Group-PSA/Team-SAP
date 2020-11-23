@@ -3,29 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Enterprise;
+package Business.Enterprise.ClinicEnterprise;
 
-import Business.DepartmentDirectory;
+import Business.Doctor.Doctor;
+import Business.Enterprise.Enterprise;
 import Business.Location.Location;
-import Business.Medicine.MedicineDirectory;
+import Business.Department.Receptionist;
 import Business.Role.Role;
 import java.util.ArrayList;
-import java.util.Map;
 
 /**
  *
  * @author aditi
  */
-public class Pharmacy extends Enterprise{
-    //int id;
-    //String name;
+public class Clinic extends Enterprise{
+    Doctor doctor;
     Location location;
-    Map<MedicineDirectory,Integer> medicineList;   /// medicine,quantity
-    DepartmentDirectory departmentList;
+    Receptionist receptionist;
     
     
-    public Pharmacy(String name){
-        super(name,EnterpriseType.Pharmacy);
+    
+    public Clinic(String name){
+        super(name,EnterpriseType.Clinic);
     }
     @Override
     public ArrayList<Role> getSupportedRole() {

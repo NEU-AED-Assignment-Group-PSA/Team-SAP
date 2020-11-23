@@ -3,18 +3,20 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Department;
+package Business.Medicine;
 
-import Business.Person.EmployeeDirectory;
+import java.util.Date;
 
 /**
  *
  * @author aditi
  */
-public class Department {
+public class Medicine {
     int id;
     String name;
-    String departmentType;  //dental, billing, etc
-    EmployeeDirectory employeeList;
+    Date expiryDate;
+    String dosage;
+    double price;
     
+    String type;//liquid, tablet, gel
 }
