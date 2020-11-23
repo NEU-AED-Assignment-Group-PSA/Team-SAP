@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Organization;
+package Business.Bill;
 
-import Business.Department.Inventory;
+import java.util.List;
 
 /**
  *
  * @author preranaurs
  */
-public class InventoryManagementDept {
-    String productID;
-    Inventory inventory;
+public class BillDirectory {
+    List<Bill> billList;
+    //static int count=1;
 }

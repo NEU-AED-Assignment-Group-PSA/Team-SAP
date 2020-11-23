@@ -5,10 +5,10 @@
  */
 package Business.Organization;
 
-import Business.Appointment;
-import Business.Bill;
-import Business.Doctor;
-import Business.Patient;
+import Business.Appointment.Appointment;
+import Business.Bill.Bill;
+import Business.Doctor.Doctor;
+import Business.Patient.Patient;
 import java.util.Date;
 
 /**

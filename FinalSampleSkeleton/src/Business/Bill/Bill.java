@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Business.Organization;
+package Business.Bill;
 
 import Business.Appointment.Appointment;
 import Business.Doctor.Doctor;
-import Business.Lab.LabTest;
 import Business.Patient.Patient;
 
 /**
  *
- * @author preranaurs
+ * @author aditi
  */
-public class LabTestReportDept {
-    Doctor doctor;
-    LabTest labTest;
-    Appointment appointment;
+public class Bill {
+    //cumulative charges->> labs, medicine, consultation, hospital charges
+    int billId;
     Patient patient;
+    Doctor doctor;
+    Appointment appointment;
+    double totalCharges;
+    String status;//paid, unpaid
+    int invoiceNumber;
     
-    public void generateReport(LabTest labtest){
-    //generates the given lab report     
-    }
     
-    public void generateBill(LabTest labTest){
-       //generates bill for Lab tests conducted 
-    }
+    
 }
