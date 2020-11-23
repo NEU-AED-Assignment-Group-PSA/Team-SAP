@@ -14,4 +14,8 @@ import Business.Department.Inventory;
 public class InventoryManagementDept {
     String productID;
     Inventory inventory;
+
+    
+
+    
 }

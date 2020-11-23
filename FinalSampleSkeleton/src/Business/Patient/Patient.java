@@ -8,7 +8,7 @@ package Business.Patient;
 import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
 import Business.Bill.Bill;
-import Business.Lab.LabTestDirectory;
+import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Person.Person;
 import java.util.Date;
 import java.util.List;
