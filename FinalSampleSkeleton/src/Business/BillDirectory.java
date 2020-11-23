@@ -5,10 +5,13 @@
  */
 package Business;
 
+import java.util.List;
+
 /**
  *
- * @author aditi
+ * @author preranaurs
  */
-public class Receptionist {
-    // linked with admission department
+public class BillDirectory {
+    List<Bill> billList;
+    //static int count=1;
 }
