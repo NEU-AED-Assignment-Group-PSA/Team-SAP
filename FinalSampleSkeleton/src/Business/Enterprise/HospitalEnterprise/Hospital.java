@@ -5,7 +5,7 @@
  */
 package Business.Enterprise.HospitalEnterprise;
 
-import Business.DepartmentDirectory;
+import Business.Department.DepartmentDirectory;
 import Business.Doctor.DoctorDirectory;
 import Business.Enterprise.Enterprise;
 import Business.Location.Location;

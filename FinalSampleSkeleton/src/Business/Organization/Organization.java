@@ -26,12 +26,14 @@ public abstract class Organization {
     
     public enum Type{
         Admin("Admin"),
+        //Doctor("Doctor"),
+        Lab("Lab"),
         Dental("Dental Department"),
         ENT("ENT Department"),
         CovidCenter("Covid-19 Treatment Department"),
         MedicalStore("Medical Store Department"),
         BedManagement("Bed Management Department"),
-        Laundry("Laundry Service Department"),
+        //Laundry("Laundry Service Department"),
         Pathology("Pathology Department"),
         Radiology("Radiology Department"),
         Inventory("Inventory Management Department"),

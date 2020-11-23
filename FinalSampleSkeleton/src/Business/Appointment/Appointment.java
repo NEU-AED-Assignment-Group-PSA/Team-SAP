@@ -6,7 +6,7 @@
 package Business.Appointment;
 
 import Business.Doctor.Doctor;
-import Business.Lab.LabTest;
+import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Operation.OperationDirectory;
 import Business.Patient.Patient;
 import java.util.Date;

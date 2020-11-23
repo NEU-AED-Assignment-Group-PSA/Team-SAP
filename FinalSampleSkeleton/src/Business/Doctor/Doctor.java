@@ -7,7 +7,7 @@ package Business.Doctor;
 
 import Business.Department.Department;
 import Business.Enterprise.LabEnterprise.Lab;
-import Business.Lab.LabTest;
+import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Patient.Patient;
 import Business.Person.Person;
 import java.util.Date;
