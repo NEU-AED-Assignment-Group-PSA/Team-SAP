@@ -22,4 +22,10 @@ public class LabTechnicianRole extends Role {
         return new LabAssistantWorkAreaJPanel(userProcessContainer, account, organization, business);
     }
     
+    @Override
+    public String roleValue()
+    {
+        return "LabTechnicianRole";
+    }
+    
 }

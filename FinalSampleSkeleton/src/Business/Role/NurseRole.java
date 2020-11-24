@@ -24,4 +24,10 @@ public class NurseRole extends Role{
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system) {
         return new NurseWorkAreaJPanel(userProcessContainer, system);
     }
+    
+    @Override
+    public String roleValue()
+    {
+        return "NurseRole";
+    }
 }
