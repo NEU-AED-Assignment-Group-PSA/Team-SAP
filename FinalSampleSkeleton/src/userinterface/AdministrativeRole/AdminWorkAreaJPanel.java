@@ -2,6 +2,7 @@
 
 package userinterface.AdministrativeRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
@@ -16,11 +17,17 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     
     JPanel userProcessContainer;
     Enterprise enterprise;
+    UserAccount account;
+    Organization organization;
+    EcoSystem system;
     /** Creates new form AdminWorkAreaJPanel */
-    public AdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise,UserAccount account, Organization organization) {
+    public AdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise,UserAccount account, Organization organization, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.enterprise = enterprise;
+        this.account = account;
+        this.organization = organization;
+        this.system = system;
         lblEnterprise.setText(enterprise.getName());
         lblHeadName.setText(account.getEmployee().getName());
     }
