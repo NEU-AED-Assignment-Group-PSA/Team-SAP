@@ -24,5 +24,11 @@ public class PatientRole extends Role {
         return new PatientWorkAreaJPanel(userProcessContainer, account, organization, business);
     }
     
+    @Override
+    public String roleValue()
+    {
+        return "PatientRole";
+    }
+    
     
 }

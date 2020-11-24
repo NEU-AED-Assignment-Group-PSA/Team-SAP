@@ -23,4 +23,10 @@ public class ReceptionistRole extends Role {
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         return new ReceptionistWorkAreaJPanel(userProcessContainer, account, organization, business);
     }
+    
+    @Override
+    public String roleValue()
+    {
+        return "ReceptionistRole";
+    }
 }
