@@ -5,6 +5,8 @@
 package Business.Organization;
 
 import Business.Employee.PersonDirectory;
+import Business.Patient.Patient;
+import Business.Patient.PatientDirectory;
 import Business.Role.Role;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
@@ -21,6 +23,7 @@ public abstract class Organization {
     private WorkQueue workQueue;
     private PersonDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
+    private PatientDirectory patientDirectory;
     private int organizationID;
     private static int counter=0;
     
@@ -56,6 +59,10 @@ public abstract class Organization {
         workQueue = new WorkQueue();
         employeeDirectory = new PersonDirectory();
         userAccountDirectory = new UserAccountDirectory();
+        patientDirectory = new PatientDirectory();
+        if(patientDirectory.getPatientList() == null){
+            patientDirectory.setPatientList(new ArrayList<Patient>());
+        }
         organizationID = counter;
         ++counter;
     }
@@ -88,6 +95,14 @@ public abstract class Organization {
 
     public void setWorkQueue(WorkQueue workQueue) {
         this.workQueue = workQueue;
+    }
+
+    public PatientDirectory getPatientDirectory() {
+        return patientDirectory;
+    }
+
+    public void setPatientDirectory(PatientDirectory patientDirectory) {
+        this.patientDirectory = patientDirectory;
     }
 
     @Override

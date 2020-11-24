@@ -26,6 +26,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
     private DoctorOrganization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private EcoSystem system;
     /**
      * Creates new form PatientWorkAreaJPanel
      */
@@ -33,7 +34,7 @@ public class PatientWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public PatientWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public PatientWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
