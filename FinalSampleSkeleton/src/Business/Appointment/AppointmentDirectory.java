@@ -6,23 +6,27 @@
 package Business.Appointment;
 
 import Business.Patient.Patient;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.swing.JTextField;
 
 /**
  *
  * @author aditi
  */
 public class AppointmentDirectory {
+    private int count = 1;
     List<Appointment> appointmentList;
-    
-    //create appointment
-    Appointment createAppointment(){
-        Appointment app= null;
-        
-        return app;
-        
+
+    public List<Appointment> getAppointmentList() {
+        return appointmentList;
     }
+
+    public void setAppointmentList(List<Appointment> appointmentList) {
+        this.appointmentList = appointmentList;
+    }
+    
     //update appointment
     
     void updateAppointment(Appointment app){
@@ -54,6 +58,22 @@ public class AppointmentDirectory {
         
         
         return app;
+    }
+
+    public void createAppointment(Patient patient, String doctor, Date appointmetDate, String appointmentType) {
+       if(patient.getAppointmentDirectory()== null){
+            AppointmentDirectory appointmentDirectory = new AppointmentDirectory();
+            List<Appointment> appointmentList = new ArrayList<Appointment>();
+            appointmentDirectory.setAppointmentList(appointmentList);
+            patient.setAppointmentDirectory(appointmentDirectory);
+        }
+        
+        Appointment appointment = new Appointment(count++);
+        appointment.setDate(appointmetDate);
+       // appointment.setDoctor(doctor);
+        appointment.setType(appointmentType);
+        appointment.setPatient(patient);
+       
     }
     
     

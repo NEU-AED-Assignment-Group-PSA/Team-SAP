@@ -10,6 +10,7 @@ import Business.Appointment.AppointmentDirectory;
 import Business.Bill.Bill;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Person.Person;
+import Business.UserAccount.UserAccount;
 import java.util.Date;
 import java.util.List;
 
@@ -20,9 +21,75 @@ import java.util.List;
 public class Patient extends Person{
     
     String phoneNum;
-    AppointmentDirectory appointmentList;
+    AppointmentDirectory appointmentDirectory;
     LabTestDirectory labTestList;
     String patientSex;
+    private String address;
+    private String bloodGroup;
+    private UserAccount userAccount;
+
+    public UserAccount getUserAccount() {
+        return userAccount;
+    }
+
+    public void setUserAccount(UserAccount userAccount) {
+        this.userAccount = userAccount;
+    }
+    
+    
+
+    public String getBloodGroup() {
+        return bloodGroup;
+    }
+
+    public void setBloodGroup(String bloodGroup) {
+        this.bloodGroup = bloodGroup;
+    }
+    
+    
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public AppointmentDirectory getAppointmentDirectory() {
+        return appointmentDirectory;
+    }
+
+    public void setAppointmentDirectory(AppointmentDirectory appointmentDirectory) {
+        this.appointmentDirectory = appointmentDirectory;
+    }
+
+    public LabTestDirectory getLabTestList() {
+        return labTestList;
+    }
+
+    public void setLabTestList(LabTestDirectory labTestList) {
+        this.labTestList = labTestList;
+    }
+
+    public String getPatientSex() {
+        return patientSex;
+    }
+
+    public void setPatientSex(String patientSex) {
+        this.patientSex = patientSex;
+    }
+    
     
     
     void bookAppointment(Appointment app )

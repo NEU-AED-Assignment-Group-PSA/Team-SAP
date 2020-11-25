@@ -8,6 +8,7 @@ package Business.Organization;
 import Business.Role.DoctorRole;
 import Business.Role.LabTechnicianRole;
 import Business.Role.NurseRole;
+import Business.Role.ReceptionistRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -29,6 +30,7 @@ public class GeneralOrganization extends Organization
         ArrayList<Role> roles = new ArrayList();
         roles.add(new DoctorRole());
         roles.add(new NurseRole());
+        roles.add(new ReceptionistRole());
         return roles;
 }
     
