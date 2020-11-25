@@ -30,6 +30,17 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.system = system;
         lblEnterprise.setText(enterprise.getName());
         lblHeadName.setText(account.getEmployee().getName());
+        if(enterprise.getEnterpriseType().toString().equals("Hospital"))
+        {
+            manageBedBtn.setEnabled(true);
+            manageBedBtn.setVisible(true);
+        }
+        else{
+             manageBedBtn.setEnabled(false);
+             manageBedBtn.setVisible(false);
+        }
+        
+        manageEmployeeJButton.setVisible(false);
     }
     
     /** This method is called from within the constructor to
@@ -48,6 +59,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         lblHeadName = new javax.swing.JLabel();
         enterpriseLabel1 = new javax.swing.JLabel();
         lblEnterprise = new javax.swing.JLabel();
+        manageBedBtn = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -55,23 +67,23 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         jLabel1.setText("My Work Area -Adminstrative Role");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
 
-        userJButton.setText("Manage User");
+        userJButton.setText("Manage Staff");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
             }
         });
-        add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 150, -1));
+        add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 150, -1));
 
-        manageEmployeeJButton.setText("Manage Staff");
+        manageEmployeeJButton.setText("Manage ss");
         manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageEmployeeJButtonActionPerformed(evt);
             }
         });
-        add(manageEmployeeJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, 150, -1));
+        add(manageEmployeeJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 150, -1));
 
-        manageOrganizationJButton.setText("Manage Organization");
+        manageOrganizationJButton.setText("Manage Department");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageOrganizationJButtonActionPerformed(evt);
@@ -92,6 +104,15 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         lblEnterprise.setText("<value>");
         add(lblEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
+
+        manageBedBtn.setText("Manage Bed");
+        manageBedBtn.setEnabled(false);
+        manageBedBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageBedBtnActionPerformed(evt);
+            }
+        });
+        add(manageBedBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -120,6 +141,16 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
+
+    private void manageBedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageBedBtnActionPerformed
+        // TODO add your handling code here:
+        
+        ManageBedJPanel manageOrganizationJPanel = new ManageBedJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), organization);
+        userProcessContainer.add("ManageBedJPanel", manageOrganizationJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+    }//GEN-LAST:event_manageBedBtnActionPerformed
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -128,6 +159,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblEnterprise;
     private javax.swing.JLabel lblHeadName;
+    private javax.swing.JButton manageBedBtn;
     private javax.swing.JButton manageEmployeeJButton;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;

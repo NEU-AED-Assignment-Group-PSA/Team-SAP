@@ -5,10 +5,10 @@
  */
 package Business.Organization;
 
-import Business.Role.DoctorRole;
 import Business.Role.NurseRole;
 import Business.Role.Role;
 import java.util.ArrayList;
+import Business.Bed.BedDirectory;
 
 /**
  *
@@ -16,6 +16,34 @@ import java.util.ArrayList;
  */
 public class BedManagementDepartment extends Organization {
 
+    
+    BedDirectory bedList;
+    int bedCount;
+
+    public int getBedCount() {
+        return bedCount;
+    }
+
+    public void setBedCount(int bedCount) {
+        this.bedCount = bedCount;
+    }
+
+    public BedDirectory getBedList() {
+        return bedList;
+    }
+
+    public void setBedList(BedDirectory bedList) {
+        
+        this.bedList = bedList;
+    }
+    
+    
+    public BedDirectory createBedList(int count){
+        bedList = new BedDirectory();
+        this.bedCount=count;
+        return bedList;
+    }
+    
     public BedManagementDepartment() {
         super(Organization.Type.BedManagement.getValue());
     }

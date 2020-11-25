@@ -8,12 +8,16 @@ package Business.Person;
  *
  * @author raunak
  */
-public class Person {
+public class Person {  //dont use
     
     private String name;
     private int id;
     private static int count = 1;
 
+    //private double visitingCharge;
+
+    
+    
     public Person() {
         id = count;
         count++;

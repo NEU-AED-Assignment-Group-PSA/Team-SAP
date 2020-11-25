@@ -24,6 +24,7 @@ public abstract class Organization {
     private PersonDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
     private PatientDirectory patientDirectory;
+    //private BedManagementDepartment 
     private int organizationID;
     private static int counter=0;
     
