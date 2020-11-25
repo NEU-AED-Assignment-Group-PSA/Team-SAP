@@ -49,4 +49,10 @@ public class UserAccountDirectory {
         }
         return true;
     }
+    
+    public void removeUserAccount(UserAccount ua)
+    {
+        userAccountList.remove(ua);
+    }
+    
 }

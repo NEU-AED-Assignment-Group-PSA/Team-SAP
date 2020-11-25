@@ -6,6 +6,7 @@
 package Business.Doctor;
 
 import Business.Department.Department;
+import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Patient.Patient;
@@ -16,7 +17,7 @@ import java.util.Date;
  *
  * @author aditi
  */
-public class Doctor extends Person{
+public class Doctor extends Employee{
     //id, name from Person
     Department department;
     String specialization; // cardiologist, technician

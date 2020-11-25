@@ -5,6 +5,7 @@
  */
 package Business.Bed;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,8 +16,8 @@ public class BedDirectory {
     List<Bed> bedList;
     static int count=1;
     
-    BedDirectory(){
-        
+    public BedDirectory(){
+        bedList = new ArrayList<Bed>();
     }
     
     

@@ -13,7 +13,15 @@ public class Employee {
     private String name;
     private int id;
     private static int count = 1;
-    
+    private double visitingCharge;
+
+    public double getVisitingCharge() {
+        return visitingCharge;
+    }
+
+    public void setVisitingCharge(double visitingCharge) {
+        this.visitingCharge = visitingCharge;
+    }
 
     public Employee() {
         id = count;
