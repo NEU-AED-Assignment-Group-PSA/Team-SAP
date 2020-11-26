@@ -25,7 +25,7 @@ public class LabTechnicianRole extends Role {
     @Override
     public String roleValue()
     {
-        return "LabTechnicianRole";
+        return "Lab Technician Role";
     }
     
 }
