@@ -4,6 +4,7 @@
  */
 package userinterface.AdministrativeRole;
 
+import Business.Enterprise.Enterprise;
 import Business.Organization.BedManagementDepartment;
 import Business.Organization.Organization;
 import Business.Organization.Organization.Type;
@@ -21,17 +22,18 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     private OrganizationDirectory directory;
     private JPanel userProcessContainer;
-    
+    private Enterprise enterprise;
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageOrganizationJPanel(JPanel userProcessContainer,OrganizationDirectory directory) {
+    public ManageOrganizationJPanel(JPanel userProcessContainer,OrganizationDirectory directory, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.directory = directory;
+        this.enterprise = enterprise;
         
         populateTable();
-        populateCombo();
+        //populateCombo();
         
         
         addDeptJPanel.setVisible(false);
@@ -174,10 +176,12 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                     .addComponent(closebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(32, 32, 32)
                 .addGroup(addDeptJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(organizationJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addJButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                    .addComponent(cmbBedNUmber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(33, Short.MAX_VALUE))
+                    .addComponent(organizationJComboBox, 0, 232, Short.MAX_VALUE)
+                    .addComponent(cmbBedNUmber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addDeptJPanelLayout.createSequentialGroup()
+                        .addComponent(addJButton)
+                        .addGap(28, 28, 28)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         addDeptJPanelLayout.setVerticalGroup(
             addDeptJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,9 +226,9 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(85, 85, 85)
+                        .addGap(162, 162, 162)
                         .addComponent(addDeptJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(208, 208, Short.MAX_VALUE))
+                .addContainerGap(208, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,9 +243,9 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewBtn)
                     .addComponent(addDeptShowJpanelBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(31, 31, 31)
                 .addComponent(addDeptJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
 
         addDeptJPanel.getAccessibleContext().setAccessibleName("Add Department");
@@ -252,9 +256,10 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         
         
         Type type = (Type) organizationJComboBox.getSelectedItem();
+        //Type type= Type.valueOf(stringType);
         Organization dept = directory.createOrganization(type);
         if(type.getValue().equals("Bed Management Department")){
-            int selectedBedCount =(Integer) cmbBedNUmber.getSelectedItem();
+            int selectedBedCount =Integer.parseInt((String) cmbBedNUmber.getSelectedItem());
             BedManagementDepartment bedMngDept = (BedManagementDepartment)dept;
             bedMngDept.createBedList(selectedBedCount);
         }
@@ -273,7 +278,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private void organizationJComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBoxActionPerformed
         // TODO add your handling code here:
         Type type = (Type) organizationJComboBox.getSelectedItem();
-        if(type.getValue().equals("Bed Management Department")){
+        if(type !=null){
+        if( type.getValue().equals(Type.BedManagement.getValue())){
         lblNumofBeds.setVisible(true);
         cmbBedNUmber.setVisible(true);
         }
@@ -281,11 +287,17 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             lblNumofBeds.setVisible(false);
             cmbBedNUmber.setVisible(false);
         }
+        }//end outer if
         
     }//GEN-LAST:event_organizationJComboBoxActionPerformed
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise);
+        userProcessContainer.add("ManageUserAccountJPanel", muajp);
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
     }//GEN-LAST:event_viewBtnActionPerformed
 
     private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
@@ -297,6 +309,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         addDeptJPanel.setVisible(true);
         lblNumofBeds.setVisible(false);
         cmbBedNUmber.setVisible(false);
+        populateCombo();
     }//GEN-LAST:event_addDeptShowJpanelBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

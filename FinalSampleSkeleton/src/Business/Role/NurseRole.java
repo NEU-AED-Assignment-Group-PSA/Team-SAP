@@ -28,6 +28,6 @@ public class NurseRole extends Role{
     @Override
     public String roleValue()
     {
-        return "NurseRole";
+        return "Nurse Role";
     }
 }

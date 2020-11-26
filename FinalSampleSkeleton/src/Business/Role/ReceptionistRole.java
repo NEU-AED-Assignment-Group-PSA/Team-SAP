@@ -27,6 +27,6 @@ public class ReceptionistRole extends Role {
     @Override
     public String roleValue()
     {
-        return "ReceptionistRole";
+        return "Receptionist Role";
     }
 }

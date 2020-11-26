@@ -39,26 +39,49 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.container = container;
 
-        popOrganizationComboBox();
+        popMainOrganizationComboBox();
         //popMainDeptComboBox();
        // employeeJComboBox.removeAllItems();
         //popData();
-        visitingChargeLbl.setEnabled(false);
-        visitingChargeTxt.setEnabled(false);
-        visitingChargeLbl.setVisible(false);
-        visitingChargeTxt.setVisible(false);
+        createStaffPanel.setVisible(false);
+        viewStaffPanel.setVisible(false);
+        
+        //visitingChargeLbl.setEnabled(false);
+        //visitingChargeTxt.setEnabled(false);
+        //visitingChargeLbl.setVisible(false);
+        //visitingChargeTxt.setVisible(false);
     }
 
     public void popOrganizationComboBox() {
         organizationJComboBox.removeAllItems();
-        organizationJComboBox2.removeAllItems();
+        //organizationJComboBox2.removeAllItems();
         for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
             organizationJComboBox.addItem(organization);
-            organizationJComboBox2.addItem(organization);
-            selectDeptCmb.addItem(organization);// main cmb box of department
+          //  organizationJComboBox2.addItem(organization);
+          //  selectDeptCmb.addItem(organization);// main cmb box of department
         }
     }
     
+    public void popOrganizationComboBox2() {
+        //organizationJComboBox.removeAllItems();
+        organizationJComboBox2.removeAllItems();
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+           // organizationJComboBox.addItem(organization);
+            organizationJComboBox2.addItem(organization);
+            //selectDeptCmb.addItem(organization);// main cmb box of department
+        }
+    }
+    
+    
+    public void popMainOrganizationComboBox() {
+        //organizationJComboBox.removeAllItems();
+        selectDeptCmb.removeAllItems();
+        for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()) {
+            //organizationJComboBox.addItem(organization);
+            //organizationJComboBox2.addItem(organization);
+            selectDeptCmb.addItem(organization);// main cmb box of department
+        }
+    }
     
     
     
@@ -73,9 +96,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private void populateRoleComboBox(Organization organization){
         roleJComboBox.removeAllItems();
         for (Role role : organization.getSupportedRole()){
-            roleJComboBox.addItem(role);
+            roleJComboBox.addItem(role); //.roleValue()
         }
     }
+    
+    
+    private void populateRoleComboBox2(Organization organization){
+        roleJComboBox2.removeAllItems();
+        for (Role role : organization.getSupportedRole()){
+            roleJComboBox2.addItem(role);
+        }
+    }
+    
 
     public void popData() {
 
@@ -162,11 +194,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         roleJComboBox2 = new javax.swing.JComboBox();
         saveBtn2 = new javax.swing.JButton();
-        deleteStaffBtn = new javax.swing.JButton();
         viewStaff = new javax.swing.JButton();
         viewStaff1 = new javax.swing.JButton();
         selectDeptCmb = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
+        deleteStaffBtn = new javax.swing.JButton();
 
         userJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -274,22 +306,20 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(jLabel5)))
-                            .addGap(32, 32, 32)
                             .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, createStaffPanelLayout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addComponent(roleJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(organizationJComboBox, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, createStaffPanelLayout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(empNameJTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(passwordJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
+                                    .addGap(32, 32, 32)
+                                    .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(roleJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(createStaffPanelLayout.createSequentialGroup()
-                                    .addGap(3, 3, 3)
-                                    .addComponent(visitingChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addGap(67, 67, 67)
+                                    .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(visitingChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(nameJTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                            .addComponent(empNameJTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(passwordJTextField, javax.swing.GroupLayout.Alignment.TRAILING))))))))
                 .addGap(51, 51, 51))
         );
         createStaffPanelLayout.setVerticalGroup(
@@ -385,13 +415,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        deleteStaffBtn.setText("Delete Staff");
-        deleteStaffBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteStaffBtnActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout viewStaffPanelLayout = new javax.swing.GroupLayout(viewStaffPanel);
         viewStaffPanel.setLayout(viewStaffPanelLayout);
         viewStaffPanelLayout.setHorizontalGroup(
@@ -411,23 +434,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel14)))
                             .addGap(32, 32, 32)
                             .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(organizationJComboBox2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewStaffPanelLayout.createSequentialGroup()
-                                        .addGap(3, 3, 3)
-                                        .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(roleJComboBox2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(nameJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(empNameJTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGroup(viewStaffPanelLayout.createSequentialGroup()
-                                    .addGap(3, 3, 3)
-                                    .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(nameJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(empNameJTextField2)
+                                    .addComponent(roleJComboBox2, 0, 176, Short.MAX_VALUE))
+                                .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(organizationJComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(viewStaffPanelLayout.createSequentialGroup()
-                        .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(deleteStaffBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(closebtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(closebtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(saveBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -466,9 +481,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     .addComponent(updateUserBtn)
                     .addComponent(closebtn1))
                 .addGap(18, 18, 18)
-                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveBtn2)
-                    .addComponent(deleteStaffBtn))
+                .addComponent(saveBtn2)
                 .addContainerGap(50, Short.MAX_VALUE))
         );
 
@@ -495,6 +508,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
         jLabel16.setText("Select Department");
 
+        deleteStaffBtn.setText("Delete Staff");
+        deleteStaffBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteStaffBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -506,23 +526,29 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel16)
-                        .addGap(89, 89, 89)
+                        .addGap(18, 18, 18)
                         .addComponent(selectDeptCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(viewStaff1)
-                        .addGap(253, 253, 253))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(18, 18, 18)
+                        .addComponent(viewStaff1))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
                                     .addComponent(createStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(addStaffBtn))
-                                .addGap(41, 41, 41)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGap(41, 41, 41))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(addStaffBtn)
+                                    .addGap(98, 98, 98)
                                     .addComponent(viewStaff)
-                                    .addComponent(viewStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(46, 46, Short.MAX_VALUE))))
+                                    .addGap(25, 25, 25)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(viewStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(109, 109, 109)
+                                    .addComponent(deleteStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(12, 12, 12))))))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -541,15 +567,17 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(selectDeptCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(viewStaff)
-                    .addComponent(addStaffBtn))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(deleteStaffBtn)
+                        .addComponent(viewStaff))
+                    .addComponent(addStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(viewStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(createStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         createStaffPanel.getAccessibleContext().setAccessibleName("Add Staff");
@@ -614,7 +642,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         Role role = (Role) roleJComboBox.getSelectedItem();
         
-        if(role.roleValue().equals("DoctorRole"))
+        if(role.roleValue().equals("Doctor Role"))
         {
             employee.setVisitingCharge(Double.parseDouble(visitingChargeTxt.getText()));
         }
@@ -684,8 +712,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         Role role = (Role) roleJComboBox.getSelectedItem();
         if(role!=null){
-        String roleString = role.toString();
-        if(roleString.equals("DoctorRole"))
+        //String roleString = role.toString();
+        if(role.roleValue().equals("Doctor Role"))
         {
             visitingChargeLbl.setEnabled(true);
             visitingChargeTxt.setEnabled(true);
@@ -708,7 +736,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private void addStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffBtnActionPerformed
         // TODO add your handling code here:
         createStaffPanel.setVisible(true);
-        
+        visitingChargeLbl.setEnabled(false);
+        visitingChargeTxt.setEnabled(false);
+        visitingChargeLbl.setVisible(false);
+        visitingChargeTxt.setVisible(false);
+        popOrganizationComboBox();
+        //populateRoleComboBox();
     }//GEN-LAST:event_addStaffBtnActionPerformed
 
     private void closebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtn1ActionPerformed
@@ -722,8 +755,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void updateUserBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateUserBtnActionPerformed
         // TODO add your handling code here:
-        organizationJComboBox2.setEditable(true);
-        roleJComboBox2.setEditable(true);
+       // organizationJComboBox2.setEditable(true);
+        //roleJComboBox2.setEditable(true);
         empNameJTextField2.setEditable(true);
         nameJTextField2.setEditable(false); // cannot change userName
         passwordJTextField2.setEditable(true);
@@ -750,6 +783,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
 
     private void organizationJComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_organizationJComboBox2ActionPerformed
         // TODO add your handling code here:
+        Organization organization = (Organization) organizationJComboBox2.getSelectedItem();
+        if (organization != null){
+            //populateEmployeeComboBox(organization);
+            populateRoleComboBox2(organization);
+        }
     }//GEN-LAST:event_organizationJComboBox2ActionPerformed
 
     private void roleJComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_roleJComboBox2ActionPerformed
@@ -764,11 +802,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         viewStaffPanel.setVisible(true);
+        organizationJComboBox2.setEnabled(false);  // not allowed to change department
+        roleJComboBox2.setEnabled(false);  // not allowed to change role
+        popOrganizationComboBox2(); // department populate
+        
         UserAccount selectedUsrAcc = (UserAccount) userJTable.getValueAt(row,0);
         selectedStaff = selectedUsrAcc;
+        //populateRoleComboBox2((Organization)userJTable.getValueAt(row, 2));  //based on department
         Role uaRole= selectedUsrAcc.getRole();
-        organizationJComboBox2.setSelectedItem(userJTable.getValueAt(row, 2));  //department at 2nd index
-        roleJComboBox2.setSelectedItem(uaRole);
+        organizationJComboBox2.setSelectedItem((Organization)userJTable.getValueAt(row, 2));  //department at 2nd index
+        roleJComboBox2.getModel().setSelectedItem(uaRole);
         empNameJTextField2.setText(selectedUsrAcc.getEmployee().getName());
         nameJTextField2.setText(selectedUsrAcc.getUsername());//username
         passwordJTextField2.setText(selectedUsrAcc.getPassword());
@@ -778,8 +821,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         empNameJTextField2.setEditable(false);
         nameJTextField2.setEditable(false);
         passwordJTextField2.setEditable(false);
-        
-        if(uaRole.toString().equals("DoctorRole"))
+        //uaRole.getClass()
+        if(uaRole.roleValue().equals("Doctor Role"))
         {
             visitingChargeLbl2.setVisible(true);
             visitingChargeTxt2.setVisible(true);
@@ -837,7 +880,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         selectedStaff.setPassword(password);
         selectedStaff.getEmployee().setName(staffName);
         
-        if(selectedStaff.getRole().roleValue().equals("DoctorRole"))
+        if(selectedStaff.getRole().roleValue().equals("Doctor Role"))
         {
             selectedStaff.getEmployee().setVisitingCharge(visitingChgr);
         }
@@ -848,6 +891,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         updateUserBtn.setEnabled(true);
         saveBtn2.setEnabled(false);
         closebtn1.setEnabled(true);
+        empNameJTextField2.setEditable(false);
+        nameJTextField2.setEditable(false); // cannot change userName
+        passwordJTextField2.setEditable(false);
+        if(visitingChargeTxt2.isVisible())
+        {
+            visitingChargeTxt2.setEditable(false);
+        }
+        else{
+            visitingChargeTxt2.setEditable(false);
+        }
+        
+        
         popData();
     }//GEN-LAST:event_saveBtn2ActionPerformed
 
