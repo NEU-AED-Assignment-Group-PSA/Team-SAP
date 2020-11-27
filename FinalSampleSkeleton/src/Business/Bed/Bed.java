@@ -5,6 +5,8 @@
  */
 package Business.Bed;
 
+import Business.Patient.Patient;
+
 /**
  *
  * @author aditi
@@ -14,6 +16,58 @@ public class Bed {
     private BedType bedType;
     private Double price;
     private BedStatus status;
+    private static int count =0;
+    private Patient patient;
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+    
+    public Bed(){
+        this.bedID = count++;
+        this.status = BedStatus.Available;
+        this.bedType = BedType.Normal;
+        this.price = 1000.00;
+        this.patient = null;
+    }
+    
+    
+    public int getBedID() {
+        return bedID;
+    }
+
+    public void setBedID(int bedID) {
+        this.bedID = bedID;
+    }
+
+    public BedType getBedType() {
+        return bedType;
+    }
+
+    public void setBedType(BedType bedType) {
+        this.bedType = bedType;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
+    public BedStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(BedStatus status) {
+        this.status = status;
+    }
+    
             
     public enum BedStatus{
         Available("Available"),

@@ -32,6 +32,8 @@ public class BedManagementDepartment extends Organization {
         return bedList;
     }
 
+    
+    
     public void setBedList(BedDirectory bedList) {
         
         this.bedList = bedList;
@@ -39,9 +41,13 @@ public class BedManagementDepartment extends Organization {
     
     
     public BedDirectory createBedList(int count){
-        bedList = new BedDirectory();
+        this.bedList = new BedDirectory(count);
         this.bedCount=count;
         return bedList;
+    }
+    
+    public void addBedInBedList(int count){
+        this.bedList.addBeds(count);
     }
     
     public BedManagementDepartment() {

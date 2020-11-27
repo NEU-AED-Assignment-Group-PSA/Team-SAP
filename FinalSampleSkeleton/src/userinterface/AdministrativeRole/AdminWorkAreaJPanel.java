@@ -4,9 +4,12 @@ package userinterface.AdministrativeRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Organization.BedManagementDepartment;
 import Business.Organization.Organization;
+import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -127,7 +130,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
 
         ManageStaffJPanel manageEmployeeJPanel = new ManageStaffJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), enterprise);
-        userProcessContainer.add("manageEmployeeJPanel", manageEmployeeJPanel);
+        userProcessContainer.add("ManageEmployeeJPanel", manageEmployeeJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -137,19 +140,39 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
 
         ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), enterprise);
-        userProcessContainer.add("manageOrganizationJPanel", manageOrganizationJPanel);
+        userProcessContainer.add("ManageOrganizationJPanel", manageOrganizationJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_manageOrganizationJButtonActionPerformed
 
     private void manageBedBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageBedBtnActionPerformed
         // TODO add your handling code here:
+        //check if bed management department is created or not
+        boolean flag=false;
+        BedManagementDepartment bedOrg=null;
+        OrganizationDirectory orgDir = enterprise.getOrganizationDirectory();
+        for(Organization org : orgDir.getOrganizationList() ){
+            if(org.getName().equals(Organization.Type.BedManagement.getValue()))
+            {
+                //if bed management departemtn is present then navigate to bed management screen
+                flag = true;
+                bedOrg = (BedManagementDepartment)org;
+            }
+        }
         
-        ManageBedJPanel manageOrganizationJPanel = new ManageBedJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), organization);
+        if(flag == true){
+        ManageBedJPanel manageOrganizationJPanel = new ManageBedJPanel(userProcessContainer, 
+                orgDir, organization, bedOrg);
         userProcessContainer.add("ManageBedJPanel", manageOrganizationJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
+        }
         
+        else{
+            JOptionPane.showMessageDialog(null, "No Bed Management department, please create one!");
+            return;
+
+        }
     }//GEN-LAST:event_manageBedBtnActionPerformed
     
     
