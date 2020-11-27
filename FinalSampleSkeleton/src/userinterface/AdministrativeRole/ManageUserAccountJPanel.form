@@ -48,7 +48,6 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                                   <Component id="deleteStaffBtn" min="-2" pref="117" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

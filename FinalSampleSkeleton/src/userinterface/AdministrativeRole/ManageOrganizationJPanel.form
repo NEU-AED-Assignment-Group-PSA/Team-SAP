@@ -25,8 +25,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Component id="addDeptShowJpanelBtn" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="218" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                               <Component id="viewBtn" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
+                              <Component id="deletBtn" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" alignment="0" min="-2" pref="592" max="-2" attributes="0"/>
@@ -55,6 +57,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="viewBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="addDeptShowJpanelBtn" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="deletBtn" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
               <Component id="addDeptJPanel" min="-2" max="-2" attributes="0"/>
@@ -258,6 +261,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addDeptShowJpanelBtnActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="deletBtn">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete Department"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deletBtnActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

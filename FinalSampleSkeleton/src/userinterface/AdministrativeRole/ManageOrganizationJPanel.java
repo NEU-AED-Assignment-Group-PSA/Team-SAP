@@ -9,7 +9,9 @@ import Business.Organization.BedManagementDepartment;
 import Business.Organization.Organization;
 import Business.Organization.Organization.Type;
 import Business.Organization.OrganizationDirectory;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -57,7 +59,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         for (Organization organization : directory.getOrganizationList()){
             Object[] row = new Object[2];
             row[0] = organization.getOrganizationID();
-            row[1] = organization.getName();
+            row[1] = organization;//.getName();
             
             model.addRow(row);
         }
@@ -84,6 +86,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         lblNumofBeds = new javax.swing.JLabel();
         cmbBedNUmber = new javax.swing.JComboBox();
         addDeptShowJpanelBtn = new javax.swing.JButton();
+        deletBtn = new javax.swing.JButton();
 
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -208,6 +211,13 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             }
         });
 
+        deletBtn.setText("Delete Department");
+        deletBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deletBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,8 +231,10 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(addDeptShowJpanelBtn)
-                                .addGap(218, 218, 218)
-                                .addComponent(viewBtn))
+                                .addGap(105, 105, 105)
+                                .addComponent(viewBtn)
+                                .addGap(74, 74, 74)
+                                .addComponent(deletBtn))
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -242,7 +254,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                 .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewBtn)
-                    .addComponent(addDeptShowJpanelBtn))
+                    .addComponent(addDeptShowJpanelBtn)
+                    .addComponent(deletBtn))
                 .addGap(31, 31, 31)
                 .addComponent(addDeptJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
@@ -256,6 +269,19 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         
         
         Type type = (Type) organizationJComboBox.getSelectedItem();
+        
+        
+        //check if department is already present, if so not allowed to add duplicate department
+        for(Organization org : directory.getOrganizationList())
+        {
+            if(org.getName().equals(type.getValue()))
+            {
+                JOptionPane.showMessageDialog(null, "Department already exists, cannot create new!");
+                return;
+
+            }
+        }      
+        
         //Type type= Type.valueOf(stringType);
         Organization dept = directory.createOrganization(type);
         if(type.getValue().equals("Bed Management Department")){
@@ -312,6 +338,40 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
         populateCombo();
     }//GEN-LAST:event_addDeptShowJpanelBtnActionPerformed
 
+    private void deletBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deletBtnActionPerformed
+        // TODO add your handling code here:
+        
+        int row = organizationJTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+         int dialogButton= JOptionPane.YES_NO_CANCEL_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null, "Would you like to delete the department details?", "Warning",dialogButton);
+            if(dialogResult==JOptionPane.YES_OPTION){
+                //UserAccount selectedUsrAcc = (UserAccount) organizationJTable.getValueAt(row,0);
+                Organization org = (Organization) organizationJTable.getValueAt(row,1);
+                //reomve account
+                ArrayList<Organization> orgList = enterprise.getOrganizationDirectory().getOrganizationList();
+           // for (Organization organization : orgList) 
+           // {
+             ///   if(org.equals(organization)){
+                
+                org.removeAllUserAccount();    
+                org.removeAllEmployee();
+                //org.getEmployeeDirectory().removeAllEmployee();
+                orgList.remove(org);
+                 populateTable();
+                // populateCombo();
+                 JOptionPane.showMessageDialog(null, "Deleted successfully!!");
+               // }//inner for 
+                //}//if 
+            }
+        
+    }//GEN-LAST:event_deletBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel addDeptJPanel;
     private javax.swing.JButton addDeptShowJpanelBtn;
@@ -319,6 +379,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private javax.swing.JButton backJButton;
     private javax.swing.JButton closebtn;
     private javax.swing.JComboBox cmbBedNUmber;
+    private javax.swing.JButton deletBtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

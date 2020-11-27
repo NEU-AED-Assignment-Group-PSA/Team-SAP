@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package userinterface.AdministrativeRole;
+package userinterface.NurseRole;
 
+import userinterface.AdministrativeRole.*;
 import Business.Bed.Bed;
 import Business.Organization.BedManagementDepartment;
 import Business.Organization.Organization;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author aditi
  */
-public class ManageBedJPanel extends javax.swing.JPanel {
+public class ManageBedbyNurseJPanel extends javax.swing.JPanel {
 
     JPanel userProcessContainer;
     OrganizationDirectory organizationDirectory;
@@ -28,7 +29,7 @@ public class ManageBedJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageBedJPanel
      */
-    public ManageBedJPanel(JPanel userProcessContainer, OrganizationDirectory organizationDirectory, Organization organization, BedManagementDepartment bedorg) {
+    public ManageBedbyNurseJPanel(JPanel userProcessContainer, OrganizationDirectory organizationDirectory, Organization organization, BedManagementDepartment bedorg) {
         initComponents();
         this.userProcessContainer= userProcessContainer;
         this.organizationDirectory= organizationDirectory;
