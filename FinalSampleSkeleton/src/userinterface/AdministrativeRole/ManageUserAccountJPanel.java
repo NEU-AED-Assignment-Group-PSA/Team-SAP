@@ -15,8 +15,12 @@ import Business.Role.PatientRole;
 import Business.Role.ReceptionistRole;
 import Business.Role.Role;
 import Business.UserAccount.UserAccount;
+import static Business.Utility.EmailClass.sendEmailMessage;
+import static Business.Utility.EmailClass.sendTextMessage;
 import Business.Utility.Validation;
 import java.awt.CardLayout;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -178,6 +182,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         organizationJComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         roleJComboBox = new javax.swing.JComboBox();
+        contactCarrier = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        phoneNumberTxt = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        uEmailTxt = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
         viewStaffPanel = new javax.swing.JPanel();
         closebtn1 = new javax.swing.JButton();
         empNameJTextField2 = new javax.swing.JTextField();
@@ -194,6 +204,10 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         roleJComboBox2 = new javax.swing.JComboBox();
         saveBtn2 = new javax.swing.JButton();
+        phoneNumberTxt1 = new javax.swing.JTextField();
+        uEmailTxt1 = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         viewStaff = new javax.swing.JButton();
         viewStaff1 = new javax.swing.JButton();
         selectDeptCmb = new javax.swing.JComboBox();
@@ -233,7 +247,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
-        createStaffPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
+        createStaffPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Staff"));
         createStaffPanel.setAutoscrolls(true);
 
         closebtn.setText("Close");
@@ -285,41 +299,108 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
+        contactCarrier.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        contactCarrier.setForeground(new java.awt.Color(25, 56, 82));
+        contactCarrier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        contactCarrier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                contactCarrierActionPerformed(evt);
+            }
+        });
+        contactCarrier.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                contactCarrierKeyTyped(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(25, 56, 82));
+        jLabel9.setText("Phone Number");
+
+        phoneNumberTxt.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        phoneNumberTxt.setForeground(new java.awt.Color(25, 56, 82));
+        phoneNumberTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumberTxtActionPerformed(evt);
+            }
+        });
+        phoneNumberTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                phoneNumberTxtKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                phoneNumberTxtKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                phoneNumberTxtKeyTyped(evt);
+            }
+        });
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(25, 56, 82));
+        jLabel7.setText("Email Id");
+
+        uEmailTxt.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        uEmailTxt.setForeground(new java.awt.Color(25, 56, 82));
+        uEmailTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uEmailTxtActionPerformed(evt);
+            }
+        });
+        uEmailTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                uEmailTxtKeyTyped(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(25, 56, 82));
+        jLabel17.setText("Carrier");
+
         javax.swing.GroupLayout createStaffPanelLayout = new javax.swing.GroupLayout(createStaffPanel);
         createStaffPanel.setLayout(createStaffPanelLayout);
         createStaffPanelLayout.setHorizontalGroup(
             createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
+            .addGroup(createStaffPanelLayout.createSequentialGroup()
+                .addGap(54, 54, 54)
                 .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createStaffPanelLayout.createSequentialGroup()
+                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel17)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel7))
+                        .addGap(51, 51, 51)
+                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(contactCarrier, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(phoneNumberTxt)
+                            .addComponent(uEmailTxt)))
                     .addComponent(visitingChargeLbl)
-                    .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(createStaffPanelLayout.createSequentialGroup()
-                            .addComponent(closebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(createUserJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(createStaffPanelLayout.createSequentialGroup()
-                            .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5)))
-                            .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
-                                    .addGap(32, 32, 32)
-                                    .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(roleJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGroup(createStaffPanelLayout.createSequentialGroup()
-                                    .addGap(67, 67, 67)
-                                    .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(visitingChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(nameJTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                                            .addComponent(empNameJTextField, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(passwordJTextField, javax.swing.GroupLayout.Alignment.TRAILING))))))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
+                        .addComponent(closebtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(createUserJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(createStaffPanelLayout.createSequentialGroup()
+                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel5)))
+                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(roleJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(organizationJComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(createStaffPanelLayout.createSequentialGroup()
+                                .addGap(67, 67, 67)
+                                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(visitingChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(nameJTextField, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                                        .addComponent(empNameJTextField, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(passwordJTextField, javax.swing.GroupLayout.Alignment.TRAILING)))))))
                 .addGap(51, 51, 51))
         );
         createStaffPanelLayout.setVerticalGroup(
@@ -345,7 +426,19 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(passwordJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addGap(18, 18, 18)
+                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(contactCarrier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
                 .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(visitingChargeLbl)
                     .addComponent(visitingChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -353,10 +446,10 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(createUserJButton)
                     .addComponent(closebtn))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        viewStaffPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
+        viewStaffPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Staff"));
         viewStaffPanel.setAutoscrolls(true);
 
         closebtn1.setText("Close");
@@ -415,38 +508,92 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             }
         });
 
+        phoneNumberTxt1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        phoneNumberTxt1.setForeground(new java.awt.Color(25, 56, 82));
+        phoneNumberTxt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                phoneNumberTxt1ActionPerformed(evt);
+            }
+        });
+        phoneNumberTxt1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                phoneNumberTxt1KeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                phoneNumberTxt1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                phoneNumberTxt1KeyTyped(evt);
+            }
+        });
+
+        uEmailTxt1.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        uEmailTxt1.setForeground(new java.awt.Color(25, 56, 82));
+        uEmailTxt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                uEmailTxt1ActionPerformed(evt);
+            }
+        });
+        uEmailTxt1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                uEmailTxt1KeyTyped(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(25, 56, 82));
+        jLabel10.setText("Phone Number");
+
+        jLabel8.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(25, 56, 82));
+        jLabel8.setText("Email Id");
+
         javax.swing.GroupLayout viewStaffPanelLayout = new javax.swing.GroupLayout(viewStaffPanel);
         viewStaffPanel.setLayout(viewStaffPanelLayout);
         viewStaffPanelLayout.setHorizontalGroup(
             viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewStaffPanelLayout.createSequentialGroup()
-                .addContainerGap(54, Short.MAX_VALUE)
                 .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(visitingChargeLbl2)
-                        .addGroup(viewStaffPanelLayout.createSequentialGroup()
-                            .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel14)))
-                            .addGap(32, 32, 32)
-                            .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(nameJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(empNameJTextField2)
-                                    .addComponent(roleJComboBox2, 0, 176, Short.MAX_VALUE))
-                                .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(organizationJComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(viewStaffPanelLayout.createSequentialGroup()
-                        .addComponent(closebtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(saveBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(updateUserBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
+                        .addGap(15, 15, 15)
+                        .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                                .addComponent(closebtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(saveBtn2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(updateUserBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8))
+                                .addGap(15, 15, 15)
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(phoneNumberTxt1)
+                                    .addComponent(uEmailTxt1)))))
+                    .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                        .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                                .addGap(0, 16, Short.MAX_VALUE)
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel14)))
+                                .addGap(32, 32, 32))
+                            .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                                .addComponent(visitingChargeLbl2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nameJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(empNameJTextField2)
+                                .addComponent(roleJComboBox2, 0, 176, Short.MAX_VALUE))
+                            .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(organizationJComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(51, 51, 51))
         );
         viewStaffPanelLayout.setVerticalGroup(
@@ -472,7 +619,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(phoneNumberTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uEmailTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(visitingChargeLbl2)
                     .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -482,7 +637,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     .addComponent(closebtn1))
                 .addGap(18, 18, 18)
                 .addComponent(saveBtn2)
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         viewStaff.setText("View Staff");
@@ -520,9 +675,9 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addComponent(backjButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(49, 49, 49)
+                .addGap(41, 41, 41)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel16)
@@ -533,30 +688,22 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(createStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(41, 41, 41))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                    .addComponent(addStaffBtn)
-                                    .addGap(98, 98, 98)
-                                    .addComponent(viewStaff)
-                                    .addGap(25, 25, 25)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(viewStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(109, 109, 109)
-                                    .addComponent(deleteStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(12, 12, 12))))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                            .addComponent(addStaffBtn)
+                            .addGap(98, 98, 98)
+                            .addComponent(viewStaff)
+                            .addGap(134, 134, 134)
+                            .addComponent(deleteStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(113, 113, 113))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(createStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(28, 28, 28)
+                            .addComponent(viewStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(backjButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(viewStaff1))
@@ -564,8 +711,9 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel16)
-                            .addComponent(selectDeptCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(36, 36, 36)
+                            .addComponent(selectDeptCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(backjButton1))))
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,11 +721,11 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                         .addComponent(deleteStaffBtn)
                         .addComponent(viewStaff))
                     .addComponent(addStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(viewStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(createStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(476, Short.MAX_VALUE))
         );
 
         createStaffPanel.getAccessibleContext().setAccessibleName("Add Staff");
@@ -588,7 +736,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         String userName = nameJTextField.getText();
         String password = passwordJTextField.getText();
         String name = empNameJTextField.getText();
-        
+        String uEmail = uEmailTxt.getText();
+        String phoneNo = phoneNumberTxt.getText();
         if(userName.equals("") || userName.equals(null)){
             JOptionPane.showMessageDialog(null, "Enter username!");
             return;
@@ -601,6 +750,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         if(name.equals("") || name.equals(null)){
             JOptionPane.showMessageDialog(null, "Enter name!");
+            return;
+        }
+        
+        if(uEmail.equals("") || uEmail.equals(null)){
+            JOptionPane.showMessageDialog(null, "Enter Email!");
+            return;
+        }
+        
+        if(phoneNo.equals("") || phoneNo.equals(null)){
+            JOptionPane.showMessageDialog(null, "Enter Phone Number!");
             return;
         }
         
@@ -621,6 +780,18 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         if(isNameCorrect == false)
         {
             JOptionPane.showMessageDialog(null, "Enter name properly!");
+            return;
+        }
+        
+        boolean isValid=Validation.emailValidator(uEmail);
+        if(isValid == false){
+             JOptionPane.showMessageDialog(null, "Enter email correctly");
+            return;
+        }
+        
+        
+        if(!phoneNumberValidity(phoneNumberTxt.getText())){
+            JOptionPane.showMessageDialog(null, "Phone number is incorrect, only 10 digits no prefix");
             return;
         }
         
@@ -648,9 +819,29 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         }
         
         
-        organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
+        UserAccount account= organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
         //organization.ge
         popData();
+        
+        
+        //send email and sms
+        
+        String contact = "";
+        
+            if (contactCarrier.getSelectedItem().equals("ATT")) {
+                contact = phoneNumberTxt.getText() + "@txt.att.net";
+            } else if (contactCarrier.getSelectedItem().equals("Verizon")) {
+                contact = phoneNumberTxt.getText() + "@vmobl.com";
+            } else if (contactCarrier.getSelectedItem().equals("Sprint")) {
+                contact = phoneNumberTxt.getText() + "@messaging.sprintpcs.com";
+            } else if (contactCarrier.getSelectedItem().equals("TMobile")) {
+                contact = phoneNumberTxt.getText() + "@tmomail.net";
+            }
+            //registrationRequest.setContactCarrierName(contact);
+            sendEmailMessage(uEmail, account);//.getText());
+            sendTextMessage(contact);
+        
+             //JOptionPane.showMessageDialog(null, "User added successfully");
         
         JOptionPane.showMessageDialog(null, "Staff added successfully!");
         //clear text
@@ -660,7 +851,24 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         nameJTextField.setText("");
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
+    public Boolean phoneNumberValidity(String customerContact) {
+        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(regex);
+        
+        Matcher matcher = pattern.matcher(customerContact);
+        if(matcher.matches()){
+            return true;
+        }
+        return false;
+    }
     
+    public void populateMobileCarrierComboBox() {
+        contactCarrier.removeAllItems();
+        contactCarrier.addItem("ATT");
+        contactCarrier.addItem("Sprint");
+        contactCarrier.addItem("TMobile");
+        contactCarrier.addItem("Verizon");
+    }
         public Role createObjectForRole(String roleString){
         Role role = null;
         if(roleString.equals("DoctorRole"))
@@ -944,27 +1152,131 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_selectDeptCmbActionPerformed
 
+    private void contactCarrierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contactCarrierActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contactCarrierActionPerformed
+
+    private void contactCarrierKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_contactCarrierKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_contactCarrierKeyTyped
+
+    private void phoneNumberTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNumberTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxtActionPerformed
+
+    private void phoneNumberTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneNumberTxtKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxtKeyPressed
+
+    private void phoneNumberTxtKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneNumberTxtKeyReleased
+        // TODO add your handling code here:
+        //        if(uContact.getText().trim().length() != 11){
+            //          contactFormatMessage.setVisible(true);
+            //          contactValid = false;
+            //        }
+        //        else if (!contactValidity(uContact.getText())) {
+            //            contactFormatMessage.setVisible(true);
+            //            contactValid = false;
+            //        } else {
+            //            uContact.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            //            uContact.setForeground(Color.BLACK);
+            //            contactFormatMessage.setVisible(false);
+            //            contactSuccessLabel.setVisible(true);
+            //            contactValid = true;
+            //            int delay = 2500; //milliseconds
+            //            ActionListener taskPerformer = new ActionListener() {
+                //                public void actionPerformed(ActionEvent evt) {
+                    //                    contactSuccessLabel.setVisible(false);
+                    //                }
+                //            };
+            //            javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
+            //            tick.setRepeats(false);
+            //            tick.start();
+            //        }
+    }//GEN-LAST:event_phoneNumberTxtKeyReleased
+
+    private void phoneNumberTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneNumberTxtKeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxtKeyTyped
+
+    private void uEmailTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uEmailTxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uEmailTxtActionPerformed
+
+    private void uEmailTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uEmailTxtKeyTyped
+        // TODO add your handling code here:
+        /* if (!validation.emailValidator(uEmailTxt.getText())) {
+            emailValidateMessage.setVisible(true);
+            emailValid = false;
+        } else {
+            uEmailTxt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+            uEmailTxt.setForeground(Color.BLACK);
+            emailValidateMessage.setVisible(false);
+            emailSuccessLabel.setVisible(true);
+            emailValid = true;
+            int delay = 2500; //milliseconds
+            ActionListener taskPerformer = new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    emailSuccessLabel.setVisible(false);
+                }
+            };
+            javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
+            tick.setRepeats(false);
+            tick.start();
+        }*/
+    }//GEN-LAST:event_uEmailTxtKeyTyped
+
+    private void uEmailTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_uEmailTxt1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uEmailTxt1ActionPerformed
+
+    private void uEmailTxt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uEmailTxt1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_uEmailTxt1KeyTyped
+
+    private void phoneNumberTxt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_phoneNumberTxt1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxt1ActionPerformed
+
+    private void phoneNumberTxt1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneNumberTxt1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxt1KeyPressed
+
+    private void phoneNumberTxt1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneNumberTxt1KeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxt1KeyReleased
+
+    private void phoneNumberTxt1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_phoneNumberTxt1KeyTyped
+        // TODO add your handling code here:
+    }//GEN-LAST:event_phoneNumberTxt1KeyTyped
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStaffBtn;
     private javax.swing.JButton backjButton1;
     private javax.swing.JButton closebtn;
     private javax.swing.JButton closebtn1;
+    private javax.swing.JComboBox contactCarrier;
     private javax.swing.JPanel createStaffPanel;
     private javax.swing.JButton createUserJButton;
     private javax.swing.JButton deleteStaffBtn;
     private javax.swing.JTextField empNameJTextField;
     private javax.swing.JTextField empNameJTextField2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField nameJTextField;
     private javax.swing.JTextField nameJTextField2;
@@ -972,10 +1284,14 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox organizationJComboBox2;
     private javax.swing.JTextField passwordJTextField;
     private javax.swing.JTextField passwordJTextField2;
+    private javax.swing.JTextField phoneNumberTxt;
+    private javax.swing.JTextField phoneNumberTxt1;
     private javax.swing.JComboBox roleJComboBox;
     private javax.swing.JComboBox roleJComboBox2;
     private javax.swing.JButton saveBtn2;
     private javax.swing.JComboBox selectDeptCmb;
+    private javax.swing.JTextField uEmailTxt;
+    private javax.swing.JTextField uEmailTxt1;
     private javax.swing.JButton updateUserBtn;
     private javax.swing.JTable userJTable;
     private javax.swing.JButton viewStaff;

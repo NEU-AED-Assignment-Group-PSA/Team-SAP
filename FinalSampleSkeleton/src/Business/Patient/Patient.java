@@ -26,6 +26,15 @@ public class Patient extends Person{
     String patientSex;
     private String address;
     private String bloodGroup;
+    private String emailId;
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
     private UserAccount userAccount;
 
     public UserAccount getUserAccount() {
