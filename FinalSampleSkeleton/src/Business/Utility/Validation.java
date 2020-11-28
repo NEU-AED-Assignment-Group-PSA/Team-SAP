@@ -56,7 +56,7 @@ public class Validation {
         Pattern pattern;
         Matcher matcher;
         String PASSWORD_PATTERN
-                = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=~|?])(?=\\S+$).{8,}$";
+                = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=~|?])(?=\\S+$).{6,}$";
         pattern = Pattern.compile(PASSWORD_PATTERN);
         matcher = pattern.matcher(passwordValue);
         return matcher.matches();
@@ -71,6 +71,18 @@ public class Validation {
         return matcher.matches();
     }
 
+    
+    
+    public Boolean phoneNumberValidity(String customerContact) {
+        String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";
+        Pattern pattern = Pattern.compile(regex);
+        
+        Matcher matcher = pattern.matcher(customerContact);
+        if(matcher.matches()){
+            return true;
+        }
+        return false;
+    }
     public static void stringValidator(KeyEvent evt, JTextField field) {
         char c = evt.getKeyChar();
         if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') || (c == evt.VK_SPACE)

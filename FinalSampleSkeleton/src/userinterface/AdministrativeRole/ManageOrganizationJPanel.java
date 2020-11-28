@@ -136,7 +136,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             }
         });
 
-        addDeptJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
+        addDeptJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Department"));
         addDeptJPanel.setToolTipText("");
         addDeptJPanel.setAutoscrolls(true);
 
