@@ -4,9 +4,13 @@
  */
 package userinterface.DoctorRole;
 
+import Business.Appointment.Appointment;
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Medicine.MedicineDirectory;
 import Business.Organization.DoctorOrganization;
+import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.WorkRequest;
@@ -15,6 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import userinterface.NurseRole.RequestNurseJPanel;
+import userinterface.PatientRole.ViewPatientJPanel;
 
 /**
  *
@@ -26,6 +31,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private DoctorOrganization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
+    private Appointment appointment;
+    private Doctor doctor;
+    private Patient patient;
+    private MedicineDirectory medicineList;
+    private EcoSystem ecosystem;
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
@@ -278,18 +288,14 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(btnViewPatientHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAssignNextDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnMarkForBilling, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
-                                .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnMarkForBilling, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(16, 16, 16)
-                                        .addComponent(requestTestJButton)))))))
+                                .addGap(16, 16, 16)
+                                .addComponent(requestTestJButton))
+                            .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,11 +371,11 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnViewAppointmentsActionPerformed
 
     private void btnViewPatientHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPatientHistoryActionPerformed
-        int selectedRow = PatientDataJTable.getSelectedRow();
+        int selectedRow = DoctorWorkAreaTable.getSelectedRow();
         if(selectedRow >= 0){
             Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
             //            Order order = (Order)OrderJTable.getValueAt(selectedRow, 0);
-            ViewPatientJPanel viewPatientJPanel = new ViewPatientJPanel(userProcessContainer, userAccount, organization, enterprise, system, patient);
+            ViewPatientJPanel viewPatientJPanel = new ViewPatientJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem, patient);
             userProcessContainer.add("viewPatientJPanel",viewPatientJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -430,7 +436,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnPrescribeMedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrescribeMedsActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, userAccount, enterprise));
+        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnPrescribeMedsActionPerformed
 

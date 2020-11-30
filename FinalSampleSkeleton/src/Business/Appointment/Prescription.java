@@ -19,11 +19,16 @@ import java.util.List;
 public class Prescription {
     LabTestDirectory labTestList;
     MedicineDirectory medicineList;
-    Date Date;
+    private Date createdOn;
     Doctor doctor;
     Patient patient;
     private String history;
 
+    public Prescription() {
+        this.createdOn = new Date();
+    }
+
+    
     public LabTestDirectory getLabTestList() {
         return labTestList;
     }
@@ -40,13 +45,12 @@ public class Prescription {
         this.medicineList = medicineList;
     }
 
-    public Date getDate() {
-        return Date;
+    public Date getCreatedOn() {
+        return createdOn;
     }
 
-    public void setDate(Date Date) {
-        this.Date = Date;
-    }
+   
+    
 
     public Doctor getDoctor() {
         return doctor;

@@ -6,9 +6,11 @@
 package userinterface.DoctorRole;
 
 import Business.Appointment.Appointment;
+import Business.Appointment.AppointmentDirectory;
 import Business.Appointment.Prescription;
 import Business.Doctor.Doctor;
 import Business.Enterprise.Enterprise;
+import Business.Medicine.Medicine;
 import Business.Medicine.MedicineDirectory;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
@@ -36,9 +38,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private Doctor doctor;
     private Appointment appointment;
     private MedicineDirectory medicineList;
+    private AppointmentDirectory prescriptionList;
     
 
-    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Doctor doctor) {
+    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Doctor doctor, MedicineDirectory medicineList) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.appointment = appointment;
@@ -59,16 +62,14 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        dateTxt = new javax.swing.JTextField();
         patientNameTxt = new javax.swing.JTextField();
         doctorNameTxt = new javax.swing.JTextField();
         medsPrescribedTxt = new javax.swing.JTextField();
         patientHistoryTxt = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnPrescribe = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         PrescriptionTable = new javax.swing.JTable();
 
@@ -78,8 +79,6 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         jLabel2.setText("Patient Name :");
 
         jLabel3.setText("Doctor Name :");
-
-        jLabel5.setText("Date :");
 
         jLabel6.setText("History :");
 
@@ -92,10 +91,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
             }
         });
 
-        jButton1.setText("Prescribe");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPrescribe.setText("Prescribe");
+        btnPrescribe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPrescribeActionPerformed(evt);
             }
         });
 
@@ -138,29 +137,6 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(233, 233, 233)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(medsPrescribedTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(doctorNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(47, 47, 47)
@@ -168,9 +144,29 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                         .addGap(114, 114, 114)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(149, 149, 149)
+                        .addGap(202, 202, 202)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(medsPrescribedTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnPrescribe)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(136, 136, 136)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(345, Short.MAX_VALUE))
+                .addContainerGap(358, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,11 +175,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(backJButton))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -200,10 +192,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
+                .addComponent(btnPrescribe)
+                .addGap(31, 31, 31)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,55 +205,61 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+    private void btnPrescribeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrescribeActionPerformed
+        //DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
           
-        String date=dateTxt.getText();
-        date = dateFormat.format(date);
+        //String date=dateTxt.getText();
+        //date = dateFormat.format(date);
         String patientName=patientNameTxt.getText();
         String doctorName=doctorNameTxt.getText();
         //String specialization=specializationTxt.getText();
         String medsPrescribed= medsPrescribedTxt.getText();
-        if(date.equals("") || patientName.equals("") || doctorName.equals("") || medsPrescribed.equals(""))
+        if(patientName.equals("") || doctorName.equals("") || medsPrescribed.equals(""))
         {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty"); 
         }
         else
-        {Prescription prescription = new Prescription();
-        prescription.setDate(date);
+        {Prescription prescription = prescriptionList.addPrescription();
+        //prescription.setDate(date);
         prescription.setPatient(patient);
         prescription.setDoctor(doctor);
         prescription.setMedicineList(medicineList);
-        flightField.setText("");
-        modeltField.setText("");
+        //dateTxt.setText("");
+        patientNameTxt.setText("");
+        doctorNameTxt.setText("");
+        medsPrescribedTxt.setText("");
+        appointment.setPrescription(prescription);
         JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
-        Populate();
+        populate();
         }
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPrescribeActionPerformed
 
-    public void Populate()
-    {   DefaultTableModel dtm = (DefaultTableModel)PrescriptionTable.getModel();
-        dtm.setRowCount(0);        
-        for(Doctor doctor : airliner.getfArrayList()){
-            Object[] row = new Object[dtm.getColumnCount()];
-            row[0]=doctor;
-            row[1]=doctor.getfModel();
-            dtm.addRow(row);
-        }
+     public void populate() {
+        DefaultTableModel model = (DefaultTableModel) PrescriptionTable.getModel();
+
+        model.setRowCount(0);
+        //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
+            for (Prescription prescription : prescriptionList.getPrescriptionList()) {
+                    Object[] row = new Object[3];
+                    //row[0] = prescription.getDate();
+                    row[0] = prescription.getPatient();
+                    row[1] = prescription.getDoctor();
+                    row[2] = prescription.getMedicineList();
+                    model.addRow(row);
+                }
+            }
         
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PrescriptionTable;
     private javax.swing.JButton backJButton;
-    private javax.swing.JTextField dateTxt;
+    private javax.swing.JButton btnPrescribe;
     private javax.swing.JTextField doctorNameTxt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
