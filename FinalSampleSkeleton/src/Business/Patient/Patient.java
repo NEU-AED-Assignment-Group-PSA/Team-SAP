@@ -9,6 +9,7 @@ import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
 import Business.Bill.Bill;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Location.LocationPoint;
 import Business.Person.Person;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
@@ -24,7 +25,8 @@ public class Patient extends Person{
     AppointmentDirectory appointmentDirectory;
     LabTestDirectory labTestList;
     String patientSex;
-    private String address;
+    //private String address;
+    private LocationPoint address;
     private String bloodGroup;
     private UserAccount userAccount;
 
@@ -45,19 +47,15 @@ public class Patient extends Person{
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
     }
-    
-    
 
-    public String getAddress() {
+    public LocationPoint getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(LocationPoint address) {
         this.address = address;
     }
     
-    
-
     public String getPhoneNum() {
         return phoneNum;
     }
