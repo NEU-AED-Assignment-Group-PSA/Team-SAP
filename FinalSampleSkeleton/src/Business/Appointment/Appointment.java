@@ -26,6 +26,15 @@ public class Appointment {
     String location;
     OperationDirectory operationDirectory;
     List<LabTest> labTestList;
+    Prescription prescription;
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
+    }
     
     public Appointment(int count){
         this.appointmentId = count;

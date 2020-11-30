@@ -22,6 +22,55 @@ public class Prescription {
     Date Date;
     Doctor doctor;
     Patient patient;
+    private String history;
+
+    public LabTestDirectory getLabTestList() {
+        return labTestList;
+    }
+
+    public void setLabTestList(LabTestDirectory labTestList) {
+        this.labTestList = labTestList;
+    }
+
+    public MedicineDirectory getMedicineList() {
+        return medicineList;
+    }
+
+    public void setMedicineList(MedicineDirectory medicineList) {
+        this.medicineList = medicineList;
+    }
+
+    public Date getDate() {
+        return Date;
+    }
+
+    public void setDate(Date Date) {
+        this.Date = Date;
+    }
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
     
     
     
