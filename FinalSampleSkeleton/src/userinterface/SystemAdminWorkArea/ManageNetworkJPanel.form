@@ -57,7 +57,7 @@
                   <Component id="submitJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="nameJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="backJButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
           </Group>

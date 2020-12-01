@@ -52,9 +52,9 @@ public class OperationDirectory {
         return null;
     }
 
-    public void updateOperation(String operationNumber, String operationDate, String operationDescription, double operationCharge, String status, Patient patient, Doctor doctor){
+    public void updateOperation(int operationNumber, String operationDate, String operationDescription, double operationCharge, String status, Patient patient, Doctor doctor){
         for(Operation operation: operationlist){
-            if(operation.getOperationNumber().equals(operationNumber)){
+            if(operation.getOperationNumber()==(operationNumber)){
                 operation.setOperationDate(operationDate);
                 operation.setOperationDescription(operationDescription);
                 operation.setOperationCharge(operationCharge);

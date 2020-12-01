@@ -35,7 +35,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtPatientName" max="32767" attributes="0"/>
-                          <Component id="txtDoctor" alignment="0" max="32767" attributes="0"/>
+                          <Component id="cmbDoctor" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtAppointmetDate" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtAppointmentType" alignment="0" pref="148" max="32767" attributes="0"/>
                       </Group>
@@ -65,7 +65,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtDoctor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="cmbDoctor" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -98,6 +98,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="&lt;&lt; Back"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
@@ -113,7 +116,7 @@
         <Property name="text" type="java.lang.String" value="Doctor:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="txtDoctor">
+    <Component class="javax.swing.JComboBox" name="cmbDoctor">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">

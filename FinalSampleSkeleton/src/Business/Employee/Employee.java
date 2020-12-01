@@ -14,9 +14,18 @@ public class Employee {
     private int id;
     private static int count = 1;
     private double visitingCharge;
-        private String phoneNum;
+    private String phoneNum;
     private String emailID;
+    private String role;
     //private double visitingCharge;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getPhoneNum() {
         return phoneNum;

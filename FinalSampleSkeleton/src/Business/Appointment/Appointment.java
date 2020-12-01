@@ -5,10 +5,12 @@
  */
 package Business.Appointment;
 
-import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Operation.Operation;
 import Business.Patient.Patient;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,7 @@ public class Appointment {
     int appointmentId;
     String type; //online, in-person
     Date date;
-    Doctor doctor;
+    Employee doctor;
     Patient patient;
     String status;  //booked, cancelled, rescheduled, completed
     String location;
@@ -64,11 +66,11 @@ public class Appointment {
         this.date = date;
     }
 
-    public Doctor getDoctor() {
+    public Employee getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
 
@@ -115,7 +117,13 @@ public class Appointment {
     }
     
     
-    
+    @Override
+    public String toString()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+        String strDate = dateFormat.format(this.date); 
+        return strDate;
+    }
     
     
 }

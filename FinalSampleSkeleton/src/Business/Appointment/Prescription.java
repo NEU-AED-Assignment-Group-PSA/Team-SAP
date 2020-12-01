@@ -7,6 +7,7 @@ package Business.Appointment;
 
 import Business.Medicine.MedicineDirectory;
 import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Patient.Patient;
 import java.util.Date;
@@ -20,7 +21,7 @@ public class Prescription {
     LabTestDirectory labTestList;
     MedicineDirectory medicineList;
     private Date createdOn;
-    Doctor doctor;
+    Employee doctor;
     Patient patient;
     private String history;
 
@@ -52,11 +53,11 @@ public class Prescription {
    
     
 
-    public Doctor getDoctor() {
+    public Employee getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
 

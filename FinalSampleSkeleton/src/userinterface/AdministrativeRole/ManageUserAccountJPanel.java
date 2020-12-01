@@ -809,6 +809,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         //UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee,role);// new AdmRole());
         employee.setEmailID(uEmail);
         employee.setPhoneNum(phoneNo);
+        
         Role role = (Role) roleJComboBox.getSelectedItem();
         role.getClass();
         
@@ -817,7 +818,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             employee.setVisitingCharge(Double.parseDouble(visitingChargeTxt.getText()));
         }
         
-        
+        employee.setRole(role.roleValue());
         UserAccount account= organization.getUserAccountDirectory().createUserAccount(userName, password, employee, role);
         //organization.ge
         popData();
@@ -1156,7 +1157,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         else{
             visitingChargeTxt2.setEditable(false);
         }
-        
+        uEmailTxt1.setEditable(false);
+        phoneNumberTxt1.setEditable(false);
         
         popData();
     }//GEN-LAST:event_saveBtn2ActionPerformed

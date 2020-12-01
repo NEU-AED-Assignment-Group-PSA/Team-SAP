@@ -152,7 +152,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(submitJButton)
                     .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(backJButton)
                 .addGap(118, 118, 118))
         );
@@ -160,7 +160,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
 
-        if(nameJTextField.getText()!=null || nameJTextField.getText().equals("")){
+        if(nameJTextField.getText()==null || nameJTextField.getText().equals("")){
              JOptionPane.showMessageDialog(null, "Enter network name!");
             return;
         }
