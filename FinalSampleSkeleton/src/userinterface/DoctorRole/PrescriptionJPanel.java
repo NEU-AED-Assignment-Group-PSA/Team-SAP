@@ -84,6 +84,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Medicines Prescribed :");
 
+        patientNameTxt.setEnabled(false);
+
+        doctorNameTxt.setEnabled(false);
+
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

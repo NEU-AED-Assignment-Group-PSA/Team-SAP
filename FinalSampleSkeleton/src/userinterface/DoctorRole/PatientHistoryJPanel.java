@@ -5,6 +5,7 @@
  */
 package userinterface.DoctorRole;
 
+import Business.Appointment.AppointmentDirectory;
 import Business.Appointment.PatientHistoryDetails;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
@@ -14,6 +15,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -30,6 +32,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private EcoSystem ecosystem;
     private Patient patient;
+    private AppointmentDirectory patientHistoryList;
 
     PatientHistoryJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem, Patient patient) {
         initComponents();
@@ -65,7 +68,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         btnAddPatientDetails = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        patientDetailsTbl = new javax.swing.JTable();
+        patientHistoryDetailsTbl = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         patientNameTxt = new javax.swing.JTextField();
 
@@ -120,7 +123,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
             }
         });
 
-        patientDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
+        patientHistoryDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -143,11 +146,11 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(patientDetailsTbl);
-        if (patientDetailsTbl.getColumnModel().getColumnCount() > 0) {
-            patientDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(patientHistoryDetailsTbl);
+        if (patientHistoryDetailsTbl.getColumnModel().getColumnCount() > 0) {
+            patientHistoryDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
+            patientHistoryDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
+            patientHistoryDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel8.setText("Patient Name :");
@@ -279,36 +282,33 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty, Please fill in all fields"); 
         }
         else{
-        {PatientHistoryDetails patientHistoryDetails = prescriptionList.addPrescription();
+        {PatientHistoryDetails patientHistoryDetails = patientHistoryList.addPatientHistory();
         //prescription.setDate(date);
-        prescription.setPatient(patient);
-        prescription.setDoctor(doctor);
-        prescription.setMedicineList(medicineList);
+        patientHistoryDetails.getPerson().setName(patientName);
+        patientHistoryDetails.setPreviousDiagnosis(previousDiagnosis);
+        patientHistoryDetails.setMedAlergies(medsalergies);
         //dateTxt.setText("");
         patientNameTxt.setText("");
-        doctorNameTxt.setText("");
-        medsPrescribedTxt.setText("");
-        appointment.setPrescription(prescription);
-        JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
-        populatePatientDetails();
+        previousDiagnosisTxt.setText("");
+        medAlergiesTxt.setText("");
+        //JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
+        populatePatientHistoryDetails();
         }
-        }
-        int select=diagnosistable.getSelectedRow();
-        if(select<0){
-            JOptionPane.showMessageDialog(null, "please select");
-            return;
-        }else{
-            Diagnosis date=(Diagnosis)diagnosistable.getValueAt(select, 0);
-//            String detail=(String)diagnosistable.getValueAt(select, 1);
-//            String medicine=(String)diagnosistable.getValueAt(select, 2);
-            System.out.println("to patient detail:"+date);
-            CardLayout layout=(CardLayout)jpanel.getLayout();
-            jpanel.add("patient detail",new PatientDetailJPanel(jpanel,date));
-            layout.next(jpanel);
         }
     }//GEN-LAST:event_btnAddPatientDetailsActionPerformed
 
-    public void populatePatientDetails(){
+    public void populatePatientHistoryDetails(){
+        DefaultTableModel model = (DefaultTableModel) patientHistoryDetailsTbl.getModel();
+
+        model.setRowCount(0);
+        //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
+            for (PatientHistoryDetails patientHistoryDetails : patientHistoryList.getPatientHistoryList()) {
+                    Object[] row = new Object[3];
+                    row[0] = patientHistoryDetails.getPerson().getName();
+                    row[1] = patientHistoryDetails.getPreviousDiagnosis();
+                    row[2] = patientHistoryDetails.getMedAlergies();
+                    model.addRow(row);
+                }
         
     }
     
@@ -331,7 +331,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField medAlergiesTxt;
-    private javax.swing.JTable patientDetailsTbl;
+    private javax.swing.JTable patientHistoryDetailsTbl;
     private javax.swing.JTextField patientNameTxt;
     private javax.swing.JTextField previousDiagnosisTxt;
     private javax.swing.JTextField surgeryHistoryTxt;
