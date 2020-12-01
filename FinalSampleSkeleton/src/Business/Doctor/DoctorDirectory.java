@@ -5,6 +5,7 @@
  */
 package Business.Doctor;
 
+import Business.Department.Department;
 import java.util.List;
 
 /**
@@ -13,11 +14,24 @@ import java.util.List;
  */
 public class DoctorDirectory {
     List<Doctor> doctorList;
+
+    public List<Doctor> getDoctorList() {
+        return doctorList;
+    }
+
+    public void setDoctorList(List<Doctor> doctorList) {
+        this.doctorList = doctorList;
+    }
     
-    Doctor searchDoctorById(int id){
-        Doctor doctor=null;
-        
-        return doctor;
+    
+    
+    public Doctor searchDoctorById(int id){
+        for(Doctor doctor : doctorList){
+            if(doctor.getId() == id ){
+               return doctor; 
+            }
+        }
+        return null;
     }
     
     List<Doctor> viewDoctorList(){
@@ -27,17 +41,26 @@ public class DoctorDirectory {
         return doctorList;
     }
     
-    void deleteDoctor(int id){
-        
+    public void deleteDoctor(Doctor doctor ){
+       doctorList.remove(doctor); 
     }
     
-    void updateDoctor(int id){
-        
+    public void updateDoctor(int id, String specialization, String phoneNum, String location, String visitingCharge, Department department){
+       for(Doctor doctor: doctorList){
+            if(doctor.getId() == (id)){
+                doctor.setSpecialization(specialization);
+                doctor.setPhoneNum(phoneNum);
+                doctor.setLocation(location);
+                doctor.setVisitingCharge(Double.parseDouble(visitingCharge));
+                doctor.setDepartment(department);
+            }
+        } 
     }
     
-    Doctor createDoctor(){
+    public Doctor createDoctor(){
         //create a new doctor object, add to directory and send
-        Doctor doctor=null;
+        Doctor doctor= new Doctor();
+        doctorList.add(doctor);
         return doctor;
     }
     

@@ -19,9 +19,62 @@ import java.util.List;
 public class Prescription {
     LabTestDirectory labTestList;
     MedicineDirectory medicineList;
-    Date Date;
+    private Date createdOn;
     Doctor doctor;
     Patient patient;
+    private String history;
+
+    public Prescription() {
+        this.createdOn = new Date();
+    }
+
+    
+    public LabTestDirectory getLabTestList() {
+        return labTestList;
+    }
+
+    public void setLabTestList(LabTestDirectory labTestList) {
+        this.labTestList = labTestList;
+    }
+
+    public MedicineDirectory getMedicineList() {
+        return medicineList;
+    }
+
+    public void setMedicineList(MedicineDirectory medicineList) {
+        this.medicineList = medicineList;
+    }
+
+    public Date getCreatedOn() {
+        return createdOn;
+    }
+
+   
+    
+
+    public Doctor getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Doctor doctor) {
+        this.doctor = doctor;
+    }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public String getHistory() {
+        return history;
+    }
+
+    public void setHistory(String history) {
+        this.history = history;
+    }
     
     
     

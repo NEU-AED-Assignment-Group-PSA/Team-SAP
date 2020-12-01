@@ -18,6 +18,9 @@ import javax.swing.JTextField;
 public class AppointmentDirectory {
     private int count = 1;
     List<Appointment> appointmentList;
+    //private Prescription prescription;
+    List<Prescription> prescriptionList;
+    List<PatientHistoryDetails> patientHistoryList;
 
     public List<Appointment> getAppointmentList() {
         return appointmentList;
@@ -26,6 +29,23 @@ public class AppointmentDirectory {
     public void setAppointmentList(List<Appointment> appointmentList) {
         this.appointmentList = appointmentList;
     }
+
+    public List<Prescription> getPrescriptionList() {
+        return prescriptionList;
+    }
+
+    public void setPrescriptionList(List<Prescription> prescriptionList) {
+        this.prescriptionList = prescriptionList;
+    }
+
+    public List<PatientHistoryDetails> getPatientHistoryList() {
+        return patientHistoryList;
+    }
+
+    public void setPatientHistoryList(List<PatientHistoryDetails> patientHistoryList) {
+        this.patientHistoryList = patientHistoryList;
+    }
+    
     
     //update appointment
     
@@ -36,7 +56,7 @@ public class AppointmentDirectory {
     
     //cancel appointment
     void cancelAppointment(Appointment app){
-        
+        appointmentList.remove(app);
     }
     
     //search Appointment by patient and date
@@ -74,6 +94,12 @@ public class AppointmentDirectory {
         appointment.setType(appointmentType);
         appointment.setPatient(patient);
        
+    }
+    
+    public Prescription addPrescription(){
+        Prescription prescription = new Prescription();
+        prescriptionList.add(prescription);
+        return prescription;
     }
     
     

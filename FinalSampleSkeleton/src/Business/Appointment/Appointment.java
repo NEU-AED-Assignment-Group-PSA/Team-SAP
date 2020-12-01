@@ -7,7 +7,7 @@ package Business.Appointment;
 
 import Business.Doctor.Doctor;
 import Business.Enterprise.LabEnterprise.LabTest;
-import Business.Operation.OperationDirectory;
+import Business.Operation.Operation;
 import Business.Patient.Patient;
 import java.util.Date;
 import java.util.List;
@@ -24,8 +24,17 @@ public class Appointment {
     Patient patient;
     String status;  //booked, cancelled, rescheduled, completed
     String location;
-    OperationDirectory operationDirectory;
+    private Operation operation;
     List<LabTest> labTestList;
+    Prescription prescription;
+
+    public Prescription getPrescription() {
+        return prescription;
+    }
+
+    public void setPrescription(Prescription prescription) {
+        this.prescription = prescription;
+    }
     
     public Appointment(int count){
         this.appointmentId = count;
@@ -87,13 +96,15 @@ public class Appointment {
         this.location = location;
     }
 
-    public OperationDirectory getOperationDirectory() {
-        return operationDirectory;
+    public Operation getOperation() {
+        return operation;
     }
 
-    public void setOperationDirectory(OperationDirectory operationDirectory) {
-        this.operationDirectory = operationDirectory;
+    public void setOperation(Operation operation) {
+        this.operation = operation;
     }
+
+    
 
     public List<LabTest> getLabTestList() {
         return labTestList;
