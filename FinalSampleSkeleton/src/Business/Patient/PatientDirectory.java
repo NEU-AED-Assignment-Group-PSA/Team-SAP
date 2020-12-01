@@ -5,6 +5,7 @@
  */
 package Business.Patient;
 
+import Business.Location.LocationPoint;
 import Business.UserAccount.UserAccount;
 import java.util.List;
 
@@ -27,22 +28,24 @@ public class PatientDirectory {
         
     }
 
-    public void createPatient(String patientName, String phoneNumber, String gender, String address, String bloodGroup, UserAccount userAccount) {
+    public Patient createPatient(String patientName, String phoneNumber, String gender, String bloodGroup, UserAccount userAccount, LocationPoint locationPoint) {
         Patient patient = new Patient();
         patient.setName(patientName);
         patient.setPhoneNum(phoneNumber);
         patient.setPatientSex(gender);
-        patient.setAddress(address);
+        //patient.setAddress(address);
         patient.setBloodGroup(bloodGroup);
         patient.setUserAccount(userAccount);
+        patient.setAddress(locationPoint);
         patientList.add(patient);
+        return patient;
     }
 
-    public void updatePatient(int patientID, String name, String phoneNumber, String gender, String address, String bloodGroup) {
+    public void updatePatient(int patientID, String name, String phoneNumber, String gender, String bloodGroup, LocationPoint locationPoint) {
         for(Patient patient : patientList){
             if(patient.getId() == patientID){
                 patient.setName(name);
-                patient.setAddress(address);
+                patient.setAddress(locationPoint);
                 patient.setPatientSex(gender);
                 patient.setPhoneNum(phoneNumber);
                 patient.setBloodGroup(bloodGroup);
