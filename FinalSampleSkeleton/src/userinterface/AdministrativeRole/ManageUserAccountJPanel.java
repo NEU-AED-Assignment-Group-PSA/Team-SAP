@@ -568,9 +568,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel10)
                                     .addComponent(jLabel8))
                                 .addGap(15, 15, 15)
-                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(phoneNumberTxt1)
-                                    .addComponent(uEmailTxt1)))))
+                                .addComponent(phoneNumberTxt1))))
                     .addGroup(viewStaffPanelLayout.createSequentialGroup()
                         .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(viewStaffPanelLayout.createSequentialGroup()
@@ -587,14 +585,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                                 .addComponent(visitingChargeLbl2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(nameJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(empNameJTextField2)
-                                .addComponent(roleJComboBox2, 0, 176, Short.MAX_VALUE))
-                            .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(organizationJComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(51, 51, 51))
+                            .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nameJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(empNameJTextField2)
+                                    .addComponent(roleJComboBox2, 0, 176, Short.MAX_VALUE))
+                                .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(visitingChargeTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(organizationJComboBox2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(uEmailTxt1))))
+                .addGap(50, 50, 50))
         );
         viewStaffPanelLayout.setVerticalGroup(
             viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -698,7 +698,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(createStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(28, 28, 28)
                             .addComponent(viewStaffPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -727,9 +727,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     .addComponent(createStaffPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(476, Short.MAX_VALUE))
         );
-
-        createStaffPanel.getAccessibleContext().setAccessibleName("Add Staff");
-        viewStaffPanel.getAccessibleContext().setAccessibleName("View Staff");
     }// </editor-fold>//GEN-END:initComponents
 
     private void createUserJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createUserJButtonActionPerformed
@@ -810,8 +807,10 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         Employee employee =organization.getEmployeeDirectory().createEmployee(name);
         //UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee,role);// new AdmRole());
-        
+        employee.setEmailID(uEmail);
+        employee.setPhoneNum(phoneNo);
         Role role = (Role) roleJComboBox.getSelectedItem();
+        role.getClass();
         
         if(role.roleValue().equals("Doctor Role"))
         {
@@ -977,13 +976,23 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             //visitingChargeLbl2.setVisible(true);
          //   visitingChargeTxt2.setVisible(true);
             //visitingChargeLbl2.setEditable(false);
-            visitingChargeTxt2.setEditable(false);
+           
             
+            if(selectedStaff.getRole().roleValue().equals("Doctor Role"))
+        {
+            visitingChargeTxt2.setEditable(true);
+            visitingChargeTxt2.setVisible(true);
+            visitingChargeTxt2.setEnabled(true);
+            visitingChargeLbl2.setEnabled(true);
+        }
         //}
-       // else{
-          //  visitingChargeLbl2.setVisible(false);
-         //   visitingChargeTxt2.setVisible(false);
-       // }
+       //else{
+          // visitingChargeLbl2.setVisible(false);
+        //   visitingChargeTxt2.setVisible(false);
+      // }
+      
+      uEmailTxt1.setEditable(true);
+        phoneNumberTxt1.setEditable(true);
         updateUserBtn.setEnabled(false);
         saveBtn2.setEnabled(true);
         closebtn1.setEnabled(true);
@@ -1016,7 +1025,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         organizationJComboBox2.setEnabled(false);  // not allowed to change department
         roleJComboBox2.setEnabled(false);  // not allowed to change role
         popOrganizationComboBox2(); // department populate
-        
+        //organizationJComboBox2.setEditable(false);  // not allowed to change department
+        //roleJComboBox2.setEditable(false);
         UserAccount selectedUsrAcc = (UserAccount) userJTable.getValueAt(row,0);
         selectedStaff = selectedUsrAcc;
         //populateRoleComboBox2((Organization)userJTable.getValueAt(row, 2));  //based on department
@@ -1026,12 +1036,15 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         empNameJTextField2.setText(selectedUsrAcc.getEmployee().getName());
         nameJTextField2.setText(selectedUsrAcc.getUsername());//username
         passwordJTextField2.setText(selectedUsrAcc.getPassword());
-        
+        uEmailTxt1.setText(selectedUsrAcc.getEmployee().getEmailID());
+        phoneNumberTxt1.setText(selectedUsrAcc.getEmployee().getPhoneNum());
         organizationJComboBox2.setEditable(false);
         roleJComboBox2.setEditable(false);
         empNameJTextField2.setEditable(false);
         nameJTextField2.setEditable(false);
         passwordJTextField2.setEditable(false);
+        uEmailTxt1.setEditable(false);
+        phoneNumberTxt1.setEditable(false);
         //uaRole.getClass()
         if(uaRole.roleValue().equals("Doctor Role"))
         {
@@ -1039,11 +1052,12 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             visitingChargeTxt2.setVisible(true);
             //visitingChargeLbl2.setEditable(false);
             visitingChargeTxt2.setEditable(false);
-            
+            visitingChargeTxt2.setText(String.valueOf(selectedUsrAcc.getEmployee().getVisitingCharge()));
         }
         else{
             visitingChargeLbl2.setVisible(false);
             visitingChargeTxt2.setVisible(false);
+            visitingChargeTxt2.setText("");
         }
         updateUserBtn.setEnabled(true);
         saveBtn2.setEnabled(false);
@@ -1067,7 +1081,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         //change password, staff name, visiting charge 
         String staffName= empNameJTextField2.getText();
         String password = passwordJTextField2.getText();
-        
+        String phonenum= phoneNumberTxt1.getText();
+        String emailId = uEmailTxt1.getText();
         boolean result = Validation.nameValidator(staffName);
         if(result == false){
             JOptionPane.showMessageDialog(null, "Enter name properly!");
@@ -1081,16 +1096,45 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             return;
         }
         
+        
+        if(emailId.equals("") || emailId.equals(null)){
+            JOptionPane.showMessageDialog(null, "Enter Email!");
+            return;
+        }
+        
+        if(phonenum.equals("") || phonenum.equals(null)){
+            JOptionPane.showMessageDialog(null, "Enter Phone Number!");
+            return;
+        }
+        
+        
+        boolean isValid=Validation.emailValidator(emailId);
+        if(isValid == false){
+             JOptionPane.showMessageDialog(null, "Enter email correctly");
+            return;
+        }
+        
+        
+        if(!phoneNumberValidity(phoneNumberTxt1.getText())){
+            JOptionPane.showMessageDialog(null, "Phone number is incorrect, only 10 digits no prefix");
+            return;
+        }
+        
         double visitingChgr =-1; ;
         if(visitingChargeTxt2.isVisible())
         {
             visitingChgr= Double.parseDouble(visitingChargeTxt2.getText());
         }
         
+        
+        
+        
+        
         //update properrty
         selectedStaff.setPassword(password);
         selectedStaff.getEmployee().setName(staffName);
-        
+        selectedStaff.getEmployee().setEmailID(emailId);
+        selectedStaff.getEmployee().setPhoneNum(phonenum);
         if(selectedStaff.getRole().roleValue().equals("Doctor Role"))
         {
             selectedStaff.getEmployee().setVisitingCharge(visitingChgr);

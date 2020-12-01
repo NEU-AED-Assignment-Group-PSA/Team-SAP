@@ -45,7 +45,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="97" max="32767" attributes="0"/>
+              <EmptySpace pref="98" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -499,10 +499,7 @@
                                       <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="phoneNumberTxt1" max="32767" attributes="0"/>
-                                      <Component id="uEmailTxt1" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="phoneNumberTxt1" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -527,18 +524,21 @@
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="nameJTextField2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="empNameJTextField2" max="32767" attributes="0"/>
-                                  <Component id="roleJComboBox2" pref="176" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="nameJTextField2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="empNameJTextField2" max="32767" attributes="0"/>
+                                      <Component id="roleJComboBox2" pref="176" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Component id="passwordJTextField2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                  <Component id="visitingChargeTxt2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
+                                  <Component id="organizationJComboBox2" alignment="1" min="-2" pref="176" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="passwordJTextField2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                              <Component id="visitingChargeTxt2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                              <Component id="organizationJComboBox2" alignment="1" min="-2" pref="176" max="-2" attributes="0"/>
+                              <Component id="uEmailTxt1" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
