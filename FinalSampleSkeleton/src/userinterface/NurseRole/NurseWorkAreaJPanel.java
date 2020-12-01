@@ -46,12 +46,14 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request.getMessage();
+            Object[] row = new Object[5];
+            row[0] = request.getSender();
             row[1] = request.getReceiver();
-            row[2] = request.getStatus();
-            String result = ((LabTestWorkRequest) request).getTestResult();
-            row[3] = result == null ? "Waiting" : result;
+            row[2] = ((NurseWorkRequest)request).getPatient();
+            row[3] = request.getStatus();
+            row[4] = ((NurseWorkRequest)request).getAppointment();
+            //String result = ((LabTestWorkRequest) request).getTestResult();
+            //row[3] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
@@ -116,11 +118,11 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Sender", "Receiver", "Patient", "Status", "Message"
+                "Sender", "Receiver", "Patient", "Status", "Appointment"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -212,7 +214,6 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewReqBtn)
                     .addComponent(searchReqBtn)
@@ -515,10 +516,9 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(65, 65, 65)
                         .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(viewDetailsJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        viewDetailsJPanel.getAccessibleContext().setAccessibleName("View Details");
         searchJPanel.getAccessibleContext().setAccessibleName("Search JPanel");
     }// </editor-fold>//GEN-END:initComponents
 

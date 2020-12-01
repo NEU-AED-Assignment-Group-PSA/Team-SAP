@@ -236,24 +236,30 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel5)
                                     .addComponent(backJButton))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(contactCarrier, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(nameJTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
-                                    .addComponent(phoneNumberTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(passwordJPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(submitJButton, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(uEmailTxt)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(contactCarrier, javax.swing.GroupLayout.Alignment.LEADING, 0, 136, Short.MAX_VALUE)
+                                            .addComponent(phoneNumberTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(submitJButton, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(uEmailTxt))
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(passwordJPasswordField, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
+                                            .addComponent(nameJTextField)))))
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel2)
-                                .addGap(52, 52, 52)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(usernameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -382,7 +388,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         
         
         Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
-        
+        employee.setRole("Head Role");
         UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new AdminRole());
         populateTable();
         //send email and sms

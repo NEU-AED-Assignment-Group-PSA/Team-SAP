@@ -9,6 +9,7 @@ import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
 import Business.Appointment.Prescription;
 import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Medicine.Medicine;
 import Business.Medicine.MedicineDirectory;
@@ -35,13 +36,13 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Patient patient;
-    private Doctor doctor;
+    private Employee doctor;
     private Appointment appointment;
     private MedicineDirectory medicineList;
     private AppointmentDirectory prescriptionList;
     
 
-    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Doctor doctor, MedicineDirectory medicineList) {
+    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor, MedicineDirectory medicineList) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.appointment = appointment;

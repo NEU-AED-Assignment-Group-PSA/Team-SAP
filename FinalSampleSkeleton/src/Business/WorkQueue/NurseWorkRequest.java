@@ -4,6 +4,7 @@
  */
 package Business.WorkQueue;
 
+import Business.Appointment.Appointment;
 import Business.Operation.Operation;
 import Business.Patient.Patient;
 
@@ -17,22 +18,23 @@ public class NurseWorkRequest extends WorkRequest{
     private String message;
     private UserAccount sender;--> from doctor
     private UserAccount receiver; -->> to nurse
-    private String status;  -> new, assigned, complete
+    private String status;  -> new, schduled, on-going, success
     private Date requestDate;
     private Date resolveDate;
     */
-    private String testResult;
-    private Operation operation;
+    private Appointment appointment;    
+    //private Operation operation;
     private Patient patient;
 
-    public Operation getOperation() {
-        return operation;
+        
+    public Appointment getAppointment() {
+        return appointment;
     }
 
-    public void setOperation(Operation operation) {
-        this.operation = operation;
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
-
+    
     public Patient getPatient() {
         return patient;
     }
@@ -41,13 +43,7 @@ public class NurseWorkRequest extends WorkRequest{
         this.patient = patient;
     }
 
-    public String getTestResult() {
-        return testResult;
-    }
-
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
-    }
+    
     
     
 }

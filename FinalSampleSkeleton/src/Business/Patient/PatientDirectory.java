@@ -24,11 +24,9 @@ public class PatientDirectory {
         this.patientList = patientList;
     }
     
-    public void createPatient(){
-        
-    }
+    
 
-    public Patient createPatient(String patientName, String phoneNumber, String gender, String bloodGroup, UserAccount userAccount, LocationPoint locationPoint) {
+    public Patient createPatient(String patientName, String phoneNumber, String gender, String bloodGroup, UserAccount userAccount, LocationPoint locationPoint, String email) {
         Patient patient = new Patient();
         patient.setName(patientName);
         patient.setPhoneNum(phoneNumber);
@@ -37,11 +35,14 @@ public class PatientDirectory {
         patient.setBloodGroup(bloodGroup);
         patient.setUserAccount(userAccount);
         patient.setAddress(locationPoint);
+        patient.setRole("Patient Role");
+        patient.setEmailID(email);
         patientList.add(patient);
+        patient.createNewAppointmentDirectory();
         return patient;
     }
 
-    public void updatePatient(int patientID, String name, String phoneNumber, String gender, String bloodGroup, LocationPoint locationPoint) {
+    public void updatePatient(int patientID, String name, String phoneNumber, String gender, String bloodGroup, LocationPoint locationPoint, String email) {
         for(Patient patient : patientList){
             if(patient.getId() == patientID){
                 patient.setName(name);
@@ -49,6 +50,7 @@ public class PatientDirectory {
                 patient.setPatientSex(gender);
                 patient.setPhoneNum(phoneNumber);
                 patient.setBloodGroup(bloodGroup);
+                patient.setEmailID(name);
             }
         }
     }

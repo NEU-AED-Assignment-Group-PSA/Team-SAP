@@ -55,4 +55,16 @@ public class UserAccountDirectory {
         userAccountList.remove(ua);
     }
     
+    
+    public UserAccount getUserAccByEMployee(Employee emp)
+    {
+        for(UserAccount ua: userAccountList)
+        {
+            if(ua.getEmployee().equals(emp))
+            {
+                return ua;
+            }
+        }
+        return null;
+    }
 }
