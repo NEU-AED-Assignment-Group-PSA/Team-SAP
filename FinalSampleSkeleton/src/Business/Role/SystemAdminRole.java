@@ -22,4 +22,9 @@ public class SystemAdminRole extends Role{
         return new SystemAdminWorkAreaJPanel(userProcessContainer, system);
     }
     
+    @Override
+    public String roleValue()
+    {
+        return "Sys Admin Role";
+    }
 }

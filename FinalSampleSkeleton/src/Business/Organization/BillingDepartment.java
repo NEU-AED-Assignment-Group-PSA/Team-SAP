@@ -5,17 +5,22 @@
  */
 package Business.Organization;
 
-import Business.Appointment;
-import Business.Bill;
-import Business.Doctor;
-import Business.Patient;
+import Business.Appointment.Appointment;
+import Business.Bill.Bill;
+import Business.Department.Receptionist;
+import Business.Doctor.Doctor;
+import Business.Patient.Patient;
+import Business.Role.DoctorRole;
+import Business.Role.ReceptionistRole;
+import Business.Role.Role;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
  *
  * @author preranaurs
  */
-public class BillingDepartment {
+public class BillingDepartment extends Organization{
     String billingId;
     String billIssuer;
     Patient patient;
@@ -24,8 +29,17 @@ public class BillingDepartment {
     Bill bill;
     String paymentStatus;
     String paymentMode;
+
+    public BillingDepartment() {
+      super(Organization.Type.Billing.getValue());
+    }
     
-    
+    @Override
+    public ArrayList<Role> getSupportedRole() {
+        ArrayList<Role> roles = new ArrayList();
+        roles.add(new ReceptionistRole());
+        return roles;
+    }
    Bill processBilling(Date date){
       
        return bill;

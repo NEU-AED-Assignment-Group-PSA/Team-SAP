@@ -5,7 +5,7 @@
  */
 package Business.Organization;
 
-import Business.Inventory;
+import Business.Department.Inventory;
 
 /**
  *
@@ -14,4 +14,8 @@ import Business.Inventory;
 public class InventoryManagementDept {
     String productID;
     Inventory inventory;
+
+    
+
+    
 }
