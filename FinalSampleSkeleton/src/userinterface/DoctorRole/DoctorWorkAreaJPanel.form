@@ -16,31 +16,6 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="401" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnViewAppointments" min="-2" pref="147" max="-2" attributes="0"/>
-                          <Component id="btnViewPatientHistory" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="btnAssignNextDoctor" min="-2" pref="162" max="-2" attributes="0"/>
-                          <Component id="btnScheduleSurgery" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnMarkForBilling" min="-2" pref="153" max="-2" attributes="0"/>
-                          <Component id="btnPrescribeMeds" min="-2" pref="153" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                              <Component id="requestTestJButton" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="btnScheduleLabTest" min="-2" pref="153" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
@@ -51,9 +26,37 @@
                       <EmptySpace min="-2" pref="163" max="-2" attributes="0"/>
                       <Component id="refreshTestJButton" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="148" max="-2" attributes="0"/>
-                      <Component id="schedulePanel" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+                      <Component id="backJButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane1" min="-2" pref="401" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnViewAppointments" min="-2" pref="147" max="-2" attributes="0"/>
+                                          <Component id="btnViewPatientHistory" min="-2" pref="157" max="-2" attributes="0"/>
+                                          <Component id="btnAssignNextDoctor" min="-2" pref="162" max="-2" attributes="0"/>
+                                          <Component id="btnScheduleSurgery" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="btnMarkForBilling" min="-2" pref="153" max="-2" attributes="0"/>
+                                          <Component id="btnPrescribeMeds" min="-2" pref="153" max="-2" attributes="0"/>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                                              <Component id="requestTestJButton" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="btnScheduleLabTest" min="-2" pref="153" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Component id="scheduleSurgeryJPanel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="310" max="32767" attributes="0"/>
@@ -90,13 +93,21 @@
                       <Component id="requestTestJButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnScheduleSurgery" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnScheduleLabTest" alignment="0" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnScheduleSurgery" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnScheduleLabTest" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="scheduleSurgeryJPanel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="backJButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="schedulePanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="19" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -218,7 +229,7 @@
         <Property name="text" type="java.lang.String" value="Schedule Test"/>
       </Properties>
     </Component>
-    <Container class="javax.swing.JPanel" name="schedulePanel">
+    <Container class="javax.swing.JPanel" name="scheduleSurgeryJPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -231,7 +242,7 @@
         </Property>
       </Properties>
       <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Add Surgery Schedule"/>
+        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Add Surgery"/>
       </AccessibilityProperties>
 
       <Layout>
@@ -351,5 +362,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="backJButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="&lt;&lt; Back"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="backJButtonActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

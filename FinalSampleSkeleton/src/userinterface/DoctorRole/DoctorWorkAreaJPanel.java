@@ -9,7 +9,9 @@ import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Medicine.MedicineDirectory;
+import Business.Operation.Operation;
 import Business.Organization.DoctorOrganization;
+import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTestWorkRequest;
@@ -28,7 +30,7 @@ import userinterface.PatientRole.ViewPatientJPanel;
 public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private JPanel userProcessContainer;
-    private DoctorOrganization organization;
+    private Organization organization;
     private Enterprise enterprise;
     private UserAccount userAccount;
     private Appointment appointment;
@@ -39,7 +41,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise) {
+    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, Enterprise enterprise) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -91,7 +93,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         btnPrescribeMeds = new javax.swing.JButton();
         btnScheduleSurgery = new javax.swing.JButton();
         btnScheduleLabTest = new javax.swing.JButton();
-        schedulePanel = new javax.swing.JPanel();
+        scheduleSurgeryJPanel = new javax.swing.JPanel();
         patientIDTxt = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         patientNameTxt = new javax.swing.JTextField();
@@ -102,6 +104,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         closebtn = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         bloodGrpTxt = new javax.swing.JTextField();
+        backJButton = new javax.swing.JButton();
 
         DoctorWorkAreaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -193,7 +196,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         btnScheduleLabTest.setText("Schedule Test");
 
-        schedulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
+        scheduleSurgeryJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Patient ID:");
@@ -220,51 +223,51 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Blood Group:");
 
-        javax.swing.GroupLayout schedulePanelLayout = new javax.swing.GroupLayout(schedulePanel);
-        schedulePanel.setLayout(schedulePanelLayout);
-        schedulePanelLayout.setHorizontalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(schedulePanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout scheduleSurgeryJPanelLayout = new javax.swing.GroupLayout(scheduleSurgeryJPanel);
+        scheduleSurgeryJPanel.setLayout(scheduleSurgeryJPanelLayout);
+        scheduleSurgeryJPanelLayout.setHorizontalGroup(
+            scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(schedulePanelLayout.createSequentialGroup()
+                .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
                         .addComponent(saveButton)
                         .addGap(0, 40, Short.MAX_VALUE))
-                    .addGroup(schedulePanelLayout.createSequentialGroup()
-                        .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
+                        .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bloodGrpTxt)
                             .addComponent(patientNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 55, Short.MAX_VALUE)
                             .addComponent(patientIDTxt)
                             .addComponent(dateTxt))))
                 .addContainerGap())
-            .addGroup(schedulePanelLayout.createSequentialGroup()
+            .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(closebtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        schedulePanelLayout.setVerticalGroup(
-            schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(schedulePanelLayout.createSequentialGroup()
+        scheduleSurgeryJPanelLayout.setVerticalGroup(
+            scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientIDTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addGap(18, 18, 18)
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addGap(12, 12, 12)
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bloodGrpTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(schedulePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(dateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,29 +277,17 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        backJButton.setText("<< Back");
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnViewPatientHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAssignNextDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(54, 54, 54)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnMarkForBilling, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(requestTestJButton))
-                            .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -307,8 +298,29 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(163, 163, 163)
                         .addComponent(refreshTestJButton))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(148, 148, 148)
-                        .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(39, 39, 39)
+                        .addComponent(backJButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnViewAppointments, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnViewPatientHistory, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnAssignNextDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(54, 54, 54)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnMarkForBilling, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(16, 16, 16)
+                                                .addComponent(requestTestJButton))
+                                            .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(310, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -336,16 +348,21 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(btnMarkForBilling)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(requestTestJButton)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnScheduleSurgery)
-                    .addComponent(btnScheduleLabTest))
-                .addGap(18, 18, 18)
-                .addComponent(schedulePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnScheduleSurgery)
+                            .addComponent(btnScheduleLabTest))
+                        .addGap(18, 18, 18)
+                        .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(backJButton)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        schedulePanel.getAccessibleContext().setAccessibleName("Add Surgery Schedule");
+        scheduleSurgeryJPanel.getAccessibleContext().setAccessibleName("Add Surgery");
     }// </editor-fold>//GEN-END:initComponents
 
     private void requestTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_requestTestJButtonActionPerformed
@@ -364,8 +381,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnViewAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointmentsActionPerformed
 
-        CreateNewPatientJPanel createNewPatientJPanel = new CreateNewPatientJPanel(userProcessContainer, userAccount, organization, enterprise, system);
-        userProcessContainer.add("createNewPatientJPanel",createNewPatientJPanel);
+        ViewAppointmentJPanel viewAppointmentJPanel = new ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem);
+        userProcessContainer.add("viewAppointmentJPanel",viewAppointmentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnViewAppointmentsActionPerformed
@@ -375,8 +392,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         if(selectedRow >= 0){
             Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
             //            Order order = (Order)OrderJTable.getValueAt(selectedRow, 0);
-            ViewPatientJPanel viewPatientJPanel = new ViewPatientJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem, patient);
-            userProcessContainer.add("viewPatientJPanel",viewPatientJPanel);
+            PatientHistoryJPanel patientHistoryJPanel = new PatientHistoryJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem, patient);
+            userProcessContainer.add("patientHistoryJPanel",patientHistoryJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
         }else{
@@ -390,24 +407,29 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAssignNextDoctorActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        if(patientIDTxt.getText().equals("") || patientNameTxt.getText().equals("") || dateTxt.getText().equals(""))
+        if(patientIDTxt.getText().equals("") || patientNameTxt.getText().equals("") || bloodGrpTxt.getText().equals("") || dateTxt.getText().equals(""))
         {
             JOptionPane.showMessageDialog(null, "fields cannot be empty");
         }
         else{
             try {
-                int selectedrow=flightsTable.getSelectedRow();
-                Fleet fleet=(Fleet)flightsTable.getValueAt(selectedrow, 0);
-                String from=patientIDTxt.getText();
-                String to=patientNameTxt.getText();
-                Date date=Date.valueOf(dateTxt.getText());
-                fleet.getSchedule().setSrc(from);
-                fleet.getSchedule().setDest(to);
-                fleet.getSchedule().setDate(date);
+                int selectedrow=DoctorWorkAreaTable.getSelectedRow();
+                Operation operation=(Operation)DoctorWorkAreaTable.getValueAt(selectedrow, 0);
+                int patientID=Integer.parseInt(patientIDTxt.getText());
+                String patientName=patientNameTxt.getText();
+                String bloodGroup=bloodGrpTxt.getText();
+                String date=dateTxt.getText();
+                operation.getPerson().setId(patientID);
+                operation.getPerson().setName(patientName);
+                //operation.getPatient().setName(patientName);
+                operation.getPatient().setBloodGroup(bloodGroup);
+                operation.getOperationDate();
+
                 JOptionPane.showMessageDialog(null, "schedule added successfully");
-                schedulePanel.setVisible(false);
+                scheduleSurgeryJPanel.setVisible(false);
                 patientIDTxt.setText("");
                 patientNameTxt.setText("");
+                bloodGrpTxt.setText("");
                 dateTxt.setText("");
             }
             catch(Exception e)
@@ -418,14 +440,14 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
-        schedulePanel.setVisible(false);
+        scheduleSurgeryJPanel.setVisible(false);
     }//GEN-LAST:event_closebtnActionPerformed
 
     private void btnScheduleSurgeryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScheduleSurgeryActionPerformed
         int selectedrow=DoctorWorkAreaTable.getSelectedRow();
         if(selectedrow>=0)
         {   
-           schedulePanel.setVisible(true);        
+           scheduleSurgeryJPanel.setVisible(true);        
                     
         }
         else {
@@ -440,8 +462,15 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnPrescribeMedsActionPerformed
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DoctorWorkAreaTable;
+    private javax.swing.JButton backJButton;
     private javax.swing.JTextField bloodGrpTxt;
     private javax.swing.JButton btnAssignNextDoctor;
     private javax.swing.JButton btnMarkForBilling;
@@ -463,7 +492,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton refreshTestJButton;
     private javax.swing.JButton requestTestJButton;
     private javax.swing.JButton saveButton;
-    private javax.swing.JPanel schedulePanel;
+    private javax.swing.JPanel scheduleSurgeryJPanel;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
 }

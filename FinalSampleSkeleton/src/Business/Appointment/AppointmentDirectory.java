@@ -20,6 +20,7 @@ public class AppointmentDirectory {
     List<Appointment> appointmentList;
     //private Prescription prescription;
     List<Prescription> prescriptionList;
+    List<PatientHistoryDetails> patientHistoryList;
 
     public List<Appointment> getAppointmentList() {
         return appointmentList;
@@ -36,6 +37,14 @@ public class AppointmentDirectory {
     public void setPrescriptionList(List<Prescription> prescriptionList) {
         this.prescriptionList = prescriptionList;
     }
+
+    public List<PatientHistoryDetails> getPatientHistoryList() {
+        return patientHistoryList;
+    }
+
+    public void setPatientHistoryList(List<PatientHistoryDetails> patientHistoryList) {
+        this.patientHistoryList = patientHistoryList;
+    }
     
     
     //update appointment
@@ -47,7 +56,7 @@ public class AppointmentDirectory {
     
     //cancel appointment
     void cancelAppointment(Appointment app){
-        
+        appointmentList.remove(app);
     }
     
     //search Appointment by patient and date

@@ -5,6 +5,7 @@
  */
 package Business.Doctor;
 
+import Business.Department.Department;
 import java.util.List;
 
 /**
@@ -44,8 +45,16 @@ public class DoctorDirectory {
        doctorList.remove(doctor); 
     }
     
-    void updateDoctor(int id){
-        
+    public void updateDoctor(int id, String specialization, String phoneNum, String location, String visitingCharge, Department department){
+       for(Doctor doctor: doctorList){
+            if(doctor.getId() == (id)){
+                doctor.setSpecialization(specialization);
+                doctor.setPhoneNum(phoneNum);
+                doctor.setLocation(location);
+                doctor.setVisitingCharge(Double.parseDouble(visitingCharge));
+                doctor.setDepartment(department);
+            }
+        } 
     }
     
     public Doctor createDoctor(){
