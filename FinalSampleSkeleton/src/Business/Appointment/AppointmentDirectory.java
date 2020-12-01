@@ -102,10 +102,5 @@ public class AppointmentDirectory {
         return prescription;
     }
     
-    public PatientHistoryDetails addPatientHistory(){
-        PatientHistoryDetails patientHistoryDetails = new PatientHistoryDetails();
-        patientHistoryList.add(patientHistoryDetails);
-        return patientHistoryDetails;
-    }
     
 }

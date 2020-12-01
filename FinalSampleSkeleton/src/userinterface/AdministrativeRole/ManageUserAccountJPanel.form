@@ -161,9 +161,6 @@
         </Property>
         <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Add Staff"/>
-      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">
@@ -479,9 +476,6 @@
         </Property>
         <Property name="autoscrolls" type="boolean" value="true"/>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="View Staff"/>
-      </AccessibilityProperties>
 
       <Layout>
         <DimensionLayout dim="0">
