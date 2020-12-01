@@ -248,6 +248,7 @@ public class ManageBedJPanel extends javax.swing.JPanel {
         bedCountTxt.setEditable(false);
         currentBedCountTxt.setText(String.valueOf(bedorg.getBedCount()));
         bedCountTxt.setText("");
+        populateBedTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed

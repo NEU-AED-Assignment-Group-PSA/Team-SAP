@@ -849,6 +849,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         passwordJTextField.setText("");
         visitingChargeTxt.setText("");
         nameJTextField.setText("");
+        phoneNumberTxt.setText("");
+        uEmailTxt.setText("");
     }//GEN-LAST:event_createUserJButtonActionPerformed
 
     public Boolean phoneNumberValidity(String customerContact) {
@@ -949,6 +951,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         visitingChargeLbl.setVisible(false);
         visitingChargeTxt.setVisible(false);
         popOrganizationComboBox();
+        populateMobileCarrierComboBox();
         //populateRoleComboBox();
     }//GEN-LAST:event_addStaffBtnActionPerformed
 

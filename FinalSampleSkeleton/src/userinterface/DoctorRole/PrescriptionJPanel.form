@@ -128,14 +128,8 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="patientNameTxt">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="doctorNameTxt">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="medsPrescribedTxt">
     </Component>
