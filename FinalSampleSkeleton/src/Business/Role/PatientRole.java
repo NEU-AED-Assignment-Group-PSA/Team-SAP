@@ -27,7 +27,7 @@ public class PatientRole extends Role {
     @Override
     public String roleValue()
     {
-        return "PatientRole";
+        return "Patient Role";
     }
     
     

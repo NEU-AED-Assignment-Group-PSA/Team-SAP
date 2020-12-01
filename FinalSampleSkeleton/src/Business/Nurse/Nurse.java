@@ -5,10 +5,12 @@
  */
 package Business.Nurse;
 
+import Business.Employee.Employee;
+
 /**
  *
  * @author aditi
  */
-public class Nurse {
+public class Nurse extends Employee{
     
 }

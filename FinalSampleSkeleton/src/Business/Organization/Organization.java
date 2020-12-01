@@ -4,10 +4,12 @@
  */
 package Business.Organization;
 
+import Business.Employee.Employee;
 import Business.Employee.PersonDirectory;
 import Business.Patient.Patient;
 import Business.Patient.PatientDirectory;
 import Business.Role.Role;
+import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
 import Business.WorkQueue.WorkQueue;
 import java.util.ArrayList;
@@ -24,13 +26,13 @@ public abstract class Organization {
     private PersonDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
     private PatientDirectory patientDirectory;
+    //private BedManagementDepartment 
     private int organizationID;
     private static int counter=0;
     
     public enum Type{
         Admin("Admin"),
-        //Doctor("Doctor"),
-        Lab("Lab"),
+        //Doctor("Doctor"),        
         Dental("Dental Department"),
         ENT("ENT Department"),
         CovidCenter("Covid-19 Treatment Department"),
@@ -43,6 +45,7 @@ public abstract class Organization {
         UrgentCare("Urgent Care Department"),
         Cardiology("Cardiology Department"),
         Billing("Billing Department"),
+        Lab("Lab"),
         Other("Other Department");
         
         private String value;
@@ -110,5 +113,20 @@ public abstract class Organization {
         return name;
     }
     
+    
+    public void removeAllUserAccount(){
+        for(UserAccount ua : userAccountDirectory.getUserAccountList())
+        {
+            this.userAccountDirectory.removeUserAccount(ua);
+        }
+        
+    } 
+    
+    public void removeAllEmployee(){
+                 for(Employee ua : employeeDirectory.getEmployeeList())
+        {
+            this.employeeDirectory.removeEmployee(ua);
+        }    
+                }
     
 }

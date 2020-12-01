@@ -13,7 +13,34 @@ public class Employee {
     private String name;
     private int id;
     private static int count = 1;
-    
+    private double visitingCharge;
+        private String phoneNum;
+    private String emailID;
+    //private double visitingCharge;
+
+    public String getPhoneNum() {
+        return phoneNum;
+    }
+
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
+    public String getEmailID() {
+        return emailID;
+    }
+
+    public void setEmailID(String emailID) {
+        this.emailID = emailID;
+    }
+
+    public double getVisitingCharge() {
+        return visitingCharge;
+    }
+
+    public void setVisitingCharge(double visitingCharge) {
+        this.visitingCharge = visitingCharge;
+    }
 
     public Employee() {
         id = count;
