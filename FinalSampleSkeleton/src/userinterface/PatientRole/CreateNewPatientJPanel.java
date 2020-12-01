@@ -7,6 +7,7 @@ package userinterface.PatientRole;
 
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Location.LocationPoint;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
@@ -17,6 +18,7 @@ import Business.Role.PatientRole;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
+import userinterface.GoogleMAP.AddressJPanel;
 import userinterface.ReceptionistRole.ReceptionistWorkAreaJPanel;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 
@@ -35,6 +37,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     UserAccount userAccount;
     EcoSystem ecosystem;
+    LocationPoint locationPoint;
     public CreateNewPatientJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
         if(enterprise.getPatientDirectory() == null){
@@ -64,8 +67,6 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         txtPatientName = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        txtAddress = new javax.swing.JTextArea();
         lblGender = new javax.swing.JLabel();
         txtGender = new javax.swing.JComboBox();
         lblPhoneNumber = new javax.swing.JLabel();
@@ -77,6 +78,8 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         txtBloodGroup = new javax.swing.JComboBox();
         btnSubmit = new javax.swing.JButton();
+        txtAddress = new javax.swing.JTextField();
+        btnSetLocation = new javax.swing.JButton();
 
         jButton1.setText("<< Back");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -100,10 +103,6 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Patient Address:");
-
-        txtAddress.setColumns(20);
-        txtAddress.setRows(5);
-        jScrollPane1.setViewportView(txtAddress);
 
         lblGender.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblGender.setText("Gender:");
@@ -131,17 +130,26 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
             }
         });
 
+        txtAddress.setEditable(false);
+
+        btnSetLocation.setText("Set Location");
+        btnSetLocation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSetLocationActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)
                         .addGap(148, 148, 148)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -160,16 +168,14 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
                             .addComponent(txtPhoneNumber)
                             .addComponent(txtUserName)
                             .addComponent(txtPassword)
-                            .addComponent(txtBloodGroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtBloodGroup, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtAddress))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSetLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(212, 212, 212)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(btnSubmit)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(222, Short.MAX_VALUE))
+                        .addGap(254, 254, 254)
+                        .addComponent(btnSubmit)))
+                .addContainerGap(132, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -203,12 +209,13 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(txtBloodGroup, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSetLocation))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addContainerGap(65, Short.MAX_VALUE))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -227,7 +234,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         
         UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), null, new PatientRole());
         enterprise.getPatientDirectory().createPatient(txtPatientName.getText(), txtPhoneNumber.getText(), txtGender.getSelectedItem().toString(),
-                txtAddress.getText(), txtBloodGroup.getSelectedItem().toString(), account);
+                txtBloodGroup.getSelectedItem().toString(), account, locationPoint);
         
         JOptionPane.showMessageDialog(null, "Patient added successfully!", "Warning", JOptionPane.INFORMATION_MESSAGE);
         
@@ -250,20 +257,32 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    public void populateLongituteLatitude(LocationPoint locationPoint) {
+        this.locationPoint = locationPoint;
+        txtAddress.setText(locationPoint.getLatitude() + ", " + locationPoint.getLongitude());
+    }
+    
+    private void btnSetLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetLocationActionPerformed
+        AddressJPanel muajp = new AddressJPanel(userProcessContainer);
+        userProcessContainer.add("AddressJPanel", muajp);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnSetLocationActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnSetLocation;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblGender;
     private javax.swing.JLabel lblPatientName;
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblUserName;
-    private javax.swing.JTextArea txtAddress;
+    private javax.swing.JTextField txtAddress;
     private javax.swing.JComboBox txtBloodGroup;
     private javax.swing.JComboBox txtGender;
     private javax.swing.JPasswordField txtPassword;
