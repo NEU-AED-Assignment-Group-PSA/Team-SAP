@@ -24,7 +24,7 @@ public class Appointment {
     Date date;
     Employee doctor;
     Patient patient;
-    String status;  //booked, cancelled, rescheduled, completed
+    String status;  //new, booked, cancelled, rescheduled, completed , mark for billing
     String location;
     private Operation operation;
     List<LabTest> labTestList;
@@ -40,6 +40,7 @@ public class Appointment {
     
     public Appointment(int count){
         this.appointmentId = count;
+        prescription= new Prescription();
     }
 
     public int getAppointmentId() {
@@ -126,4 +127,27 @@ public class Appointment {
     }
     
     
+   // Appointment-> New, markforbilling, markforsurgery, markforTest, close
+    
+    public enum AppointmentStatus{
+        New("New"),
+        Markforbilling("Markforbilling"),
+        Markforsurgery("Markforsurgery"),
+        MarkforTest("MarkforTest"),
+        Close("Close");
+        
+        private String value;
+        private AppointmentStatus(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
 }
