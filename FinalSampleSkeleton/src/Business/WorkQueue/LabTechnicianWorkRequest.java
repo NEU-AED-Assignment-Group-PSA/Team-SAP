@@ -4,6 +4,9 @@
  */
 package Business.WorkQueue;
 
+import Business.Appointment.Appointment;
+import Business.Patient.Patient;
+
 /**
  *
  * @author raunak
@@ -21,15 +24,9 @@ public class LabTechnicianWorkRequest extends WorkRequest{
     
     
     */
-    private String testResult;
+    private Patient patient;
+    private Appointment appointment;
 
-    public String getTestResult() {
-        return testResult;
-    }
-
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
-    }
     
     
 }

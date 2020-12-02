@@ -36,20 +36,17 @@
                                   <Component id="jScrollPane1" min="-2" pref="401" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnViewAppointments" min="-2" pref="147" max="-2" attributes="0"/>
-                                          <Component id="btnViewPatientHistory" min="-2" pref="157" max="-2" attributes="0"/>
                                           <Component id="btnAssignNextDoctor" min="-2" pref="162" max="-2" attributes="0"/>
-                                          <Component id="btnScheduleSurgery" alignment="0" min="-2" pref="153" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="btnViewAppointments" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="btnViewPatientHistory" alignment="0" pref="157" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="btnMarkForBilling" min="-2" pref="153" max="-2" attributes="0"/>
                                           <Component id="btnPrescribeMeds" min="-2" pref="153" max="-2" attributes="0"/>
-                                          <Group type="102" alignment="0" attributes="0">
-                                              <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                                              <Component id="requestTestJButton" min="-2" max="-2" attributes="0"/>
-                                          </Group>
                                           <Component id="btnScheduleLabTest" min="-2" pref="153" max="-2" attributes="0"/>
+                                          <Component id="btnScheduleSurgery" min="-2" pref="153" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -57,6 +54,10 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
                               <Component id="scheduleSurgeryJPanel" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="138" max="-2" attributes="0"/>
+                              <Component id="btnCompleted" min="-2" pref="185" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -79,7 +80,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="97" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="btnViewAppointments" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -90,23 +91,20 @@
                   <Group type="102" attributes="0">
                       <Component id="btnPrescribeMeds" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnMarkForBilling" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="requestTestJButton" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnScheduleLabTest" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnScheduleSurgery" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnScheduleLabTest" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnScheduleSurgery" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnCompleted" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="scheduleSurgeryJPanel" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                       <Component id="backJButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
@@ -153,14 +151,6 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="requestTestJButton">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Request Test"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="requestTestJButtonActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="refreshTestJButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Refresh"/>
@@ -206,10 +196,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAssignNextDoctorActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btnMarkForBilling">
+    <Component class="javax.swing.JButton" name="btnCompleted">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mark for Billing"/>
+        <Property name="text" type="java.lang.String" value="Appointment Completed"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCompletedActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnPrescribeMeds">
       <Properties>
@@ -231,6 +224,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Schedule Test"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnScheduleLabTestActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="scheduleSurgeryJPanel">
       <Properties>

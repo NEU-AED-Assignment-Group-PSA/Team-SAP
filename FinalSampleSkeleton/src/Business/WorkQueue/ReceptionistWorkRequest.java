@@ -4,6 +4,10 @@
  */
 package Business.WorkQueue;
 
+import Business.Appointment.Appointment;
+import Business.Employee.Employee;
+import Business.Patient.Patient;
+
 /**
  *
  * @author raunak
@@ -21,15 +25,37 @@ public class ReceptionistWorkRequest extends WorkRequest{
     
     
     */
-    private String testResult;
+    private Appointment app;
+    private Patient patient;
 
-    public String getTestResult() {
-        return testResult;
+    public Appointment getApp() {
+        return app;
     }
 
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
+    public void setApp(Appointment app) {
+        this.app = app;
     }
+
+    public Patient getPatient() {
+        return patient;
+    }
+
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Employee getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Employee doctor) {
+        this.doctor = doctor;
+    }
+    private Employee doctor;
+
+    
+    
+   
     
     
 }

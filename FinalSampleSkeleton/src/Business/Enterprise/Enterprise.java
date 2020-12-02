@@ -16,6 +16,15 @@ public abstract class Enterprise extends Organization{
     
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
+    private String networkName;
+
+    public String getNetworkName() {
+        return networkName;
+    }
+
+    public void setNetworkName(String networkName) {
+        this.networkName = networkName;
+    }
 
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;

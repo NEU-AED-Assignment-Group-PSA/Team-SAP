@@ -5,10 +5,26 @@
  */
 package Business.Organization;
 
+import Business.Medicine.MedicineDirectory;
+
 /**
  *
  * @author aditi
  */
 public class PharmacyOrganization {
+    
+    
+    MedicineDirectory medicinedir;
+    
+    
+    public  PharmacyOrganization(){
+        medicinedir = new MedicineDirectory();
+                
+    }
+    
+    
+    
+    
+    
     
 }

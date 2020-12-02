@@ -5,10 +5,29 @@
  */
 package Business.Enterprise.LabEnterprise;
 
+import java.util.List;
+
 /**
  *
  * @author aditi
  */
 public class LabTestDirectory {
+    private List <LabTest> labTestList;
+
+    public LabTestDirectory() {
+    }
+
+    public List<LabTest> getLabTestList() {
+        return labTestList;
+    }
+
+    public void setLabTestList(List<LabTest> labTestList) {
+        this.labTestList = labTestList;
+    }
     
+    public LabTest addLabTest(){
+        LabTest labTest = new LabTest();
+        labTestList.add(labTest);
+        return labTest;
+    }
 }
