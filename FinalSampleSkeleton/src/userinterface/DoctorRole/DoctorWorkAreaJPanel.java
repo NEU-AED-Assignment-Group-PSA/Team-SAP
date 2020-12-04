@@ -56,14 +56,14 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, Enterprise enterprise, EcoSystem ecosystem, Network network) {
+    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
         this.ecosystem=ecosystem;
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
-        this.network=network;
+        this.network= enterprise.getNetwork();//getNetwork();
         valueLabel.setText(enterprise.getName());
         this.doctor=userAccount.getEmployee();
         populateRequestTable();

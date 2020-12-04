@@ -76,9 +76,9 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
             network=networkList.get(i);
             
             List<Enterprise> enterpriseList;
-            enterprise.getNetworkName();
+            enterprise.getNetwork();
             
-            if(network.getName().equals(enterprise.getNetworkName()))
+            if(network.equals(enterprise.getNetwork()))
             {
                 //boston network
                 

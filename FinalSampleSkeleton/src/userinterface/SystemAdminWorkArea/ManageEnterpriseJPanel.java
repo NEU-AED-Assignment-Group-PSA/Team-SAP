@@ -182,8 +182,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -204,7 +204,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                             .addComponent(submitJButton)
                             .addComponent(backJButton)))
                     .addComponent(jLabel5))
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(89, 89, 89))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -221,7 +221,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         String name = nameJTextField.getText();
         
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
-        enterprise.setNetworkName(network);
+        enterprise.setNetwork(network);
         nameJTextField.setText("");
         populateTable();
 

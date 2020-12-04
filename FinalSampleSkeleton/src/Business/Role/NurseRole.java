@@ -22,7 +22,7 @@ import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 public class NurseRole extends Role{
 
     @Override
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system, Network network) {
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem system) {
         return new NurseWorkAreaJPanel(userProcessContainer, enterprise, account);
     }
     

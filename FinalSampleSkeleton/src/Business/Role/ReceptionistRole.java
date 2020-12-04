@@ -22,7 +22,7 @@ public class ReceptionistRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account,
-            Organization organization, Enterprise enterprise, EcoSystem business, Network network) {
+            Organization organization, Enterprise enterprise, EcoSystem business) {
         return new ReceptionistWorkAreaJPanel(userProcessContainer, account, organization, enterprise, business);
     }
     
