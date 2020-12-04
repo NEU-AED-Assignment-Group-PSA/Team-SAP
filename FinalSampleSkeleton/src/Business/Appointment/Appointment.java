@@ -134,7 +134,9 @@ public class Appointment {
         Markforbilling("Markforbilling"),
         Markforsurgery("Markforsurgery"),
         MarkforTest("MarkforTest"),
-        Close("Close");
+        Close("Close"),
+        AnalyseReport("AnalyseReport"),
+        GeneratedReport("GeneratedReport");
         
         private String value;
         private AppointmentStatus(String value){

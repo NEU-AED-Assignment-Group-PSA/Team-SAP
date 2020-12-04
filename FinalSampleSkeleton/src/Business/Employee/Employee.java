@@ -18,6 +18,15 @@ public class Employee {
     private String emailID;
     private String role;
     //private double visitingCharge;
+    private SpecializationType specialization;
+
+    public SpecializationType getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(SpecializationType specialization) {
+        this.specialization = specialization;
+    }
 
     public String getRole() {
         return role;
@@ -74,5 +83,26 @@ public class Employee {
         return name;
     }
     
+    
+    public enum SpecializationType{
+        MBBS("MBBS"),
+        Surgeon("Surgeon"),
+        MD("MD"),
+        Physician("Physician");
+        
+        private String value;
+        private SpecializationType(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
     
 }

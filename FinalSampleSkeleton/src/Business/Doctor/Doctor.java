@@ -20,7 +20,7 @@ import java.util.Date;
 public class Doctor extends Employee{
     //id, name from Person
     Department department;
-    String specialization; // cardiologist, technician
+    //String specialization; // cardiologist, technician
     String phoneNum;
     String location;
     double visitingCharge;
@@ -33,13 +33,7 @@ public class Doctor extends Employee{
         this.department = department;
     }
 
-    public String getSpecialization() {
-        return specialization;
-    }
-
-    public void setSpecialization(String specialization) {
-        this.specialization = specialization;
-    }
+    
 
     public String getPhoneNum() {
         return phoneNum;
