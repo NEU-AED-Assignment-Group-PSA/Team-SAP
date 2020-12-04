@@ -21,13 +21,14 @@ import java.util.List;
  * @author preranaurs
  */
 public class MedicalStoreDept extends Organization {
-    List <MedicineDirectory> medicineList;
+    MedicineDirectory medicineList;
     String pharmacistName;
     Location location;
     Prescription prescription;
 
     public MedicalStoreDept() {
-        super(Organization.Type.Dental.getValue());
+        super(Organization.Type.MedicalStore.getValue());
+        medicineList = new MedicineDirectory();
       // super(type);
     }
 

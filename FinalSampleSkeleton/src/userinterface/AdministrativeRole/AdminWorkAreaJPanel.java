@@ -9,6 +9,7 @@ import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -33,7 +34,8 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         this.system = system;
         lblEnterprise.setText(enterprise.getName());
         lblHeadName.setText(account.getEmployee().getName());
-        if(enterprise.getEnterpriseType().toString().equals("Hospital"))
+        String enterpriseType= enterprise.getEnterpriseType().toString();
+        if(enterpriseType.equals("Hospital"))
         {
             manageBedBtn.setEnabled(true);
             manageBedBtn.setVisible(true);
@@ -43,7 +45,41 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
              manageBedBtn.setVisible(false);
         }
         
-        manageEmployeeJButton.setVisible(false);
+        
+        if(enterpriseType.equals("Pharmacy"))
+        {            
+            manageMedicineInvtry.setVisible(true);
+            manageMedicineInvtry.setEnabled(true);
+        }
+        else{
+            manageMedicineInvtry.setVisible(false);
+            manageMedicineInvtry.setEnabled(false);
+        }
+        
+        
+        
+        
+        //Icon icon = new Icon();
+        
+        if(enterpriseType.equals("Hospital"))
+        {        
+        lblEnterpriseImage.setIcon(new ImageIcon("src/icon/hospital.png"));
+        }
+        
+        else if(enterpriseType.equals("Clinic"))
+        {        
+        lblEnterpriseImage.setIcon(new ImageIcon("src/icon/clinic.jpg"));
+        }
+        else if(enterpriseType.equals("Pharmacy"))
+        {        
+        lblEnterpriseImage.setIcon(new ImageIcon("src/icon/pharm1.png"));
+        }
+        else if(enterpriseType.equals("Lab"))
+        {        
+        lblEnterpriseImage.setIcon(new ImageIcon("src/icon/laboratory.jpg"));
+        }
+        
+        
     }
     
     /** This method is called from within the constructor to
@@ -55,36 +91,44 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        userJButton = new javax.swing.JButton();
-        manageEmployeeJButton = new javax.swing.JButton();
-        manageOrganizationJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         lblHeadName = new javax.swing.JLabel();
         enterpriseLabel1 = new javax.swing.JLabel();
         lblEnterprise = new javax.swing.JLabel();
+        lblEnterpriseImage = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        manageOrganizationJButton = new javax.swing.JButton();
+        userJButton = new javax.swing.JButton();
         manageBedBtn = new javax.swing.JButton();
+        manageMedicineInvtry = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel1.setText("My Work Area -Adminstrative Role");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, -1, -1));
+        jLabel1.setText("Head Role");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
-        userJButton.setText("Manage Staff");
-        userJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userJButtonActionPerformed(evt);
-            }
-        });
-        add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 190, 150, -1));
+        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel.setText("Name :");
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 120, 30));
 
-        manageEmployeeJButton.setText("Manage ss");
-        manageEmployeeJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                manageEmployeeJButtonActionPerformed(evt);
-            }
-        });
-        add(manageEmployeeJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 310, 150, -1));
+        lblHeadName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblHeadName.setText("<value>");
+        add(lblHeadName, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 130, 30));
+
+        enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        enterpriseLabel1.setText("Enterprise :");
+        add(enterpriseLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 40, 120, 30));
+
+        lblEnterprise.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblEnterprise.setText("<value>");
+        add(lblEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 130, 30));
+
+        lblEnterpriseImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/admin.png"))); // NOI18N
+        add(lblEnterpriseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 560, 350));
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         manageOrganizationJButton.setText("Manage Department");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -92,21 +136,15 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageOrganizationJButtonActionPerformed(evt);
             }
         });
-        add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 130, -1, -1));
+        jPanel1.add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, 60));
 
-        enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel.setText("Name :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 90, 120, 30));
-
-        lblHeadName.setText("<value>");
-        add(lblHeadName, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 100, 130, -1));
-
-        enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        enterpriseLabel1.setText("Enterprise :");
-        add(enterpriseLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 120, 30));
-
-        lblEnterprise.setText("<value>");
-        add(lblEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 130, -1));
+        userJButton.setText("Manage Staff");
+        userJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userJButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 150, 60));
 
         manageBedBtn.setText("Manage Bed");
         manageBedBtn.setEnabled(false);
@@ -115,7 +153,18 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageBedBtnActionPerformed(evt);
             }
         });
-        add(manageBedBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 250, 150, -1));
+        jPanel1.add(manageBedBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 150, 60));
+
+        manageMedicineInvtry.setText("Manage Inventory");
+        manageMedicineInvtry.setEnabled(false);
+        manageMedicineInvtry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                manageMedicineInvtryActionPerformed(evt);
+            }
+        });
+        jPanel1.add(manageMedicineInvtry, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 150, 60));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 840, 130));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -127,15 +176,15 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_userJButtonActionPerformed
 
-    private void manageEmployeeJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageEmployeeJButtonActionPerformed
+    private void manageMedicineInvtryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageMedicineInvtryActionPerformed
 
-        ManageStaffJPanel manageEmployeeJPanel = new ManageStaffJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), enterprise);
-        userProcessContainer.add("ManageEmployeeJPanel", manageEmployeeJPanel);
+        ManageMedicinesJPanel manageEmployeeJPanel = new ManageMedicinesJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), enterprise);
+        userProcessContainer.add("ManageMedicinesJPanel", manageEmployeeJPanel);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
         
-    }//GEN-LAST:event_manageEmployeeJButtonActionPerformed
+    }//GEN-LAST:event_manageMedicineInvtryActionPerformed
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
 
@@ -180,10 +229,12 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblEnterprise;
+    private javax.swing.JLabel lblEnterpriseImage;
     private javax.swing.JLabel lblHeadName;
     private javax.swing.JButton manageBedBtn;
-    private javax.swing.JButton manageEmployeeJButton;
+    private javax.swing.JButton manageMedicineInvtry;
     private javax.swing.JButton manageOrganizationJButton;
     private javax.swing.JButton userJButton;
     // End of variables declaration//GEN-END:variables
