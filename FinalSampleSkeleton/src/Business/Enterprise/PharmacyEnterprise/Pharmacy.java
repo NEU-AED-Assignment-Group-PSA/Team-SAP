@@ -54,6 +54,9 @@ public class Pharmacy extends Enterprise{
     
     public Pharmacy(String name){
         super(name,EnterpriseType.Pharmacy);
+        medicineList = new MedicineDirectory();
+        departmentList = new DepartmentDirectory();
+        
     }
     @Override
     public ArrayList<Role> getSupportedRole() {

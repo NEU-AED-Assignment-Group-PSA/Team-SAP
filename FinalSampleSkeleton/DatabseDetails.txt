@@ -1,3 +1,15 @@
 boston hospital patient- bpat1
 bhead, brecp, bdoc1, bnur1
 bed mangt dept- bnur3
+-------------------------------
+boston hospital patient- bpat1
+bhead, brecp, bdoc1, bnur1
+bed mangt dept- bnur3
+
+nychead
+
+doc2, nur1, rec1, pat2
+
+-----------------------
+
+bphar - pharmacy head

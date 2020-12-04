@@ -128,6 +128,11 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         jLabel3.setText("Doctor:");
 
         cmbDoctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbDoctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDoctorActionPerformed(evt);
+            }
+        });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Appointment Date:");
@@ -280,6 +285,10 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void cmbDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDoctorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDoctorActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
