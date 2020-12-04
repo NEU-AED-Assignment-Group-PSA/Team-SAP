@@ -32,6 +32,20 @@ public class Validation {
         return matcher.matches();
     }
     
+    
+    public static boolean validateDate(String currentDate)
+    {
+        Pattern pattern;
+        Matcher matcher;
+        String NAME_PATTERN = "^\\d{4}[\\-\\/\\s]?((((0[13578])|(1[02]))[\\-\\/\\s]?(([0-2][0-9])|(3[01])))|(((0[469])|(11))[\\-\\/\\s]?(([0-2][0-9])|(30)))|(02[\\-\\/\\s]?[0-2][0-9]))$";
+      ;
+        pattern = Pattern.compile(NAME_PATTERN);
+        matcher = pattern.matcher(currentDate);
+       // System.out.println(matcher.matches());
+      return matcher.matches();
+    }
+    
+    
         public static boolean userNameValidator(String name) {
         Pattern pattern;
         Matcher matcher;
@@ -83,7 +97,7 @@ public class Validation {
         }
         return false;
     }
-    public static void stringValidator(KeyEvent evt, JTextField field) {
+    /*public static void stringValidator(KeyEvent evt, JTextField field) {
         char c = evt.getKeyChar();
         if (!((c >= 'A') && (c <= 'Z') || (c >= 'a') && (c <= 'z') || (c == evt.VK_SPACE)
                 || (c == evt.VK_BACK_SPACE)
@@ -92,9 +106,54 @@ public class Validation {
             JOptionPane.showMessageDialog(null, "Enter Alphabets only");
             field.setText(field.getText().substring(0, field.getText().length()-1));
         }
-    }
+    }*/
 
-    public static void integerValidator(KeyEvent evt, JTextField field) {
+    
+    public static boolean integerValidator(String number) {
+        Pattern pattern;
+        Matcher matcher;
+        String integer_pattern = "^[0-9]$";
+        pattern = Pattern.compile(integer_pattern);
+        matcher = pattern.matcher(number);
+        return matcher.matches();
+    }
+    
+    
+    public static boolean stringValidator(String number) {
+        Pattern pattern;
+        Matcher matcher;
+        String integer_pattern = "^[A-Za-z\\s]$";
+        pattern = Pattern.compile(integer_pattern);
+        matcher = pattern.matcher(number);
+         boolean match = number.matches("[a-zA-Z\\s]+");
+        return matcher.matches();
+    }
+    
+    
+    public static boolean validateString(String s)
+    {
+        boolean match = s.matches("[a-zA-Z\\s]+");
+        
+            return match;
+        }
+      
+        
+    public static boolean validateAplhaNumeric(String s)
+    {
+        boolean match = match = s.matches("[a-zA-Z0-9]+");
+        
+            return match;
+        }
+        
+   public static boolean validateNumeric(String s)
+    {
+        boolean match = match = s.matches("[0-9]+");
+        
+            return match;
+        } 
+    
+    
+    /*public static void integerValidator(KeyEvent evt, JTextField field) {
         char c = evt.getKeyChar();
         if (!((c >= '0') && (c <= '9')
                 || (c == evt.VK_BACK_SPACE)
@@ -104,7 +163,7 @@ public class Validation {
             //field.setText("");
             field.setText(field.getText().substring(0, field.getText().length()-1));
         }
-    }
+    }*/
     
     public static void sendEmailMessage(String emailId, String subject, String text) {
         String to = emailId;
