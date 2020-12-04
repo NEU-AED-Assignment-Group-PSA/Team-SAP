@@ -455,26 +455,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_uEmailTxtActionPerformed
 
     private void uEmailTxtKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_uEmailTxtKeyTyped
-        // TODO add your handling code here:
-       /* if (!validation.emailValidator(uEmailTxt.getText())) {
-            emailValidateMessage.setVisible(true);
-            emailValid = false;
-        } else {
-            uEmailTxt.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-            uEmailTxt.setForeground(Color.BLACK);
-            emailValidateMessage.setVisible(false);
-            emailSuccessLabel.setVisible(true);
-            emailValid = true;
-            int delay = 2500; //milliseconds
-            ActionListener taskPerformer = new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    emailSuccessLabel.setVisible(false);
-                }
-            };
-            javax.swing.Timer tick = new javax.swing.Timer(delay, taskPerformer);
-            tick.setRepeats(false);
-            tick.start();
-        }*/
+      
     }//GEN-LAST:event_uEmailTxtKeyTyped
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
@@ -547,6 +528,11 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "User added successfully");
         // return;
 
+        nameJTextField.setText("");
+        passwordJPasswordField.setText("");
+        uEmailTxt.setText("");
+        usernameJTextField.setText("");
+        phoneNumberTxt.setText("");
     }//GEN-LAST:event_submitJButtonActionPerformed
 public Boolean phoneNumberValidity(String customerContact) {
         String regex = "^\\(?([0-9]{3})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{4})$";

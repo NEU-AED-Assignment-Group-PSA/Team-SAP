@@ -17,15 +17,15 @@ public abstract class Enterprise extends Organization{
     
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
-    private Network networkName;
+    private Network network;
 
-    public Network getNetworkName() {
+    public Network getNetwork() {
         //networkName="Boston";
-        return networkName;
+        return network;
     }
 
-    public void setNetworkName(Network networkName) {
-        this.networkName = networkName;
+    public void setNetwork(Network network) {
+        this.network = network;
     }
 
     public OrganizationDirectory getOrganizationDirectory() {
