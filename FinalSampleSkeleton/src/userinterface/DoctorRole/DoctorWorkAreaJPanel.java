@@ -545,6 +545,16 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     private void btnPrescribeMedsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrescribeMedsActionPerformed
+        
+        int selectedRow = DoctorWorkAreaTable.getSelectedRow();
+        
+        if(selectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select a Patient Appointment");
+            return;
+        }
+        patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
+        appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem));
         layout.next(userProcessContainer);
