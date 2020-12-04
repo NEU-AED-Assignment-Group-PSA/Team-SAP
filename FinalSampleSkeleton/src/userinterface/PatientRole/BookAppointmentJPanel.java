@@ -15,6 +15,10 @@ import Business.Organization.GeneralOrganization;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.Utility.EmailClass;
+import static Business.Utility.EmailClass.sendEmailMessage;
+import static Business.Utility.EmailClass.sendEmailMessageAppointment;
+import static Business.Utility.EmailClass.sendTextMessage;
 import Business.WorkQueue.DoctorWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -167,20 +171,20 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtPatientName)
-                            .addComponent(cmbDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtAppointmetDate)
-                            .addComponent(txtAppointmentType, 0, 148, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(227, 227, 227)
-                        .addComponent(txtBookAppointment)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtBookAppointment)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtPatientName)
+                                    .addComponent(cmbDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(txtAppointmetDate)
+                                    .addComponent(txtAppointmentType, 0, 148, Short.MAX_VALUE))))))
                 .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -264,6 +268,23 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
         JOptionPane.showMessageDialog(null, "Appointment added", "Information", JOptionPane.INFORMATION_MESSAGE);
+        
+        //send sms and email to patient for appointment book status
+        
+        //send Sms
+                
+          //send email and sms
+
+        String statusString = "Hello! Your appointment is booked! Date: "+ date1 + "Doctor: "+ doctor.getName();
+
+        String uEmail= patient.getEmailID();
+        UserAccount account = patient.getUserAccount();
+        String phonecontact = patient.getPhoneNum();
+        //registrationRequest.setContactCarrierName(contact);
+        sendEmailMessageAppointment(uEmail, account, statusString);//.getText());
+        sendTextMessage(phonecontact);      
+        
+        
         return;
     }//GEN-LAST:event_txtBookAppointmentActionPerformed
 

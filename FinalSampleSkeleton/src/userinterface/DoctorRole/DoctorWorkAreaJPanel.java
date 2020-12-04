@@ -12,6 +12,7 @@ import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Medicine.MedicineDirectory;
+import Business.Network.Network;
 import Business.Operation.Operation;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
@@ -49,18 +50,20 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private EcoSystem ecosystem;
     private LabTestDirectory labTestList;
     private Employee receptionist;
+    private Network network;
     //private EcoSystem ecosystem;
     
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, Enterprise enterprise, EcoSystem ecosystem) {
+    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount account, Enterprise enterprise, EcoSystem ecosystem, Network network) {
         initComponents();
         this.ecosystem=ecosystem;
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = account;
+        this.network=network;
         valueLabel.setText(enterprise.getName());
         this.doctor=userAccount.getEmployee();
         populateRequestTable();
@@ -572,7 +575,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnScheduleLabTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScheduleLabTestActionPerformed
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment, labTestList));
+        userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment, labTestList,network));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnScheduleLabTestActionPerformed
 
