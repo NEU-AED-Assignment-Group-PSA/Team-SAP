@@ -41,7 +41,7 @@ public abstract class Organization {
         //Laundry("Laundry Service Department"),
         Pathology("Pathology Department"),
         Radiology("Radiology Department"),
-        Inventory("Inventory Management Department"),
+        //Inventory("Inventory Management Department"),
         UrgentCare("Urgent Care Department"),
         Cardiology("Cardiology Department"),
         Billing("Billing Department"),

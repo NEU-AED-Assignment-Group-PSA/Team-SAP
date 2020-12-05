@@ -1,15 +1,9 @@
-boston hospital patient- bpat1
-bhead, brecp, bdoc1, bnur1
-bed mangt dept- bnur3
--------------------------------
-boston hospital patient- bpat1
-bhead, brecp, bdoc1, bnur1
-bed mangt dept- bnur3
+new status= occupied- not from here
+new status= assign laundry -if was occupied
+new status= available=> if assign laundry 
 
-nychead
-
-doc2, nur1, rec1, pat2
-
------------------------
-
-bphar - pharmacy head
+bhos1 boston hospital head	
+bcli1, doc1, nur1, rec1(billing dept), rec2(medicasl store dept)
+bphar1
+bphar2
+blab1

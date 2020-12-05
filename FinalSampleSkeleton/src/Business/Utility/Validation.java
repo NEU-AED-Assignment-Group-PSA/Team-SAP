@@ -5,7 +5,11 @@
  */
 package Business.Utility;
 
+import Business.EcoSystem;
+import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import java.awt.event.KeyEvent;
+import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -230,4 +234,33 @@ public class Validation {
             JOptionPane.showMessageDialog(null, "Invalid email id");
         }
     }
+    
+    
+    public static boolean checkIfUserNameIsUniqueAcrossNetworks(EcoSystem system, String username){
+        //check if username is unique
+        boolean isUserNameUnique = true;
+        //boolean flag = false;
+        for(Network net : system.getNetworkList())
+        {
+            List<Enterprise> entrList = net.getEnterpriseDirectory().getEnterpriseList();
+            for(Enterprise entpr: entrList)
+            {
+              isUserNameUnique  = entpr.getUserAccountDirectory().checkIfUsernameIsUnique(username);
+              if(isUserNameUnique== false)
+              {
+                  
+                //  JOptionPane.showMessageDialog(null, "Username already exists, try another name!");
+            return false;
+              }
+              
+            }
+            
+           
+        }
+        
+        return true;
+    }
+    
+    
+    
 }

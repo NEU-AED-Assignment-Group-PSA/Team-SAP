@@ -92,12 +92,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        if(specialization != null){
-            return name + " - " + specialization;
-        }else{
-            return name;
-        }
-        
+        return name;
     }
     
     

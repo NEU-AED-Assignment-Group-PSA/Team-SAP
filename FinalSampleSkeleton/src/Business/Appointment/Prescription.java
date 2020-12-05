@@ -12,6 +12,7 @@ import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Medicine.Medicine;
 import Business.Patient.Patient;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,7 @@ public class Prescription {
 
     public Prescription() {
         this.createdOn = new Date();
+        medicinePrescribed = new HashMap<>();
     }
 
     

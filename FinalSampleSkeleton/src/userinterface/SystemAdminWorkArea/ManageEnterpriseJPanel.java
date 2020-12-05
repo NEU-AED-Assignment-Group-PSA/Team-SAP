@@ -41,8 +41,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         for (Network network : system.getNetworkList()) {
             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                 Object[] row = new Object[3];
-                row[0] = enterprise.getName();
-                row[1] = network.getName();
+                row[0] = enterprise; //enterprise.getNetwork();
+                row[1] = network;//.getName();
                 row[2] = enterprise.getEnterpriseType().getValue();
 
                 model.addRow(row);
@@ -183,7 +183,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel4)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(btnDelete)
                 .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,7 +219,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         }
 
         String name = nameJTextField.getText();
-        
+        if(name == null || name.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "Enter name!");
+            return;
+        }
         Enterprise enterprise = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
         enterprise.setNetwork(network);
         nameJTextField.setText("");
@@ -253,7 +257,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 
                 netwrk.getEnterpriseDirectory().getEnterpriseList().remove(enter); //.deleteAccount(account);
                 populateTable();
-                JOptionPane.showMessageDialog(null, "Deleted");
+                JOptionPane.showMessageDialog(null, "Deleted successfully");
                 
                 
             }

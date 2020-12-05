@@ -54,6 +54,8 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         this.medicineDir= ((Pharmacy)enterprise).getMedicineList();
         //populateMainMedicineComboBox();
         //populateOrganizationEmpComboBox();
+        viewMedicineJPanel.setVisible(false);
+        addMedicineJPanel.setVisible(false);
     }
     
     public void populateOrganizationComboBox(){
@@ -82,14 +84,18 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         for (Medicine med : medicineDir.getMedicineList()){
+            if(med.getType().equals(medType))
+            {
+            
             Object[] row = new Object[6];
-            row[0] = med.getId();
+            row[0] = med;//.getId();
             row[1] = med.getName();
             row[2] = med.getDosage();
             row[3] = med.getQuantity();
             row[4] = med.getType();
             row[5] = med.getExpiryDate();
             model.addRow(row);
+        }
         }
     }
     /**
@@ -604,6 +610,16 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         String medType = (String) cmbMainMedicineType.getSelectedItem();
         populateTable(medType);
         
+        nameJTextField.setText("");
+        dosageJTextField.setText("");
+      availableQtyTxt.setText("");
+       //cmbMedicineType.setSelectedItem(med.getType());
+        expDate.setText("");       
+         priceTxt.setText("");
+        
+        
+        
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     
@@ -706,7 +722,7 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
        
        
        valid = Validation.validateNumeric(qty);
-       if(valid == false)
+       if(valid == false )
        {
            JOptionPane.showMessageDialog(null, "Please enter quantity correctly","Warning",JOptionPane.WARNING_MESSAGE);
            return;
@@ -730,6 +746,14 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
        //parse
            
         int quantity =  Integer.parseInt(qty);
+        
+        if(quantity <0)
+        {
+            JOptionPane.showMessageDialog(null, "Please enter quantity correctly","Warning",JOptionPane.WARNING_MESSAGE);
+           return;
+            
+        }
+        
         double price = Double.parseDouble(priceString);
         if(price == 0.0)
         {
@@ -765,6 +789,18 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         String medType = (String) cmbMainMedicineType.getSelectedItem();
         populateTable(medType);
         
+        
+        cmbMedicineType1.setEnabled(false);
+        nameJTextField1.setEditable(false);
+        dosageJTextField1.setEditable(false);
+        availableQtyTxt1.setEditable(false);
+          expDate1.setEditable(false);      
+           priceTxt1.setEditable(false);     
+         btnSave1.setEnabled(false);
+           btnUpdate1.setEnabled(true);   
+        
+        
+        
     }//GEN-LAST:event_btnSave1ActionPerformed
 
     private void closebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtn1ActionPerformed
@@ -780,19 +816,49 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
 
     private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
+        
+        cmbMedicineType1.setEnabled(true);
+        nameJTextField1.setEditable(true);
+        dosageJTextField1.setEditable(true);
+        availableQtyTxt1.setEditable(true);
+          expDate1.setEditable(true);      
+           priceTxt1.setEditable(true); 
+           btnSave1.setEnabled(true);
+           btnUpdate1.setEnabled(false);
     }//GEN-LAST:event_btnUpdate1ActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
+          int row = organizationJTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        viewMedicineJPanel.setVisible(true);
         
         //populate 
-        
-        populateViewMedicine();
+        Medicine med= (Medicine)  organizationJTable.getValueAt(row,0);
+        populateViewMedicine(med);
     }//GEN-LAST:event_btnViewActionPerformed
 
     
-    void populateViewMedicine(){
+    void populateViewMedicine(Medicine med){
         
+        nameJTextField1.setText(med.getName());
+        dosageJTextField1.setText(med.getDosage());
+      availableQtyTxt1.setText(String.valueOf(med.getQuantity()));
+       cmbMedicineType1.setSelectedItem(med.getType());
+        expDate1.setText(med.getExpiryDate().toString());       
+         priceTxt1.setText(String.valueOf(med.getPrice()));
+        
+        cmbMedicineType1.setEnabled(false);
+        nameJTextField1.setEditable(false);
+        dosageJTextField1.setEditable(false);
+        availableQtyTxt1.setEditable(false);
+          expDate1.setEditable(false);      
+           priceTxt1.setEditable(false);     
+         btnSave1.setEnabled(false);
+           btnUpdate1.setEnabled(true);        
     }
     
     

@@ -75,6 +75,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         ArrayList<Network> networkList=ecosystem.getNetworkList();
         Network network=null;
         //network
+        cmbPharmacy.removeAllItems();
         for(int i=0;i<networkList.size();i++){
             network=networkList.get(i);
             
