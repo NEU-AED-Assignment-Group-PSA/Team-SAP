@@ -5,6 +5,7 @@
  */
 package Business.Appointment;
 
+import Business.Appointment.Appointment.AppointmentStatus;
 import Business.Employee.Employee;
 import Business.Patient.Patient;
 import java.util.ArrayList;
@@ -90,7 +91,9 @@ public class AppointmentDirectory {
 
     public Appointment createAppointment(Patient patient, Employee doctor, Date appointmetDate, String appointmentType) {
        if(patient.getAppointmentDirectory()== null){
+           List<Appointment> appointments = new ArrayList<>();
             AppointmentDirectory appointmentDirectory = new AppointmentDirectory();
+            appointmentDirectory.setAppointmentList(appointments);
             //List<Appointment> appointmentList = new ArrayList<Appointment>();
             //appointmentDirectory.setAppointmentList(appointmentList);
             patient.setAppointmentDirectory(appointmentDirectory);
@@ -101,6 +104,8 @@ public class AppointmentDirectory {
         appointment.setDoctor(doctor);
         appointment.setType(appointmentType);
         appointment.setPatient(patient);
+        appointment.setStatus(AppointmentStatus.New);
+        patient.getAppointmentDirectory().getAppointmentList().add(appointment);
        return appointment;
     }
     

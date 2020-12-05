@@ -60,7 +60,7 @@ public class UserAccountDirectory {
     {
         for(UserAccount ua: userAccountList)
         {
-            if(ua.getEmployee().equals(emp))
+            if(ua.getEmployee().getId() == (emp.getId()))
             {
                 return ua;
             }
