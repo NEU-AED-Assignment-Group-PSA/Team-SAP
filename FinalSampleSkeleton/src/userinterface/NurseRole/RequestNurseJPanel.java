@@ -110,10 +110,10 @@ public class RequestNurseJPanel extends javax.swing.JPanel {
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         
         userProcessContainer.remove(this);
-        Component[] componentArray = userProcessContainer.getComponents();
-        Component component = componentArray[componentArray.length - 1];
-        DoctorWorkAreaJPanel dwjp = (DoctorWorkAreaJPanel) component;
-        dwjp.populateRequestTable();
+        //Component[] componentArray = userProcessContainer.getComponents();
+        //Component component = componentArray[componentArray.length - 1];
+        //DoctorWorkAreaJPanel dwjp = (DoctorWorkAreaJPanel) component;
+        //dwjp.populateRequestTable();
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
         

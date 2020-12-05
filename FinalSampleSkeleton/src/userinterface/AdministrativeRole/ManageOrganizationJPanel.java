@@ -4,6 +4,7 @@
  */
 package userinterface.AdministrativeRole;
 
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.BedManagementDepartment;
 import Business.Organization.Organization;
@@ -25,15 +26,16 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private OrganizationDirectory directory;
     private JPanel userProcessContainer;
     private Enterprise enterprise;
+    private EcoSystem system;
     /**
      * Creates new form ManageOrganizationJPanel
      */
-    public ManageOrganizationJPanel(JPanel userProcessContainer,OrganizationDirectory directory, Enterprise enterprise) {
+    public ManageOrganizationJPanel(JPanel userProcessContainer,OrganizationDirectory directory, Enterprise enterprise, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.directory = directory;
         this.enterprise = enterprise;
-        
+        this.system= system;
         populateTable();
         //populateCombo();
         
@@ -45,11 +47,40 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     
     private void populateCombo(){
         organizationJComboBox.removeAllItems();
-        for (Type type : Organization.Type.values()){
-            if (!type.getValue().equals(Type.Admin.getValue()) && 
-                    !type.getValue().equals(Type.Lab.getValue()))
+        
+          if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Pharmacy))
+          {
+              for (Type type : Organization.Type.values()){
+            if (type.getValue().equals(Type.MedicalStore.getValue()) && 
+                    type.getValue().equals(Type.Billing.getValue()) 
+                    )
                 organizationJComboBox.addItem(type);
         }
+          }
+        //lab 
+          else if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab)){
+              for (Type type : Organization.Type.values()){
+            if (type.getValue().equals(Type.Billing.getValue()) && 
+                    
+                    type.getValue().equals(Type.Pathology.getValue()) &&
+                    type.getValue().equals(Type.Radiology.getValue()) 
+                    )
+                organizationJComboBox.addItem(type);
+        }
+              
+              
+          }
+//lab
+          else{
+        for (Type type : Organization.Type.values()){
+            if (!type.getValue().equals(Type.Admin.getValue()) && 
+                    !type.getValue().equals(Type.Lab.getValue()) &&
+                    !type.getValue().equals(Type.Pathology.getValue()) &&
+                    !type.getValue().equals(Type.Radiology.getValue()) 
+                    )
+                organizationJComboBox.addItem(type);
+        }
+          }
     }
 
     private void populateTable(){
@@ -350,7 +381,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
     private void viewBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewBtnActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise);
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise, system);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();

@@ -4,10 +4,11 @@
  */
 package userinterface.AdministrativeRole;
 
+import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Network.Network;
 import Business.Organization.Organization;
-import Business.Person.Person;
 import Business.Role.DoctorRole;
 import Business.Role.LabTechnicianRole;
 import Business.Role.NurseRole;
@@ -19,6 +20,7 @@ import static Business.Utility.EmailClass.sendEmailMessage;
 import static Business.Utility.EmailClass.sendTextMessage;
 import Business.Utility.Validation;
 import java.awt.CardLayout;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -37,11 +39,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private JPanel container;
     private Enterprise enterprise;
     private UserAccount selectedStaff;
+    EcoSystem system;
 
-    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise) {
+    public ManageUserAccountJPanel(JPanel container, Enterprise enterprise, EcoSystem system) {
         initComponents();
         this.enterprise = enterprise;
         this.container = container;
+        this.system = system;
 
         popMainOrganizationComboBox();
         //popMainDeptComboBox();
@@ -386,7 +390,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addComponent(closebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(createStaffPanelLayout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -413,14 +417,14 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(passwordJTextField)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
                         .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
                             .addComponent(specializationlbl)
+                            .addComponent(jLabel7)
                             .addComponent(visitingChargeLbl))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(visitingChargeTxt)
-                            .addComponent(cmbSpecialization, 0, 180, Short.MAX_VALUE)
-                            .addComponent(uEmailTxt, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addGap(50, 50, 50)
+                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(visitingChargeTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbSpecialization, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(uEmailTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         createStaffPanelLayout.setVerticalGroup(
@@ -454,14 +458,13 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(createStaffPanelLayout.createSequentialGroup()
-                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(uEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(specializationlbl, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(uEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cmbSpecialization, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(specializationlbl))
                 .addGap(18, 18, 18)
                 .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(visitingChargeTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -890,14 +893,22 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         
         
         Organization organization = (Organization) organizationJComboBox.getSelectedItem();
+       
+        //check if username is unique
+        
+        
         
         //check if username is unique
-        boolean isUserNameUnique = organization.getUserAccountDirectory().checkIfUsernameIsUnique(userName);
+        boolean isUserNameUnique = Validation.checkIfUserNameIsUniqueAcrossNetworks(system,userName);
+        System.out.println("isUserNameUnique: "+ isUserNameUnique);
+        
+        
         if(isUserNameUnique == false)
         {
             JOptionPane.showMessageDialog(null, "Username already exists, try another name!");
             return;
         }
+        
         
         //Employee employee = (Employee) employeeJComboBox.getSelectedItem();
         

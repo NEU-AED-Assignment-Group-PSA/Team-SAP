@@ -27,23 +27,6 @@ public class LabTechnicianWorkRequest extends WorkRequest{
     private Patient patient;
     private Appointment appointment;
 
-    public Patient getPatient() {
-        return patient;
-    }
-
-    public void setPatient(Patient patient) {
-        this.patient = patient;
-    }
-
-    public Appointment getAppointment() {
-        return appointment;
-    }
-
-    public void setAppointment(Appointment appointment) {
-        this.appointment = appointment;
-    }
-
-    
     
     
 }

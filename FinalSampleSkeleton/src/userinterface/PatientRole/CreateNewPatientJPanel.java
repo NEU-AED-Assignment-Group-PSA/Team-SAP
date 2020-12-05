@@ -9,6 +9,7 @@ import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Location.LocationPoint;
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JOptionPane;
@@ -20,6 +21,7 @@ import Business.Utility.Validation;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.util.ArrayList;
+import java.util.List;
 import userinterface.GoogleMAP.AddressJPanel;
 import userinterface.ReceptionistRole.ReceptionistWorkAreaJPanel;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
@@ -301,14 +303,24 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         }
         
         String userName = txtUserName.getText();
-        valid = enterprise.getUserAccountDirectory().checkIfUsernameIsUnique(userName);
+       // valid = enterprise.getUserAccountDirectory().checkIfUsernameIsUnique(userName);
         
-        if(valid == false)
-        {
-            JOptionPane.showMessageDialog(null, "User name exists, try other name", "Warning", JOptionPane.WARNING_MESSAGE);
+        //if(valid == false)
+        //{
+         //   JOptionPane.showMessageDialog(null, "User name exists, try other name", "Warning", JOptionPane.WARNING_MESSAGE);
+          //  return;
+        //}
+        
+        
+        //check if username is unique
+         boolean isUserNameUnique = Validation.checkIfUserNameIsUniqueAcrossNetworks(ecosystem,userName);
+        System.out.println("isUserNameUnique: "+ isUserNameUnique);
+         if(isUserNameUnique== false)
+              {
+                  
+                  JOptionPane.showMessageDialog(null, "Username already exists, try another name!");
             return;
-        }
-        
+              }
         String phoneNumberString = txtPhoneNumber.getText();
         
         

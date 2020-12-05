@@ -81,6 +81,24 @@ public class Medicine {
     public void setType(String type) {
         this.type = type;
     }
+
+    public void setValues(String name, Date date1, String dosage, double price, int quantity, String type) {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.setDosage(dosage);
+        this.setExpiryDate(date1);
+        this.setName(name);
+        this.setPrice(price);
+        this.setQuantity(quantity);
+        this.setType(type);
+    
+    
+    }
+    
+    
+    @Override
+    public String toString(){
+        return "Med" +String.valueOf(this.getId()) + this.getName();
+    }
     
     
 }

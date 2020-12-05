@@ -30,7 +30,7 @@ public class GeneralOrganization extends Organization
         ArrayList<Role> roles = new ArrayList();
         roles.add(new DoctorRole());
         roles.add(new NurseRole());
-        roles.add(new ReceptionistRole());
+        //roles.add(new ReceptionistRole());
         return roles;
 }
     

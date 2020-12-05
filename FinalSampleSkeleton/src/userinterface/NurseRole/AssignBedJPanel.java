@@ -19,12 +19,12 @@ import Business.Utility.Validation;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.text.ParseException;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -40,14 +40,14 @@ public class AssignBedJPanel extends javax.swing.JPanel {
     Enterprise enterprise;
     Appointment appointment;
     Patient patient;
-    Employee doctor;
+    UserAccount doctor;
     UserAccount nurseUserAccount;
     WorkRequest workrequest;
     BedManagementDepartment bedorg;
     /**
      * Creates new form AssignBed
      */
-    public AssignBedJPanel(JPanel userProcessContainer, Enterprise enterprise, Appointment appointment, Patient patient, Employee doctor, UserAccount nurseUserAccount, WorkRequest workrequest) {
+    public AssignBedJPanel(JPanel userProcessContainer, Enterprise enterprise, Appointment appointment, Patient patient, UserAccount doctor, UserAccount nurseUserAccount, WorkRequest workrequest) {
         initComponents();
         this.userProcessContainer= userProcessContainer;
         this.enterprise= enterprise;
@@ -97,7 +97,7 @@ public class AssignBedJPanel extends javax.swing.JPanel {
 void populateDetails(){
     viewPatientNametxt.setText(patient.getName());
     viewAppnmtID.setText(String.valueOf(appointment.getAppointmentId()));
-    viewDrTxt.setText(doctor.getName());
+    viewDrTxt.setText(doctor.getEmployee().getName());
     viewpatientIdTxt.setText(String.valueOf(patient.getId()));
     emailIDTxt.setText(patient.getEmailID());
     phoneNumberTxt.setText(patient.getPhoneNum());
@@ -158,7 +158,6 @@ void populateDetails(){
         btnviewBed = new javax.swing.JButton();
         txtBedAssignDate = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
         assignJPanel = new javax.swing.JPanel();
         lblBedStatus = new javax.swing.JLabel();
         bedStatusCmb = new javax.swing.JComboBox();
@@ -171,6 +170,7 @@ void populateDetails(){
         btnAssignBed = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         bedTypeCmb = new javax.swing.JComboBox();
+        btnBack = new javax.swing.JButton();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -324,10 +324,9 @@ void populateDetails(){
                                         .addGap(51, 51, 51)
                                         .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(txtBedAssignDate, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                                            .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(txtBedIPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                                                .addComponent(txtBedType, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(txtBedId, javax.swing.GroupLayout.Alignment.LEADING)))
+                                            .addComponent(txtBedIPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                            .addComponent(txtBedType)
+                                            .addComponent(txtBedId))
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
                                 .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -420,15 +419,7 @@ void populateDetails(){
                 .addContainerGap())
         );
 
-        add(viewDetailsJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(85, 13, -1, -1));
-
-        btnBack.setText("Back");
-        btnBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBackActionPerformed(evt);
-            }
-        });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 21, -1, -1));
+        add(viewDetailsJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         assignJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Assign Bed"));
         assignJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -480,7 +471,7 @@ void populateDetails(){
         });
         jScrollPane2.setViewportView(bedJTable);
 
-        assignJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 480, 210));
+        assignJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 350, 210));
 
         txtBedDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -519,7 +510,15 @@ void populateDetails(){
         });
         assignJPanel.add(bedTypeCmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 146, -1));
 
-        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 24, -1, 540));
+        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 370, 540));
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
@@ -572,11 +571,11 @@ void populateDetails(){
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void bedStatusCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bedStatusCmbActionPerformed
-        Organization organization = (Organization) bedStatusCmb.getSelectedItem();
-        if (organization != null){
+       // Organization organization = (Organization) bedStatusCmb.getSelectedItem();
+        //if (organization != null){
             //populateEmployeeComboBox(organization);
             // populateRoleComboBox(organization);
-        }
+        //}
     }//GEN-LAST:event_bedStatusCmbActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
@@ -623,7 +622,7 @@ void populateDetails(){
             boolean checkBedAvalibility = bedorg.checkIfBedAvailbleOnDate(date1, bed);
         
         
-        if(checkBedAvalibility){
+        if(checkBedAvalibility && bed.getBedType().getBedType().equals(bedType)){
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
         
@@ -710,7 +709,8 @@ void populateDetails(){
         Date date1;
         try {
             date1 = formatter1.parse(dateString);
-            bedorg.assignBedOnDate(date1, selectedBed);
+            bedorg.assignBedToPatientOnDate(date1, selectedBed);
+            selectedBed.setStatus(Bed.BedStatus.Occupied);
             JOptionPane.showMessageDialog(null, "Bed Assigned Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
             Operation opr= appointment.getOperation();
             opr.setBedAssigned(selectedBed);
@@ -731,6 +731,14 @@ void populateDetails(){
         
     }//GEN-LAST:event_btnAssignBedActionPerformed
 
+    void populateBedStatusCmb(){
+          bedStatusCmb.removeAllItems();
+        
+        for (Bed.BedStatus status : Bed.BedStatus.values()){
+            bedStatusCmb.addItem(status.getStatus());
+        }
+    }
+    
     
     void populateBedTypeCmb(){
           bedTypeCmb.removeAllItems();

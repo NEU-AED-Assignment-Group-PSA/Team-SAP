@@ -465,9 +465,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 
                 //set operation
                 appointment.setOperation(operation);
+                appointment.setStatus("New");
                 NurseWorkRequest workreq = new NurseWorkRequest();
                 workreq.setAppointment(appointment);
-                workreq.setMessage("New Patient for Operation, please confirm a operation Date.");
+                workreq.setMessage("New Patient for Operation, please confirm an operation Date.");
                 
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);

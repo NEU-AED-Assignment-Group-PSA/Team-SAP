@@ -16,7 +16,7 @@ public class Bed {
     private BedType bedType;
     private Double price;
     private BedStatus status;
-    private static int count =0;
+    private static int count =1;
     private Patient patient;
 
     public Patient getPatient() {
@@ -90,7 +90,7 @@ public class Bed {
 
         @Override
         public String toString() {
-            return "BedStatus{" + "status=" + status + '}';
+            return status ;
         }
         
         
@@ -116,8 +116,31 @@ public class Bed {
 
         @Override
         public String toString() {
-            return "BedType{" + "bedType=" + bedType + '}';
+            return bedType ;
         }
         
     }
+    
+    @Override
+        public String toString() {
+            return "Bed"+String.valueOf(this.bedID) ;
+            
+        }
+    
+    
+      @Override
+    public boolean equals(Object o) { 
+  
+
+        // typecast o to Complex so that we can compare data members  
+        Bed c = (Bed) o; 
+          
+        // Compare the data members and return accordingly  
+        //return Double.compare(re, c.re) == 0
+        //        && Double.compare(im, c.im) == 0; 
+        
+        return (this.bedID==(c.bedID)&&  this.bedType.equals(c.bedType));
+    }
+    
+    
 }
