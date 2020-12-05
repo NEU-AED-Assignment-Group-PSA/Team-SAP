@@ -5,9 +5,12 @@
  */
 package userinterface.NurseRole;
 
+import Business.Appointment.Appointment;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.DoctorOrganization;
+import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.NurseWorkRequest;
@@ -35,7 +38,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer= userProcessContainer;
         this.enterprise=enterprise;
         this.userAccount = ua;  
-        viewDetailsJPanel.setVisible(false);
+        //viewDetailsJPanel.setVisible(false);
         searchJPanel.setVisible(false);
         enterpriseLbl.setText(enterprise.getName());
         nameLbl.setText(ua.getEmployee().getName());
@@ -46,12 +49,14 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request.getMessage();
+            Object[] row = new Object[5];
+            row[0] = request.getSender();
             row[1] = request.getReceiver();
-            row[2] = request.getStatus();
-            String result = ((LabTestWorkRequest) request).getTestResult();
-            row[3] = result == null ? "Waiting" : result;
+            row[2] = ((NurseWorkRequest)request).getPatient();
+            row[3] = request.getStatus();
+            row[4] = ((NurseWorkRequest)request).getAppointment();
+            //String result = ((LabTestWorkRequest) request).getTestResult();
+            //row[3] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
@@ -77,27 +82,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLbl = new javax.swing.JLabel();
         enterpriseLabel1 = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        viewDetailsJPanel = new javax.swing.JPanel();
-        closebtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        saveBtn = new javax.swing.JButton();
-        updateBtn = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
-        viewStatusCmb = new javax.swing.JComboBox();
+        viewDetailsBtn = new javax.swing.JButton();
         searchJPanel = new javax.swing.JPanel();
         searchclosebtn1 = new javax.swing.JButton();
         searchPatientIDcmb = new javax.swing.JComboBox();
@@ -116,14 +101,14 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Sender", "Receiver", "Patient", "Status", "Message"
+                "Sender", "Receiver", "Patient", "Status", "Appointment", "Request ID", "Message"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -143,7 +128,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        buttonPanel.setBackground(new java.awt.Color(204, 204, 255));
+        buttonPanel.setBackground(new java.awt.Color(153, 204, 255));
 
         viewReqBtn.setText("View New Request");
         viewReqBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -197,7 +182,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(searchReqBtn)
                         .addGap(18, 18, 18)
                         .addComponent(refreshTestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(317, Short.MAX_VALUE))
+                .addContainerGap(372, Short.MAX_VALUE))
         );
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +197,6 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(4, 4, 4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewReqBtn)
                     .addComponent(searchReqBtn)
@@ -220,166 +204,12 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton1.setText("View Details");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        viewDetailsBtn.setText("View Details");
+        viewDetailsBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                viewDetailsBtnActionPerformed(evt);
             }
         });
-
-        viewDetailsJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Details"));
-        viewDetailsJPanel.setToolTipText("");
-        viewDetailsJPanel.setAutoscrolls(true);
-
-        closebtn.setText("Close");
-        closebtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                closebtnActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Status");
-
-        jLabel3.setText("Patient ID");
-
-        jLabel4.setText("Patient Name");
-
-        jLabel5.setText("Request ID");
-
-        saveBtn.setText("Save");
-
-        updateBtn.setText("Update");
-
-        jLabel1.setText("Patient Email ID");
-
-        jLabel6.setText("Contact Number");
-
-        jLabel7.setText("Bed ID");
-
-        jLabel8.setText("Bed Type");
-
-        jLabel9.setText("Date");
-
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
-            }
-        });
-
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
-            }
-        });
-
-        jTextField5.setText("jTextField1");
-
-        jTextField6.setText("jTextField1");
-
-        viewStatusCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout viewDetailsJPanelLayout = new javax.swing.GroupLayout(viewDetailsJPanel);
-        viewDetailsJPanel.setLayout(viewDetailsJPanelLayout);
-        viewDetailsJPanelLayout.setHorizontalGroup(
-            viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(closebtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(updateBtn)
-                        .addGap(27, 27, 27)
-                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(saveBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addComponent(jLabel9)))
-                            .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(jLabel2))))
-                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel3))
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                                    .addComponent(jTextField2))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewStatusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(73, 73, 73))
-        );
-        viewDetailsJPanelLayout.setVerticalGroup(
-            viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(15, 15, 15)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(viewStatusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel8)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(closebtn)
-                    .addComponent(saveBtn)
-                    .addComponent(updateBtn))
-                .addContainerGap())
-        );
 
         searchJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Search"));
         searchJPanel.setToolTipText("");
@@ -483,20 +313,16 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addContainerGap()
                         .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(requestTestJButton))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(38, 38, 38)
-                        .addComponent(viewDetailsJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(32, 32, 32)
+                        .addComponent(viewDetailsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(36, 36, 36)
+                        .addComponent(requestTestJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -504,21 +330,17 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(36, 36, 36)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(requestTestJButton))
-                        .addGap(65, 65, 65)
-                        .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(viewDetailsJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(viewDetailsBtn)
+                    .addComponent(requestTestJButton))
+                .addGap(65, 65, 65)
+                .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
-        viewDetailsJPanel.getAccessibleContext().setAccessibleName("View Details");
         searchJPanel.getAccessibleContext().setAccessibleName("Search JPanel");
     }// </editor-fold>//GEN-END:initComponents
 
@@ -550,10 +372,10 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            if(request.getStatus().equals("New"))
+            if(request.getStatus().equals(Appointment.AppointmentStatus.Markforsurgery))
             {
             //sender, receiver, pateint,status, message
-            Object[] row = new Object[5];
+            Object[] row = new Object[7];
             row[0] = request.getSender();
             row[1] = request.getReceiver();
             row[2] = ((NurseWorkRequest)request).getPatient();
@@ -562,8 +384,11 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             //String result = ((LabTestWorkRequest) request).getTestResult();
             //row[3] = result == null ? "Waiting" : result;
             
-            row[4] = request.getMessage() == null ? " " : request.getMessage() ;
+            row[4] = ((NurseWorkRequest)request).getAppointment();//request.getMessage() == null ? " " : request.getMessage() ;
+            row[5] = request;
+            row[6] = request.getMessage();
             model.addRow(row);
+            
         }
         }
         
@@ -575,69 +400,53 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_searchReqBtnActionPerformed
 
-    private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
-        viewDetailsJPanel.setVisible(false);
-    }//GEN-LAST:event_closebtnActionPerformed
-
     private void searchclosebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchclosebtn1ActionPerformed
         // TODO add your handling code here:
         searchJPanel.setVisible(false);
     }//GEN-LAST:event_searchclosebtn1ActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void viewDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailsBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        viewDetailsJPanel.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        //viewDetailsJPanel.setVisible(true);
+        
+        
+        int row = workRequestJTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Employee doctor =(Employee) workRequestJTable.getValueAt(row, 0);
+        
+        Patient patient = (Patient) workRequestJTable.getValueAt(row, 2);
+        
+        Appointment appointment =(Appointment) workRequestJTable.getValueAt(row, 4);
+        //FlightSchedule fsch= (FlightSchedule)  tblFlightSchedule.getValueAt(row,7);
+        UserAccount nurseUserAccount = userAccount;
+        WorkRequest workreq= (WorkRequest) workRequestJTable.getValueAt(row, 5);
+        
+        
+        AssignBedJPanel manageOrganizationJPanel = new AssignBedJPanel(userProcessContainer, enterprise, appointment, patient, doctor, nurseUserAccount, workreq);
+        userProcessContainer.add("AssignBedJPanel", manageOrganizationJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_viewDetailsBtnActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
-    private javax.swing.JButton closebtn;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel enterpriseLbl;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JButton refreshTestJButton;
     private javax.swing.JButton requestTestJButton;
-    private javax.swing.JButton saveBtn;
     private javax.swing.JTextField searchEmailTxt;
     private javax.swing.JPanel searchJPanel;
     private javax.swing.JComboBox searchPatientIDcmb;
@@ -646,10 +455,8 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox searchRequestIdCmb;
     private javax.swing.JButton searchSearchBtn;
     private javax.swing.JButton searchclosebtn1;
-    private javax.swing.JButton updateBtn;
-    private javax.swing.JPanel viewDetailsJPanel;
+    private javax.swing.JButton viewDetailsBtn;
     private javax.swing.JButton viewReqBtn;
-    private javax.swing.JComboBox viewStatusCmb;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 }

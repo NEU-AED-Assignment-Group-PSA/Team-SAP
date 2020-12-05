@@ -5,6 +5,7 @@
  */
 package Business.Enterprise;
 
+import Business.Network.Network;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 
@@ -16,6 +17,16 @@ public abstract class Enterprise extends Organization{
     
     private EnterpriseType enterpriseType;
     private OrganizationDirectory organizationDirectory;
+    private Network network;
+
+    public Network getNetwork() {
+        //networkName="Boston";
+        return network;
+    }
+
+    public void setNetwork(Network network) {
+        this.network = network;
+    }
 
     public OrganizationDirectory getOrganizationDirectory() {
         return organizationDirectory;

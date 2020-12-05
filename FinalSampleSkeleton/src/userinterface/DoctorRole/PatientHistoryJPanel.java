@@ -5,7 +5,6 @@
  */
 package userinterface.DoctorRole;
 
-import Business.Appointment.AppointmentDirectory;
 import Business.Appointment.PatientHistoryDetails;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
@@ -15,7 +14,6 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -32,7 +30,6 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private EcoSystem ecosystem;
     private Patient patient;
-    private AppointmentDirectory patientHistoryList;
 
     PatientHistoryJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem, Patient patient) {
         initComponents();
@@ -68,7 +65,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         btnAddPatientDetails = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        patientHistoryDetailsTbl = new javax.swing.JTable();
+        patientDetailsTbl = new javax.swing.JTable();
         jLabel8 = new javax.swing.JLabel();
         patientNameTxt = new javax.swing.JTextField();
 
@@ -123,7 +120,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
             }
         });
 
-        patientHistoryDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
+        patientDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -146,11 +143,11 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(patientHistoryDetailsTbl);
-        if (patientHistoryDetailsTbl.getColumnModel().getColumnCount() > 0) {
-            patientHistoryDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
-            patientHistoryDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
-            patientHistoryDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
+        jScrollPane1.setViewportView(patientDetailsTbl);
+        if (patientDetailsTbl.getColumnModel().getColumnCount() > 0) {
+            patientDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
+            patientDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
+            patientDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
         }
 
         jLabel8.setText("Patient Name :");
@@ -171,17 +168,17 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                         .addGap(85, 85, 85)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel4))
-                        .addGap(57, 57, 57)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(previousDiagnosisTxt)
-                            .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
-                        .addComponent(jLabel8)
-                        .addGap(57, 57, 57)
-                        .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(64, 64, 64)
+                        .addComponent(jLabel8)))
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(previousDiagnosisTxt)
+                        .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(75, 75, 75)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel6)
@@ -274,7 +271,9 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddPatientDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientDetailsActionPerformed
-        String patientName=patientNameTxt.getText();
+       
+        
+        /*String patientName=patientNameTxt.getText();
         String previousDiagnosis = previousDiagnosisTxt.getText();
         String medsalergies = medAlergiesTxt.getText();
         if(patientName.equals("") || previousDiagnosis.equals("") || medsalergies.equals(""))
@@ -282,33 +281,38 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty, Please fill in all fields"); 
         }
         else{
-        {PatientHistoryDetails patientHistoryDetails = patientHistoryList.addPatientHistory();
+        {PatientHistoryDetails patientHistoryDetails = prescriptionList.addPrescription();
         //prescription.setDate(date);
-        patientHistoryDetails.getPerson().setName(patientName);
-        patientHistoryDetails.setPreviousDiagnosis(previousDiagnosis);
-        patientHistoryDetails.setMedAlergies(medsalergies);
+        prescription.setPatient(patient);
+        prescription.setDoctor(doctor);
+        prescription.setMedicineList(medicineList);
         //dateTxt.setText("");
         patientNameTxt.setText("");
-        previousDiagnosisTxt.setText("");
-        medAlergiesTxt.setText("");
-        //JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
-        populatePatientHistoryDetails();
+        doctorNameTxt.setText("");
+        medsPrescribedTxt.setText("");
+        appointment.setPrescription(prescription);
+        JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
+        populatePatientDetails();
         }
         }
+        int select=diagnosistable.getSelectedRow();
+        if(select<0){
+            JOptionPane.showMessageDialog(null, "please select");
+            return;
+        }else{
+            Diagnosis date=(Diagnosis)diagnosistable.getValueAt(select, 0);
+//            String detail=(String)diagnosistable.getValueAt(select, 1);
+//            String medicine=(String)diagnosistable.getValueAt(select, 2);
+            System.out.println("to patient detail:"+date);
+            CardLayout layout=(CardLayout)jpanel.getLayout();
+            jpanel.add("patient detail",new PatientDetailJPanel(jpanel,date));
+            layout.next(jpanel);
+        }
+
+*/
     }//GEN-LAST:event_btnAddPatientDetailsActionPerformed
 
-    public void populatePatientHistoryDetails(){
-        DefaultTableModel model = (DefaultTableModel) patientHistoryDetailsTbl.getModel();
-
-        model.setRowCount(0);
-        //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
-            for (PatientHistoryDetails patientHistoryDetails : patientHistoryList.getPatientHistoryList()) {
-                    Object[] row = new Object[3];
-                    row[0] = patientHistoryDetails.getPerson().getName();
-                    row[1] = patientHistoryDetails.getPreviousDiagnosis();
-                    row[2] = patientHistoryDetails.getMedAlergies();
-                    model.addRow(row);
-                }
+    public void populatePatientDetails(){
         
     }
     
@@ -331,7 +335,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField medAlergiesTxt;
-    private javax.swing.JTable patientHistoryDetailsTbl;
+    private javax.swing.JTable patientDetailsTbl;
     private javax.swing.JTextField patientNameTxt;
     private javax.swing.JTextField previousDiagnosisTxt;
     private javax.swing.JTextField surgeryHistoryTxt;

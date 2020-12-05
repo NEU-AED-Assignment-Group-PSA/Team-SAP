@@ -7,10 +7,13 @@ package Business.Appointment;
 
 import Business.Medicine.MedicineDirectory;
 import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Medicine.Medicine;
 import Business.Patient.Patient;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -18,9 +21,11 @@ import java.util.List;
  */
 public class Prescription {
     LabTestDirectory labTestList;
-    MedicineDirectory medicineList;
+    //MedicineDirectory medicineList;
+    Map<Medicine, Double> medicinePrescribed;
+    
     private Date createdOn;
-    Doctor doctor;
+    Employee doctor;
     Patient patient;
     private String history;
 
@@ -37,13 +42,15 @@ public class Prescription {
         this.labTestList = labTestList;
     }
 
-    public MedicineDirectory getMedicineList() {
-        return medicineList;
+    public Map<Medicine, Double> getMedicinePrescribed() {
+        return medicinePrescribed;
     }
 
-    public void setMedicineList(MedicineDirectory medicineList) {
-        this.medicineList = medicineList;
+    public void setMedicinePrescribed(Map<Medicine, Double> medicinePrescribed) {
+        this.medicinePrescribed = medicinePrescribed;
     }
+
+    
 
     public Date getCreatedOn() {
         return createdOn;
@@ -52,11 +59,11 @@ public class Prescription {
    
     
 
-    public Doctor getDoctor() {
+    public Employee getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
 

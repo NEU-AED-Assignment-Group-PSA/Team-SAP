@@ -1,60 +1,85 @@
 /*
- * To change this template, choose Tools | Templates
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package userinterface.LabAssistantRole;
 
+import Business.Appointment.Appointment;
 import Business.EcoSystem;
-import Business.Organization.LabOrganization;
+import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
+import Business.Organization.PathologyOrganization;
+import Business.Organization.RadiologyOrganization;
 import Business.UserAccount.UserAccount;
-import Business.WorkQueue.LabTestWorkRequest;
+import Business.WorkQueue.DoctorWorkRequest;
+import Business.WorkQueue.LabTechnicianWorkRequest;
+import Business.WorkQueue.NurseWorkRequest;
 import Business.WorkQueue.WorkRequest;
-import java.awt.CardLayout;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author raunak
+ * @author ee
  */
 public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
-
+    
     private JPanel userProcessContainer;
     private EcoSystem business;
     private UserAccount userAccount;
-    private LabOrganization labOrganization;
-    
+    private Organization organization;
+    private PathologyOrganization pathologyOrganization;
+    private RadiologyOrganization radiologyOrganization;
+    private Enterprise enterprise;
+
     /**
-     * Creates new form LabAssistantWorkAreaJPanel
+     * Creates new form LabAssistantWorkAreaJPanel1
      */
-    public LabAssistantWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business) {
+    public LabAssistantWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
+        this.enterprise = enterprise;
         this.business = business;
-        this.labOrganization = (LabOrganization)organization;
+        this.organization = organization;
+
+//        if(organization instanceof PathologyOrganization){
+//           this.pathologyOrganization = (PathologyOrganization)organization;
+//           this.organization = (Organization)pathologyOrganization;
+//        }else if(organization instanceof RadiologyOrganization){
+//            this.radiologyOrganization = (RadiologyOrganization) organization;
+//            this.organization = (Organization)radiologyOrganization;
+//        }
         
         populateTable();
     }
     
-    public void populateTable(){
-        DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
+    
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel)labTestJTable.getModel();
         
         model.setRowCount(0);
         
-        for(WorkRequest request : labOrganization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[4];
-            row[0] = request;
-            row[1] = request.getSender().getEmployee().getName();
-            row[2] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[3] = request.getStatus();
+        for(WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            LabTechnicianWorkRequest labTechnicianWorkRequest = ((LabTechnicianWorkRequest)request);
+            Object[] row = new Object[5];
+            row[0] = labTechnicianWorkRequest.getSender().getEmployee().getName();
+            row[1] = labTechnicianWorkRequest.getReceiver().getEmployee().getName();
+            row[2] = labTechnicianWorkRequest.getPatient().getName();
+            row[3] = labTechnicianWorkRequest.getAppointment().getLabTest().getName();
+//            row[4] = labTechnicianWorkRequest.getAppointment().getLabTest().getCreatedOn();
+            row[4] = labTechnicianWorkRequest.getAppointment().getLabTest().getStatus();
             
             model.addRow(row);
         }
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,118 +89,212 @@ public class LabAssistantWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        labTestJTable = new javax.swing.JTable();
+        btnView = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtPatientId = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtPatientName = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        workRequestJTable = new javax.swing.JTable();
-        assignJButton = new javax.swing.JButton();
-        processJButton = new javax.swing.JButton();
-        refreshJButton = new javax.swing.JButton();
+        txtLabTest = new javax.swing.JTextArea();
+        jLabel4 = new javax.swing.JLabel();
+        txtTestCharge = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        txtTestDate = new javax.swing.JTextField();
+        btnComplete = new javax.swing.JButton();
 
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+        labTestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Message", "Sender", "Receiver", "Status"
+                "Sender", "Receiver", "Patient Name", "Lab Test Name", "Status"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, true, true, false
+                false, false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(workRequestJTable);
-        if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
-            workRequestJTable.getColumnModel().getColumn(0).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(1).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(2).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
-        }
+        jScrollPane2.setViewportView(labTestJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 58, 375, 96));
-
-        assignJButton.setText("Assign to me");
-        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+        btnView.setText("View Test");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                assignJButtonActionPerformed(evt);
+                btnViewActionPerformed(evt);
             }
         });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 215, -1, -1));
 
-        processJButton.setText("Process");
-        processJButton.addActionListener(new java.awt.event.ActionListener() {
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel1.setText("Patient Id:");
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Patient Name:");
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Lab Test:");
+
+        txtLabTest.setColumns(20);
+        txtLabTest.setRows(5);
+        jScrollPane1.setViewportView(txtLabTest);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Test Charge:");
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Test Date:");
+
+        btnComplete.setText("Complete Test");
+        btnComplete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processJButtonActionPerformed(evt);
+                btnCompleteActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(446, 215, -1, -1));
 
-        refreshJButton.setText("Refresh");
-        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButtonActionPerformed(evt);
-            }
-        });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(406, 26, -1, -1));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(314, 314, 314)
+                .addComponent(btnView, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(113, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(107, 107, 107))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                                    .addComponent(txtTestCharge)
+                                    .addComponent(txtTestDate))))
+                        .addGap(234, 234, 234))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(btnComplete, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(286, 286, 286))))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(62, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnView)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtTestCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtTestDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnComplete)
+                .addGap(60, 60, 60))
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
-
-        int selectedRow = workRequestJTable.getSelectedRow();
-        
-        if (selectedRow < 0){
-            return;
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        int selectedRow = labTestJTable.getSelectedRow();
+        if(selectedRow >= 0){
+            LabTechnicianWorkRequest labTechnicianWorkRequest = (LabTechnicianWorkRequest)organization.getWorkQueue().getWorkRequestList().get(selectedRow);
+            txtPatientId.setText(String.valueOf(labTechnicianWorkRequest.getPatient().getId()));
+            txtPatientName.setText(labTechnicianWorkRequest.getPatient().getName());
+            txtLabTest.setText(labTechnicianWorkRequest.getAppointment().getLabTest().getName());
+//            txtTestCharge.setText(labTechnicianWorkRequest.getAppointment().getLabTest().getTestCharge());
+//            txtTestDate.setText(TOOL_TIP_TEXT_KEY);
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
         }
-        
-        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
-        request.setReceiver(userAccount);
-        request.setStatus("Pending");
-        populateTable();
-        
-    }//GEN-LAST:event_assignJButtonActionPerformed
 
-    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
-        
-        int selectedRow = workRequestJTable.getSelectedRow();
-        
-        if (selectedRow < 0){
-            return;
-        }
-        
-        LabTestWorkRequest request = (LabTestWorkRequest)workRequestJTable.getValueAt(selectedRow, 0);
-     
-        request.setStatus("Processing");
-        
-        ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
-        userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.next(userProcessContainer);
-        
-    }//GEN-LAST:event_processJButtonActionPerformed
+          
+    }//GEN-LAST:event_btnViewActionPerformed
 
-    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-        populateTable();
-    }//GEN-LAST:event_refreshJButtonActionPerformed
+    private void btnCompleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompleteActionPerformed
+          //get user account of dcotor selected        
+//       (int)txtPatientId.getText();
+//          
+//       List<Employee> empList= new ArrayList<>();//enterprise.getEmployeeDirectory().getDoctorList();
+//       UserAccount drUserAcc =null;
+//       ArrayList<Organization> deptList = enterprise.getOrganizationDirectory().getOrganizationList();
+//       for(Organization dept : deptList)
+//       {
+//           if(dept instanceof Business.Organization.PathologyOrganization ||
+//                   dept instanceof Business.Organization.RadiologyOrganization){
+//              drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(labTechnicianWorkRequest.getAppointment().getDoctor());
+//              break;
+//           }
+//       }
+//        
+//        //add in work queue for assigned doctor
+//        DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
+//        drWorkReq.setMessage("Test Completed");
+//        drWorkReq.setReceiver(drUserAcc);
+//        drWorkReq.setSender(userAccount);
+//        drWorkReq.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
+//        drWorkReq.setPatient(labTechnicianWorkRequest.getPatient());
+//        drWorkReq.setAppointment(labTechnicianWorkRequest.getAppointment());
+//        drWorkReq.setRequestDate(new Date());
+//        drWorkReq.setResolveDate(new Date());
+//        drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
+//        JOptionPane.showMessageDialog(null, "Lab Test Complete", "Information", JOptionPane.INFORMATION_MESSAGE);
+//        txtPatientName.setText("");
+//        txtAppointmetDate.setText("");
+//        txtAppointmentType.setSelectedIndex(0);
+//        cmbDoctor.setSelectedIndex(0);
+    }//GEN-LAST:event_btnCompleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton assignJButton;
+    private javax.swing.JButton btnComplete;
+    private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton processJButton;
-    private javax.swing.JButton refreshJButton;
-    private javax.swing.JTable workRequestJTable;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable labTestJTable;
+    private javax.swing.JTextArea txtLabTest;
+    private javax.swing.JTextField txtPatientId;
+    private javax.swing.JTextField txtPatientName;
+    private javax.swing.JTextField txtTestCharge;
+    private javax.swing.JTextField txtTestDate;
     // End of variables declaration//GEN-END:variables
+
 }

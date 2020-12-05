@@ -5,7 +5,9 @@
  */
 package Business.Operation;
 
+import Business.Bed.Bed;
 import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Patient.Patient;
 import Business.Person.Person;
 import java.util.Date;
@@ -15,14 +17,42 @@ import java.util.Date;
  * @author aditi
  */
 public class Operation {
-    private String operationNumber;
+    private int operationNumber;
     private String operationDate;
     private String operationDescription;
     private double operationCharge;
-    private String status;
+    private String status; //new -by doctor, success - by doctor, on-going, scheduled- by nurse after bed confirmation
+    
     private Patient patient;
-    private Doctor doctor;//success, on-going, scheduled
-    private Person person;
+    private Employee doctor;
+    private Employee person;  // for nurse??
+    private static int count =0;
+    private Bed bedAssigned;
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Operation.count = count;
+    }
+
+    public Bed getBedAssigned() {
+        return bedAssigned;
+    }
+
+    public void setBedAssigned(Bed bedAssigned) {
+        this.bedAssigned = bedAssigned;
+    }
+    
+    public Operation()
+    {
+        this.operationNumber= ++count;
+        this.status= "New";
+        this.bedAssigned= null;
+        //this.bedAssigned
+    }
+    
 
     public String getOperationDate() {
         return operationDate;
@@ -64,28 +94,78 @@ public class Operation {
         this.patient = patient;
     }
 
-    public Doctor getDoctor() {
+    public Employee getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
 
-    public String getOperationNumber() {
+    public int getOperationNumber() {
         return operationNumber;
     }
 
-    public void setOperationNumber(String operationNumber) {
+    public void setOperationNumber(int operationNumber) {
         this.operationNumber = operationNumber;
     }
 
-    public Person getPerson() {
+    public Employee getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(Employee person) {
         this.person = person;
+    }
+    
+    
+    public enum OperationType{
+        Surgery("Surgery"),
+        Biopsy("Biospy"),
+        Skin("Skin"),
+        Cataract("Cataract"),
+        Heart("Heart"),
+        Lung("Lung"),
+        Kidney("Kidney"),
+        Hernia("Hernia"),
+        Fracture("Fracture"),
+        Other("Other");
+        
+        private String value;
+        private OperationType(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
+    
+    
+     public enum OperationStatus{
+        WaitingConfirmation("Waiting Confirmation"),
+        BedAssigned("Bed Assigned"),
+        Completed("Completed"),
+        Other("Other");
+        
+        private String value;
+        private OperationStatus(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
     }
     
     

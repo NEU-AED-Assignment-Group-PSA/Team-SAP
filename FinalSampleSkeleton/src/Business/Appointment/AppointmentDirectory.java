@@ -5,6 +5,8 @@
  */
 package Business.Appointment;
 
+import Business.Appointment.Appointment.AppointmentStatus;
+import Business.Employee.Employee;
 import Business.Patient.Patient;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,13 @@ public class AppointmentDirectory {
     List<Prescription> prescriptionList;
     List<PatientHistoryDetails> patientHistoryList;
 
+    public AppointmentDirectory(){
+        appointmentList = new ArrayList<>();
+        prescriptionList = new ArrayList<>();
+        
+    }
+    
+    
     public List<Appointment> getAppointmentList() {
         return appointmentList;
     }
@@ -80,20 +89,24 @@ public class AppointmentDirectory {
         return app;
     }
 
-    public void createAppointment(Patient patient, String doctor, Date appointmetDate, String appointmentType) {
+    public Appointment createAppointment(Patient patient, Employee doctor, Date appointmetDate, String appointmentType) {
        if(patient.getAppointmentDirectory()== null){
+           List<Appointment> appointments = new ArrayList<>();
             AppointmentDirectory appointmentDirectory = new AppointmentDirectory();
-            List<Appointment> appointmentList = new ArrayList<Appointment>();
-            appointmentDirectory.setAppointmentList(appointmentList);
+            appointmentDirectory.setAppointmentList(appointments);
+            //List<Appointment> appointmentList = new ArrayList<Appointment>();
+            //appointmentDirectory.setAppointmentList(appointmentList);
             patient.setAppointmentDirectory(appointmentDirectory);
         }
         
         Appointment appointment = new Appointment(count++);
         appointment.setDate(appointmetDate);
-       // appointment.setDoctor(doctor);
+        appointment.setDoctor(doctor);
         appointment.setType(appointmentType);
         appointment.setPatient(patient);
-       
+        appointment.setStatus(AppointmentStatus.New);
+        patient.getAppointmentDirectory().getAppointmentList().add(appointment);
+       return appointment;
     }
     
     public Prescription addPrescription(){
@@ -102,10 +115,11 @@ public class AppointmentDirectory {
         return prescription;
     }
     
-    public PatientHistoryDetails addPatientHistory(){
-        PatientHistoryDetails patientHistoryDetails = new PatientHistoryDetails();
-        patientHistoryList.add(patientHistoryDetails);
-        return patientHistoryDetails;
+    public AppointmentDirectory createNewAPPDir()
+    {
+            AppointmentDirectory appointmentDirectory = new AppointmentDirectory();
+            //List<Appointment> appointmentList = new ArrayList<Appointment>();
+            //appointmentDirectory.setAppointmentList(appointmentList);
+            return appointmentDirectory;
     }
-    
 }

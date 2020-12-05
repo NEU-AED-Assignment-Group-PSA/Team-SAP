@@ -4,21 +4,28 @@
  */
 package Business.WorkQueue;
 
+import Business.Appointment.Appointment;
+import Business.Patient.Patient;
+
 /**
  *
  * @author raunak
  */
 public class LabTestWorkRequest extends WorkRequest{
+        /* inherited
     
-    private String testResult;
-
-    public String getTestResult() {
-        return testResult;
-    }
-
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
-    }
+    private String message;
+    private UserAccount sender;
+    private UserAccount receiver;
+    private String status;
+    private Date requestDate;
+    private Date resolveDate;
+    
+    
+    
+    */
+   
+  
     
     
 }

@@ -30,7 +30,7 @@ public class OrganizationDirectory {
             organizationList.add(organization);
         }
         else if (type.getValue().equals(Type.Pathology.getValue())){
-            organization = new GeneralOrganization(Type.Pathology.getValue());
+            organization = new PathologyOrganization();//GeneralOrganization(Type.Pathology.getValue());
             organizationList.add(organization);
         }
         else if (type.getValue().equals(Type.Billing.getValue())){
@@ -58,7 +58,7 @@ public class OrganizationDirectory {
             organizationList.add(organization);   
         }
         else if (type.getValue().equals(Type.Radiology.getValue())){
-            organization = new GeneralOrganization(Type.Radiology.getValue());
+            organization = new RadiologyOrganization();//GeneralOrganization(Type.Radiology.getValue());
             organizationList.add(organization);   
         }
         else if (type.getValue().equals(Type.MedicalStore.getValue())){

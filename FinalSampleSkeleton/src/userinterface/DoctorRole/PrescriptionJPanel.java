@@ -9,17 +9,26 @@ import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
 import Business.Appointment.Prescription;
 import Business.Doctor.Doctor;
+import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import static Business.Enterprise.Enterprise.EnterpriseType.Pharmacy;
+import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Medicine.Medicine;
 import Business.Medicine.MedicineDirectory;
+import Business.Network.Network;
+import Business.Organization.PharmacyOrganization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
 
 /**
  *
@@ -35,21 +44,86 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private JPanel userProcessContainer;
     private UserAccount userAccount;
     private Patient patient;
-    private Doctor doctor;
+    private Employee doctor;
     private Appointment appointment;
     private MedicineDirectory medicineList;
     private AppointmentDirectory prescriptionList;
-    
+    private Enterprise enterprise;
+    private EcoSystem ecosystem;
 
-    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Doctor doctor, MedicineDirectory medicineList) {
+    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor,
+            MedicineDirectory medicineList,EcoSystem ecosystem, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.appointment = appointment;
         this.patient = patient;
         this.doctor = doctor;
+        this.ecosystem=ecosystem;
         this.medicineList = medicineList;
+        this.enterprise= enterprise;
+        patientNameTxt.setText(patient.getName());
+        doctorNameTxt.setText(doctor.getName());
+        //docotr
+        //appointment.
+        //appointment.setPrescription(prescription);
+        populatePharmacy();
+        //populateMedicineCmb();
     }
 
+    
+    void populatePharmacy(){
+        ArrayList<Network> networkList=ecosystem.getNetworkList();
+        Network network=null;
+        //network
+        for(int i=0;i<networkList.size();i++){
+            network=networkList.get(i);
+            
+            List<Enterprise> enterpriseList;
+            //enterprise.getNetwork();
+            
+            if(network.equals(enterprise.getNetwork()))
+            {
+                //boston network
+                
+                enterpriseList=network.getEnterpriseDirectory().getEnterpriseList();
+                
+               for(Enterprise enterpri: enterpriseList){
+                   if(enterpri.getEnterpriseType().equals(Enterprise.EnterpriseType.Pharmacy))
+                   {
+                       cmbPharmacy.addItem(enterpri);
+                   }
+               }
+            }
+            
+            
+            
+        }
+        
+        
+        //
+        
+        
+        
+    }
+    
+    void populateMedicineCmb()
+    {
+          medicneCmb.removeAllItems();
+        
+          Pharmacy pharEnterprise =(Pharmacy) cmbPharmacy.getSelectedItem();
+          
+          MedicineDirectory medicineList =pharEnterprise.getMedicineList();
+          
+          
+          if(medicineList != null){
+          for(Medicine med: medicineList.getMedicineList())
+          {
+              medicneCmb.addItem(med);
+          }
+          }
+
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -66,12 +140,17 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         patientNameTxt = new javax.swing.JTextField();
         doctorNameTxt = new javax.swing.JTextField();
-        medsPrescribedTxt = new javax.swing.JTextField();
+        dosageTxt = new javax.swing.JTextField();
         patientHistoryTxt = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
         btnPrescribe = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         PrescriptionTable = new javax.swing.JTable();
+        medicneCmb = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        cmbPharmacy = new javax.swing.JComboBox();
+        jLabel5 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabel1.setText("Medicine Prescription");
@@ -80,13 +159,9 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Doctor Name :");
 
-        jLabel6.setText("History :");
+        jLabel6.setText("Remark :");
 
         jLabel7.setText("Medicines Prescribed :");
-
-        patientNameTxt.setEnabled(false);
-
-        doctorNameTxt.setEnabled(false);
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -104,25 +179,18 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
         PrescriptionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Prescription Date", "Patient Name", "Doctor Name", "Medicines prescribed"
+                "Medicines prescribed", "Dosage"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -131,15 +199,68 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(PrescriptionTable);
         if (PrescriptionTable.getColumnModel().getColumnCount() > 0) {
             PrescriptionTable.getColumnModel().getColumn(0).setResizable(false);
-            PrescriptionTable.getColumnModel().getColumn(1).setResizable(false);
-            PrescriptionTable.getColumnModel().getColumn(2).setResizable(false);
-            PrescriptionTable.getColumnModel().getColumn(3).setResizable(false);
         }
+
+        medicneCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel4.setText("Dosage");
+
+        jButton1.setText("Add Medicine");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        cmbPharmacy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbPharmacy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbPharmacyActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Pharmacy");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(202, 202, 202)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(23, 23, 23)
+                                .addComponent(medicneCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel4)
+                                .addGap(72, 72, 72)
+                                .addComponent(dosageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(224, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(67, 67, 67)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(doctorNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -148,29 +269,12 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                         .addGap(114, 114, 114)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(medsPrescribedTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnPrescribe)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel2))
-                                .addGap(67, 67, 67)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(doctorNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(371, 371, 371)
+                        .addComponent(btnPrescribe))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
+                        .addGap(165, 165, 165)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(358, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -187,19 +291,27 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(doctorNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(medsPrescribedTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
+                    .addComponent(cmbPharmacy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dosageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(medicneCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
                     .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnPrescribe)
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(159, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPrescribe)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -217,41 +329,80 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         String patientName=patientNameTxt.getText();
         String doctorName=doctorNameTxt.getText();
         //String specialization=specializationTxt.getText();
-        String medsPrescribed= medsPrescribedTxt.getText();
+        String medsPrescribed= dosageTxt.getText();
         if(patientName.equals("") || doctorName.equals("") || medsPrescribed.equals(""))
         {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty"); 
         }
         else
-        {Prescription prescription = prescriptionList.addPrescription();
+        {Prescription prescription = appointment.getPrescription();//prescriptionList.addPrescription();
         //prescription.setDate(date);
         prescription.setPatient(patient);
         prescription.setDoctor(doctor);
-        prescription.setMedicineList(medicineList);
+        
+        
+        
+        
         //dateTxt.setText("");
         patientNameTxt.setText("");
         doctorNameTxt.setText("");
-        medsPrescribedTxt.setText("");
-        appointment.setPrescription(prescription);
+        dosageTxt.setText("");
+        //appointment.setPrescription(prescription);
         JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
         populate();
         }
         
     }//GEN-LAST:event_btnPrescribeActionPerformed
 
+    private void cmbPharmacyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbPharmacyActionPerformed
+        // TODO add your handling code here:
+        
+        populateMedicineCmb();
+        
+    }//GEN-LAST:event_cmbPharmacyActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        
+        populatePrescribedMedicineTable();
+        
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    
+    void populatePrescribedMedicineTable(){
+        
+        Medicine med = (Medicine) medicneCmb.getSelectedItem();
+        double dosage = Double.parseDouble(dosageTxt.getText());
+        
+        Prescription prescription = appointment.getPrescription();
+        
+        prescription.getMedicinePrescribed().put(med, dosage);
+        
+        
+        DefaultTableModel model = (DefaultTableModel) PrescriptionTable.getModel();
+        Object[] row = new Object[2];
+                   
+                    row[0] = med;
+                    row[1] = dosage;
+                    model.addRow(row);
+    }
+    
+    
      public void populate() {
         DefaultTableModel model = (DefaultTableModel) PrescriptionTable.getModel();
 
         model.setRowCount(0);
         //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
-            for (Prescription prescription : prescriptionList.getPrescriptionList()) {
+          /*  for (MapEntry<Medicine,double> med : appointment.getPrescription().getMedicinePrescribed()) {
                     Object[] row = new Object[3];
                     //row[0] = prescription.getDate();
                     row[0] = prescription.getPatient();
                     row[1] = prescription.getDoctor();
                     row[2] = prescription.getMedicineList();
                     model.addRow(row);
-                }
+                }*/
             }
         
     
@@ -260,14 +411,19 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private javax.swing.JTable PrescriptionTable;
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnPrescribe;
+    private javax.swing.JComboBox cmbPharmacy;
     private javax.swing.JTextField doctorNameTxt;
+    private javax.swing.JTextField dosageTxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField medsPrescribedTxt;
+    private javax.swing.JComboBox medicneCmb;
     private javax.swing.JTextField patientHistoryTxt;
     private javax.swing.JTextField patientNameTxt;
     // End of variables declaration//GEN-END:variables

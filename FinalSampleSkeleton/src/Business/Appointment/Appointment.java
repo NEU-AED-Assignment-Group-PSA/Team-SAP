@@ -5,10 +5,12 @@
  */
 package Business.Appointment;
 
-import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Operation.Operation;
 import Business.Patient.Patient;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -20,12 +22,12 @@ public class Appointment {
     int appointmentId;
     String type; //online, in-person
     Date date;
-    Doctor doctor;
+    Employee doctor;
     Patient patient;
-    String status;  //booked, cancelled, rescheduled, completed
+    AppointmentStatus status;  //new, booked, cancelled, rescheduled, completed , mark for billing
     String location;
     private Operation operation;
-    List<LabTest> labTestList;
+    LabTest labTest;
     Prescription prescription;
 
     public Prescription getPrescription() {
@@ -38,6 +40,7 @@ public class Appointment {
     
     public Appointment(int count){
         this.appointmentId = count;
+        prescription= new Prescription();
     }
 
     public int getAppointmentId() {
@@ -64,11 +67,11 @@ public class Appointment {
         this.date = date;
     }
 
-    public Doctor getDoctor() {
+    public Employee getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
 
@@ -80,11 +83,11 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public String getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 
@@ -104,18 +107,51 @@ public class Appointment {
         this.operation = operation;
     }
 
-    
-
-    public List<LabTest> getLabTestList() {
-        return labTestList;
+    public LabTest getLabTest() {
+        return labTest;
     }
 
-    public void setLabTestList(List<LabTest> labTestList) {
-        this.labTestList = labTestList;
+    public void setLabTest(LabTest labTest) {
+        this.labTest = labTest;
+    }
+
+    
+    
+    
+    @Override
+    public String toString()
+    {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
+        String strDate = dateFormat.format(this.date); 
+        //new SimpleDateFormat("yyyy-MM-dd").format(this.date);
+        return strDate;
     }
     
     
+   // Appointment-> New, markforbilling, markforsurgery, markforTest, close
     
-    
-    
+    public enum AppointmentStatus{
+        New("New"),
+        Markforbilling("Markforbilling"),
+        Markforsurgery("Markforsurgery"),
+        MarkforTest("MarkforTest"),
+        Close("Close"),
+        AnalyseReport("AnalyseReport"),
+        GeneratedReport("GeneratedReport"),
+        Cancel("Cancel");
+        
+        private String value;
+        private AppointmentStatus(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
 }

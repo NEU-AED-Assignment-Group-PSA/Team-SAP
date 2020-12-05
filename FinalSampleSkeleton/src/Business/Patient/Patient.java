@@ -8,7 +8,9 @@ package Business.Patient;
 import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
 import Business.Bill.Bill;
+import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Location.LocationPoint;
 import Business.Person.Person;
 import Business.UserAccount.UserAccount;
 import java.util.Date;
@@ -18,23 +20,18 @@ import java.util.List;
  *
  * @author aditi
  */
-public class Patient extends Person{
+public class Patient extends Employee{
     
-    String phoneNum;
+    //String phoneNum;
     AppointmentDirectory appointmentDirectory;
     LabTestDirectory labTestList;
     String patientSex;
-    private String address;
+    //private String address;
+    private LocationPoint address;
     private String bloodGroup;
-    private String emailId;
+    //private String emailId;
 
-    public String getEmailId() {
-        return emailId;
-    }
-
-    public void setEmailId(String emailId) {
-        this.emailId = emailId;
-    }
+    
     private UserAccount userAccount;
 
     public UserAccount getUserAccount() {
@@ -46,7 +43,11 @@ public class Patient extends Person{
     }
     
     
-
+public void createNewAppointmentDirectory(){
+    appointmentDirectory = new AppointmentDirectory();
+}
+    
+    
     public String getBloodGroup() {
         return bloodGroup;
     }
@@ -54,26 +55,16 @@ public class Patient extends Person{
     public void setBloodGroup(String bloodGroup) {
         this.bloodGroup = bloodGroup;
     }
-    
-    
 
-    public String getAddress() {
+    public LocationPoint getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(LocationPoint address) {
         this.address = address;
     }
     
     
-
-    public String getPhoneNum() {
-        return phoneNum;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
 
     public AppointmentDirectory getAppointmentDirectory() {
         return appointmentDirectory;
