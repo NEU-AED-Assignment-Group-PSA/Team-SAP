@@ -6,6 +6,7 @@
 package userinterface.PatientRole;
 
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Location.LocationPoint;
 import Business.Organization.Organization;
@@ -51,7 +52,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.ecosystem = ecosystem;
-        
+        populateMobileCarrierComboBox();
     }
 
     /**
@@ -246,7 +247,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(contactCarrier, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblemail)
                     .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -310,18 +311,22 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         
         String phoneNumberString = txtPhoneNumber.getText();
         
-        if (contactCarrier.getSelectedItem().equals("ATT")) {
-            phoneNumberString = phoneNumberString + "@txt.att.net";
-        } else if (contactCarrier.getSelectedItem().equals("Verizon")) {
-            phoneNumberString = phoneNumberString + "@vmobl.com";
-        } else if (contactCarrier.getSelectedItem().equals("Sprint")) {
-            phoneNumberString = phoneNumberString + "@messaging.sprintpcs.com";
-        } else if (contactCarrier.getSelectedItem().equals("TMobile")) {
-            phoneNumberString = phoneNumberString + "@tmomail.net";
-        }
+        
         UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), null, new PatientRole());
-        enterprise.getPatientDirectory().createPatient(txtPatientName.getText(), phoneNumberString, txtGender.getSelectedItem().toString(),
+        Employee emp= enterprise.getPatientDirectory().createPatient(txtPatientName.getText(), phoneNumberString, txtGender.getSelectedItem().toString(),
                 txtBloodGroup.getSelectedItem().toString(), account, locationPoint, txtEmail.getText());
+        
+        
+        if (contactCarrier.getSelectedItem().equals("ATT")) {
+             phoneNumberString="@txt.att.net";
+        } else if (contactCarrier.getSelectedItem().equals("Verizon")) {
+            phoneNumberString ="@vmobl.com";
+        } else if (contactCarrier.getSelectedItem().equals("Sprint")) {
+            phoneNumberString =  "@messaging.sprintpcs.com";
+        } else if (contactCarrier.getSelectedItem().equals("TMobile")) {
+            phoneNumberString = "@tmomail.net";
+        }
+        emp.setCarrier(phoneNumberString);
         
         JOptionPane.showMessageDialog(null, "Patient added successfully!","Information", JOptionPane.INFORMATION_MESSAGE);
         

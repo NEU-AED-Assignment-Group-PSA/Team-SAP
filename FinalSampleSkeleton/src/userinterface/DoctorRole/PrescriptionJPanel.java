@@ -51,7 +51,8 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private EcoSystem ecosystem;
 
-    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor, MedicineDirectory medicineList,EcoSystem ecosystem) {
+    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor,
+            MedicineDirectory medicineList,EcoSystem ecosystem, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.appointment = appointment;
@@ -59,7 +60,9 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         this.doctor = doctor;
         this.ecosystem=ecosystem;
         this.medicineList = medicineList;
+        this.enterprise= enterprise;
         patientNameTxt.setText(patient.getName());
+        doctorNameTxt.setText(doctor.getName());
         //docotr
         //appointment.
         //appointment.setPrescription(prescription);
@@ -76,7 +79,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
             network=networkList.get(i);
             
             List<Enterprise> enterpriseList;
-            enterprise.getNetwork();
+            //enterprise.getNetwork();
             
             if(network.equals(enterprise.getNetwork()))
             {

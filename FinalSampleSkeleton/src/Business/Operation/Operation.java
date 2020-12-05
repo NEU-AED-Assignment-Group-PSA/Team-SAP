@@ -5,6 +5,7 @@
  */
 package Business.Operation;
 
+import Business.Bed.Bed;
 import Business.Doctor.Doctor;
 import Business.Employee.Employee;
 import Business.Patient.Patient;
@@ -26,12 +27,30 @@ public class Operation {
     private Employee doctor;
     private Employee person;  // for nurse??
     private static int count =0;
+    private Bed bedAssigned;
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        Operation.count = count;
+    }
+
+    public Bed getBedAssigned() {
+        return bedAssigned;
+    }
+
+    public void setBedAssigned(Bed bedAssigned) {
+        this.bedAssigned = bedAssigned;
+    }
     
     public Operation()
     {
         this.operationNumber= ++count;
         this.status= "New";
-        
+        this.bedAssigned= null;
+        //this.bedAssigned
     }
     
 
@@ -127,6 +146,27 @@ public class Operation {
         }
     }
     
+    
+     public enum OperationStatus{
+        WaitingConfirmation("Waiting Confirmation"),
+        BedAssigned("Bed Assigned"),
+        Completed("Completed"),
+        Other("Other");
+        
+        private String value;
+        private OperationStatus(String value){
+            this.value = value;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        @Override
+        public String toString() {
+            return value;
+        }
+    }
     
     
     

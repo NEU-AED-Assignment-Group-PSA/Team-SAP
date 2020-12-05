@@ -5,10 +5,14 @@
  */
 package Business.Organization;
 
+import Business.Bed.Bed;
 import Business.Role.NurseRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 import Business.Bed.BedDirectory;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -17,8 +21,18 @@ import Business.Bed.BedDirectory;
 public class BedManagementDepartment extends Organization {
 
     
-    BedDirectory bedList;
-    int bedCount;
+    private BedDirectory bedList;
+    private int bedCount;
+    private Map<Date,Bed> assignedBedMap;
+
+    public Map<Date, Bed> getAssignedBedMap() {
+        return assignedBedMap;
+    }
+
+    public void setAssignedBedMap(Map<Date, Bed> assignedBedMap) {
+        this.assignedBedMap = assignedBedMap;
+    }
+    
 
     public int getBedCount() {
         return bedCount;
@@ -52,7 +66,39 @@ public class BedManagementDepartment extends Organization {
     
     public BedManagementDepartment() {
         super(Organization.Type.BedManagement.getValue());
+        
+        assignedBedMap = new HashMap<>();
+        
+        
     }
+    
+    
+    public void assignBedOnDate(Date date, Bed bed)
+    {
+       assignedBedMap.put(date,bed);
+    }
+    
+    public boolean checkIfBedAvailbleOnDate(Date date, Bed bed){
+        
+        for (Map.Entry<Date, Bed> entry : assignedBedMap.entrySet()) {
+        Date k = entry.getKey();
+        Bed v = entry.getValue();
+        
+        if(k.equals(date) && v.equals(bed) && bed.getStatus()!= Bed.BedStatus.Available)
+        {
+            return false;
+        }
+        
+        System.out.println("Key: " + k + ", Value: " + v);
+    }
+        
+        
+        //return true if entry is not present
+        return true;
+    }
+    
+    
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();

@@ -111,11 +111,11 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         enterpriseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel.setText("Name :");
-        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 120, 30));
+        add(enterpriseLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 40, 120, 30));
 
         lblHeadName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblHeadName.setText("<value>");
-        add(lblHeadName, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 130, 30));
+        add(lblHeadName, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 180, 30));
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel1.setText("Enterprise :");
@@ -123,7 +123,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         lblEnterprise.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblEnterprise.setText("<value>");
-        add(lblEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 130, 30));
+        add(lblEnterprise, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 40, 180, 30));
 
         lblEnterpriseImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/admin.png"))); // NOI18N
         add(lblEnterpriseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 560, 350));

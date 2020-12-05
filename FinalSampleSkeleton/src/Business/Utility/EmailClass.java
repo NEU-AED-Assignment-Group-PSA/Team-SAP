@@ -177,7 +177,7 @@ public class EmailClass {
             System.out.println("User : Sent message successfully!!");
         } catch (MessagingException mex) {
             mex.printStackTrace();
-            JOptionPane.showMessageDialog(null, "Wrong phone number ");
+            JOptionPane.showMessageDialog(null, "Wrong phone number sms not sent.");
         }
     }
 

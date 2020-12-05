@@ -75,7 +75,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
            for(Employee emp : dept.getEmployeeDirectory().getEmployeeList()){
-               if(emp.getRole().equals("Doctor Role"))
+               if(emp.getRole()!= null && emp.getRole().equals("Doctor Role"))
                {
                    empList.add(emp);
                }
