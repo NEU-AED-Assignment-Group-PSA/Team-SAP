@@ -461,7 +461,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 
                 operation.setOperationCharge(10000.00);
                 operation.setDoctor(doctor);
-                
+                operation.setStatus(Operation.OperationStatus.WaitingConfirmation.getValue());
                 
                 //set operation
                 appointment.setOperation(operation);
@@ -559,7 +559,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem));
+        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem, enterprise));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnPrescribeMedsActionPerformed
 

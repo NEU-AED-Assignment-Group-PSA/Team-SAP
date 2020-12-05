@@ -19,6 +19,11 @@ public class Medicine {
     double price;
     int quantity;
     String type;//liquid, tablet, gel
+    static int count =1;
+    
+    public Medicine(){
+        this.id= count++;
+    }
 
     public int getQuantity() {
         return quantity;
@@ -76,4 +81,6 @@ public class Medicine {
     public void setType(String type) {
         this.type = type;
     }
+    
+    
 }

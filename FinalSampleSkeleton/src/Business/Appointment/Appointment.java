@@ -121,8 +121,9 @@ public class Appointment {
     @Override
     public String toString()
     {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");  
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");  
         String strDate = dateFormat.format(this.date); 
+        //new SimpleDateFormat("yyyy-MM-dd").format(this.date);
         return strDate;
     }
     
