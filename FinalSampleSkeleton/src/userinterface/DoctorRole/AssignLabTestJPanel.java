@@ -6,13 +6,16 @@
 package userinterface.DoctorRole;
 
 import Business.Appointment.Appointment;
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Network.Network;
 import static Business.Organization.Organization.Type.Lab;
 import Business.Patient.Patient;
 import Business.Person.Person;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -32,15 +35,34 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     private Appointment appointment;
     private LabTestDirectory labTestList;
     private Lab lab;
-    
-   
+    private Network network;
 
-    AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, LabTestDirectory labTestList) {
+    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, LabTestDirectory labTestList, Network network) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patient = patient;
         this.appointment = appointment;
         this.labTestList = labTestList;
+        this.network = network;
+        populateNetworkLabs();
+    }
+
+    void populateNetworkLabs() {
+        cmbLabs.removeAllItems();;
+
+        List<Enterprise> enterprsList = network.getEnterpriseDirectory().getEnterpriseList();
+        if (enterprsList.isEmpty() || enterprsList == null) {
+            //nothing
+        } else {
+            for (Enterprise enterprise : enterprsList) {
+                if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab)) {
+                    {
+                        cmbLabs.addItem(enterprise);
+                    }
+                }
+            }
+
+        }
     }
 
     /**
@@ -58,7 +80,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         testTypeTxt = new javax.swing.JTextField();
-        cmbLabType = new javax.swing.JComboBox<>();
+        cmbLabs = new javax.swing.JComboBox();
         submitBtn = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
 
@@ -101,10 +123,10 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
             }
         });
 
-        cmbLabType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        cmbLabType.addActionListener(new java.awt.event.ActionListener() {
+        cmbLabs.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cmbLabs.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbLabTypeActionPerformed(evt);
+                cmbLabsActionPerformed(evt);
             }
         });
 
@@ -146,7 +168,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                             .addComponent(submitBtn)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(testTypeTxt)
-                                .addComponent(cmbLabType, 0, 171, Short.MAX_VALUE)))))
+                                .addComponent(cmbLabs, 0, 171, Short.MAX_VALUE)))))
                 .addContainerGap(271, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -163,7 +185,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(cmbLabType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbLabs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(submitBtn)
                 .addGap(30, 30, 30)
@@ -177,40 +199,38 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_testTypeTxtActionPerformed
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        String testType=testTypeTxt.getText();
-        String labName= cmbLabType.getActionCommand();
-        
+        String testType = testTypeTxt.getText();
+        String labName = cmbLabs.getActionCommand();
+
         //String medsPrescribed= medsPrescribedTxt.getText();
-        if(testType.equals("") || labName.equals(""))
-        {
-           JOptionPane.showMessageDialog(null, "Fields cannot be empty"); 
-        }
-        else
-        {LabTest labTest = labTestList.addLabTest();
-        labTest.setPatient(patient);
-        labTest.setType(testType);
-        labTest.setLab(lab);
-        //dateTxt.setText("");
-        testTypeTxt.setText("");
-        cmbLabType.setActionCommand(labName);
-        //medsPrescribedTxt.setText("");
-        //appointment.setLabTestList(labTestList);
-        JOptionPane.showMessageDialog(null, "Lab test assigned sucessfully"); 
-        populateLabTest();
+        if (testType.equals("") || labName.equals("")) {
+            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+        } else {
+            LabTest labTest = labTestList.addLabTest();
+            labTest.setPatient(patient);
+            labTest.setType(testType);
+            labTest.setLab(lab);
+            //dateTxt.setText("");
+            testTypeTxt.setText("");
+            cmbLabs.setActionCommand(labName);
+            //medsPrescribedTxt.setText("");
+            //appointment.setLabTestList(labTestList);
+            JOptionPane.showMessageDialog(null, "Lab test assigned sucessfully");
+            populateLabTest();
         }
     }//GEN-LAST:event_submitBtnActionPerformed
-     
-    public void populateLabTest(){
+
+    public void populateLabTest() {
         DefaultTableModel model = (DefaultTableModel) assignTestTbl.getModel();
         model.setRowCount(0);
         //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
-            for (LabTest labTest : labTestList.getLabTestList()) {
-                    Object[] row = new Object[3];
-                    row[0] = labTest.getType();
-                    row[1] = labTest.getLab();
-                    row[2] = labTest.getPatient();
-                    model.addRow(row);
-                }
+        for (LabTest labTest : labTestList.getLabTestList()) {
+            Object[] row = new Object[3];
+            row[0] = labTest.getType();
+            row[1] = labTest.getLab();
+            row[2] = labTest.getPatient();
+            model.addRow(row);
+        }
     }
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
@@ -218,15 +238,15 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
-    private void cmbLabTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLabTypeActionPerformed
-        String str=String.valueOf(cmbLabType.getSelectedItem());
-    }//GEN-LAST:event_cmbLabTypeActionPerformed
+    private void cmbLabsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbLabsActionPerformed
+        String str = String.valueOf(cmbLabs.getSelectedItem());
+    }//GEN-LAST:event_cmbLabsActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable assignTestTbl;
     private javax.swing.JButton backJButton;
-    private javax.swing.JComboBox<String> cmbLabType;
+    private javax.swing.JComboBox cmbLabs;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

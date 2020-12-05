@@ -39,7 +39,7 @@
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel16" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -52,9 +52,9 @@
                       <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                       <Component id="viewStaffPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" min="-2" pref="757" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
+              <EmptySpace pref="41" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -184,17 +184,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                              <Component id="visitingChargeLbl" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jLabel3" max="32767" attributes="0"/>
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                              </Group>
+                              <Component id="jLabel5" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="closebtn" alignment="0" min="-2" pref="96" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="38" max="32767" attributes="0"/>
@@ -202,33 +193,47 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace pref="2" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="roleJComboBox" alignment="0" pref="180" max="32767" attributes="0"/>
-                                      <Component id="organizationJComboBox" max="32767" attributes="0"/>
-                                      <Component id="cmbSpecialization" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="organizationJComboBox" pref="180" max="32767" attributes="0"/>
+                                      <Component id="roleJComboBox" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="visitingChargeTxt" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="nameJTextField" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="empNameJTextField" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="passwordJTextField" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="createUserJButton" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="uEmailTxt" min="-2" pref="179" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="phoneNumberTxt" alignment="0" max="32767" attributes="0"/>
-                                          <Component id="contactCarrier" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
+                              <Component id="createUserJButton" alignment="0" min="-2" pref="180" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="specialization" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="phoneNumberTxt" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="contactCarrier" alignment="0" min="-2" pref="179" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Component id="empNameJTextField" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Component id="nameJTextField" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
+                              <Component id="passwordJTextField" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="specializationlbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="visitingChargeLbl" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="visitingChargeTxt" max="32767" attributes="0"/>
+                              <Component id="cmbSpecialization" pref="180" max="32767" attributes="0"/>
+                              <Component id="uEmailTxt" alignment="1" max="32767" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -247,12 +252,7 @@
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="roleJComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="specialization" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cmbSpecialization" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="empNameJTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -277,17 +277,24 @@
                       <Component id="jLabel9" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="phoneNumberTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="uEmailTxt" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel7" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="uEmailTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel7" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="cmbSpecialization" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="specializationlbl" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="visitingChargeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="visitingChargeTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="visitingChargeLbl" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="createUserJButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="closebtn" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -495,9 +502,10 @@
             <Property name="text" type="java.lang.String" value="Carrier"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="specialization">
+        <Component class="javax.swing.JLabel" name="specializationlbl">
           <Properties>
             <Property name="text" type="java.lang.String" value="Specialization"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="cmbSpecialization">
@@ -510,9 +518,10 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
           </AuxValues>
         </Component>
       </SubComponents>
@@ -542,51 +551,52 @@
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" attributes="0">
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="jLabel13" alignment="1" max="32767" attributes="0"/>
+                                              <Component id="jLabel14" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                      <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="uEmailTxt1" max="32767" attributes="0"/>
+                                          <Component id="nameJTextField2" alignment="0" pref="176" max="32767" attributes="0"/>
+                                          <Component id="empNameJTextField2" max="32767" attributes="0"/>
+                                          <Component id="roleJComboBox2" pref="176" max="32767" attributes="0"/>
+                                          <Component id="passwordJTextField2" alignment="0" pref="176" max="32767" attributes="0"/>
+                                          <Component id="organizationJComboBox2" alignment="0" pref="176" max="32767" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      <Component id="phoneNumberTxt1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="specializationlbl1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="cmbSpecialization1" min="-2" pref="176" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="updateUserBtn" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="15" pref="15" max="-2" attributes="0"/>
-                          <Component id="phoneNumberTxt1" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="0" pref="16" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jLabel15" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jLabel13" alignment="1" max="32767" attributes="0"/>
-                                          <Component id="jLabel14" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                                  <EmptySpace min="32" pref="32" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="visitingChargeLbl2" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="nameJTextField2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="empNameJTextField2" max="32767" attributes="0"/>
-                                      <Component id="roleJComboBox2" pref="176" max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="passwordJTextField2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                                  <Component id="visitingChargeTxt2" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                                  <Component id="organizationJComboBox2" alignment="1" min="-2" pref="176" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="uEmailTxt1" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="visitingChargeLbl2" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="visitingChargeTxt2" min="-2" pref="175" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -602,7 +612,6 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel14" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="organizationJComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -637,7 +646,12 @@
                       <Component id="uEmailTxt1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jLabel8" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="specializationlbl1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cmbSpecialization1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="visitingChargeLbl2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="visitingChargeTxt2" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -831,6 +845,28 @@
               <Color blue="52" green="38" red="19" type="rgb"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Email Id"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="cmbSpecialization1">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="Item 1"/>
+                <StringItem index="1" value="Item 2"/>
+                <StringItem index="2" value="Item 3"/>
+                <StringItem index="3" value="Item 4"/>
+              </StringArray>
+            </Property>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JLabel" name="specializationlbl1">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Specialization"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
         </Component>
       </SubComponents>

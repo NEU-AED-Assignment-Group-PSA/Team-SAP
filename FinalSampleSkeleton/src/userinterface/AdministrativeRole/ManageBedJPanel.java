@@ -87,6 +87,8 @@ public class ManageBedJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         currentBedCountTxt = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         jLabel3.setText("New Bed Count");
 
         bedJTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -196,7 +198,7 @@ public class ManageBedJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(backJButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(bedStatusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,7 +217,7 @@ public class ManageBedJPanel extends javax.swing.JPanel {
                     .addComponent(bedCountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnSave)
-                .addContainerGap(151, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -233,6 +235,12 @@ public class ManageBedJPanel extends javax.swing.JPanel {
         
         if(currentCount > newCountBed){
             JOptionPane.showMessageDialog(null, "Cannot decrease bed Count!");
+            return;
+
+        }
+        
+        if(currentCount == newCountBed){
+            JOptionPane.showMessageDialog(null, "No change in bed Count!");
             return;
 
         }

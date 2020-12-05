@@ -17,6 +17,9 @@ public class Employee {
     private String phoneNum;
     private String emailID;
     private String role;
+    private String carrier;
+
+   
     //private double visitingCharge;
     private SpecializationType specialization;
 
@@ -28,6 +31,15 @@ public class Employee {
         this.specialization = specialization;
     }
 
+    
+     public String getCarrier() {
+        return carrier;
+    }
+
+    public void setCarrier(String carrier) {
+        this.carrier = carrier;
+    }
+    
     public String getRole() {
         return role;
     }

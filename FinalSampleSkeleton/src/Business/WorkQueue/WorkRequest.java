@@ -11,19 +11,31 @@ import java.util.Date;
  *
  * @author raunak
  */
-public abstract class WorkRequest {
+public class WorkRequest {
 
+    private int workRequestId;    
     private String message;
     private UserAccount sender;
     private UserAccount receiver;
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    static int count =1;
     
     public WorkRequest(){
         requestDate = new Date();
+        workRequestId=count++;
     }
 
+    
+    public int getWorkRequestId() {
+        return workRequestId;
+    }
+
+    public void setWorkRequestId(int workRequestId) {
+        this.workRequestId = workRequestId;
+    }
+    
     public String getMessage() {
         return message;
     }
@@ -71,4 +83,10 @@ public abstract class WorkRequest {
     public void setResolveDate(Date resolveDate) {
         this.resolveDate = resolveDate;
     }
+    
+    @Override 
+    public String toString(){
+        return String.valueOf(this.workRequestId);
+    }
+    
 }
