@@ -6,28 +6,24 @@
 package userinterface.PatientRole;
 
 import Business.Appointment.Appointment;
-import Business.Appointment.AppointmentDirectory;
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
-import Business.Organization.GeneralOrganization;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.DoctorWorkRequest;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import userinterface.ReceptionistRole.ReceptionistWorkAreaJPanel;
 
 /**
  *
@@ -80,7 +76,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        }
        
         cmbDoctor.removeAllItems();
-        //cmbDoctor.add("Select");
         for (Employee doc : empList){
             cmbDoctor.addItem(doc);
         }
@@ -240,23 +235,35 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             Logger.getLogger(BookAppointmentJPanel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("expection in Book appointmentJPanel");
         }
+        
+        
+        
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new Date());
+        calendar.set(Calendar.MILLISECOND, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        
+        if(date1.before(calendar.getTime())){
+            JOptionPane.showMessageDialog(null, "Appointment date should be greater than or equal to current date", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
         Appointment appoint = patient.getAppointmentDirectory().createAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
         
-        //get user accout of dcotor selected
-        
-       
+        //get user account of dcotor selected        
        List<Employee> empList= new ArrayList<>();//enterprise.getEmployeeDirectory().getDoctorList();
        UserAccount drUserAcc =null;
        ArrayList<Organization> deptList = enterprise.getOrganizationDirectory().getOrganizationList();
        for(Organization dept : deptList)
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
-           drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
+              drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
               break;
            }
        }
-        
         
         //add in work queue for assigned doctor
         DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
@@ -270,6 +277,10 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
         JOptionPane.showMessageDialog(null, "Appointment added", "Information", JOptionPane.INFORMATION_MESSAGE);
+        txtPatientName.setText("");
+        txtAppointmetDate.setText("");
+        txtAppointmentType.setSelectedIndex(0);
+        cmbDoctor.setSelectedIndex(0);
         return;
     }//GEN-LAST:event_txtBookAppointmentActionPerformed
 
@@ -277,10 +288,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         userProcessContainer.remove(this);
-        //Component[] componentArray =userProcessContainer.getComponents();
-        //Component component = componentArray[componentArray.length - 1];
-        //ReceptionistWorkAreaJPanel sysAdminwajp = (ReceptionistWorkAreaJPanel) component;
-        //sysAdminwajp.populatePatients();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
         

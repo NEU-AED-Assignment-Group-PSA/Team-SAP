@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 import userinterface.PatientRole.BookAppointmentJPanel;
+import userinterface.PatientRole.ViewAppointmentJPanel;
 import userinterface.PatientRole.CreateNewPatientJPanel;
 import userinterface.PatientRole.ViewPatientJPanel;
 
@@ -128,6 +129,11 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnGenerateBill.setText("Generate Bill");
+        btnGenerateBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerateBillActionPerformed(evt);
+            }
+        });
 
         btnViewAppointment.setText("View Appointment");
         btnViewAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -248,8 +254,21 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBookAppointmentActionPerformed
 
     private void btnViewAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointmentActionPerformed
-        // TODO add your handling code here:
+        int selectedRow = PatientDataJTable.getSelectedRow();
+        if(selectedRow >= 0){
+            Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
+            ViewAppointmentJPanel viewAppointmentJPanel = new ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, patient);
+            userProcessContainer.add("viewAppointmentJPanel",viewAppointmentJPanel);
+            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }else{
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnViewAppointmentActionPerformed
+
+    private void btnGenerateBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateBillActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnGenerateBillActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
