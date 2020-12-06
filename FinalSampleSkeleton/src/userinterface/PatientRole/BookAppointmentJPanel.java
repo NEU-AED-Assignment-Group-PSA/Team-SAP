@@ -6,24 +6,32 @@
 package userinterface.PatientRole;
 
 import Business.Appointment.Appointment;
+import Business.Appointment.AppointmentDirectory;
+import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Organization.GeneralOrganization;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.Utility.EmailClass;
+import static Business.Utility.EmailClass.sendEmailMessage;
+import static Business.Utility.EmailClass.sendEmailMessageAppointment;
+import static Business.Utility.EmailClass.sendTextMessage;
 import Business.WorkQueue.DoctorWorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.ReceptionistRole.ReceptionistWorkAreaJPanel;
 
 /**
  *
@@ -67,7 +75,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
            for(Employee emp : dept.getEmployeeDirectory().getEmployeeList()){
-               if(emp.getRole() != null && emp.getRole().equals("Doctor Role"))
+               if(emp.getRole()!= null && emp.getRole().equals("Doctor Role"))
                {
                    empList.add(emp);
                }
@@ -76,6 +84,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        }
        
         cmbDoctor.removeAllItems();
+        //cmbDoctor.add("Select");
         for (Employee doc : empList){
             cmbDoctor.addItem(doc);
         }
@@ -103,7 +112,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         txtBookAppointment = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtAppointmentType = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -150,8 +158,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
 
         txtAppointmentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "In-Person", "Online" }));
 
-        jLabel6.setText("(yyyy-mm-dd)");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,23 +171,21 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(92, 92, 92)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(txtBookAppointment)
                             .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPatientName)
                                     .addComponent(cmbDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtAppointmetDate)
-                                    .addComponent(txtAppointmentType, 0, 148, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(91, Short.MAX_VALUE))
+                                    .addComponent(txtAppointmentType, 0, 148, Short.MAX_VALUE))))))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,8 +205,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
+                    .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -235,35 +238,23 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             Logger.getLogger(BookAppointmentJPanel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("expection in Book appointmentJPanel");
         }
-        
-        
-        
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.set(Calendar.MILLISECOND, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        
-        if(date1.before(calendar.getTime())){
-            JOptionPane.showMessageDialog(null, "Appointment date should be greater than or equal to current date", "Warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
         Appointment appoint = patient.getAppointmentDirectory().createAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
         
-        //get user account of dcotor selected        
+        //get user accout of dcotor selected
+        
+       
        List<Employee> empList= new ArrayList<>();//enterprise.getEmployeeDirectory().getDoctorList();
        UserAccount drUserAcc =null;
        ArrayList<Organization> deptList = enterprise.getOrganizationDirectory().getOrganizationList();
        for(Organization dept : deptList)
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
-              drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
+           drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
               break;
            }
        }
+        
         
         //add in work queue for assigned doctor
         DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
@@ -277,10 +268,23 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
         JOptionPane.showMessageDialog(null, "Appointment added", "Information", JOptionPane.INFORMATION_MESSAGE);
-        txtPatientName.setText("");
-        txtAppointmetDate.setText("");
-        txtAppointmentType.setSelectedIndex(0);
-        cmbDoctor.setSelectedIndex(0);
+        
+        //send sms and email to patient for appointment book status
+        
+        //send Sms
+                
+          //send email and sms
+
+        String statusString = "Hello! Your appointment is booked! Date: "+ date1 + "Doctor: "+ doctor.getName();
+
+        String uEmail= patient.getEmailID();
+        UserAccount account = patient.getUserAccount();
+        String phonecontact = patient.getPhoneNum()+patient.getCarrier();
+        //registrationRequest.setContactCarrierName(contact);
+        sendEmailMessageAppointment(uEmail, account, statusString);//.getText());
+        sendTextMessage(phonecontact);      
+        
+        
         return;
     }//GEN-LAST:event_txtBookAppointmentActionPerformed
 
@@ -288,6 +292,10 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         userProcessContainer.remove(this);
+        //Component[] componentArray =userProcessContainer.getComponents();
+        //Component component = componentArray[componentArray.length - 1];
+        //ReceptionistWorkAreaJPanel sysAdminwajp = (ReceptionistWorkAreaJPanel) component;
+        //sysAdminwajp.populatePatients();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
         
@@ -306,7 +314,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox txtAppointmentType;
     private javax.swing.JTextField txtAppointmetDate;
     private javax.swing.JButton txtBookAppointment;

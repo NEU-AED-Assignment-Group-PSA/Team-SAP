@@ -24,10 +24,10 @@ public class Appointment {
     Date date;
     Employee doctor;
     Patient patient;
-    AppointmentStatus status;  //new, booked, cancelled, rescheduled, completed , mark for billing
+    String status;  //new, booked, cancelled, rescheduled, completed , mark for billing
     String location;
     private Operation operation;
-    LabTest labTest;
+    List<LabTest> labTestList;
     Prescription prescription;
 
     public Prescription getPrescription() {
@@ -83,11 +83,11 @@ public class Appointment {
         this.patient = patient;
     }
 
-    public AppointmentStatus getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(AppointmentStatus status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 
@@ -107,15 +107,15 @@ public class Appointment {
         this.operation = operation;
     }
 
-    public LabTest getLabTest() {
-        return labTest;
-    }
-
-    public void setLabTest(LabTest labTest) {
-        this.labTest = labTest;
-    }
-
     
+
+    public List<LabTest> getLabTestList() {
+        return labTestList;
+    }
+
+    public void setLabTestList(List<LabTest> labTestList) {
+        this.labTestList = labTestList;
+    }
     
     
     @Override
@@ -137,8 +137,7 @@ public class Appointment {
         MarkforTest("MarkforTest"),
         Close("Close"),
         AnalyseReport("AnalyseReport"),
-        GeneratedReport("GeneratedReport"),
-        Cancel("Cancel");
+        GeneratedReport("GeneratedReport");
         
         private String value;
         private AppointmentStatus(String value){

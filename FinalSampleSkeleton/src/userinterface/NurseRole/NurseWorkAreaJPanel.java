@@ -95,6 +95,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         searchPatientNamecmb = new javax.swing.JComboBox();
         searchEmailTxt = new javax.swing.JTextField();
         searchRequestIdCmb = new javax.swing.JComboBox();
+        btnManageBedAssngmt = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -231,6 +232,11 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         jLabel13.setText("Request ID");
 
         searchSearchBtn.setText("Search");
+        searchSearchBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchSearchBtnActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Patient Email ID");
 
@@ -303,6 +309,13 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        btnManageBedAssngmt.setText("Manage Bed Assignment");
+        btnManageBedAssngmt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManageBedAssngmtActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -316,7 +329,9 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(32, 32, 32)
                         .addComponent(viewDetailsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
-                        .addComponent(requestTestJButton))
+                        .addComponent(requestTestJButton)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnManageBedAssngmt))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -335,7 +350,8 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewDetailsBtn)
-                    .addComponent(requestTestJButton))
+                    .addComponent(requestTestJButton)
+                    .addComponent(btnManageBedAssngmt))
                 .addGap(65, 65, 65)
                 .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -372,7 +388,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            if(request.getStatus().equals(Appointment.AppointmentStatus.Markforsurgery))
+            if(request.getStatus().equals("New"))
             {
             //sender, receiver, pateint,status, message
             Object[] row = new Object[7];
@@ -416,7 +432,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
-        Employee doctor =(Employee) workRequestJTable.getValueAt(row, 0);
+        UserAccount doctor =(UserAccount) workRequestJTable.getValueAt(row, 0);
         
         Patient patient = (Patient) workRequestJTable.getValueAt(row, 2);
         
@@ -432,8 +448,22 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_viewDetailsBtnActionPerformed
 
+    private void btnManageBedAssngmtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBedAssngmtActionPerformed
+        // TODO add your handling code here:
+        
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout(); //JPanel,Enterprise,UserAccount
+        userProcessContainer.add("ManageBedsFinalJPanel", new ManageBedsFinalJPanel(userProcessContainer, enterprise,userAccount));
+        layout.next(userProcessContainer);
+
+    }//GEN-LAST:event_btnManageBedAssngmtActionPerformed
+
+    private void searchSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSearchBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchSearchBtnActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnManageBedAssngmt;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;

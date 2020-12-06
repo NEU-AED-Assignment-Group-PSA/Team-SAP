@@ -16,6 +16,7 @@ import static Business.Utility.EmailClass.sendTextMessage;
 import Business.Utility.Validation;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
@@ -468,12 +469,38 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
         String uEmail = uEmailTxt.getText();//"aditijain2025@gmail.com";
 
         //check if username is unique
-        boolean isUserNameUnique = enterprise.getUserAccountDirectory().checkIfUsernameIsUnique(username);
-        if(isUserNameUnique == false)
+        boolean isUserNameUnique = Validation.checkIfUserNameIsUniqueAcrossNetworks(system,username);
+        //boolean flag = false;
+        /*for(Network net : system.getNetworkList())
+        {
+            List<Enterprise> entrList = net.getEnterpriseDirectory().getEnterpriseList();
+            for(Enterprise entpr: entrList)
+            {
+              isUserNameUnique  = entpr.getUserAccountDirectory().checkIfUsernameIsUnique(username);
+              if(isUserNameUnique== false)
+              {
+                  
+                  JOptionPane.showMessageDialog(null, "Username already exists, try another name!");
+            return;
+              }
+              
+            }
+            
+           
+        }*/
+        System.out.println("isUserNameUnique:" + isUserNameUnique);
+         if(isUserNameUnique== false)
+              {
+                  
+                  JOptionPane.showMessageDialog(null, "Username already exists, try another name!");
+            return;
+              }
+        
+      /*  if(isUserNameUnique == false)
         {
             JOptionPane.showMessageDialog(null, "Username already exists, try another name!");
             return;
-        }
+        }*/
 
         boolean isUserNameCorrect = Validation.userNameValidator(username);
         if(isUserNameCorrect == false)
@@ -492,7 +519,7 @@ public class ManageEnterpriseAdminJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Enter password properly!");
             return;
         }
-        boolean isNameCorrect = Validation.nameValidator(name);
+        boolean isNameCorrect = Validation.validateString(name);
         if(isNameCorrect == false)
         {
             JOptionPane.showMessageDialog(null, "Enter name properly!");

@@ -115,7 +115,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         lblHeadName.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblHeadName.setText("<value>");
-        add(lblHeadName, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 40, 180, 30));
+        add(lblHeadName, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 40, 250, 30));
 
         enterpriseLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         enterpriseLabel1.setText("Enterprise :");
@@ -169,7 +169,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
         // TODO add your handling code here:
-        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise);
+        ManageUserAccountJPanel muajp = new ManageUserAccountJPanel(userProcessContainer, enterprise, system);
         userProcessContainer.add("ManageUserAccountJPanel", muajp);
 
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -188,7 +188,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
     private void manageOrganizationJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageOrganizationJButtonActionPerformed
 
-        ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), enterprise);
+        ManageOrganizationJPanel manageOrganizationJPanel = new ManageOrganizationJPanel(userProcessContainer, enterprise.getOrganizationDirectory(), enterprise, system);
         userProcessContainer.add("ManageOrganizationJPanel", manageOrganizationJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);

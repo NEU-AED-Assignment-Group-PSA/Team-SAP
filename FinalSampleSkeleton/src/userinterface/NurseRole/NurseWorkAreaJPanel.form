@@ -27,6 +27,8 @@
                       <Component id="viewDetailsBtn" min="-2" pref="135" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Component id="requestTestJButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnManageBedAssngmt" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -52,6 +54,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="viewDetailsBtn" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="requestTestJButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnManageBedAssngmt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
               <Component id="searchJPanel" min="-2" max="-2" attributes="0"/>
@@ -402,6 +405,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Search"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="searchSearchBtnActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
@@ -447,5 +453,13 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnManageBedAssngmt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Manage Bed Assignment"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageBedAssngmtActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

@@ -21,7 +21,7 @@ public abstract class Enterprise extends Organization{
 
     public Network getNetwork() {
         //networkName="Boston";
-        return network;
+        return this.network;
     }
 
     public void setNetwork(Network network) {
@@ -65,4 +65,11 @@ public abstract class Enterprise extends Organization{
         this.enterpriseType=type;
         organizationDirectory=new OrganizationDirectory();
     }
+    
+    
+    @Override
+    public String toString(){
+        return this.getName();
+    }
+    
 }
