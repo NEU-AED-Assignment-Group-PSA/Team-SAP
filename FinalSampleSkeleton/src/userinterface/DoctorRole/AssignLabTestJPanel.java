@@ -11,10 +11,14 @@ import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Network.Network;
+import Business.Organization.Organization;
 import static Business.Organization.Organization.Type.Lab;
 import Business.Patient.Patient;
 import Business.Person.Person;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.LabTechnicianWorkRequest;
 import java.awt.CardLayout;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -36,14 +40,19 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     private LabTestDirectory labTestList;
     private Lab lab;
     private Network network;
+    private UserAccount userAccount;
+    private Organization organization;
+    private Date createdOn;
 
-    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, LabTestDirectory labTestList, Network network) {
+    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, LabTestDirectory labTestList, Network network, UserAccount userAccount, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patient = patient;
         this.appointment = appointment;
         this.labTestList = labTestList;
         this.network = network;
+        this.userAccount = userAccount;
+        this.organization = organization;
         populateNetworkLabs();
     }
 
@@ -200,37 +209,59 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String testType = testTypeTxt.getText();
-        String labName = cmbLabs.getActionCommand();
-
-        //String medsPrescribed= medsPrescribedTxt.getText();
-        if (testType.equals("") || labName.equals("")) {
+        //String labName = cmbLabs.getSelectedItem();
+        
+        if (testType.equals("")) {
             JOptionPane.showMessageDialog(null, "Fields cannot be empty");
-        } else {
-            LabTest labTest = labTestList.addLabTest();
-            labTest.setPatient(patient);
-            labTest.setType(testType);
-            labTest.setLab(lab);
-            //dateTxt.setText("");
-            testTypeTxt.setText("");
-            cmbLabs.setActionCommand(labName);
-            //medsPrescribedTxt.setText("");
-            //appointment.setLabTestList(labTestList);
-            JOptionPane.showMessageDialog(null, "Lab test assigned sucessfully");
-            populateLabTest();
         }
+        else
+        { LabTechnicianWorkRequest workreq = new LabTechnicianWorkRequest();
+                workreq.setStatus("New");
+                appointment.setStatus(Appointment.AppointmentStatus.MarkforTest.getValue());
+                workreq.setMessage("New Patient for Lab test, please confirm a Test Date");
+                
+                workreq.setSender(userAccount);
+                workreq.setPatient(patient);
+                //workreq.setDoctor(doctor);
+                //workreq.setReceiver(userAccount);
+                Lab lab = (Lab) cmbLabs.getSelectedItem();
+                lab.getWorkQueue().getWorkRequestList().add(workreq);
+                UserAccount recepUseracc = null;
+                //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
+                //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
+                workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
+        }
+        populateLabTest();
+        //String medsPrescribed= medsPrescribedTxt.getText();
+//        if (testType.equals("") || labName.equals("")) {
+//            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+//        } else {
+//            LabTest labTest = labTestList.addLabTest();
+//            labTest.setPatient(patient);
+//            labTest.setType(testType);
+//            labTest.setLab(lab);
+//            //dateTxt.setText("");
+//            testTypeTxt.setText("");
+//            cmbLabs.setActionCommand(labName);
+//            //medsPrescribedTxt.setText("");
+//            //appointment.setLabTestList(labTestList);
+//            JOptionPane.showMessageDialog(null, "Lab test assigned sucessfully");
+            
+//        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
     public void populateLabTest() {
         DefaultTableModel model = (DefaultTableModel) assignTestTbl.getModel();
         model.setRowCount(0);
         //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
-        for (LabTest labTest : labTestList.getLabTestList()) {
+        //for (LabTest labTest : labTestList.getLabTestList()) {
             Object[] row = new Object[3];
-            row[0] = labTest.getType();
-            row[1] = labTest.getLab();
-            row[2] = labTest.getPatient();
+            row[0] = new Date();
+            row[1] = testTypeTxt.getText();
+            row[2] = cmbLabs.getSelectedItem();
+            row[3] = patient.getName();
             model.addRow(row);
-        }
+        
     }
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
