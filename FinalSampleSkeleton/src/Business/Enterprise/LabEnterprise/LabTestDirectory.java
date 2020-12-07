@@ -5,6 +5,7 @@
  */
 package Business.Enterprise.LabEnterprise;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,6 +16,9 @@ public class LabTestDirectory {
     private List <LabTest> labTestList;
 
     public LabTestDirectory() {
+        labTestList= new ArrayList<>();
+        
+        
     }
 
     public List<LabTest> getLabTestList() {
@@ -25,8 +29,8 @@ public class LabTestDirectory {
         this.labTestList = labTestList;
     }
     
-    public LabTest addLabTest(){
-        LabTest labTest = new LabTest();
+    public LabTest addLabTest(LabTest labTest){
+       // LabTest labTest = new LabTest();
         labTestList.add(labTest);
         return labTest;
     }

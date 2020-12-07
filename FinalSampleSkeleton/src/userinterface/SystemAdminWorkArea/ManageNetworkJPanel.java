@@ -181,10 +181,23 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         }
         String name = nameJTextField.getText();
 
+        //check network unique
+        
+        for(Network net: system.getNetworkList())
+        {
+            if(net.getName().equalsIgnoreCase(name))
+            {
+                  JOptionPane.showMessageDialog(null, "Network already exists!");
+            return;
+            }
+        }
+        
+        
         Network network = system.createAndAddNetwork();
         network.setName(name);
         nameJTextField.setText("");
         populateNetworkTable();
+         JOptionPane.showMessageDialog(null, "Network added successfully!");
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

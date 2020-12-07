@@ -6,6 +6,7 @@
 package Business.Enterprise.LabEnterprise;
 
 import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Patient.Patient;
 import Business.Person.Person;
 import java.util.Date;
@@ -21,7 +22,7 @@ public class LabTest {
     double testCharge;
     Date createdOn;
     String status; //scheduled, in-process, complete
-    Doctor doctor;
+    Employee doctor;
     Person labTechnician;
     private Patient patient;
     private Lab lab;
@@ -66,11 +67,11 @@ public class LabTest {
         this.status = status;
     }
 
-    public Doctor getDoctor() {
+    public Employee getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
 
