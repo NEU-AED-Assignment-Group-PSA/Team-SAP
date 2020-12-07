@@ -10,7 +10,6 @@ import Business.Role.NurseRole;
 import Business.Role.Role;
 import java.util.ArrayList;
 import Business.Bed.BedDirectory;
-import Business.Patient.Patient;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,22 +19,20 @@ import java.util.Map;
  *
  * @author aditi
  */
-
-
 public class BedManagementDepartment extends Organization {
 
     
     private BedDirectory bedList;
     private int bedCount;
-    private Map<Date,BedPatient> assignedBedtoPatientMap;
+    private Map<Date,Bed> assignedBedtoPatientMap;
     private List<Bed> assignedLaundryBedMap;
 
     
-    public Map<Date, BedPatient> getAssignedBedMap() {
+    public Map<Date, Bed> getAssignedBedMap() {
         return assignedBedtoPatientMap;
     }
 
-    public void setAssignedBedMap(Map<Date, BedPatient> assignedBedMap) {
+    public void setAssignedBedMap(Map<Date, Bed> assignedBedMap) {
         this.assignedBedtoPatientMap = assignedBedMap;
     }
     
@@ -79,13 +76,9 @@ public class BedManagementDepartment extends Organization {
     }
     
     
-    public void assignBedToPatientOnDate(Patient patient,Date date, Bed bed)
+    public void assignBedToPatientOnDate(Date date, Bed bed)
     {
-        BedPatient bp = new BedPatient();
-        bp.setPatient(patient);
-        bp.setDate(date);
-        bp.setBed(bed);
-       assignedBedtoPatientMap.put(date,bp);
+       assignedBedtoPatientMap.put(date,bed);
     }
     
     public void assignBedToLaundryOnDate(Date date, Bed bed)
@@ -107,16 +100,16 @@ public class BedManagementDepartment extends Organization {
         
         
         
-        for (Map.Entry<Date, BedPatient> entry : assignedBedtoPatientMap.entrySet()) {
+        for (Map.Entry<Date, Bed> entry : assignedBedtoPatientMap.entrySet()) {
         Date k = entry.getKey();
-        BedPatient v = entry.getValue();
+        Bed v = entry.getValue();
         
-        if(k.equals(date) && v.getBed().equals(bed) )//&& bed.getStatus()!= Bed.BedStatus.Available)
+        if(k.equals(date) && v.equals(bed) && bed.getStatus()!= Bed.BedStatus.Available)
         {
             return false;
         }
         
-        System.out.println("Key: " + k + ", Value: " + v.bed);
+        System.out.println("Key: " + k + ", Value: " + v);
     }
         
         
@@ -191,24 +184,4 @@ public class BedManagementDepartment extends Organization {
         roles.add(new NurseRole());
         return roles;
     }
-
-    public Patient getPatientByBedNDate(Bed bed, Date date) {
-            //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-            
-            Patient p = null;
-            
-            for (Map.Entry<Date, BedPatient> entry : assignedBedtoPatientMap.entrySet()) {
-        Date k = entry.getKey();
-        BedPatient v = entry.getValue();
-        
-        if(k.equals(date) && v.getBed().equals(bed))// && bed.getStatus()!= Bed.BedStatus.Available)
-        {
-            return v.getPatient();
-        }
-        
-    }
-            return p;
-    }
-    
 }
-

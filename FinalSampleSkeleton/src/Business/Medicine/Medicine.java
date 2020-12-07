@@ -97,7 +97,7 @@ public class Medicine {
     
     @Override
     public String toString(){
-        return "Med " +String.valueOf(this.getId()) +  " "+this.getName();
+        return "Med" +String.valueOf(this.getId()) + this.getName();
     }
     
     
