@@ -73,6 +73,8 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         appointmentDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -137,8 +139,8 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(backJButton))
                 .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

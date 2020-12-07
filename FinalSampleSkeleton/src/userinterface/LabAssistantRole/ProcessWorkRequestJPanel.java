@@ -4,6 +4,7 @@
  */
 package userinterface.LabAssistantRole;
 
+import userinterface.LabTechnicianRole.LabAssistantMainAreaJPanel;
 import Business.WorkQueue.LabTestWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -95,7 +96,7 @@ public class ProcessWorkRequestJPanel extends javax.swing.JPanel {
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        LabAssistantWorkAreaJPanel dwjp = (LabAssistantWorkAreaJPanel) component;
+        LabAssistantMainAreaJPanel dwjp = (LabAssistantMainAreaJPanel) component;
         dwjp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
