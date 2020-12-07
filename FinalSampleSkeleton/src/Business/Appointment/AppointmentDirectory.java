@@ -101,6 +101,8 @@ public class AppointmentDirectory {
         appointment.setDoctor(doctor);
         appointment.setType(appointmentType);
         appointment.setPatient(patient);
+        appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
+        patient.getAppointmentDirectory().getAppointmentList().add(appointment);
        return appointment;
     }
     

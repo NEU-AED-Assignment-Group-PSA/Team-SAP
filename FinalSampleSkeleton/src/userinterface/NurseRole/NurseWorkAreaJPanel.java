@@ -9,6 +9,7 @@ import Business.Appointment.Appointment;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Operation.Operation;
 import Business.Organization.DoctorOrganization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
@@ -49,15 +50,20 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[5];
+            Object[] row = new Object[11];
             row[0] = request.getSender();
             row[1] = request.getReceiver();
             row[2] = ((NurseWorkRequest)request).getPatient();
             row[3] = request.getStatus();
-            row[4] = ((NurseWorkRequest)request).getAppointment();
-            //String result = ((LabTestWorkRequest) request).getTestResult();
-            //row[3] = result == null ? "Waiting" : result;
-            
+            Appointment app = ((NurseWorkRequest)request).getAppointment();
+            row[4] = app;//request.getMessage() == null ? " " : request.getMessage() ;
+            row[5] = request;
+            row[6] = request.getMessage();
+            row[7] = app.getStatus();
+            Operation opr= app.getOperation() == null ? null : app.getOperation() ;
+            row[8] = opr.getStatus() == null ? "" : opr.getStatus();
+            row[9] = opr.getOprType();
+            row[10] = opr.getOperationDate() == null ? "" : opr.getOperationDate();
             model.addRow(row);
         }
     }
@@ -96,20 +102,21 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         searchEmailTxt = new javax.swing.JTextField();
         searchRequestIdCmb = new javax.swing.JComboBox();
         btnManageBedAssngmt = new javax.swing.JButton();
+        btnAssignToMe = new javax.swing.JButton();
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Sender", "Receiver", "Patient", "Status", "Appointment", "Request ID", "Message"
+                "Sender", "Receiver", "Patient", "Status", "Appointment Date", "Request ID", "Message", "Appointment Status", "Operation Status", "Operation Type", "Operation Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -316,6 +323,13 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAssignToMe.setText("Assign To Me");
+        btnAssignToMe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignToMeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -331,7 +345,9 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(36, 36, 36)
                         .addComponent(requestTestJButton)
                         .addGap(30, 30, 30)
-                        .addComponent(btnManageBedAssngmt))
+                        .addComponent(btnManageBedAssngmt)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnAssignToMe, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -351,7 +367,8 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewDetailsBtn)
                     .addComponent(requestTestJButton)
-                    .addComponent(btnManageBedAssngmt))
+                    .addComponent(btnManageBedAssngmt)
+                    .addComponent(btnAssignToMe))
                 .addGap(65, 65, 65)
                 .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(18, Short.MAX_VALUE))
@@ -391,7 +408,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             if(request.getStatus().equals("New"))
             {
             //sender, receiver, pateint,status, message
-            Object[] row = new Object[7];
+            Object[] row = new Object[11];
             row[0] = request.getSender();
             row[1] = request.getReceiver();
             row[2] = ((NurseWorkRequest)request).getPatient();
@@ -399,10 +416,15 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             
             //String result = ((LabTestWorkRequest) request).getTestResult();
             //row[3] = result == null ? "Waiting" : result;
-            
-            row[4] = ((NurseWorkRequest)request).getAppointment();//request.getMessage() == null ? " " : request.getMessage() ;
+            Appointment app = ((NurseWorkRequest)request).getAppointment();
+            row[4] = app;//request.getMessage() == null ? " " : request.getMessage() ;
             row[5] = request;
             row[6] = request.getMessage();
+            row[7] = app.getStatus();
+            Operation opr= app.getOperation() == null ? null : app.getOperation() ;
+            row[8] = opr.getStatus() == null ? "" : opr.getStatus();
+            row[9] = opr.getOprType();
+            row[10] = opr.getOperationDate() == null ? "" : opr.getOperationDate();
             model.addRow(row);
             
         }
@@ -461,8 +483,39 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchSearchBtnActionPerformed
 
+    private void btnAssignToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignToMeActionPerformed
+        // TODO add your handling code here:
+        
+        int selectedRow = workRequestJTable.getSelectedRow();
+        
+        if (selectedRow < 0){
+            return;
+        }
+        
+        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 5);
+        
+        if(request.getReceiver().equals(userAccount) )
+        {
+             JOptionPane.showMessageDialog(null, "Already assigned!");
+            return;
+
+        }
+        
+        else if( request.getReceiver()!=null &&request.getReceiver().equals(userAccount) )
+        {
+              JOptionPane.showMessageDialog(null, "Already handled, cannot assign!");
+            return;
+            
+        }
+        request.setReceiver(userAccount);
+        request.setStatus("Pending");
+        populateRequestTable();
+        
+    }//GEN-LAST:event_btnAssignToMeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssignToMe;
     private javax.swing.JButton btnManageBedAssngmt;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JLabel enterpriseLabel;

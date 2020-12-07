@@ -130,7 +130,8 @@ public class Validation {
         pattern = Pattern.compile(integer_pattern);
         matcher = pattern.matcher(number);
          boolean match = number.matches("[a-zA-Z\\s]+");
-        return matcher.matches();
+        //return matcher.matches();
+        return match;
     }
     
     

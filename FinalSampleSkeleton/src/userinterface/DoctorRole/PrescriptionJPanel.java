@@ -51,7 +51,8 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private EcoSystem ecosystem;
 
-    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor, MedicineDirectory medicineList,EcoSystem ecosystem) {
+    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor,
+            MedicineDirectory medicineList,EcoSystem ecosystem, Enterprise enterprise) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.appointment = appointment;
@@ -59,8 +60,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         this.doctor = doctor;
         this.ecosystem=ecosystem;
         this.medicineList = medicineList;
+        this.enterprise= enterprise;
         patientNameTxt.setText(patient.getName());
         doctorNameTxt.setText(doctor.getName());
+        //docotr
         //appointment.
         //appointment.setPrescription(prescription);
         populatePharmacy();
@@ -72,13 +75,14 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         ArrayList<Network> networkList=ecosystem.getNetworkList();
         Network network=null;
         //network
+        cmbPharmacy.removeAllItems();
         for(int i=0;i<networkList.size();i++){
             network=networkList.get(i);
             
             List<Enterprise> enterpriseList;
-            enterprise.getNetworkName();
+            //enterprise.getNetwork();
             
-            if(network.getName().equals(enterprise.getNetworkName()))
+            if(network.equals(enterprise.getNetwork()))
             {
                 //boston network
                 
@@ -108,17 +112,20 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
           medicneCmb.removeAllItems();
         
           Pharmacy pharEnterprise =(Pharmacy) cmbPharmacy.getSelectedItem();
+          if(pharEnterprise != null)  // added because on page loading null pointer exception is coming
+          {
+          MedicineDirectory medicineList1 =pharEnterprise.getMedicineList();
           
-          MedicineDirectory medicineList =pharEnterprise.getMedicineList();
           
-          
-          if(medicineList != null){
-          for(Medicine med: medicineList.getMedicineList())
+          if(medicineList1 != null){
+          for(Medicine med: medicineList1.getMedicineList())
           {
               medicneCmb.addItem(med);
           }
           }
 
+          
+          }//end if
     }
     
     /**
@@ -145,7 +152,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         PrescriptionTable = new javax.swing.JTable();
         medicneCmb = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        addMedsBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         cmbPharmacy = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
 
@@ -176,10 +183,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
         PrescriptionTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Medicines prescribed", "Dosage"
@@ -196,16 +200,17 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(PrescriptionTable);
         if (PrescriptionTable.getColumnModel().getColumnCount() > 0) {
             PrescriptionTable.getColumnModel().getColumn(0).setResizable(false);
+            PrescriptionTable.getColumnModel().getColumn(1).setResizable(false);
         }
 
         medicneCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel4.setText("Dosage");
 
-        addMedsBtn.setText("Add Medicine");
-        addMedsBtn.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Add Medicine");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addMedsBtnActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -229,7 +234,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(addMedsBtn)
+                                    .addComponent(jButton1)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)))
@@ -242,7 +247,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                                         .addComponent(medicneCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel4)
-                                        .addGap(18, 18, 18)
+                                        .addGap(72, 72, 72)
                                         .addComponent(dosageTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
@@ -266,9 +271,9 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                         .addGap(371, 371, 371)
                         .addComponent(btnPrescribe))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
+                        .addGap(163, 163, 163)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 504, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(278, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -300,10 +305,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel6)
                     .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
-                .addComponent(addMedsBtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addComponent(btnPrescribe)
                 .addContainerGap())
         );
@@ -355,14 +360,14 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_cmbPharmacyActionPerformed
 
-    private void addMedsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addMedsBtnActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         
         populatePrescribedMedicineTable();
         
         
         
-    }//GEN-LAST:event_addMedsBtnActionPerformed
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     void populatePrescribedMedicineTable(){
@@ -403,12 +408,12 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PrescriptionTable;
-    private javax.swing.JButton addMedsBtn;
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnPrescribe;
     private javax.swing.JComboBox cmbPharmacy;
     private javax.swing.JTextField doctorNameTxt;
     private javax.swing.JTextField dosageTxt;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
