@@ -112,9 +112,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         txtBookAppointment = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtAppointmentType = new javax.swing.JComboBox();
-        jLabel6 = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -161,8 +158,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
 
         txtAppointmentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "In-Person", "Online" }));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bookAppomnt.png"))); // NOI18N
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -189,11 +184,8 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                                     .addComponent(txtPatientName)
                                     .addComponent(cmbDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(txtAppointmetDate)
-                                    .addComponent(txtAppointmentType, 0, 148, Short.MAX_VALUE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel6)))
-                .addContainerGap(133, Short.MAX_VALUE))
+                                    .addComponent(txtAppointmentType, 0, 148, Short.MAX_VALUE))))))
+                .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,9 +212,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                     .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(txtBookAppointment)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(64, 64, 64))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -324,7 +314,6 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JComboBox txtAppointmentType;
     private javax.swing.JTextField txtAppointmetDate;
     private javax.swing.JButton txtBookAppointment;

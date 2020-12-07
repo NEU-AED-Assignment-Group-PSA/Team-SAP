@@ -64,12 +64,12 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     }
     
     public void setAppointmentStatus(){
-        cmbAppointmentStatus.removeAllItems();
-        cmbAppointmentStatus.addItem("--Select--");
+        txtAppointmentStatus.removeAllItems();
+        txtAppointmentStatus.addItem("--Select--");
         for(AppointmentStatus status : AppointmentStatus.values()){
             if(status.getValue().equals(AppointmentStatus.New.getValue()) ||
                     status.getValue().equals(AppointmentStatus.Cancel.getValue())){
-                cmbAppointmentStatus.addItem(status.getValue());
+                txtAppointmentStatus.addItem(status.getValue());
             }
         }
     }
@@ -88,7 +88,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             List<Appointment> appointments = patient.getAppointmentDirectory().getAppointmentList();
             SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
             for(Appointment appointment : appointments){
-                if(appointment.getStatus().equals(status)){
+                if(appointment.getStatus().getValue().equals(status)){
                     Object[] row = new Object[6];
                     row[0] = patient.getId();
                     row[1] = patient.getName();
@@ -99,7 +99,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                     }
                     row[3] = formatter1.format(appointment.getDate());
                     row[4] = appointment.getType();
-                    row[5] = appointment.getStatus();
+                    row[5] = appointment.getStatus().getValue();
                     model.addRow(row); 
                 }
             }
@@ -131,11 +131,8 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jButton3 = new javax.swing.JButton();
         txtDoctor = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        cmbAppointmentStatus = new javax.swing.JComboBox<>();
+        txtAppointmentStatus = new javax.swing.JComboBox<>();
         btnSubmit = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-
-        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -202,7 +199,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
 
         jLabel6.setText("Appointment Status : ");
 
-        cmbAppointmentStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtAppointmentStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSubmit.setText("Search");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -210,8 +207,6 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/viewAppont.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -232,7 +227,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                                 .addGap(9, 9, 9)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cmbAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(33, 33, 33)
                                 .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
@@ -241,9 +236,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                         .addGap(103, 103, 103)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
+                        .addGap(273, 273, 273)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -260,44 +253,39 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(cmbAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSubmit))
-                                .addGap(22, 22, 22)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jButton2)
-                                    .addComponent(jButton3))))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel6)
+                            .addComponent(txtAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSubmit))
+                        .addGap(22, 22, 22)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(308, 308, 308)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                            .addComponent(jButton2)
+                            .addComponent(jButton3))))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -340,7 +328,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         int selectedRow = viewAppointmentJTable.getSelectedRow();
         if(selectedRow >= 0){
             Appointment appointment = (Appointment)patient.getAppointmentDirectory().getAppointmentList().get(selectedRow);
-            appointment.setStatus(AppointmentStatus.Cancel.getValue());
+            appointment.setStatus(AppointmentStatus.Cancel);
             JOptionPane.showMessageDialog(null, "Appointment Cancelled", "Warning", JOptionPane.WARNING_MESSAGE);
             populatePatientVisits(AppointmentStatus.New.getValue());
             return;
@@ -350,16 +338,15 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        if(cmbAppointmentStatus.getSelectedIndex() != 0){
+        if(txtAppointmentStatus.getSelectedIndex() != 0){
 //            AppointmentStatus status = (AppointmentStatus)txtAppointmentStatus.getSelectedItem();
-            populatePatientVisits(cmbAppointmentStatus.getSelectedItem().toString());
+            populatePatientVisits(txtAppointmentStatus.getSelectedItem().toString());
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JComboBox<String> cmbAppointmentStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -369,8 +356,8 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JComboBox<String> txtAppointmentStatus;
     private javax.swing.JComboBox txtAppointmentType;
     private javax.swing.JTextField txtAppointmetDate;
     private javax.swing.JTextField txtDoctor;
