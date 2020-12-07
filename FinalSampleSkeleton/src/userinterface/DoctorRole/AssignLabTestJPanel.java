@@ -18,8 +18,10 @@ import Business.Person.Person;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTechnicianWorkRequest;
 import java.awt.CardLayout;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import javafx.util.converter.LocalDateStringConverter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -64,7 +66,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
             //nothing
         } else {
             for (Enterprise enterprise : enterprsList) {
-                if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab)) {
+                if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())) {
                     {
                         cmbLabs.addItem(enterprise);
                     }
@@ -223,7 +225,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
 
         //String medsPrescribed= medsPrescribedTxt.getText();
         if (testType.equals("")) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
+            JOptionPane.showMessageDialog(null, "Test Name cannot be empty");
         }   else
         { LabTechnicianWorkRequest workreq = new LabTechnicianWorkRequest();
                 workreq.setStatus("New");
@@ -236,10 +238,10 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 //workreq.setReceiver(userAccount);
                 Lab lab = (Lab) cmbLabs.getSelectedItem();
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
-                UserAccount recepUseracc = null;
+                //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
-                workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
+                //workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
    }
         populateLabTest();
         //String medsPrescribed= medsPrescribedTxt.getText();
@@ -265,10 +267,11 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
         for (LabTest labTest : labTestList.getLabTestList()) {
-            Object[] row = new Object[3];
-            row[0] = labTest.getType();
-            row[1] = labTest.getLab();
-            row[2] = labTest.getPatient();
+            Object[] row = new Object[4];
+            row[0] = new Date();
+            row[1] = labTest.getType();
+            row[2] = labTest.getLab();
+            row[3] = labTest.getPatient();
             model.addRow(row);
             
         }

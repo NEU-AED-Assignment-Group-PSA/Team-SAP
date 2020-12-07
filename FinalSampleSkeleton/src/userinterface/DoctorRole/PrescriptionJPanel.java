@@ -358,7 +358,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         prescription.setPatient(patient);
         prescription.setDoctor(doctor);
         
-        
+        //patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
         
         
         //dateTxt.setText("");

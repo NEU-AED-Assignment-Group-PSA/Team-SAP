@@ -8,6 +8,7 @@ package userinterface.DoctorRole;
 import Business.Appointment.Appointment;
 import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
@@ -34,9 +35,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private Patient patient;
     private Appointment appointment;
-    private Doctor doctor;
+    private Employee doctor;
     
-    ViewAppointmentJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem,Appointment appointment) {
+    public ViewAppointmentJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem,Appointment appointment) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
@@ -44,14 +45,16 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.ecosystem = ecosystem;
         this.appointment = appointment;
+        this.patient= appointment.getPatient();
+        this.doctor= (Employee) appointment.getDoctor();
         appointmentIDTxt.setText(String.valueOf(appointment.getAppointmentId()));
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        formatter.format(DateTxt.getText());
-        appointment.setType(appointmentTypeTxt.getText());
-        appointment.setLocation(locationTxt.getText());
-        patient.setName(patientNameTxt.getText());
-        doctor.setName(doctorNameTxt.getText());
-        appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
+        DateTxt.setText(formatter.format(appointment.getDate()));
+        appointmentTypeTxt.setText(appointment.getType());
+        //locationTxt.setText(appointment.setLocation());
+        patientNameTxt.setText(patient.getName());
+        doctorNameTxt.setText(doctor.getName());
+        //appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
         appointmentIDTxt.setEditable(false);
         DateTxt.setEditable(false);
         appointmentTypeTxt.setEditable(false);
@@ -59,7 +62,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         patientNameTxt.setEditable(false);
         doctorNameTxt.setEditable(false);
         appointmentStatusTxt.setEditable(false);
-        
+        appointmentStatusTxt.setText(appointment.getStatus());
 
         //populateAppointmentDetails();
     }
