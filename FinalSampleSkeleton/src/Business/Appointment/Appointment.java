@@ -137,6 +137,7 @@ public class Appointment {
         MarkforTest("MarkforTest"),
         Close("Close"),
         AnalyseReport("AnalyseReport"),
+        Cancel("Cancel"),
         GeneratedReport("GeneratedReport");
         
         private String value;

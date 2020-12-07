@@ -59,6 +59,7 @@ public class AssignBedJPanel extends javax.swing.JPanel {
         this.bedorg= getBedDepartment();
         populateStatusCMB();
         populateDetails();
+        assignJPanel.setVisible(false);
     }
 
     
@@ -102,7 +103,7 @@ void populateDetails(){
     emailIDTxt.setText(patient.getEmailID());
     phoneNumberTxt.setText(patient.getPhoneNum());
     viewStatusCmb.setSelectedItem(appointment.getStatus());
-    viewRequestDateTxt.setText(workrequest.getRequestDate().toString());
+    viewRequestDateTxt.setText(workrequest.getRequestDate().toString() == null ? "" : workrequest.getRequestDate().toString());
     txtAreaMessage.setText(workrequest.getMessage());
     Operation oprtn = appointment.getOperation();
     if(oprtn != null && oprtn.getBedAssigned() !=null)
@@ -112,7 +113,10 @@ void populateDetails(){
         txtBedIPrice.setText(String.valueOf(bed.getPrice()));
         txtBedType.setText(bed.getBedType().toString());
         txtBedAssignDate.setText(oprtn.getOperationDate());
-        
+        btnviewBed.setEnabled(false);
+    }
+    else{
+        btnviewBed.setEnabled(true);
     }
     
 }
@@ -132,8 +136,6 @@ void populateDetails(){
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        saveBtn = new javax.swing.JButton();
-        updateBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
@@ -158,6 +160,7 @@ void populateDetails(){
         btnviewBed = new javax.swing.JButton();
         txtBedAssignDate = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
         assignJPanel = new javax.swing.JPanel();
         lblBedStatus = new javax.swing.JLabel();
         bedStatusCmb = new javax.swing.JComboBox();
@@ -170,10 +173,13 @@ void populateDetails(){
         btnAssignBed = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         bedTypeCmb = new javax.swing.JComboBox();
+        jLabel17 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        viewDetailsJPanel.setBackground(new java.awt.Color(153, 204, 255));
         viewDetailsJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Appointment Details"));
         viewDetailsJPanel.setToolTipText("");
         viewDetailsJPanel.setAutoscrolls(true);
@@ -185,15 +191,6 @@ void populateDetails(){
         jLabel4.setText("Patient Name");
 
         jLabel5.setText("Appointment ID");
-
-        saveBtn.setText("Save");
-        saveBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBtnActionPerformed(evt);
-            }
-        });
-
-        updateBtn.setText("Update");
 
         jLabel1.setText("Patient Email ID");
 
@@ -292,76 +289,72 @@ void populateDetails(){
 
         jLabel16.setText("Assigned Date");
 
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BedMangmt.PNG"))); // NOI18N
+
         javax.swing.GroupLayout viewDetailsJPanelLayout = new javax.swing.GroupLayout(viewDetailsJPanel);
         viewDetailsJPanel.setLayout(viewDetailsJPanelLayout);
         viewDetailsJPanelLayout.setHorizontalGroup(
             viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
+                .addGap(0, 34, Short.MAX_VALUE)
                 .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(142, 142, 142)
-                        .addComponent(updateBtn)
-                        .addGap(37, 37, 37)
-                        .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
-                        .addGap(0, 34, Short.MAX_VALUE)
                         .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel13))
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel7)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel13))
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 319, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
-                                                .addComponent(btnviewBed)
-                                                .addGap(141, 141, 141))))
-                                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addGap(51, 51, 51)
-                                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtBedAssignDate, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                                            .addComponent(txtBedIPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                                            .addComponent(txtBedType)
-                                            .addComponent(txtBedId))
-                                        .addGap(0, 0, Short.MAX_VALUE))))
+                                        .addComponent(btnviewBed)
+                                        .addGap(141, 141, 141))))
                             .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel4)
-                                        .addComponent(jLabel1)
-                                        .addComponent(jLabel3))
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addGap(18, 18, 18)
-                                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(emailIDTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
-                                        .addComponent(viewPatientNametxt))
-                                    .addComponent(viewpatientIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(51, 51, 51)
                                 .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(viewDrTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel9)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(viewRequestDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(viewStatusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(viewAppnmtID, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addComponent(jLabel16))))
-                .addGap(19, 19, 19))
+                                    .addComponent(txtBedAssignDate, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                    .addComponent(txtBedIPrice, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
+                                    .addComponent(txtBedType)
+                                    .addComponent(txtBedId))
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel4)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel3))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(emailIDTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE)
+                                .addComponent(viewPatientNametxt))
+                            .addComponent(viewpatientIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(phoneNumberTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewDrTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewRequestDateTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewStatusCmb, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewDetailsJPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addGap(18, 18, 18)
+                                .addComponent(viewAppnmtID, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jLabel16))
+                .addContainerGap())
         );
         viewDetailsJPanelLayout.setVerticalGroup(
             viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -396,31 +389,33 @@ void populateDetails(){
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnviewBed)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txtBedId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(txtBedType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtBedIPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(txtBedAssignDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(64, 64, 64)
-                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(saveBtn)
-                    .addComponent(updateBtn))
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel7)
+                            .addComponent(txtBedId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel8)
+                            .addComponent(txtBedType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel13)
+                            .addComponent(txtBedIPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(viewDetailsJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel16)
+                            .addComponent(txtBedAssignDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(viewDetailsJPanelLayout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(102, 102, 102))
         );
 
-        add(viewDetailsJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+        add(viewDetailsJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, 550));
 
+        assignJPanel.setBackground(new java.awt.Color(153, 204, 255));
         assignJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Assign Bed"));
         assignJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -445,25 +440,15 @@ void populateDetails(){
 
         bedJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
-                "Bed ID", "Status", "Patient", "Date", "Type"
+                "Bed ID", "Patient", "Date", "Type"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -510,7 +495,11 @@ void populateDetails(){
         });
         assignJPanel.add(bedTypeCmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 146, -1));
 
-        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 40, 370, 540));
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/search_20px_1.png"))); // NOI18N
+        jLabel17.setText("Search");
+        assignJPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 30, 370, 550));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -626,13 +615,13 @@ void populateDetails(){
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
         
-            Object[] row = new Object[5];
-            row[0] = bed.getBedID();
-            row[1] = bed.getStatus().getStatus();
+            Object[] row = new Object[4];
+            row[0] = bed;//.getBedID();
+           // row[1] = bed.getStatus().getStatus();
             Patient p = bed.getPatient();
-            row[2] = p == null ? "": p;
-            row[3] = "";
-            row[4] = bed.getBedType();
+            row[1] = p == null ? "": p;
+            row[2] = "";
+            row[3] = bed.getBedType();
             model.addRow(row);
             //row[2] = 
             
@@ -709,15 +698,17 @@ void populateDetails(){
         Date date1;
         try {
             date1 = formatter1.parse(dateString);
-            bedorg.assignBedToPatientOnDate(date1, selectedBed);
-            selectedBed.setStatus(Bed.BedStatus.Occupied);
+            bedorg.assignBedToPatientOnDate(patient,date1, selectedBed);
+            //selectedBed.setStatus(Bed.BedStatus.Occupied);
             JOptionPane.showMessageDialog(null, "Bed Assigned Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
             Operation opr= appointment.getOperation();
             opr.setBedAssigned(selectedBed);
             opr.setOperationDate(dateString);
             opr.setPerson(nurseUserAccount.getEmployee());
             opr.setStatus(Operation.OperationStatus.BedAssigned.getValue());
-            
+            //appointment.setStatus(Appointment.AppointmentStatus.);
+            workrequest.setStatus("Handled- bed assigned sucessfully");
+            workrequest.setMessage("Bed is assigned for Date: "+ dateString + ". Surgery date is confirmed!");
         } catch (ParseException ex) {
             Logger.getLogger(AssignBedJPanel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("Exception occured in string to date conversion !!!!!! : method-> btnAssignBedActionPerformed");
@@ -726,8 +717,11 @@ void populateDetails(){
         
         //if all good then assign bed to this patient appointment
         //change appoitnment status
-        
-        
+        txtBedId.setText(selectedBed.toString());
+        txtBedType.setText(selectedBed.getBedType().getBedType());
+        txtBedIPrice.setText(String.valueOf(selectedBed.getPrice()));
+        txtBedAssignDate.setText(txtBedDate.getText() == null ? " " : txtBedDate.getText());
+        assignJPanel.setVisible(false);
         
     }//GEN-LAST:event_btnAssignBedActionPerformed
 
@@ -757,10 +751,6 @@ void populateDetails(){
         // TODO add your handling code here:
     }//GEN-LAST:event_txtBedAssignDateActionPerformed
 
-    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_saveBtnActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel assignJPanel;
@@ -776,10 +766,12 @@ void populateDetails(){
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -792,14 +784,12 @@ void populateDetails(){
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblBedStatus;
     private javax.swing.JTextField phoneNumberTxt;
-    private javax.swing.JButton saveBtn;
     private javax.swing.JTextArea txtAreaMessage;
     private javax.swing.JTextField txtBedAssignDate;
     private javax.swing.JTextField txtBedDate;
     private javax.swing.JTextField txtBedIPrice;
     private javax.swing.JTextField txtBedId;
     private javax.swing.JTextField txtBedType;
-    private javax.swing.JButton updateBtn;
     private javax.swing.JTextField viewAppnmtID;
     private javax.swing.JPanel viewDetailsJPanel;
     private javax.swing.JTextField viewDrTxt;

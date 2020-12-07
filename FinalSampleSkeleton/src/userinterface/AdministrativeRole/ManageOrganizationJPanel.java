@@ -48,21 +48,20 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
     private void populateCombo(){
         organizationJComboBox.removeAllItems();
         
-          if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Pharmacy))
+          if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Pharmacy.getValue()))
           {
               for (Type type : Organization.Type.values()){
-            if (type.getValue().equals(Type.MedicalStore.getValue()) && 
+            if (type.getValue().equals(Type.MedicalStore.getValue()) || 
                     type.getValue().equals(Type.Billing.getValue()) 
                     )
                 organizationJComboBox.addItem(type);
         }
           }
         //lab 
-          else if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab)){
+          else if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
               for (Type type : Organization.Type.values()){
-            if (type.getValue().equals(Type.Billing.getValue()) && 
-                    
-                    type.getValue().equals(Type.Pathology.getValue()) &&
+            if (type.getValue().equals(Type.Billing.getValue()) ||                    
+                    type.getValue().equals(Type.Pathology.getValue()) ||
                     type.getValue().equals(Type.Radiology.getValue()) 
                     )
                 organizationJComboBox.addItem(type);
@@ -195,7 +194,7 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
         lblNumofBeds.setText("Number of Beds");
 
-        cmbBedNUmber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "10", "15", "20", "30", "40", "50", "100", "150", "200", "250", "300" }));
+        cmbBedNUmber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10", "15", "20", "30", "40", "50", "100", "150", "200", "250", "300" }));
 
         javax.swing.GroupLayout addDeptJPanelLayout = new javax.swing.GroupLayout(addDeptJPanel);
         addDeptJPanel.setLayout(addDeptJPanelLayout);

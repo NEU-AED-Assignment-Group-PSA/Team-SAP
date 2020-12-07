@@ -56,19 +56,19 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form DoctorWorkAreaJPanel
      */
-    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount userAccount, Enterprise enterprise, EcoSystem ecosystem, Network network) {
+    public DoctorWorkAreaJPanel(JPanel userProcessContainer, Organization organization, UserAccount userAccount, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
         this.ecosystem=ecosystem;
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
-        this.network=network;
+        this.network=enterprise.getNetwork();;
         valueLabel.setText(enterprise.getName());
         this.doctor=userAccount.getEmployee();
         populateRequestTable();
         scheduleSurgeryJPanel.setVisible(false);
-        appointment.setAppointmentId(Integer.parseInt(appoinmtntDTxt.getText()));
+        //appointment.setAppointmentId(Integer.parseInt(appoinmtntDTxt.getText()));
         appoinmtntDTxt.setEditable(false);
     }
 
@@ -127,6 +127,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtOprDescptn = new javax.swing.JTextArea();
         backJButton = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         DoctorWorkAreaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -327,6 +328,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/doctoMain.PNG"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -358,14 +361,16 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                            .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(46, 46, 46)
+                                .addComponent(jLabel6))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(138, 138, 138)
                                 .addComponent(btnCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(181, Short.MAX_VALUE))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -377,21 +382,24 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(refreshTestJButton))
                     .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnViewAppointments)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAddPatientHistory)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnAssignNextDoctor))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnPrescribeMeds)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnScheduleLabTest)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnScheduleSurgery)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnViewAppointments)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAddPatientHistory)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnAssignNextDoctor))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnPrescribeMeds)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnScheduleLabTest)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnScheduleSurgery))))
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -469,13 +477,15 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 
                 operation.setOperationCharge(10000.00);
                 operation.setDoctor(doctor);
-                
-                
+                operation.setStatus(Operation.OperationStatus.WaitingConfirmation.getValue());
+                operation.setOprType(((Operation.OperationType)cmbOperationType.getSelectedItem()).getValue());
                 //set operation
                 appointment.setOperation(operation);
+                //changed next line status
+                appointment.setStatus(Appointment.AppointmentStatus.Markforsurgery.getValue());
                 NurseWorkRequest workreq = new NurseWorkRequest();
                 workreq.setAppointment(appointment);
-                workreq.setMessage("New Patient for Operation, please confirm a operation Date.");
+                workreq.setMessage("New Patient for Operation, please confirm an operation Date.");
                 
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);
@@ -485,8 +495,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 Date date= new Date();
                 workreq.setRequestDate(date);
                 workreq.setResolveDate(date);
-                workreq.setStatus(Appointment.AppointmentStatus.Markforsurgery.getValue());
-                UserAccount nurseUserAcc = null;
+                workreq.setStatus("New");
+                UserAccount nurseUserAcc =null;
                 //need employee list of the doctor's department -> organization
                 List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
@@ -499,13 +509,19 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     }
                     
                 }
+                
+              
+                
+       
+                
+                
+                JOptionPane.showMessageDialog(null, "Schedule added successfully!");
                 scheduleSurgeryJPanel.setVisible(false);
                 appoinmtntDTxt.setText("");
                 patientNameTxt.setText("");
                 //bloodGrpTxt.setText("");
                 dateTxt.setText("");
                 txtOprDescptn.setText("");
-                JOptionPane.showMessageDialog(null, "Schedule added successfully!");
             }
             catch(Exception e)
             {
@@ -561,7 +577,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem));
+        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem, enterprise));
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnPrescribeMedsActionPerformed
 
@@ -628,6 +644,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel oprDesc;
