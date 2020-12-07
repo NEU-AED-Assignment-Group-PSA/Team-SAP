@@ -229,6 +229,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         nameJTextField.setText("");
         populateTable();
 
+        JOptionPane.showMessageDialog(null, "Enterprise added successfully!");
     }//GEN-LAST:event_submitJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
