@@ -129,6 +129,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         DoctorWorkAreaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -423,8 +425,15 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshTestJButtonActionPerformed
 
     private void btnViewAppointmentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewAppointmentsActionPerformed
-
-        ViewAppointmentJPanel viewAppointmentJPanel = new ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem, appointment);
+         int selectedRow = DoctorWorkAreaTable.getSelectedRow();
+        if(selectedRow < 0){
+            
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        
+        }
+        Appointment appnt= (Appointment) DoctorWorkAreaTable.getValueAt(selectedRow, 1);
+        ViewAppointmentJPanel viewAppointmentJPanel = new ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem, appnt);
         userProcessContainer.add("viewAppointmentJPanel",viewAppointmentJPanel);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -592,6 +601,16 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_appoinmtntDTxtActionPerformed
 
     private void btnScheduleLabTestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnScheduleLabTestActionPerformed
+        
+        int selectedRow = DoctorWorkAreaTable.getSelectedRow();
+        
+        if(selectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select a Patient Appointment");
+            return;
+        }
+        patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
+        appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment, labTestList,network, userAccount, organization));
         layout.next(userProcessContainer);

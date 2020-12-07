@@ -295,7 +295,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         sendTextMessage(phonecontact);      
         
         
-        return;
+        //return;
     }//GEN-LAST:event_txtBookAppointmentActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
