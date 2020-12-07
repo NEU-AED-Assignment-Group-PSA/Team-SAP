@@ -109,6 +109,9 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         lblBedStatus1 = new javax.swing.JLabel();
         bedStatusCmb1 = new javax.swing.JComboBox();
         backJButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         assignJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Manage Bed"));
         assignJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -150,7 +153,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(bedJTable);
 
-        assignJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 480, 210));
+        assignJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 240, 210));
 
         txtBedDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,16 +202,23 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bedAssign.PNG"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(backJButton)
-                .addGap(40, 40, 40)
-                .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(backJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(167, 167, 167))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -216,7 +226,10 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backJButton)
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -509,6 +522,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox bedTypeCmb;
     private javax.swing.JButton btnAssignBed;
     private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane2;

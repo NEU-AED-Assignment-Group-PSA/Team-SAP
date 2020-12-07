@@ -37,11 +37,11 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private Employee labTechnician;
     private Appointment appointment;
     private Patient patient;
-    
+    private WorkRequest request;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public LabTechnicianWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business){// LabTest labTest, Employee labTechnician)
+    public LabTechnicianWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, WorkRequest request){// LabTest labTest, Employee labTechnician)
         initComponents();
         
         this.userProcessContainer = userProcessContainer;
@@ -51,6 +51,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         this.labTest = labTest;
         this.labTechnician = labTechnician;
         this.appointment = appointment;
+        this.request=request;
         populatecbox();
         //populateTable();
     }
