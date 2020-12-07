@@ -22,7 +22,15 @@ public class Operation {
     private String operationDescription;
     private double operationCharge;
     private String status; //new -by doctor, success - by doctor, on-going, scheduled- by nurse after bed confirmation
-    
+    private String oprType;
+
+    public String getOprType() {
+        return oprType;
+    }
+
+    public void setOprType(String oprType) {
+        this.oprType = oprType;
+    }
     private Patient patient;
     private Employee doctor;
     private Employee person;  // for nurse??

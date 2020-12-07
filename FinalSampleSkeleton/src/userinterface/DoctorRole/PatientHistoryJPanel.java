@@ -12,10 +12,8 @@ import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -41,7 +39,6 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.ecosystem = ecosystem;
         this.patient = patient;
-        patientNameTxt.setText(patient.getName());
         
     }
 
@@ -128,14 +125,14 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient Name", "Previous Visit details", "Medicine Allergies", "Allergies", "Surgery History", "Family History"
+                "Patient Name", "Previous Visit details", "Medicine Allergies"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -151,14 +148,10 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
             patientDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
             patientDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
             patientDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(3).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(4).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jLabel8.setText("Patient Name :");
 
-        patientNameTxt.setEditable(false);
         patientNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 patientNameTxtActionPerformed(evt);
@@ -201,23 +194,23 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(backJButton)
-                        .addGap(293, 293, 293)
+                        .addGap(310, 310, 310)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(416, 416, 416)
+                        .addGap(436, 436, 436)
                         .addComponent(btnAddPatientDetails))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(218, 218, 218)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(40, 40, 40)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(backJButton)
-                    .addComponent(jLabel1))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(backJButton))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -249,9 +242,9 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                     .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
                 .addComponent(btnAddPatientDetails)
-                .addGap(30, 30, 30)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -280,63 +273,48 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private void btnAddPatientDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientDetailsActionPerformed
        
         
-        //String patientName=patientNameTxt.getText();
+        /*String patientName=patientNameTxt.getText();
         String previousDiagnosis = previousDiagnosisTxt.getText();
         String medsalergies = medAlergiesTxt.getText();
-        String alergies = alergiesTxt.getText();
-        String familyHistory = familyHistoryTxt.getText();
-        String surgeryHistory = surgeryHistoryTxt.getText();
-        if(alergies.equals("") || previousDiagnosis.equals("") || medsalergies.equals("") || familyHistory.equals("") || surgeryHistory.equals(""))
+        if(patientName.equals("") || previousDiagnosis.equals("") || medsalergies.equals(""))
         {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty, Please fill in all fields"); 
         }
         else{
-            populatePatientDetails();
+        {PatientHistoryDetails patientHistoryDetails = prescriptionList.addPrescription();
+        //prescription.setDate(date);
+        prescription.setPatient(patient);
+        prescription.setDoctor(doctor);
+        prescription.setMedicineList(medicineList);
+        //dateTxt.setText("");
+        patientNameTxt.setText("");
+        doctorNameTxt.setText("");
+        medsPrescribedTxt.setText("");
+        appointment.setPrescription(prescription);
+        JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
+        populatePatientDetails();
         }
-//        {PatientHistoryDetails patientHistoryDetails = prescriptionList.addPrescription();
-//        prescription.setDate(date);
-//        prescription.setPatient(patient);
-//        prescription.setDoctor(doctor);
-//        prescription.setMedicineList(medicineList);
-//        dateTxt.setText("");
-//        patientNameTxt.setText("");
-//        doctorNameTxt.setText("");
-//        medsPrescribedTxt.setText("");
-//        appointment.setPrescription(prescription);
-//        JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
-        
-        
-        
-//        int select=diagnosistable.getSelectedRow();
-//        if(select<0){
-//            JOptionPane.showMessageDialog(null, "please select");
-//            return;
-//        }else{
-//            Diagnosis date=(Diagnosis)diagnosistable.getValueAt(select, 0);
-////            String detail=(String)diagnosistable.getValueAt(select, 1);
-////            String medicine=(String)diagnosistable.getValueAt(select, 2);
-//            System.out.println("to patient detail:"+date);
-//            CardLayout layout=(CardLayout)jpanel.getLayout();
-//            jpanel.add("patient detail",new PatientDetailJPanel(jpanel,date));
-//            layout.next(jpanel);
-//        }
+        }
+        int select=diagnosistable.getSelectedRow();
+        if(select<0){
+            JOptionPane.showMessageDialog(null, "please select");
+            return;
+        }else{
+            Diagnosis date=(Diagnosis)diagnosistable.getValueAt(select, 0);
+//            String detail=(String)diagnosistable.getValueAt(select, 1);
+//            String medicine=(String)diagnosistable.getValueAt(select, 2);
+            System.out.println("to patient detail:"+date);
+            CardLayout layout=(CardLayout)jpanel.getLayout();
+            jpanel.add("patient detail",new PatientDetailJPanel(jpanel,date));
+            layout.next(jpanel);
+        }
 
+*/
     }//GEN-LAST:event_btnAddPatientDetailsActionPerformed
 
     public void populatePatientDetails(){
-        DefaultTableModel model = (DefaultTableModel) patientDetailsTbl.getModel();
-        model.setRowCount(0);
-            Object[] row = new Object[6];
-            row[0] = patient.getName();
-            row[1] = previousDiagnosisTxt.getText();
-            row[2] = medAlergiesTxt.getText();
-            row[3] = alergiesTxt.getText();
-            row[4] = surgeryHistoryTxt.getText();
-            row[5] = familyHistoryTxt.getText();
-            model.addRow(row);
         
-    } 
-    
+    }
     
     private void patientNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientNameTxtActionPerformed
         // TODO add your handling code here:

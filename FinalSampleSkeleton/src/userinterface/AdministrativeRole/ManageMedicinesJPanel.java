@@ -771,15 +771,21 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
             System.out.println("Error in ManageMedicineJPanel view panel for date paring");
             Logger.getLogger(ManageMedicinesJPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Medicine medicine = new Medicine();
+        
+        int row = organizationJTable.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Medicine medicine= (Medicine)  organizationJTable.getValueAt(row,0);
         medicine.setDosage(dosage);
         medicine.setExpiryDate(date1);
         medicine.setName(name);
         medicine.setPrice(price);
         medicine.setQuantity(quantity);
         medicine.setType(type);
-        //Add to dir           
-        medicineDir.getMedicineList().add(medicine);
+                 
+       // medicineDir.getMedicineList().add(medicine);
         
         
         JOptionPane.showMessageDialog(null, "Updated successfully","Information",JOptionPane.INFORMATION_MESSAGE);

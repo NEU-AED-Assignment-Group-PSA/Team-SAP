@@ -7,18 +7,16 @@ package userinterface.NurseRole;
 
 import Business.Appointment.Appointment;
 import Business.Bed.Bed;
-import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Operation.Operation;
 import Business.Organization.BedManagementDepartment;
+import Business.Organization.BedPatient;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.Utility.Validation;
-import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.ParseException;
+import java.util.Map;
 /**
  *
  * @author aditi
@@ -135,25 +134,15 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
 
         bedJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Bed ID", "Status", "Patient", "Type"
+                "Bed ID", "Type"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -300,7 +289,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         
         if(bedList==null || bedList.isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "No bed available", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No bed for this status", "Information", JOptionPane.INFORMATION_MESSAGE);
             return;
 
         }
@@ -319,13 +308,16 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
         
-            Object[] row = new Object[4];
+            Object[] row = new Object[2];
             row[0] = bed;//.getBedID();
-            row[1] = bed.getStatus().getStatus();
-            Patient p = bed.getPatient();
-            row[2] = p == null ? "": p;
+            //row[1] = bed.getStatus().getStatus();
+            //Patient p = bed.getPatient();
+            //Map<Date, Bed> bedListOccupied=bedorg.getBedOccupiedListOnDate(date1);
+            
+            
+            //row[1] = p == null ? "": p;
             //row[3] = "";
-            row[3] = bed.getBedType();
+            row[1] = bed.getBedType();
             model.addRow(row);
             //row[2] = 
             }
@@ -383,7 +375,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         try {
             date1 = formatter1.parse(dateString);
             String newBedStatus =(String) bedStatusCmb1.getSelectedItem();
-            String currentBedStatus= selectedBed.getStatus().getStatus();
+            String currentBedStatus= (String) bedStatusCmb.getSelectedItem();//selectedBed.getStatus().getStatus();
             if(newBedStatus.equals(currentBedStatus))
             {
                 //status is same, no change
@@ -432,9 +424,9 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                 {
                     //selectedBed.getPatient().
                     //free patient
-                    Patient pat= selectedBed.getPatient();
+                    Patient pat= bedorg.getPatientByBedNDate(selectedBed,date1);
                     List<Appointment> appnmtList = pat.getAppointmentDirectory().getAppointmentList();
-                    
+                    //add appouintmt in patient app dir also when creating
                     for(Appointment app : appnmtList)
                     {
                         Bed appBed = app.getOperation().getBedAssigned() ;
@@ -442,9 +434,12 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                         {
                             //app.getOperation().getBedAssigned().setStatus(newBedStatus);
                             Operation opr= app.getOperation();
-            opr.setBedAssigned(null);
+            //opr.setBedAssigned(null);
+            BedPatient bp = new BedPatient();
+            bp.setPatient(pat);
+            bp.setBed(appBed);
             //remove entry from assignedBedtoPatient map
-            bedorg.getAssignedBedMap().remove(opr.getOperationDate(), selectedBed);
+            bedorg.getAssignedBedMap().remove(opr.getOperationDate(), bp);
             //add bed to assign laundry list
             bedorg.getBedAssignedLaundry().add(selectedBed);
             //opr.set(dateString);
@@ -457,8 +452,8 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     
                     
                     
-                    
-                    selectedBed.setStatus(Bed.BedStatus.valueOf(newBedStatus));
+                   // Bed.BedStatus.values();
+                   // selectedBed.setStatus(Bed.BedStatus.valueOf(newBedStatus));
                     JOptionPane.showMessageDialog(null, "Cannot assign status available, first assign to laundry!");
                     return;
                 }
