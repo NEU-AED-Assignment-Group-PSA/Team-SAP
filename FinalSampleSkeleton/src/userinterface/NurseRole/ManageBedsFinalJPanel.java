@@ -7,18 +7,16 @@ package userinterface.NurseRole;
 
 import Business.Appointment.Appointment;
 import Business.Bed.Bed;
-import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Operation.Operation;
 import Business.Organization.BedManagementDepartment;
+import Business.Organization.BedPatient;
 import Business.Organization.Organization;
 import Business.Organization.OrganizationDirectory;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.Utility.Validation;
-import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
-import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.text.ParseException;
+import java.util.Map;
 /**
  *
  * @author aditi
@@ -110,6 +109,9 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         lblBedStatus1 = new javax.swing.JLabel();
         bedStatusCmb1 = new javax.swing.JComboBox();
         backJButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         assignJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Manage Bed"));
         assignJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,25 +137,15 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
 
         bedJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Bed ID", "Status", "Patient", "Type"
+                "Bed ID", "Type"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -161,7 +153,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(bedJTable);
 
-        assignJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 480, 210));
+        assignJPanel.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, 240, 210));
 
         txtBedDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,16 +202,23 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bedAssign.PNG"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(backJButton)
-                .addGap(40, 40, 40)
-                .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(backJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addGap(31, 31, 31)
+                .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(167, 167, 167))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -227,7 +226,10 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backJButton)
+                        .addGap(99, 99, 99)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -300,7 +302,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         
         if(bedList==null || bedList.isEmpty())
         {
-            JOptionPane.showMessageDialog(null, "No bed available", "Information", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "No bed for this status", "Information", JOptionPane.INFORMATION_MESSAGE);
             return;
 
         }
@@ -319,13 +321,16 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
         
-            Object[] row = new Object[4];
+            Object[] row = new Object[2];
             row[0] = bed;//.getBedID();
-            row[1] = bed.getStatus().getStatus();
-            Patient p = bed.getPatient();
-            row[2] = p == null ? "": p;
+            //row[1] = bed.getStatus().getStatus();
+            //Patient p = bed.getPatient();
+            //Map<Date, Bed> bedListOccupied=bedorg.getBedOccupiedListOnDate(date1);
+            
+            
+            //row[1] = p == null ? "": p;
             //row[3] = "";
-            row[3] = bed.getBedType();
+            row[1] = bed.getBedType();
             model.addRow(row);
             //row[2] = 
             }
@@ -383,7 +388,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         try {
             date1 = formatter1.parse(dateString);
             String newBedStatus =(String) bedStatusCmb1.getSelectedItem();
-            String currentBedStatus= selectedBed.getStatus().getStatus();
+            String currentBedStatus= (String) bedStatusCmb.getSelectedItem();//selectedBed.getStatus().getStatus();
             if(newBedStatus.equals(currentBedStatus))
             {
                 //status is same, no change
@@ -432,9 +437,9 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                 {
                     //selectedBed.getPatient().
                     //free patient
-                    Patient pat= selectedBed.getPatient();
+                    Patient pat= bedorg.getPatientByBedNDate(selectedBed,date1);
                     List<Appointment> appnmtList = pat.getAppointmentDirectory().getAppointmentList();
-                    
+                    //add appouintmt in patient app dir also when creating
                     for(Appointment app : appnmtList)
                     {
                         Bed appBed = app.getOperation().getBedAssigned() ;
@@ -442,9 +447,12 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                         {
                             //app.getOperation().getBedAssigned().setStatus(newBedStatus);
                             Operation opr= app.getOperation();
-            opr.setBedAssigned(null);
+            //opr.setBedAssigned(null);
+            BedPatient bp = new BedPatient();
+            bp.setPatient(pat);
+            bp.setBed(appBed);
             //remove entry from assignedBedtoPatient map
-            bedorg.getAssignedBedMap().remove(opr.getOperationDate(), selectedBed);
+            bedorg.getAssignedBedMap().remove(opr.getOperationDate(), bp);
             //add bed to assign laundry list
             bedorg.getBedAssignedLaundry().add(selectedBed);
             //opr.set(dateString);
@@ -457,10 +465,10 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     
                     
                     
-                    
-                    selectedBed.setStatus(Bed.BedStatus.valueOf(newBedStatus));
-                    JOptionPane.showMessageDialog(null, "Cannot assign status available, first assign to laundry!");
-                    return;
+                   // Bed.BedStatus.values();
+                   // selectedBed.setStatus(Bed.BedStatus.valueOf(newBedStatus));
+                   // JOptionPane.showMessageDialog(null, "Cannot assign status available, first assign to laundry!");
+                   // return;
                 }
                         
             }
@@ -514,6 +522,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox bedTypeCmb;
     private javax.swing.JButton btnAssignBed;
     private javax.swing.JButton btnView;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JScrollPane jScrollPane2;

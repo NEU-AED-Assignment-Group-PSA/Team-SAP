@@ -8,6 +8,7 @@ package userinterface.DoctorRole;
 import Business.Appointment.Appointment;
 import Business.Doctor.Doctor;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
@@ -34,9 +35,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private Patient patient;
     private Appointment appointment;
-    private Doctor doctor;
+    private Employee doctor;
     
-    ViewAppointmentJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem,Appointment appointment) {
+    public ViewAppointmentJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem,Appointment appointment) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.userAccount = userAccount;
@@ -44,14 +45,16 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.ecosystem = ecosystem;
         this.appointment = appointment;
-        appointment.setAppointmentId(Integer.parseInt(appointmentIDTxt.getText()));
+        this.patient= appointment.getPatient();
+        this.doctor= (Employee) appointment.getDoctor();
+        appointmentIDTxt.setText(String.valueOf(appointment.getAppointmentId()));
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        formatter.format(DateTxt.getText());
-        appointment.setType(appointmentTypeTxt.getText());
-        appointment.setLocation(locationTxt.getText());
-        patient.setName(patientNameTxt.getText());
-        doctor.setName(doctorNameTxt.getText());
-        appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
+        DateTxt.setText(formatter.format(appointment.getDate()));
+        appointmentTypeTxt.setText(appointment.getType());
+        //locationTxt.setText(appointment.setLocation());
+        patientNameTxt.setText(patient.getName());
+        doctorNameTxt.setText(doctor.getName());
+        //appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
         appointmentIDTxt.setEditable(false);
         DateTxt.setEditable(false);
         appointmentTypeTxt.setEditable(false);
@@ -59,7 +62,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         patientNameTxt.setEditable(false);
         doctorNameTxt.setEditable(false);
         appointmentStatusTxt.setEditable(false);
-        
+        appointmentStatusTxt.setText(appointment.getStatus());
 
         //populateAppointmentDetails();
     }
@@ -90,11 +93,6 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        appointmentDetailsTbl = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        backJButton = new javax.swing.JButton();
-        appointmentIDTxt4 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         backJButton1 = new javax.swing.JButton();
@@ -113,51 +111,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         doctorNameTxt = new javax.swing.JTextField();
 
-        appointmentDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Patient Name", "Address", "Phone Number", "Blood Group"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(appointmentDetailsTbl);
-        if (appointmentDetailsTbl.getColumnModel().getColumnCount() > 0) {
-            appointmentDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
-            appointmentDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
-            appointmentDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
-            appointmentDetailsTbl.getColumnModel().getColumn(3).setResizable(false);
-        }
-
-        jLabel1.setText("Appointment Details");
-
-        backJButton.setText("<< Back");
-        backJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backJButtonActionPerformed(evt);
-            }
-        });
-
-        appointmentIDTxt4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                appointmentIDTxt4ActionPerformed(evt);
-            }
-        });
+        setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setText("Appointment Details");
 
@@ -309,55 +263,23 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(backJButton)
-                        .addGap(177, 177, 177)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(343, 343, 343)
-                        .addComponent(appointmentIDTxt4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(249, Short.MAX_VALUE))
+            .addGap(0, 924, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(backJButton))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 187, Short.MAX_VALUE)
-                .addComponent(appointmentIDTxt4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(191, 191, 191))
+            .addGap(0, 598, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(11, 11, 11)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-        userProcessContainer.remove(this);
-        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        layout.previous(userProcessContainer);
-    }//GEN-LAST:event_backJButtonActionPerformed
-
-    private void appointmentIDTxt4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentIDTxt4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_appointmentIDTxt4ActionPerformed
 
     private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
         // TODO add your handling code here:
@@ -394,15 +316,11 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField DateTxt;
-    private javax.swing.JTable appointmentDetailsTbl;
     private javax.swing.JTextField appointmentIDTxt;
-    private javax.swing.JTextField appointmentIDTxt4;
     private javax.swing.JTextField appointmentStatusTxt;
     private javax.swing.JTextField appointmentTypeTxt;
-    private javax.swing.JButton backJButton;
     private javax.swing.JButton backJButton1;
     private javax.swing.JTextField doctorNameTxt;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -412,7 +330,6 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField locationTxt;
     private javax.swing.JTextField patientNameTxt;
     // End of variables declaration//GEN-END:variables

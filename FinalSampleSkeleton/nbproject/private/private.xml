@@ -3,40 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/PatientRole/PatientWorkAreaJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/DoctorRole/ViewAppointmentJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/NurseWorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Role/DoctorRole.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/ReceptionistRole/ReceptionistWorkAreaJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/WorkQueue.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/UserAccount/UserAccountDirectory.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/PatientRole/CreateNewPatientJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/AdministrativeRole/ManageUserAccountJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/DoctorRole/PrescriptionJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/SystemAdminWorkArea/ManageEnterpriseAdminJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Utility/Validation.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Organization/Organization.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Operation/Operation.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Patient/Patient.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Operation/OperationDirectory.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Doctor/Doctor.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Patient/PatientDirectory.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Employee/Employee.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/WorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/LabTestWorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/LabTechnicianWorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Appointment/Prescription.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Utility/EmailClass.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Role/Role.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Employee/PersonDirectory.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/icon/location%2032x.png</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/Role/NurseRole.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/PatientRole/BookAppointmentJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/DoctorWorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/ReceptionistWorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/Business/WorkQueue/PharmacyWorkRequest.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/PatientRole/ViewPatientJPanel.java</file>
-            <file>file:/C:/Users/aditi/gitNow/main-aditiworks/Team-SAP/FinalSampleSkeleton/src/userinterface/DoctorRole/DoctorWorkAreaJPanel.java</file>
+            <file>file:/C:/Users/aditi/gitNow/a2/Team-SAP/FinalSampleSkeleton/src/userinterface/PatientRole/ViewAppointmentJPanel.java</file>
+            <file>file:/C:/Users/aditi/gitNow/a2/Team-SAP/FinalSampleSkeleton/src/userinterface/PatientRole/CreateNewPatientJPanel.java</file>
         </group>
     </open-files>
 </project-private>

@@ -9,6 +9,7 @@ import Business.Appointment.Appointment;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import Business.Operation.Operation;
 import Business.Organization.DoctorOrganization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
@@ -39,9 +40,10 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise=enterprise;
         this.userAccount = ua;  
         //viewDetailsJPanel.setVisible(false);
-        searchJPanel.setVisible(false);
+        //searchJPanel.setVisible(false);
         enterpriseLbl.setText(enterprise.getName());
         nameLbl.setText(ua.getEmployee().getName());
+        requestTestJButton.setVisible(false);
     }
 
     public void populateRequestTable(){
@@ -49,15 +51,20 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[5];
+            Object[] row = new Object[11];
             row[0] = request.getSender();
             row[1] = request.getReceiver();
             row[2] = ((NurseWorkRequest)request).getPatient();
             row[3] = request.getStatus();
-            row[4] = ((NurseWorkRequest)request).getAppointment();
-            //String result = ((LabTestWorkRequest) request).getTestResult();
-            //row[3] = result == null ? "Waiting" : result;
-            
+            Appointment app = ((NurseWorkRequest)request).getAppointment();
+            row[4] = app;//request.getMessage() == null ? " " : request.getMessage() ;
+            row[5] = request;
+            row[6] = request.getMessage();
+            row[7] = app.getStatus();
+            Operation opr= app.getOperation() == null ? null : app.getOperation() ;
+            row[8] = opr.getStatus() == null ? "" : opr.getStatus();
+            row[9] = opr.getOprType();
+            row[10] = opr.getOperationDate() == null ? "" : opr.getOperationDate();
             model.addRow(row);
         }
     }
@@ -76,40 +83,31 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         requestTestJButton = new javax.swing.JButton();
         buttonPanel = new javax.swing.JPanel();
         viewReqBtn = new javax.swing.JButton();
-        searchReqBtn = new javax.swing.JButton();
         refreshTestJButton = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         enterpriseLbl = new javax.swing.JLabel();
         enterpriseLabel1 = new javax.swing.JLabel();
         nameLbl = new javax.swing.JLabel();
         viewDetailsBtn = new javax.swing.JButton();
-        searchJPanel = new javax.swing.JPanel();
-        searchclosebtn1 = new javax.swing.JButton();
-        searchPatientIDcmb = new javax.swing.JComboBox();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
-        searchSearchBtn = new javax.swing.JButton();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
-        searchPatientNamecmb = new javax.swing.JComboBox();
-        searchEmailTxt = new javax.swing.JTextField();
-        searchRequestIdCmb = new javax.swing.JComboBox();
         btnManageBedAssngmt = new javax.swing.JButton();
+        btnAssignToMe = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Sender", "Receiver", "Patient", "Status", "Appointment", "Request ID", "Message"
+                "Sender", "Receiver", "Patient", "Status", "Appointment Date", "Request ID", "Message", "Appointment Status", "Operation Status", "Operation Type", "Operation Date"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -138,13 +136,6 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        searchReqBtn.setText("Search Request");
-        searchReqBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchReqBtnActionPerformed(evt);
-            }
-        });
-
         refreshTestJButton.setText("Refresh");
         refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,21 +160,18 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(buttonPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewReqBtn))
+                .addGap(23, 23, 23)
+                .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(buttonPanelLayout.createSequentialGroup()
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
                         .addComponent(enterpriseLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(enterpriseLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
                         .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(buttonPanelLayout.createSequentialGroup()
-                        .addComponent(viewReqBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(searchReqBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(refreshTestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(372, Short.MAX_VALUE))
+                    .addComponent(refreshTestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(257, Short.MAX_VALUE))
         );
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,7 +188,6 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(4, 4, 4)))
                 .addGroup(buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewReqBtn)
-                    .addComponent(searchReqBtn)
                     .addComponent(refreshTestJButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -212,103 +199,6 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        searchJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Search"));
-        searchJPanel.setToolTipText("");
-        searchJPanel.setAutoscrolls(true);
-
-        searchclosebtn1.setText("Close");
-        searchclosebtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchclosebtn1ActionPerformed(evt);
-            }
-        });
-
-        searchPatientIDcmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel11.setText("Patient ID");
-
-        jLabel12.setText("Patient Name");
-
-        jLabel13.setText("Request ID");
-
-        searchSearchBtn.setText("Search");
-        searchSearchBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchSearchBtnActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setText("Patient Email ID");
-
-        jLabel18.setText("Date");
-
-        searchPatientNamecmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        searchRequestIdCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout searchJPanelLayout = new javax.swing.GroupLayout(searchJPanel);
-        searchJPanel.setLayout(searchJPanelLayout);
-        searchJPanelLayout.setHorizontalGroup(
-            searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchJPanelLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchJPanelLayout.createSequentialGroup()
-                        .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(searchclosebtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel11))
-                        .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(searchJPanelLayout.createSequentialGroup()
-                                .addGap(58, 58, 58)
-                                .addComponent(searchSearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(searchJPanelLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(searchEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(searchJPanelLayout.createSequentialGroup()
-                                        .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(searchPatientIDcmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(searchPatientNamecmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(36, 36, 36)
-                                        .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel18)
-                                            .addGroup(searchJPanelLayout.createSequentialGroup()
-                                                .addComponent(jLabel13)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(searchRequestIdCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                        .addGap(0, 12, Short.MAX_VALUE))
-                    .addGroup(searchJPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        searchJPanelLayout.setVerticalGroup(
-            searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(searchJPanelLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(searchJPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addGap(15, 15, 15)
-                        .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel12)
-                            .addComponent(searchPatientNamecmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel18))
-                        .addGap(18, 18, 18)
-                        .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel14)
-                            .addComponent(searchEmailTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel13)
-                        .addComponent(searchPatientIDcmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(searchRequestIdCmb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
-                .addGroup(searchJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(searchclosebtn1)
-                    .addComponent(searchSearchBtn))
-                .addContainerGap())
-        );
-
         btnManageBedAssngmt.setText("Manage Bed Assignment");
         btnManageBedAssngmt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -316,29 +206,40 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnAssignToMe.setText("Assign To Me");
+        btnAssignToMe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignToMeActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Nurse.PNG"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(viewDetailsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36)
-                        .addComponent(requestTestJButton)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnManageBedAssngmt))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnManageBedAssngmt)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAssignToMe, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(requestTestJButton))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(174, 174, 174)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 771, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -351,13 +252,12 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(viewDetailsBtn)
                     .addComponent(requestTestJButton)
-                    .addComponent(btnManageBedAssngmt))
-                .addGap(65, 65, 65)
-                .addComponent(searchJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                    .addComponent(btnManageBedAssngmt)
+                    .addComponent(btnAssignToMe))
+                .addGap(27, 27, 27)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(41, Short.MAX_VALUE))
         );
-
-        searchJPanel.getAccessibleContext().setAccessibleName("Search JPanel");
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
@@ -391,7 +291,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             if(request.getStatus().equals("New"))
             {
             //sender, receiver, pateint,status, message
-            Object[] row = new Object[7];
+            Object[] row = new Object[11];
             row[0] = request.getSender();
             row[1] = request.getReceiver();
             row[2] = ((NurseWorkRequest)request).getPatient();
@@ -399,27 +299,21 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             
             //String result = ((LabTestWorkRequest) request).getTestResult();
             //row[3] = result == null ? "Waiting" : result;
-            
-            row[4] = ((NurseWorkRequest)request).getAppointment();//request.getMessage() == null ? " " : request.getMessage() ;
+            Appointment app = ((NurseWorkRequest)request).getAppointment();
+            row[4] = app;//request.getMessage() == null ? " " : request.getMessage() ;
             row[5] = request;
             row[6] = request.getMessage();
+            row[7] = app.getStatus();
+            Operation opr= app.getOperation() == null ? null : app.getOperation() ;
+            row[8] = opr.getStatus() == null ? "" : opr.getStatus();
+            row[9] = opr.getOprType();
+            row[10] = opr.getOperationDate() == null ? "" : opr.getOperationDate();
             model.addRow(row);
             
         }
         }
         
     }//GEN-LAST:event_viewReqBtnActionPerformed
-
-    private void searchReqBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchReqBtnActionPerformed
-        // TODO add your handling code here:
-        searchJPanel.setVisible(true);
-        
-    }//GEN-LAST:event_searchReqBtnActionPerformed
-
-    private void searchclosebtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchclosebtn1ActionPerformed
-        // TODO add your handling code here:
-        searchJPanel.setVisible(false);
-    }//GEN-LAST:event_searchclosebtn1ActionPerformed
 
     private void viewDetailsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewDetailsBtnActionPerformed
         // TODO add your handling code here:
@@ -457,34 +351,49 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnManageBedAssngmtActionPerformed
 
-    private void searchSearchBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchSearchBtnActionPerformed
+    private void btnAssignToMeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignToMeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_searchSearchBtnActionPerformed
+        
+        int selectedRow = workRequestJTable.getSelectedRow();
+        
+        if (selectedRow < 0){
+            return;
+        }
+        
+        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 5);
+        
+        if(request.getReceiver().equals(userAccount) )
+        {
+             JOptionPane.showMessageDialog(null, "Already assigned!");
+            return;
+
+        }
+        
+        else if( request.getReceiver()!=null &&request.getReceiver().equals(userAccount) )
+        {
+              JOptionPane.showMessageDialog(null, "Already handled, cannot assign!");
+            return;
+            
+        }
+        request.setReceiver(userAccount);
+        request.setStatus("Pending");
+        populateRequestTable();
+        
+    }//GEN-LAST:event_btnAssignToMeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssignToMe;
     private javax.swing.JButton btnManageBedAssngmt;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel enterpriseLbl;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel nameLbl;
     private javax.swing.JButton refreshTestJButton;
     private javax.swing.JButton requestTestJButton;
-    private javax.swing.JTextField searchEmailTxt;
-    private javax.swing.JPanel searchJPanel;
-    private javax.swing.JComboBox searchPatientIDcmb;
-    private javax.swing.JComboBox searchPatientNamecmb;
-    private javax.swing.JButton searchReqBtn;
-    private javax.swing.JComboBox searchRequestIdCmb;
-    private javax.swing.JButton searchSearchBtn;
-    private javax.swing.JButton searchclosebtn1;
     private javax.swing.JButton viewDetailsBtn;
     private javax.swing.JButton viewReqBtn;
     private javax.swing.JTable workRequestJTable;

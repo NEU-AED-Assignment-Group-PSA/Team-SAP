@@ -18,8 +18,10 @@ import Business.Person.Person;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTechnicianWorkRequest;
 import java.awt.CardLayout;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
+import javafx.util.converter.LocalDateStringConverter;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -64,7 +66,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
             //nothing
         } else {
             for (Enterprise enterprise : enterprsList) {
-                if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab)) {
+                if (enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())) {
                     {
                         cmbLabs.addItem(enterprise);
                     }
@@ -92,6 +94,9 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         cmbLabs = new javax.swing.JComboBox();
         submitBtn = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 255, 255));
 
         assignTestTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -153,6 +158,8 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/assignLabTest.PNG"))); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,9 +172,6 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                         .addGap(205, 205, 205)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(229, 229, 229)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel3)
@@ -177,7 +181,13 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                             .addComponent(submitBtn)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(testTypeTxt)
-                                .addComponent(cmbLabs, 0, 171, Short.MAX_VALUE)))))
+                                .addComponent(cmbLabs, 0, 171, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(147, 147, 147)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(182, 182, 182)
+                        .addComponent(jLabel4)))
                 .addContainerGap(271, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -199,7 +209,9 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 .addComponent(submitBtn)
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 227, Short.MAX_VALUE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -209,12 +221,12 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
         String testType = testTypeTxt.getText();
-        //String labName = cmbLabs.getSelectedItem();
-        
+        //String labName = cmbLabs.getActionCommand();
+
+        //String medsPrescribed= medsPrescribedTxt.getText();
         if (testType.equals("")) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be empty");
-        }
-        else
+            JOptionPane.showMessageDialog(null, "Test Name cannot be empty");
+        }   else
         { LabTechnicianWorkRequest workreq = new LabTechnicianWorkRequest();
                 workreq.setStatus("New");
                 appointment.setStatus(Appointment.AppointmentStatus.MarkforTest.getValue());
@@ -226,11 +238,11 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 //workreq.setReceiver(userAccount);
                 Lab lab = (Lab) cmbLabs.getSelectedItem();
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
-                UserAccount recepUseracc = null;
+                //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
-                workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
-        }
+                //workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
+   }
         populateLabTest();
         //String medsPrescribed= medsPrescribedTxt.getText();
 //        if (testType.equals("") || labName.equals("")) {
@@ -246,7 +258,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
 //            //medsPrescribedTxt.setText("");
 //            //appointment.setLabTestList(labTestList);
 //            JOptionPane.showMessageDialog(null, "Lab test assigned sucessfully");
-            
+
 //        }
     }//GEN-LAST:event_submitBtnActionPerformed
 
@@ -254,14 +266,15 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) assignTestTbl.getModel();
         model.setRowCount(0);
         //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
-        //for (LabTest labTest : labTestList.getLabTestList()) {
-            Object[] row = new Object[3];
+        for (LabTest labTest : labTestList.getLabTestList()) {
+            Object[] row = new Object[4];
             row[0] = new Date();
-            row[1] = testTypeTxt.getText();
-            row[2] = cmbLabs.getSelectedItem();
-            row[3] = patient.getName();
+            row[1] = labTest.getType();
+            row[2] = labTest.getLab();
+            row[3] = labTest.getPatient();
             model.addRow(row);
-        
+            
+        }
     }
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
@@ -281,6 +294,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton submitBtn;
     private javax.swing.JTextField testTypeTxt;
