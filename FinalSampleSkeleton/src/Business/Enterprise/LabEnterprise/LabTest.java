@@ -5,7 +5,6 @@
  */
 package Business.Enterprise.LabEnterprise;
 
-import Business.Doctor.Doctor;
 import Business.Employee.Employee;
 import Business.Patient.Patient;
 import Business.Person.Person;

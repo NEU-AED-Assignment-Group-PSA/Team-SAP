@@ -5,10 +5,10 @@
  */
 package Business.Enterprise.ClinicEnterprise;
 
-import Business.Doctor.Doctor;
 import Business.Enterprise.Enterprise;
 import Business.Location.Location;
 import Business.Department.Receptionist;
+import Business.Employee.Employee;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -17,7 +17,7 @@ import java.util.ArrayList;
  * @author aditi
  */
 public class Clinic extends Enterprise{
-    Doctor doctor;
+    Employee doctor;
     Location location;
     Receptionist receptionist;
     

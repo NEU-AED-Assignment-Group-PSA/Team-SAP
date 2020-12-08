@@ -7,7 +7,6 @@ package Business.Enterprise.LabEnterprise;
 
 import Business.Department.Receptionist;
 import Business.Department.DepartmentDirectory;
-import Business.Doctor.DoctorDirectory;
 import Business.Enterprise.Enterprise;
 import Business.Location.Location;
 import Business.Nurse.NurseDirectory;

@@ -54,4 +54,14 @@ public class PatientDirectory {
             }
         }
     }
+    
+    
+    public Patient findPatientById(int patientId){
+        for(Patient patient : patientList){
+            if(patient.getId() == patientId){
+                return patient;
+            }
+        }
+        return null;
+    }
 }

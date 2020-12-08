@@ -6,12 +6,12 @@
 package Business.Enterprise.HospitalEnterprise;
 
 import Business.Department.DepartmentDirectory;
-import Business.Doctor.DoctorDirectory;
 import Business.Enterprise.Enterprise;
 import Business.Location.Location;
 import Business.Nurse.NurseDirectory;
 import Business.Patient.PatientDirectory;
 import Business.Department.Receptionist;
+import Business.Person.EmployeeDirectory;
 import Business.Role.Role;
 import java.util.ArrayList;
 
@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class Hospital extends Enterprise {
     int id;
-    DoctorDirectory doctorList;
+    EmployeeDirectory doctorList;
     NurseDirectory nurseList;
     Location location;
     DepartmentDirectory departmentList;

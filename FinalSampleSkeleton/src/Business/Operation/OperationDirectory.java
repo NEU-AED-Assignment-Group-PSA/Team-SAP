@@ -5,7 +5,8 @@
  */
 package Business.Operation;
 
-import Business.Doctor.Doctor;
+
+import Business.Employee.Employee;
 import Business.Patient.Patient;
 import java.util.List;
 
@@ -52,7 +53,7 @@ public class OperationDirectory {
         return null;
     }
 
-    public void updateOperation(int operationNumber, String operationDate, String operationDescription, double operationCharge, String status, Patient patient, Doctor doctor){
+    public void updateOperation(int operationNumber, String operationDate, String operationDescription, double operationCharge, String status, Patient patient, Employee doctor){
         for(Operation operation: operationlist){
             if(operation.getOperationNumber()==(operationNumber)){
                 operation.setOperationDate(operationDate);

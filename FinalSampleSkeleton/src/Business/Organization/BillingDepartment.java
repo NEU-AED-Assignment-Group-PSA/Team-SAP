@@ -8,7 +8,7 @@ package Business.Organization;
 import Business.Appointment.Appointment;
 import Business.Bill.Bill;
 import Business.Department.Receptionist;
-import Business.Doctor.Doctor;
+import Business.Employee.Employee;
 import Business.Patient.Patient;
 import Business.Role.DoctorRole;
 import Business.Role.ReceptionistRole;
@@ -24,7 +24,7 @@ public class BillingDepartment extends Organization{
     String billingId;
     String billIssuer;
     Patient patient;
-    Doctor doctor;
+    Employee doctor;
     Appointment appointment;
     Bill bill;
     String paymentStatus;
