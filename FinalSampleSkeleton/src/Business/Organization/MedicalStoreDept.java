@@ -9,6 +9,7 @@ import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Location.Location;
 import Business.Medicine.MedicineDirectory;
 import Business.Appointment.Prescription;
+import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Role.DoctorRole;
 import Business.Role.NurseRole;
 import Business.Role.ReceptionistRole;
@@ -28,7 +29,8 @@ public class MedicalStoreDept extends Organization {
 
     public MedicalStoreDept() {
         super(Organization.Type.MedicalStore.getValue());
-        medicineList = new MedicineDirectory();
+        //this.medicineList= this.
+       // medicineList = new MedicineDirectory();
       // super(type);
     }
 
