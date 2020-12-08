@@ -12,6 +12,7 @@ import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
+import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,18 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         this.patient = patient;
         this.appointment = appointment;
         populatePatientData();
+        disableFields();
+    }
+    
+    private void disableFields() {
+        txtPatientName.setEditable(false);
+        txtDoctor.setEditable(false);
+        txtAppointmetId.setEditable(false);
+        txtAppointmetDate.setEditable(false);
+        txtAppointmentType.setEditable(false);
+        txtVisingCharge.setEditable(false);
+        txtOperationCharge.setEditable(false);
+        txtTotalCharge.setEditable(false);
     }
     
     public void populatePatientData(){
@@ -231,9 +244,13 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-
-       
-
+        userProcessContainer.remove(this);
+        //Component[] componentArray =userProcessContainer.getComponents();
+        //Component component = componentArray[componentArray.length - 1];
+        //ReceptionistWorkAreaJPanel sysAdminwajp = (ReceptionistWorkAreaJPanel) component;
+        //sysAdminwajp.populatePatients();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtAppointmetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAppointmetDateActionPerformed
@@ -241,6 +258,19 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtAppointmetDateActionPerformed
 
     private void txtGenerateBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenerateBillActionPerformed
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Close)){
+            JOptionPane.showMessageDialog(null, "Bill is already generated","Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel)){
+            JOptionPane.showMessageDialog(null, "Appointment is cancelled so bill will not generate","Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        if(enterprise.getBillDirectory() == null){
+            enterprise.setBillDirectory(new BillDirectory());
+            enterprise.getBillDirectory().setBillList(new ArrayList<>());
+        }
         List<Bill> bills =  enterprise.getBillDirectory().getBillList();
         Bill bill = new Bill();
         bill.setAppointment(appointment);
@@ -249,6 +279,13 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         bill.setStatus("Paid");
         bill.setTotalCharges(Double.valueOf(txtTotalCharge.getText()));
         bills.add(bill);
+        appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
+        for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
+            if(appointment.getAppointmentId() == this.appointment.getAppointmentId()){
+                appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
+            }
+        }
+        txtGenerateBill.setEnabled(false);
         JOptionPane.showMessageDialog(null, "Bill generated successfully!","Information", JOptionPane.INFORMATION_MESSAGE);
         //return;
     }//GEN-LAST:event_txtGenerateBillActionPerformed
@@ -279,4 +316,6 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtTotalCharge;
     private javax.swing.JTextField txtVisingCharge;
     // End of variables declaration//GEN-END:variables
+
+    
 }
