@@ -6,7 +6,6 @@
 package Business.Operation;
 
 import Business.Bed.Bed;
-import Business.Doctor.Doctor;
 import Business.Employee.Employee;
 import Business.Patient.Patient;
 import Business.Person.Person;

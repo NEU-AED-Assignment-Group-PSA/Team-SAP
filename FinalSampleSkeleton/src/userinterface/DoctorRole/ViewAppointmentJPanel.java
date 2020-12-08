@@ -6,7 +6,6 @@
 package userinterface.DoctorRole;
 
 import Business.Appointment.Appointment;
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;

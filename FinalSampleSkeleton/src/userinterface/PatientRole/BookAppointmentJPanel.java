@@ -7,7 +7,6 @@ package userinterface.PatientRole;
 
 import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -249,6 +248,14 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             System.out.println("expection in Book appointmentJPanel");
         }
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
+        for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
+            if((appointment.getDate().compareTo(date1) == 0) && (appointment.getDoctor().getId() == doctor.getId())){
+                JOptionPane.showMessageDialog(null, "Patient has already booked appointment!", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        }
+        
+        
         Appointment appoint = patient.getAppointmentDirectory().createAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
         
         //get user accout of dcotor selected
@@ -265,7 +272,10 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
            }
        }
         
-        
+        txtPatientName.setText("");
+        cmbDoctor.setSelectedIndex(0);
+        txtAppointmetDate.setText("");
+        txtAppointmentType.setSelectedIndex(0);
         //add in work queue for assigned doctor
         DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
         drWorkReq.setMessage("New Appointment");
