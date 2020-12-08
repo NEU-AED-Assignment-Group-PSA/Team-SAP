@@ -8,7 +8,6 @@ package userinterface.PatientRole;
 import Business.Appointment.Appointment;
 import Business.Appointment.Appointment.AppointmentStatus;
 import Business.Appointment.AppointmentDirectory;
-import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;

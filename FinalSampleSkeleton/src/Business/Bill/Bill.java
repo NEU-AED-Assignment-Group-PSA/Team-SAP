@@ -6,7 +6,6 @@
 package Business.Bill;
 
 import Business.Appointment.Appointment;
-import Business.Doctor.Doctor;
 import Business.Employee.Employee;
 import Business.Patient.Patient;
 
