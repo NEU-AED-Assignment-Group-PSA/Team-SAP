@@ -6,6 +6,7 @@ package Business.WorkQueue;
 
 import Business.Appointment.Appointment;
 import Business.Patient.Patient;
+import Business.UserAccount.UserAccount;
 
 /**
  *
@@ -26,6 +27,8 @@ public class LabTechnicianWorkRequest extends WorkRequest{
     */
     private Patient patient;
     private Appointment appointment;
+    //private UserAccount doctorUserAccount;
+
 
     public Patient getPatient() {
         return patient;

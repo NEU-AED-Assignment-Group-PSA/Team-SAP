@@ -14,10 +14,13 @@ import Business.Organization.Organization;
 import static Business.Organization.Organization.Type.Lab;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.DoctorWorkRequest;
+import Business.WorkQueue.LabTechnicianWorkRequest;
 import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.ReceptionistWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -153,7 +156,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 430, -1, -1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -263,7 +266,39 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         String testDate = testDateTxt.getText();
         String technicianName = technicianNameTxt.getText();
         //if(testName.equals("") || testDate.equals("") || technicianName.equals(""))
-       Appointment app= (Appointment)cmbStatusType.getSelectedItem();
+       Appointment app= appointment; //(Appointment)cmbStatusType.getSelectedItem();
+       //to do work request to send to doctor
+        //add in work queue for assigned doctor
+        DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
+        drWorkReq.setMessage("Test Completed, please analyse reports");
+        
+        UserAccount drUserAcc = request.getSender();
+        
+        drWorkReq.setReceiver(drUserAcc);
+        drWorkReq.setSender(userAccount);
+        drWorkReq.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
+        
+        LabTechnicianWorkRequest lwr = ((LabTechnicianWorkRequest)(request));//.getPatient()
+        
+        
+        drWorkReq.setPatient(lwr.getPatient());
+        drWorkReq.setAppointment(lwr.getAppointment());
+        drWorkReq.setRequestDate(new Date());
+        //drWorkReq.setResolveDate(new Date());
+        drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
+        JOptionPane.showMessageDialog(null, "Lab Test reports submitted", "Information", JOptionPane.INFORMATION_MESSAGE);
+       // txtPatientName.setText("");
+       // txtAppointmetDate.setText("");
+        //txtAppointmentType.setSelectedIndex(0);
+       // cmbDoctor.setSelectedIndex(0);
+       
+       
+       
+       
+       
+       
+       
+       //
        DefaultTableModel dtm = (DefaultTableModel)labTestTbl.getModel();
        dtm.setRowCount(0);        
        for (Appointment.AppointmentStatus type : Appointment.AppointmentStatus.values()){

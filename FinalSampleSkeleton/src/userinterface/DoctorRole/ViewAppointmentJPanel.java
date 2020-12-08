@@ -283,6 +283,14 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
 
     private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
         // TODO add your handling code here:
+        
+         userProcessContainer.remove(this);
+        //Component[] componentArray =userProcessContainer.getComponents();
+        //Component component = componentArray[componentArray.length - 1];
+        //NurseWorkAreaJPanel sysAdminwajp = (NurseWorkAreaJPanel) component;
+        //sysAdminwajp.populateRequestTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButton1ActionPerformed
 
     private void appointmentIDTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appointmentIDTxtActionPerformed

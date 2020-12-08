@@ -360,6 +360,9 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         
         //patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
         
+        //pharmacy work request created--todo
+        //Phar
+        
         
         //dateTxt.setText("");
         patientNameTxt.setText("");
@@ -376,7 +379,12 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
         populateMedicineCmb();
+         DefaultTableModel model = (DefaultTableModel) PrescriptionTable.getModel();
         
+        model.setRowCount(0);
+        Prescription prescription = appointment.getPrescription();
+        
+        prescription.getMedicinePrescribed().clear();
     }//GEN-LAST:event_cmbPharmacyActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed

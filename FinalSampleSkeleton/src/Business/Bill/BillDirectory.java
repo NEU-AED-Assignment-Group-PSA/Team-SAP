@@ -14,4 +14,14 @@ import java.util.List;
 public class BillDirectory {
     List<Bill> billList;
     //static int count=1;
+
+    public List<Bill> getBillList() {
+        return billList;
+    }
+
+    public void setBillList(List<Bill> billList) {
+        this.billList = billList;
+    }
+    
+    
 }

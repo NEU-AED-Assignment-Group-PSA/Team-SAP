@@ -7,10 +7,12 @@ package Business.Appointment;
 
 import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTest;
+import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Operation.Operation;
 import Business.Patient.Patient;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,11 +29,19 @@ public class Appointment {
     String status;  //new, booked, cancelled, rescheduled, completed , mark for billing
     String location;
     private Operation operation;
-    List<LabTest> labTestList;
+    LabTestDirectory labTestList;
     Prescription prescription;
 
     public Prescription getPrescription() {
         return prescription;
+    }
+
+    public LabTestDirectory getLabTestList() {
+        return labTestList;
+    }
+
+    public void setLabTestList(LabTestDirectory labTestList) {
+        this.labTestList = labTestList;
     }
 
     public void setPrescription(Prescription prescription) {
@@ -41,6 +51,7 @@ public class Appointment {
     public Appointment(int count){
         this.appointmentId = count;
         prescription= new Prescription();
+        labTestList = new LabTestDirectory();
     }
 
     public int getAppointmentId() {
@@ -109,13 +120,7 @@ public class Appointment {
 
     
 
-    public List<LabTest> getLabTestList() {
-        return labTestList;
-    }
-
-    public void setLabTestList(List<LabTest> labTestList) {
-        this.labTestList = labTestList;
-    }
+   
     
     
     @Override

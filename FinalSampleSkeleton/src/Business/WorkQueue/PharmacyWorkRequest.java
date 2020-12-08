@@ -4,6 +4,12 @@
  */
 package Business.WorkQueue;
 
+import Business.Employee.Employee;
+import Business.Medicine.Medicine;
+import Business.Patient.Patient;
+import static com.db4o.foundation.Iterators.any;
+import java.util.Map;
+
 /**
  *
  * @author raunak
@@ -21,14 +27,40 @@ public class PharmacyWorkRequest extends WorkRequest{
     
     
     */
-    private String testResult;
+    private Patient patient;
+    private Employee doctor;
+    private Map<Medicine,Double> medicineMap;
 
-    public String getTestResult() {
-        return testResult;
+    public Patient getPatient() {
+        return patient;
     }
 
-    public void setTestResult(String testResult) {
-        this.testResult = testResult;
+    public void setPatient(Patient patient) {
+        this.patient = patient;
+    }
+
+    public Employee getDoctor() {
+        return doctor;
+    }
+
+    public void setDoctor(Employee doctor) {
+        this.doctor = doctor;
+    }
+
+    public Map<Medicine,Double> getMedicineMap() {
+        return medicineMap;
+    }
+
+    public void setMedicineMap(Map<Medicine,Double> medicineMap) {
+        this.medicineMap = medicineMap;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static void setCount(int count) {
+        WorkRequest.count = count;
     }
     
     
