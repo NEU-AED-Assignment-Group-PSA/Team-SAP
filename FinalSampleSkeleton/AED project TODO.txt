@@ -6,7 +6,9 @@ pending-> validation for enterprise head multiple
 restrict doc appotmnt booking to 5 per day
 rec cancels app-> can dr still see?
 view appointmt - mark for billing status in drop down to poulate table for billing
+
 doctor role-> populate table only for non cancelled appointments
+
 username uniqueness - staff add- aditi
 hospital - pharmacy not medoical store
 Team NAme- Team SAP
@@ -18,9 +20,18 @@ flow to check-> patient histry to check as aditi removed code
 
 view preseciptions-> to see all prescribed add nre panel
 prescribe medicine work request for phramacy new
+
 testing apointment status change by dr -> overriding
 appointmt complte button-> check receptionist wr
 
 pharmacy ->> prerna, suhani
 
 lab -->> receptionist
+
+
+
+Prerana - 
+
+view preseciptions-> to see all prescribed add nre panel done
+prescribe medicine work request for phramacy new  done
+doctor role-> populate table only for non cancelled appointments
