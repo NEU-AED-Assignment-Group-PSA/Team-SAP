@@ -14,6 +14,7 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -39,6 +40,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.ecosystem = ecosystem;
         this.patient = patient;
+        patientNameTxt.setText(patient.getName());
         
     }
 
@@ -251,7 +253,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel3)
                             .addComponent(familyHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(29, 29, 29)
@@ -285,9 +287,9 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddPatientDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientDetailsActionPerformed
-       
+       /*
         
-        /*String patientName=patientNameTxt.getText();
+        String patientName=patientNameTxt.getText();
         String previousDiagnosis = previousDiagnosisTxt.getText();
         String medsalergies = medAlergiesTxt.getText();
         if(patientName.equals("") || previousDiagnosis.equals("") || medsalergies.equals(""))
@@ -327,8 +329,19 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddPatientDetailsActionPerformed
 
     public void populatePatientDetails(){
-        
+        DefaultTableModel model = (DefaultTableModel) patientDetailsTbl.getModel();
+        model.setRowCount(0);
+            Object[] row = new Object[6];
+            row[0] = patient.getName();
+            row[1] = previousDiagnosisTxt.getText();
+            row[2] = medAlergiesTxt.getText();
+            row[3] = alergiesTxt.getText();
+            row[4] = surgeryHistoryTxt.getText();
+            row[5] = familyHistoryTxt.getText();
+            model.addRow(row);
+            
     }
+    
     
     private void patientNameTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_patientNameTxtActionPerformed
         // TODO add your handling code here:

@@ -12,13 +12,12 @@ import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Network.Network;
 import Business.Organization.Organization;
-import static Business.Organization.Organization.Type.Lab;
 import Business.Patient.Patient;
 import Business.Person.Person;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTechnicianWorkRequest;
 import java.awt.CardLayout;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -45,16 +44,17 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     private Organization organization;
     private Date createdOn;
 
-    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, LabTestDirectory labTestList, Network network, UserAccount userAccount, Organization organization) {
+    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Network network, UserAccount userAccount, Organization organization) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patient = patient;
         this.appointment = appointment;
-        this.labTestList = labTestList;
+        this.labTestList = appointment.getLabTestList();
         this.network = network;
         this.userAccount = userAccount;
         this.organization = organization;
         populateNetworkLabs();
+        populateLabTest();
     }
 
     void populateNetworkLabs() {
@@ -126,7 +126,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
 
         jLabel1.setText("Assign Lab Test");
 
-        jLabel2.setText("Test type/name :");
+        jLabel2.setText("Test Name :");
 
         jLabel3.setText("Lab :");
 
@@ -230,13 +230,26 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 workreq.setStatus("New");
                 appointment.setStatus(Appointment.AppointmentStatus.MarkforTest.getValue());
                 workreq.setMessage("New Patient for Lab test, please confirm a Test Date");
-                
+                workreq.setStatus("New");
+                workreq.setAppointment(appointment);
+                workreq.setMessage("Please conduct lab test!");
+                workreq.setRequestDate(createdOn == null ? new Date() : createdOn);
+                //workreq.setDoctorUserAccount(userAccount);
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);
                 //workreq.setDoctor(doctor);
                 //workreq.setReceiver(userAccount);
                 Lab lab = (Lab) cmbLabs.getSelectedItem();
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
+                LabTest labTest= new LabTest();
+                labTest.setLab(lab);
+                labTest.setLabTechnician(null);
+                labTest.setPatient(patient);
+                labTest.setName(testType);
+                labTest.setDoctor(appointment.getDoctor());
+                //labTest.setType(testType);
+                appointment.getLabTestList().addLabTest(labTest);
+                appointment.setStatus(Appointment.AppointmentStatus.MarkforTest.getValue());
                 //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
@@ -265,14 +278,21 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) assignTestTbl.getModel();
         model.setRowCount(0);
         //for (UserAccount ua : system.getUserAccountDirectory().getUserAccountList()) {s
+        if(labTestList==null)
+        {
+            labTestList= new LabTestDirectory();
+            appointment.setLabTestList(labTestList);
+        }
+        if(labTestList.getLabTestList() != null && !labTestList.getLabTestList().isEmpty()){
         for (LabTest labTest : labTestList.getLabTestList()) {
             Object[] row = new Object[4];
             row[0] = new Date();
-            row[1] = labTest.getType();
+            row[1] = labTest.getName();
             row[2] = labTest.getLab();
             row[3] = labTest.getPatient();
             model.addRow(row);
             
+        }
         }
     }
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
