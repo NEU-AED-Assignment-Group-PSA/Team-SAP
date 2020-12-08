@@ -22,4 +22,12 @@ public class PharmacyDirectory {
     //view
     
     //update
+
+    public List<Pharmacy> getPharmacyList() {
+        return pharmacyList;
+    }
+
+    public void setPharmacyList(List<Pharmacy> pharmacyList) {
+        this.pharmacyList = pharmacyList;
+    }
 }
