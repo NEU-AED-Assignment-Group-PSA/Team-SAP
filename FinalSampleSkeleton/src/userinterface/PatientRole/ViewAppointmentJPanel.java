@@ -82,6 +82,8 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         txtDoctor.setEditable(false);
         txtAppointmetDate.setEditable(false);
         txtAppointmentType.setEnabled(false);
+        txtAppointmentStatus.setEditable(false);
+        txtPatientId.setEditable(false);
     }
 
     private void populatePatientVisits(String status) {
@@ -424,6 +426,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             userinterface.PatientRole.GeneratePatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.GeneratePatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment);
             userProcessContainer.add("generatePatientBillJPanel",generatePatientBillJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
         }
         
     }//GEN-LAST:event_btnGenerateBillActionPerformed
