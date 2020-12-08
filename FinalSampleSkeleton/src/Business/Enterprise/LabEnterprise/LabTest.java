@@ -23,7 +23,7 @@ public class LabTest {
     Date createdOn;
     String status; //scheduled, in-process, complete
     Employee doctor;
-    Person labTechnician;
+    Employee labTechnician;
     private Patient patient;
     private Lab lab;
 
@@ -75,11 +75,11 @@ public class LabTest {
         this.doctor = doctor;
     }
 
-    public Person getLabTechnician() {
+    public Employee getLabTechnician() {
         return labTechnician;
     }
 
-    public void setLabTechnician(Person labTechnician) {
+    public void setLabTechnician(Employee labTechnician) {
         this.labTechnician = labTechnician;
     }
 
