@@ -10,7 +10,11 @@ import Business.Doctor.Doctor;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
+import static Business.Enterprise.Enterprise.EnterpriseType.Pharmacy;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Enterprise.PharmacyEnterprise.Pharmacy;
+import Business.Enterprise.PharmacyEnterprise.PharmacyDirectory;
+import Business.Medicine.Medicine;
 import Business.Medicine.MedicineDirectory;
 import Business.Network.Network;
 import Business.Operation.Operation;
@@ -29,6 +33,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -49,8 +54,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private MedicineDirectory medicineList;
     private EcoSystem ecosystem;
    // private LabTestDirectory labTestList;
-    private Employee receptionist;
+    private UserAccount receptionist;
     private Network network;
+    private Medicine medicine;
+    private PharmacyDirectory pharmacyList;
+    private Pharmacy pharmacy;
+ 
     //private EcoSystem ecosystem;
     
     /**
@@ -63,11 +72,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.userAccount = userAccount;
-        this.network=enterprise.getNetwork();;
+        this.network=enterprise.getNetwork();
         valueLabel.setText(enterprise.getName());
         this.doctor=userAccount.getEmployee();
         populateRequestTable();
         scheduleSurgeryJPanel.setVisible(false);
+        viewPrescriptionPanel.setVisible(false);
         //appointment.setAppointmentId(Integer.parseInt(appoinmtntDTxt.getText()));
         appoinmtntDTxt.setEditable(false);
     }
@@ -79,15 +89,21 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[2];
+            if(!((DoctorWorkRequest)request).getAppointment().getStatus().equals("Cancel")){
+            Object[] row = new Object[6];
             row[0] = ((DoctorWorkRequest)request).getPatient();//request.getMessage();
-            row[1] = ((DoctorWorkRequest)request).getAppointment();//getReceiver();
+            row[1] = ((DoctorWorkRequest)request).getAppointment();
+            row[2] = ((DoctorWorkRequest)request).getSender();
+            row[3] = ((DoctorWorkRequest)request).getAppointment().getStatus();//getReceiver();
+            row[4] = ((DoctorWorkRequest)request);//getReceiver();
+            row[5] = ((DoctorWorkRequest)request).getStatus();//getReceiver();
             //row[2] = request.getStatus();
 //            String result = ((LabTestWorkRequest) request).getTestResult();
             //row[3] = result == null ? "Waiting" : result;
             
             model.addRow(row);
         }
+    }
     }
 
     
@@ -107,7 +123,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel = new javax.swing.JLabel();
         btnViewAppointments = new javax.swing.JButton();
         btnAddPatientHistory = new javax.swing.JButton();
-        btnAssignNextDoctor = new javax.swing.JButton();
+        btnViewPrescription = new javax.swing.JButton();
         btnCompleted = new javax.swing.JButton();
         btnPrescribeMeds = new javax.swing.JButton();
         btnScheduleSurgery = new javax.swing.JButton();
@@ -127,22 +143,26 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         txtOprDescptn = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
+        viewPrescriptionPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        viewPrescriptionTbl = new javax.swing.JTable();
+        viewPresCloseBtn = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
         DoctorWorkAreaTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Patient Name", "Appointment Date"
+                "Patient Name", "Appointment Date", "Receptionist", "Appointment Status", "WorkReq Id", "WorkReq Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -151,7 +171,12 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(DoctorWorkAreaTable);
         if (DoctorWorkAreaTable.getColumnModel().getColumnCount() > 0) {
+            DoctorWorkAreaTable.getColumnModel().getColumn(0).setResizable(false);
             DoctorWorkAreaTable.getColumnModel().getColumn(1).setResizable(false);
+            DoctorWorkAreaTable.getColumnModel().getColumn(2).setResizable(false);
+            DoctorWorkAreaTable.getColumnModel().getColumn(3).setResizable(false);
+            DoctorWorkAreaTable.getColumnModel().getColumn(4).setResizable(false);
+            DoctorWorkAreaTable.getColumnModel().getColumn(5).setResizable(false);
         }
 
         refreshTestJButton.setText("Refresh");
@@ -180,10 +205,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnAssignNextDoctor.setText("View Prescription");
-        btnAssignNextDoctor.addActionListener(new java.awt.event.ActionListener() {
+        btnViewPrescription.setText("View Prescription");
+        btnViewPrescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAssignNextDoctorActionPerformed(evt);
+                btnViewPrescriptionActionPerformed(evt);
             }
         });
 
@@ -267,7 +292,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         scheduleSurgeryJPanelLayout.setHorizontalGroup(
             scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(oprDesc)
@@ -280,9 +305,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(closebtn)
                     .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
                         .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cmbOperationType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cmbOperationType, 0, 127, Short.MAX_VALUE)
                             .addComponent(appoinmtntDTxt)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
@@ -292,8 +317,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                             .addGroup(scheduleSurgeryJPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(dateTxt)))))
-                .addContainerGap())
+                                .addComponent(dateTxt))))))
         );
         scheduleSurgeryJPanelLayout.setVerticalGroup(
             scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,10 +343,70 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(scheduleSurgeryJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(closebtn)
                     .addComponent(saveButton))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/doctoMain.PNG"))); // NOI18N
+
+        viewPrescriptionPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Prescription"));
+
+        viewPrescriptionTbl.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Patient", "Doctor", "Medicines", "Dosage", "Pharmacy"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(viewPrescriptionTbl);
+        if (viewPrescriptionTbl.getColumnModel().getColumnCount() > 0) {
+            viewPrescriptionTbl.getColumnModel().getColumn(0).setResizable(false);
+            viewPrescriptionTbl.getColumnModel().getColumn(1).setResizable(false);
+            viewPrescriptionTbl.getColumnModel().getColumn(2).setResizable(false);
+            viewPrescriptionTbl.getColumnModel().getColumn(3).setResizable(false);
+            viewPrescriptionTbl.getColumnModel().getColumn(4).setResizable(false);
+        }
+
+        viewPresCloseBtn.setText("Close");
+        viewPresCloseBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewPresCloseBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout viewPrescriptionPanelLayout = new javax.swing.GroupLayout(viewPrescriptionPanel);
+        viewPrescriptionPanel.setLayout(viewPrescriptionPanelLayout);
+        viewPrescriptionPanelLayout.setHorizontalGroup(
+            viewPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPrescriptionPanelLayout.createSequentialGroup()
+                .addGap(108, 108, 108)
+                .addComponent(viewPresCloseBtn)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewPrescriptionPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 312, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116))
+        );
+        viewPrescriptionPanelLayout.setVerticalGroup(
+            viewPrescriptionPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(viewPrescriptionPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(viewPresCloseBtn)
+                .addGap(305, 305, 305))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -331,36 +415,41 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(163, 163, 163)
-                        .addComponent(refreshTestJButton))
+                        .addGap(258, 258, 258)
+                        .addComponent(btnCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(157, 157, 157)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnAssignNextDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(btnViewAppointments, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(btnAddPatientHistory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                                .addGap(54, 54, 54)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(46, 46, 46)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(146, 146, 146)
-                        .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(258, 258, 258)
-                        .addComponent(btnCompleted, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(96, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(144, 144, 144)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(btnViewAppointments, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addComponent(btnAddPatientHistory, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                                            .addComponent(btnScheduleLabTest, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(54, 54, 54)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(btnPrescribeMeds, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnScheduleSurgery, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnViewPrescription, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel6))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(163, 163, 163)
+                                .addComponent(refreshTestJButton)))))
+                .addContainerGap(267, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(viewPrescriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(35, 35, 35)
+                .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(137, 137, 137))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -376,28 +465,31 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnViewAppointments)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAddPatientHistory)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAssignNextDoctor))
+                                .addComponent(btnAddPatientHistory))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnPrescribeMeds)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnScheduleLabTest)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnScheduleSurgery))))
+                                .addComponent(btnViewPrescription)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnScheduleSurgery)
+                                    .addComponent(btnScheduleLabTest)))))
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(6, 6, 6)
                 .addComponent(btnCompleted)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(viewPrescriptionPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(368, Short.MAX_VALUE))
         );
 
         scheduleSurgeryJPanel.getAccessibleContext().setAccessibleName("Add Surgery");
+        viewPrescriptionPanel.getAccessibleContext().setAccessibleName("View Prescription");
     }// </editor-fold>//GEN-END:initComponents
 
     private void refreshTestJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshTestJButtonActionPerformed
@@ -437,10 +529,37 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnAddPatientHistoryActionPerformed
 
-    private void btnAssignNextDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignNextDoctorActionPerformed
+    private void btnViewPrescriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewPrescriptionActionPerformed
+        int selectedrow=DoctorWorkAreaTable.getSelectedRow();
+        if(selectedrow<0)
+        {
+            
+            JOptionPane.showMessageDialog(null, "Please select a Patient Appointment");
+            return;
+       
+        }
+           Appointment appointment = (Appointment) DoctorWorkAreaTable.getValueAt(selectedrow, 1);
+           //Patient patient = (Patient) DoctorWorkAreaTable.getValueAt(selectedrow, 0);
+           //Prescription prescri = (Appointment) DoctorWorkAreaTable.getValueAt(selectedrow, 1);
+           viewPrescriptionPanel.setVisible(true);        
+           //appoinmtntDTxt.setText(String.valueOf(appointment.getAppointmentId()));
+           //patientNameTxt.setText(patient.getName());
+           populatePrescription();
+    }//GEN-LAST:event_btnViewPrescriptionActionPerformed
 
-    }//GEN-LAST:event_btnAssignNextDoctorActionPerformed
-
+        public void populatePrescription(){
+         DefaultTableModel model = (DefaultTableModel) viewPrescriptionTbl.getModel();
+        model.setRowCount(0);
+        for (Map.Entry<Medicine, Double> entry : appointment.getPrescription().getMedicinePrescribed().entrySet()){
+         Object[] row = new Object[5];
+            row[0] = patient.getName();
+            row[1] = doctor.getName();
+            row[2] = entry.getKey();
+            row[3] = entry.getValue();
+            row[4] = pharmacy.getName();
+            model.addRow(row);
+    }
+        }
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         if(appoinmtntDTxt.getText().equals("") || patientNameTxt.getText().equals("") ||  dateTxt.getText().equals(""))
         {
@@ -534,6 +653,13 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             return;
        
         }
+        DoctorWorkRequest docWr = (DoctorWorkRequest) DoctorWorkAreaTable.getValueAt(selectedrow, 4);
+        //check if doc work req is closed - return
+        if(docWr.getStatus().equals("New")){
+            //JOptionPane.showMessageDialog(null, "Request is already processed");
+            docWr.setStatus("In Process");
+            //return;
+        }
            Appointment appointment = (Appointment) DoctorWorkAreaTable.getValueAt(selectedrow, 1);
            Patient patient = (Patient) DoctorWorkAreaTable.getValueAt(selectedrow, 0);
            scheduleSurgeryJPanel.setVisible(true);        
@@ -541,6 +667,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
            patientNameTxt.setText(patient.getName());
             //populate operation types
            populateOperationType();
+           populateRequestTable();
         
         
     }//GEN-LAST:event_btnScheduleSurgeryActionPerformed
@@ -565,11 +692,19 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a Patient Appointment");
             return;
         }
+        DoctorWorkRequest docWr = (DoctorWorkRequest) DoctorWorkAreaTable.getValueAt(selectedRow, 4);
+        //check if doc work req is closed - return
+        if(docWr.getStatus().equals("New")){
+            //JOptionPane.showMessageDialog(null, "Request is already processed");
+            docWr.setStatus("In Process");
+            //return;
+        }
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem, enterprise));
+        userProcessContainer.add("PrescriptionJPanel", new PrescriptionJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem, enterprise, userAccount));
         layout.next(userProcessContainer);
+        populateRequestTable();
     }//GEN-LAST:event_btnPrescribeMedsActionPerformed
 
     private void appoinmtntDTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appoinmtntDTxtActionPerformed
@@ -585,16 +720,23 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a Patient Appointment");
             return;
         }
+        DoctorWorkRequest docWr = (DoctorWorkRequest) DoctorWorkAreaTable.getValueAt(selectedRow, 4);
+        //check if doc work req is closed - return
+        if(docWr.getStatus().equals("New")){
+            //JOptionPane.showMessageDialog(null, "Request is already processed");
+            docWr.setStatus("In Process");
+            //return;
+        }
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment,network, userAccount, organization));
         layout.next(userProcessContainer);
+        populateRequestTable();
     }//GEN-LAST:event_btnScheduleLabTestActionPerformed
 
     private void btnCompletedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompletedActionPerformed
-        appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
-        JOptionPane.showMessageDialog(null, "Appointment status changed to Completed");
+        //appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
         
 //        appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
 //        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -604,32 +746,61 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         //0th patient 1th appoint
         //        appointment.setStaus("Mark for billing");
                 
+               int selectedRow = DoctorWorkAreaTable.getSelectedRow(); 
+               if(selectedRow<0)
+        {
+            JOptionPane.showMessageDialog(null, "Please select a Patient Appointment");
+            return;
+        }
+               patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
+        appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
+        receptionist = (UserAccount)DoctorWorkAreaTable.getValueAt(selectedRow, 2);
+        DoctorWorkRequest docWr = (DoctorWorkRequest) DoctorWorkAreaTable.getValueAt(selectedRow, 4);
+        //check if doc work req is closed - return
+        if(docWr.getStatus().equals("Close")){
+            JOptionPane.showMessageDialog(null, "Request is already processed");
+            return;
+        }
+        
+        docWr.setStatus("Close");
+        
+               ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
+                workreq.setStatus("New");
+                appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                workreq.setMessage("Prepare Bill for this Patient");
+                workreq.setSender(userAccount);
+                workreq.setPatient(patient);
+                workreq.setDoctor(doctor);
+                workreq.setReceiver(receptionist);
+                //Appointment appointment = (Appointment) 
+                receptionist.getWorkQueue().getWorkRequestList().add(workreq);
+                //UserAccount recepUseracc = null;
+                //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
+                //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
+                //workreq.setReceiver(receptionist.getUserAccountDirectory().getUserAccountList().get(0));
+                JOptionPane.showMessageDialog(null, "Appointment status changed to Mark for Billing & Doctor Request completed");
+                //JOptionPane.showMessageDialog(null, "Doctor Work status changed to Mark for Billing");
                 
-          /*      ReceptionistWorkRequest work = new ReceptionistWorkRequest();
-                work.setApp(appointment);
-                work.setPatient(patient);
-                work.setDoctor(doctor);
-                        work.setSender(userACcountDr);
-                        work.setReceiver(userAccount);
-                work.setStatus("Mark for billing")     ;
-                UserAccount Recuseracc;
-                useracc.getWorkQueue().getWorkRequestList().add(work);*/
     }//GEN-LAST:event_btnCompletedActionPerformed
 
     private void cmbOperationTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOperationTypeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbOperationTypeActionPerformed
 
+    private void viewPresCloseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPresCloseBtnActionPerformed
+        viewPrescriptionPanel.setVisible(false);
+    }//GEN-LAST:event_viewPresCloseBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DoctorWorkAreaTable;
     private javax.swing.JTextField appoinmtntDTxt;
     private javax.swing.JButton btnAddPatientHistory;
-    private javax.swing.JButton btnAssignNextDoctor;
     private javax.swing.JButton btnCompleted;
     private javax.swing.JButton btnPrescribeMeds;
     private javax.swing.JButton btnScheduleLabTest;
     private javax.swing.JButton btnScheduleSurgery;
     private javax.swing.JButton btnViewAppointments;
+    private javax.swing.JButton btnViewPrescription;
     private javax.swing.JButton closebtn;
     private javax.swing.JComboBox<String> cmbOperationType;
     private javax.swing.JTextField dateTxt;
@@ -641,6 +812,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JLabel oprDesc;
     private javax.swing.JTextField patientNameTxt;
     private javax.swing.JButton refreshTestJButton;
@@ -648,5 +820,8 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel scheduleSurgeryJPanel;
     private javax.swing.JTextArea txtOprDescptn;
     private javax.swing.JLabel valueLabel;
+    private javax.swing.JButton viewPresCloseBtn;
+    private javax.swing.JPanel viewPrescriptionPanel;
+    private javax.swing.JTable viewPrescriptionTbl;
     // End of variables declaration//GEN-END:variables
 }

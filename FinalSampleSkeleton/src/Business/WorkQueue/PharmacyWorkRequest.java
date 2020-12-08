@@ -4,10 +4,10 @@
  */
 package Business.WorkQueue;
 
+import Business.Appointment.Appointment;
 import Business.Employee.Employee;
 import Business.Medicine.Medicine;
 import Business.Patient.Patient;
-import static com.db4o.foundation.Iterators.any;
 import java.util.Map;
 
 /**
@@ -27,6 +27,7 @@ public class PharmacyWorkRequest extends WorkRequest{
     
     
     */
+    private Appointment appointment;
     private Patient patient;
     private Employee doctor;
     private Map<Medicine,Double> medicineMap;
@@ -61,6 +62,14 @@ public class PharmacyWorkRequest extends WorkRequest{
 
     public static void setCount(int count) {
         WorkRequest.count = count;
+    }
+
+    public Appointment getAppointment() {
+        return appointment;
+    }
+
+    public void setAppointment(Appointment appointment) {
+        this.appointment = appointment;
     }
     
     

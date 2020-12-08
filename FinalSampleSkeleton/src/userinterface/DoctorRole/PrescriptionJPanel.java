@@ -20,6 +20,7 @@ import Business.Network.Network;
 import Business.Organization.PharmacyOrganization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.PharmacyWorkRequest;
 import java.awt.CardLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -50,9 +51,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private AppointmentDirectory prescriptionList;
     private Enterprise enterprise;
     private EcoSystem ecosystem;
+    
 
     PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor,
-            MedicineDirectory medicineList,EcoSystem ecosystem, Enterprise enterprise) {
+            MedicineDirectory medicineList,EcoSystem ecosystem, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.appointment = appointment;
@@ -61,6 +63,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         this.ecosystem=ecosystem;
         this.medicineList = medicineList;
         this.enterprise= enterprise;
+        this.userAccount = userAccount;
         patientNameTxt.setText(patient.getName());
         doctorNameTxt.setText(doctor.getName());
         //docotr
@@ -207,6 +210,11 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         }
 
         medicneCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        medicneCmb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                medicneCmbActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Dosage :");
 
@@ -361,7 +369,25 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         //patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
         
         //pharmacy work request created--todo
-        //Phar
+        PharmacyWorkRequest phWr = new PharmacyWorkRequest();
+         phWr.setStatus("New");
+                //appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
+                phWr.setMessage("Prescribe medicines for this Patient");
+                phWr.setSender(userAccount);
+                phWr.setAppointment(appointment);
+                phWr.setDoctor(doctor);
+                phWr.setPatient(patient);
+                phWr.setMedicineMap(appointment.getPrescription().getMedicinePrescribed());
+                //phWr.setReceiver(receptionist);
+                //Appointment appointment = (Appointment) 
+                Pharmacy pharEnterprise =(Pharmacy) cmbPharmacy.getSelectedItem();
+                pharEnterprise.getWorkQueue().getWorkRequestList().add(phWr);
+                //UserAccount recepUseracc = null;
+                //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
+                //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
+                //workreq.setReceiver(receptionist.getUserAccountDirectory().getUserAccountList().get(0));
+                JOptionPane.showMessageDialog(null, "Medicine prescription request sent to Pharmacy");
+        
         
         
         //dateTxt.setText("");
@@ -395,6 +421,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void medicneCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medicneCmbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_medicneCmbActionPerformed
 
     
     void populatePrescribedMedicineTable(){

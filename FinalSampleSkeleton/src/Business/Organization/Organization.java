@@ -4,8 +4,6 @@
  */
 package Business.Organization;
 
-import Business.Bill.Bill;
-import Business.Bill.BillDirectory;
 import Business.Employee.Employee;
 import Business.Employee.PersonDirectory;
 import Business.Patient.Patient;
@@ -28,7 +26,6 @@ public abstract class Organization {
     private PersonDirectory employeeDirectory;
     private UserAccountDirectory userAccountDirectory;
     private PatientDirectory patientDirectory;
-    private BillDirectory billDirectory;
     //private BedManagementDepartment 
     private int organizationID;
     private static int counter=0;
@@ -68,10 +65,6 @@ public abstract class Organization {
         patientDirectory = new PatientDirectory();
         if(patientDirectory.getPatientList() == null){
             patientDirectory.setPatientList(new ArrayList<Patient>());
-        }
-        billDirectory = new BillDirectory();
-        if(billDirectory.getBillList() == null){
-            billDirectory.setBillList(new ArrayList<Bill>());
         }
         organizationID = counter;
         ++counter;
@@ -115,14 +108,6 @@ public abstract class Organization {
         this.patientDirectory = patientDirectory;
     }
 
-    public BillDirectory getBillDirectory() {
-        return billDirectory;
-    }
-
-    public void setBillDirectory(BillDirectory billDirectory) {
-        this.billDirectory = billDirectory;
-    }
-    
     @Override
     public String toString() {
         return name;
