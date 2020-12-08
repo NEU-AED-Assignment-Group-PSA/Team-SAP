@@ -148,7 +148,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(18, 18, 18)
                         .addComponent(lblSelectedNode))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(569, Short.MAX_VALUE))
+                .addContainerGap(565, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,7 +169,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jSplitPane.setLeftComponent(jPanel1);
 
-        jPanel2.setBackground(new java.awt.Color(145, 209, 255));
+        jPanel2.setBackground(new java.awt.Color(153, 204, 255));
 
         btnManageNetwork.setBackground(new java.awt.Color(255, 255, 255));
         btnManageNetwork.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -209,7 +209,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnManageENterpris, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageEAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

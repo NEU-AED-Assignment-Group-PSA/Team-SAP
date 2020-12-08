@@ -15,17 +15,21 @@ import Business.Organization.Organization;
 import static Business.Organization.Organization.Type.Lab;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.Utility.Validation;
 import Business.WorkQueue.DoctorWorkRequest;
 import Business.WorkQueue.LabTechnicianWorkRequest;
 import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.ReceptionistWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Component;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -56,10 +60,10 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
-        this.labOrganization = (LabOrganization)organization;
+        //this.labOrganization = (LabOrganization)organization;
         this.labTest = labTest;
         //this.labTechnician = labTechnician;
-        //this.appointment = appointment;
+        this.appointment = ((LabTechnicianWorkRequest)request).getAppointment();
         this.request=request;
         this.enterprise = enterprise;
         populatecbox();
@@ -69,6 +73,20 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         technicianNameTxt.setEditable(false);
         technicianNameTxt.setText(userAccount.getEmployee().getName());
         testDateTxt.setText(new Date().toString());
+        
+        Date date = new Date();
+     // String timeFormatString = "hh:mm:ss a";
+      //DateFormat timeFormat = new SimpleDateFormat(timeFormatString);
+      //String currentTime = timeFormat.format(date);
+     // System.out.println("Current time: "+currentTime);
+      String dateFormatString = "YYYY-MM-dd";
+      DateFormat dateFormat = new SimpleDateFormat(dateFormatString);
+      String currentDate = dateFormat.format(date);
+      //System.out.println("Current date: "+currentDate);
+      testDateTxt.setText(currentDate);
+        
+        
+        
     }
     
      public void populatecbox(){
@@ -120,9 +138,13 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         technicianNameTxt = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
+        lblFileUpload = new javax.swing.JLabel();
         cmbStatusType = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -155,7 +177,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(labTestTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 810, 96));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 810, 96));
 
         processJButton.setText("Process for Billing");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -163,7 +185,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 440, -1, -1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -207,10 +229,8 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, -1, -1));
-
-        jLabel6.setText("Technician Name :");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
+        add(lblFileUpload, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 460, 20));
 
         cmbStatusType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbStatusType.addActionListener(new java.awt.event.ActionListener() {
@@ -222,6 +242,53 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/laboratory.jpg"))); // NOI18N
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 290, 180));
+
+        jPanel3.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel3MouseDragged(evt);
+            }
+        });
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                jPanel3MouseEntered(evt);
+            }
+        });
+
+        jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(11, 181, 217));
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/LabTechnicianRole/upload_48px_1.png"))); // NOI18N
+        jLabel8.setText("Upload Report");
+
+        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel11))
+                .addGap(112, 112, 112))
+        );
+
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 170, 70));
+
+        jLabel9.setText("Technician Name :");
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
@@ -288,8 +355,22 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                        JOptionPane.showMessageDialog(null, "Please select Status!");
             return;
                    }
-           Date date1=new Date();        
                    
+                   if (lblFileUpload.getText()==null || lblFileUpload.getText().equals(""))
+                   {
+                       JOptionPane.showMessageDialog(null, "Please upload file!");
+            return;
+                   }
+                   if(labTest.getStatus() != null && labTest.getStatus().equals("Completed"))
+                           {
+                               JOptionPane.showMessageDialog(null, "Lab test is already completed!");
+            return; 
+                           }
+                   
+           Date date1=new Date();        
+                   String dateFormatString = "YYYY-MM-dd";
+      DateFormat dateFormat = new SimpleDateFormat(dateFormatString);
+      String currentDate = dateFormat.format(date1);
         double testCharge = Double.parseDouble(testChargeTxt.getText());
         String testDate = testDateTxt.getText();
         try{   SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
@@ -300,7 +381,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter date properly!");
             return;
         }
-
+        labTest.setStatus("Completed");
         labTest.setTestCharge(testCharge);
         //String technicianName = technicianNameTxt.getText();
         //if(testName.equals("") || testDate.equals("") || technicianName.equals(""))
@@ -324,14 +405,14 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         drWorkReq.setRequestDate(new Date());
         //drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
-        JOptionPane.showMessageDialog(null, "Lab Test reports submitted", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Lab Test reports submitted, sending email to doctor.", "Information", JOptionPane.INFORMATION_MESSAGE);
        // txtPatientName.setText("");
        // txtAppointmetDate.setText("");
         //txtAppointmentType.setSelectedIndex(0);
        // cmbDoctor.setSelectedIndex(0);
        
        
-       
+       request.setStatus("Reports Sent");
        
        
        
@@ -343,12 +424,19 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             Object[] row = new Object[6];
             row[0]= labTest.getName();
             row[1]= labTest.getTestCharge();
-            row[2]= date1;
+            row[2]= currentDate;
             row[3]= labTest.getLabTechnician().getName();
             row[4]= cmbStatusType.getSelectedItem();
             row[5]= appointment.getPatient().getName();
             dtm.addRow(row);
         //}
+        
+        
+        //send report to doctor email
+       Validation.sendEmailAttachment(request.getSender().getEmployee().getEmailID(),"Reports for patient",
+               "Please find reports attached",lblFileUpload.getText());
+        
+        
        }
        catch (Exception e)
        {
@@ -361,6 +449,32 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private void cmbStatusTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusTypeActionPerformed
         //String str=String.valueOf(cmbStatusType.getSelectedItem());
     }//GEN-LAST:event_cmbStatusTypeActionPerformed
+
+    private void jPanel3MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseDragged
+        // TODO add your handling code here:
+        jPanel3.setBackground(Color.lightGray);
+    }//GEN-LAST:event_jPanel3MouseDragged
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        // TODO add your handling code here:
+        JFileChooser fc = new JFileChooser();
+        //fc.showOpenDialog(jPanel3);
+        
+        
+        // invoke the showsSaveDialog function to show the save dialog 
+        int r = fc.showSaveDialog(null);
+
+        // if the user selects a file 
+        if (r == JFileChooser.APPROVE_OPTION) {
+            // set the label to the path of the selected file 
+            lblFileUpload.setText(fc.getSelectedFile().getAbsolutePath());
+        }   
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_jPanel3MouseEntered
 
    /* public void populatelabTestDetails(){
         DefaultTableModel model = (DefaultTableModel)labTestTbl.getModel();
@@ -378,14 +492,18 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnSubmit;
     private javax.swing.JComboBox<String> cmbStatusType;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable labTestTbl;
+    private javax.swing.JLabel lblFileUpload;
     private javax.swing.JButton processJButton;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTextField technicianNameTxt;
