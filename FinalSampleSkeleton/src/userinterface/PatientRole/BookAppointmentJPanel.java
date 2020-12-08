@@ -248,6 +248,8 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             Logger.getLogger(BookAppointmentJPanel.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("expection in Book appointmentJPanel");
         }
+        
+        
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
         Appointment appoint = patient.getAppointmentDirectory().createAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
         
@@ -278,6 +280,11 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
         JOptionPane.showMessageDialog(null, "Appointment added", "Information", JOptionPane.INFORMATION_MESSAGE);
+        
+        txtPatientName.setText("");
+        cmbDoctor.setSelectedIndex(0);
+        txtAppointmetDate.setText("");
+        txtAppointmentType.setSelectedIndex(0);
         
         //send sms and email to patient for appointment book status
         
