@@ -13,14 +13,23 @@ import java.util.List;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.activation.DataHandler;
+import javax.activation.DataSource;
+import javax.activation.FileDataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.*;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import java.util.Properties;
+import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMultipart;
 
 /**
  *
@@ -194,6 +203,7 @@ public class Validation {
             message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             message.setSubject(subject);
             message.setText(text);
+            
             Transport transport = session.getTransport("smtp");
             transport.connect(host, from, pass);
             transport.sendMessage(message, message.getAllRecipients());
@@ -204,6 +214,64 @@ public class Validation {
             JOptionPane.showMessageDialog(null, "Invalid email id");
         }
     }
+    
+    
+     public static void sendEmailAttachment(String emailId, String subject, 
+             String text, String inputfilepath) {
+        String to = emailId;
+        String from = "aedproject2020@gmail.com";
+        String pass = "2020@AED";
+
+        Properties properties = System.getProperties();
+        String host = "smtp.gmail.com";
+
+        properties.put("mail.smtp.starttls.enable", "true");
+
+        properties.put("mail.smtp.ssl.trust", host);
+        properties.put("mail.smtp.user", from);
+        properties.put("mail.smtp.port", "587");
+        properties.put("mail.smtp.auth", "true");
+
+        Session session = Session.getDefaultInstance(properties);
+
+        try {
+            MimeMessage message = new MimeMessage(session);
+            message.setFrom(new InternetAddress(from));
+            //message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+            message.addRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            message.setSubject(subject);
+            message.setText(text);
+            MimeBodyPart messageBodyPart = new MimeBodyPart();
+
+        Multipart multipart = new MimeMultipart();
+        
+        String file = inputfilepath;//"path of file to be attached";
+        
+        DataSource source = new FileDataSource(file){
+            @Override
+                public String getContentType() {
+                    return "application/octet-stream";
+                }
+        };
+        messageBodyPart.setDataHandler(new DataHandler(source));
+        String fileName = "Reports";
+        messageBodyPart.setFileName(fileName);
+        multipart.addBodyPart(messageBodyPart);
+
+        message.setContent(multipart);
+
+            Transport transport = session.getTransport("smtp");
+            transport.connect(host, from, pass);
+            transport.sendMessage(message, message.getAllRecipients());
+            transport.close();
+            System.out.println("Sent message successfully....");
+        } catch (MessagingException mex) {
+            mex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Invalid email id");
+        }
+    }
+    
+    
     
     public static void sendTextMessage(String contact, String subject, String text) {
         String to = contact;

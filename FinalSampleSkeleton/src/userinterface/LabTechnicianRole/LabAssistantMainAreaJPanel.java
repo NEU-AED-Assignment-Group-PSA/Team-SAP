@@ -53,12 +53,12 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel)workRequestJTable.getModel();
         
         model.setRowCount(0);
-        
-        for(WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
-            List<LabTest> labTestList = ((LabTechnicianWorkRequest)request).getAppointment().getLabTestList().getLabTestList();
-            if(labTestList!= null && (request.getReceiver()==null ||  request.getReceiver() ==  userAccount )){
-           for(LabTest labTest : labTestList)
-            {
+        //enterprise.getWorkQueue().getWorkRequestList();//.add(request);
+        for(WorkRequest request : enterprise.getWorkQueue().getWorkRequestList()){
+           // List<LabTest> labTestList = ((LabTechnicianWorkRequest)request).getAppointment().getLabTestList().getLabTestList();
+            if(request instanceof  LabTechnicianWorkRequest &&(request.getReceiver()==null ||  request.getReceiver() ==  userAccount )){
+           //for(LabTest labTest : labTestList)
+           // {
             
             Object[] row = new Object[8];
             row[0] = request.getSender();
@@ -67,12 +67,13 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
             row[2] = ((LabTechnicianWorkRequest)request).getPatient();
             
             row[3] = request.getStatus();
-            row[4] = labTest.getName();
-            row[5] = labTest.getStatus();
+            LabTest lt= ((LabTechnicianWorkRequest)request).getLabTest();
+            row[4] = lt== null ? " Test " : lt;//.getName();
+            row[5] =( lt ==null || lt.getStatus()==null)  ? "New" : lt.getStatus();
             row[6] = request.getMessage();
             row[7] = request;
             model.addRow(row);
-        }//inner for
+       // }//inner for
         }//if
         }//outer for
     }
@@ -94,14 +95,12 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Sender", "Receiver", "Patient", "Request Status", "Lab Test", "Test Status", "Message", "Request ID"
@@ -123,13 +122,8 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(workRequestJTable);
-        if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
-            workRequestJTable.getColumnModel().getColumn(1).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(3).setResizable(false);
-            workRequestJTable.getColumnModel().getColumn(6).setResizable(false);
-        }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(108, 58, 630, 96));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(28, 58, 860, 170));
 
         assignJButton.setText("Assign to me");
         assignJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -137,7 +131,7 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
                 assignJButtonActionPerformed(evt);
             }
         });
-        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 215, -1, -1));
+        add(assignJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, -1, -1));
 
         processJButton.setText("Process");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -153,10 +147,10 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
                 refreshJButtonActionPerformed(evt);
             }
         });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 110, -1));
+        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 110, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/diagnosis.PNG"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 760, 540));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 860, 540));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Lab Technician Area");
@@ -168,6 +162,7 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
         int selectedRow = workRequestJTable.getSelectedRow();
         
         if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row!");
             return;
         }
         
@@ -175,11 +170,12 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
         
         if(request.getReceiver() != null)
         {
-            JOptionPane.showMessageDialog(null, "Already assigned to other technician!");
+            JOptionPane.showMessageDialog(null, "Already assigned to technician!");
             return;
         }
         LabTest lt = (LabTest) workRequestJTable.getValueAt(selectedRow, 4);
         lt.setLabTechnician(userAccount.getEmployee());
+        lt.setStatus("In Process");
         request.setReceiver(userAccount);
         request.setStatus("Pending");
         JOptionPane.showMessageDialog(null, "Assigned successfully!");
@@ -192,10 +188,11 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
         int selectedRow = workRequestJTable.getSelectedRow();
         
         if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row!");
             return;
         }
         
-        LabTestWorkRequest request = (LabTestWorkRequest)workRequestJTable.getValueAt(selectedRow, 7);
+        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 7);
         if(request.getReceiver()==null)
         {
             JOptionPane.showMessageDialog(null, "Please assign request before processing!");

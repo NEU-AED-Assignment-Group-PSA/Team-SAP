@@ -31,6 +31,15 @@ public class Appointment {
     private Operation operation;
     LabTestDirectory labTestList;
     Prescription prescription;
+    String appoitmentHistory;
+
+    public String getAppoitmentHistory() {
+        return appoitmentHistory;
+    }
+
+    public void setAppoitmentHistory(String appoitmentHistory) {
+        this.appoitmentHistory = appoitmentHistory;
+    }
 
     public Prescription getPrescription() {
         return prescription;
@@ -99,7 +108,8 @@ public class Appointment {
     }
 
     public void setStatus(String status) {
-        this.status = this.status + ", " + status;
+        this.status =  status; //this.status + ", " +
+        this.appoitmentHistory += " ,"+ this.status;
     }
 
     public String getLocation() {
