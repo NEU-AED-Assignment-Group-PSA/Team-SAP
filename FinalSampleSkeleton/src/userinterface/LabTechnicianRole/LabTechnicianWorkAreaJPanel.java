@@ -7,6 +7,7 @@ package userinterface.LabTechnicianRole;
 import Business.Appointment.Appointment;
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Organization.LabOrganization;
@@ -20,11 +21,15 @@ import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.ReceptionistWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.NurseRole.NurseWorkAreaJPanel;
 
 /**
  *
@@ -41,30 +46,38 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private Appointment appointment;
     private Patient patient;
     private WorkRequest request;
+    private Enterprise enterprise;
     /**
      * Creates new form LabAssistantWorkAreaJPanel
      */
-    public LabTechnicianWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, WorkRequest request){// LabTest labTest, Employee labTechnician)
-        initComponents();
+    public LabTechnicianWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, EcoSystem business, WorkRequest request, LabTest labTest, Enterprise enterprise)
+    {  initComponents();
         
         this.userProcessContainer = userProcessContainer;
         this.userAccount = account;
         this.business = business;
         this.labOrganization = (LabOrganization)organization;
         this.labTest = labTest;
-        this.labTechnician = labTechnician;
-        this.appointment = appointment;
+        //this.labTechnician = labTechnician;
+        //this.appointment = appointment;
         this.request=request;
+        this.enterprise = enterprise;
         populatecbox();
         //populateTable();
+        testNameTxt.setText(labTest.getName());
+        testNameTxt.setEditable(false);
+        technicianNameTxt.setEditable(false);
+        technicianNameTxt.setText(userAccount.getEmployee().getName());
+        testDateTxt.setText(new Date().toString());
     }
     
      public void populatecbox(){
         cmbStatusType.removeAllItems();
-        
-        for (Appointment.AppointmentStatus type : Appointment.AppointmentStatus.values()){
-            cmbStatusType.addItem(type.toString());
-        }
+         cmbStatusType.addItem("Select");
+        //for (Appointment.AppointmentStatus type : Appointment.AppointmentStatus.values()){
+            cmbStatusType.addItem("Generated Report");
+           
+        //}
     }
      
 //    public void populateTable(){
@@ -109,26 +122,27 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         cmbStatusType = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labTestTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Test Name", "Test charge", "Date", "Technician Name", "Status"
+                "Test Name", "Test charge", "Date", "Technician Name", "Status", "Patient"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -140,15 +154,8 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(labTestTbl);
-        if (labTestTbl.getColumnModel().getColumnCount() > 0) {
-            labTestTbl.getColumnModel().getColumn(0).setResizable(false);
-            labTestTbl.getColumnModel().getColumn(1).setResizable(false);
-            labTestTbl.getColumnModel().getColumn(2).setResizable(false);
-            labTestTbl.getColumnModel().getColumn(3).setResizable(false);
-            labTestTbl.getColumnModel().getColumn(4).setResizable(false);
-        }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 330, 500, 96));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 330, 810, 96));
 
         processJButton.setText("Process for Billing");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -175,7 +182,8 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         jLabel2.setText("Test charges :");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
 
-        jLabel3.setText("Lab Technician Work Area ");
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel3.setText("Reporting and Testing");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
 
         backJButton.setText("<< Back");
@@ -210,7 +218,10 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 cmbStatusTypeActionPerformed(evt);
             }
         });
-        add(cmbStatusType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 160, -1));
+        add(cmbStatusType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 160, -1));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/laboratory.jpg"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 290, 180));
     }// </editor-fold>//GEN-END:initComponents
 
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
@@ -218,25 +229,28 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = labTestTbl.getSelectedRow();
         
         if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row!");
             return;
         }
         else{
             ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
-                workreq.setStatus("New");
-                appointment.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
-                workreq.setMessage("Report Generated for Patient");
+                workreq.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                workreq.setMessage("Test completed for Patient, make bill");
                 
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);
                 //workreq.setDoctor(doctor);
                 //workreq.setReceiver(userAccount);
-                Lab lab = (Lab) cmbStatusType.getSelectedItem();
+                Lab lab = (Lab) enterprise;
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
-                UserAccount recepUseracc = null;
+                //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
-                workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
+                //workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
         }
+        
+        JOptionPane.showMessageDialog(null, "Request completed, sent for billing!");
         
 //        LabTestWorkRequest request = (LabTestWorkRequest)labTestTbl.getValueAt(selectedRow, 0);
 //     
@@ -254,17 +268,41 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
-        userProcessContainer.remove(this);
+       
+        
+         userProcessContainer.remove(this);
+        Component[] componentArray =userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        LabAssistantMainAreaJPanel sysAdminwajp = (LabAssistantMainAreaJPanel) component;
+        sysAdminwajp.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
                try{
-                   String testName = testNameTxt.getText();
-        int testCharge = Integer.parseInt(testChargeTxt.getText());
+                   //String testName = testNameTxt.getText();
+                   int index = cmbStatusType.getSelectedIndex();
+                   if(index==0)
+                   {
+                       JOptionPane.showMessageDialog(null, "Please select Status!");
+            return;
+                   }
+           Date date1=new Date();        
+                   
+        double testCharge = Double.parseDouble(testChargeTxt.getText());
         String testDate = testDateTxt.getText();
-        String technicianName = technicianNameTxt.getText();
+        try{   SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
+         date1=formatter1.parse(testDate);
+        }
+        catch(ParseException ex)
+        {
+            JOptionPane.showMessageDialog(null, "Please enter date properly!");
+            return;
+        }
+
+        labTest.setTestCharge(testCharge);
+        //String technicianName = technicianNameTxt.getText();
         //if(testName.equals("") || testDate.equals("") || technicianName.equals(""))
        Appointment app= appointment; //(Appointment)cmbStatusType.getSelectedItem();
        //to do work request to send to doctor
@@ -276,11 +314,11 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         
         drWorkReq.setReceiver(drUserAcc);
         drWorkReq.setSender(userAccount);
-        drWorkReq.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
-        
+        drWorkReq.setStatus("New");
+        app.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
         LabTechnicianWorkRequest lwr = ((LabTechnicianWorkRequest)(request));//.getPatient()
         
-        
+        lwr.setResolveDate(date1);
         drWorkReq.setPatient(lwr.getPatient());
         drWorkReq.setAppointment(lwr.getAppointment());
         drWorkReq.setRequestDate(new Date());
@@ -301,29 +339,30 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
        //
        DefaultTableModel dtm = (DefaultTableModel)labTestTbl.getModel();
        dtm.setRowCount(0);        
-       for (Appointment.AppointmentStatus type : Appointment.AppointmentStatus.values()){
-            Object[] row = new Object[dtm.getColumnCount()];
+       //for (Appointment.AppointmentStatus type : Appointment.AppointmentStatus.values()){
+            Object[] row = new Object[6];
             row[0]= labTest.getName();
             row[1]= labTest.getTestCharge();
-            row[2]= labTest.getCreatedOn();
+            row[2]= date1;
             row[3]= labTest.getLabTechnician().getName();
             row[4]= cmbStatusType.getSelectedItem();
+            row[5]= appointment.getPatient().getName();
             dtm.addRow(row);
-        }
+        //}
        }
        catch (Exception e)
        {
-           JOptionPane.showMessageDialog(null, "Fields cannot be empty, Please fill in all fields");
+           JOptionPane.showMessageDialog(null, "Please fill in all fields properly");
        }
        
         
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void cmbStatusTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbStatusTypeActionPerformed
-        String str=String.valueOf(cmbStatusType.getSelectedItem());
+        //String str=String.valueOf(cmbStatusType.getSelectedItem());
     }//GEN-LAST:event_cmbStatusTypeActionPerformed
 
-    public void populatelabTestDetails(){
+   /* public void populatelabTestDetails(){
         DefaultTableModel model = (DefaultTableModel)labTestTbl.getModel();
         model.setRowCount(0);
         Object row[]=new Object[4];
@@ -333,7 +372,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             row[3] = labTechnician.getName();
             row[4] = labTest.getStatus();
             model.addRow(row);
-    }
+    }*/
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnSubmit;
@@ -344,6 +383,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable labTestTbl;
     private javax.swing.JButton processJButton;

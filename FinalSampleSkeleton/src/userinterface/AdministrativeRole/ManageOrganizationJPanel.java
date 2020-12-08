@@ -75,7 +75,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
             if (!type.getValue().equals(Type.Admin.getValue()) && 
                     !type.getValue().equals(Type.Lab.getValue()) &&
                     !type.getValue().equals(Type.Pathology.getValue()) &&
-                    !type.getValue().equals(Type.Radiology.getValue()) 
+                    !type.getValue().equals(Type.Radiology.getValue()) &&
+                    !type.getValue().equals(Type.MedicalStore.getValue())
                     )
                 organizationJComboBox.addItem(type);
         }
