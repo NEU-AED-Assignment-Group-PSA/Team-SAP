@@ -12,7 +12,9 @@ import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Medicine.Medicine;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ReceptionistWorkRequest;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -32,6 +34,8 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
     private Pharmacy pharmacy;
     private Appointment appointment;
     private Enterprise enterprise;
+    private UserAccount receptionist;
+    
     
     
 
@@ -210,7 +214,22 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitBtnActionPerformed
-        // TODO add your handling code here:
+         ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
+                workreq.setStatus("New");
+                appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                workreq.setMessage("Prepare Bill for this Patient");
+                workreq.setSender(userAccount);
+                workreq.setPatient(patient);
+                workreq.setDoctor(doctor);
+                workreq.setReceiver(receptionist);
+                //Appointment appointment = (Appointment) 
+                receptionist.getWorkQueue().getWorkRequestList().add(workreq);
+                //UserAccount recepUseracc = null;
+                //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
+                //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
+                //workreq.setReceiver(receptionist.getUserAccountDirectory().getUserAccountList().get(0));
+                JOptionPane.showMessageDialog(null, "Appointment status changed to Mark for Billing & Pharmacist Request completed");
+                //JOptionPane.showMessageDialog(null, "Doctor Work status changed to Mark for Billing");
         
     }//GEN-LAST:event_submitBtnActionPerformed
 
