@@ -8,6 +8,7 @@ package Business.Appointment;
 import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Operation.Operation;
 import Business.Patient.Patient;
 import java.text.DateFormat;
@@ -31,6 +32,7 @@ public class Appointment {
     private Operation operation;
     LabTestDirectory labTestList;
     Prescription prescription;
+
     String appoitmentHistory;
 
     public String getAppoitmentHistory() {
@@ -40,6 +42,9 @@ public class Appointment {
     public void setAppoitmentHistory(String appoitmentHistory) {
         this.appoitmentHistory = appoitmentHistory;
     }
+
+    Pharmacy pharmacy;
+
 
     public Prescription getPrescription() {
         return prescription;
@@ -126,6 +131,14 @@ public class Appointment {
 
     public void setOperation(Operation operation) {
         this.operation = operation;
+    }
+
+    public Pharmacy getPharmacy() {
+        return pharmacy;
+    }
+
+    public void setPharmacy(Pharmacy pharmacy) {
+        this.pharmacy = pharmacy;
     }
 
     
