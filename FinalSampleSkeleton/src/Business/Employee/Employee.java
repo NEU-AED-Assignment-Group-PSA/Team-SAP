@@ -4,6 +4,10 @@
  */
 package Business.Employee;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author raunak
@@ -19,6 +23,15 @@ public class Employee {
     private String role;
     private String carrier;
 
+    public Map<Date, Integer> getSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(Map<Date, Integer> schedule) {
+        this.schedule = schedule;
+    }
+    private Map<Date, Integer> schedule;
+    
    
     //private double visitingCharge;
     private SpecializationType specialization;
@@ -75,6 +88,7 @@ public class Employee {
     public Employee() {
         id = count;
         count++;
+        schedule = new HashMap<>();
     }
 
     public int getId() {
@@ -117,4 +131,7 @@ public class Employee {
         }
     }
     
+    
+    
+   
 }

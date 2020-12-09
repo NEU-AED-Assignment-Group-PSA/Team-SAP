@@ -32,7 +32,15 @@ public class Appointment {
     private Operation operation;
     LabTestDirectory labTestList;
     Prescription prescription;
+    Integer time;
 
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
     String appoitmentHistory;
 
     public String getAppoitmentHistory() {
