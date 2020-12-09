@@ -24,7 +24,7 @@ public class Pharmacy extends Enterprise{
     //int id;
     //String name;
     Location location;
-    Map<MedicineDirectory,Integer> medicineListquanity;   /// medicine,quantity
+    Map<Medicine,Integer> medicineListInventory;   /// medicine,quantity
     DepartmentDirectory departmentList;
     MedicineDirectory medicineList;
 
@@ -42,6 +42,14 @@ public class Pharmacy extends Enterprise{
 
     public void setLocation(Location location) {
         this.location = location;
+    }
+
+    public Map<Medicine, Integer> getMedicineListquanity() {
+        return medicineListInventory;
+    }
+
+    public void setMedicineListquanity(Map<Medicine, Integer> medicineListquanity) {
+        this.medicineListInventory = medicineListquanity;
     }
 
    

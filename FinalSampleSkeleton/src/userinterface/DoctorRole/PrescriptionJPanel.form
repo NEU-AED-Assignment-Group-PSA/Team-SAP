@@ -25,54 +25,59 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="jLabel5" min="-2" pref="66" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                          <Component id="cmbPharmacy" min="-2" pref="144" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="102" attributes="0">
-                                                  <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                                                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                              </Group>
-                                              <Group type="102" alignment="1" attributes="0">
-                                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                              </Group>
-                                          </Group>
-                                          <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="patientNameTxt" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
-                                              <Component id="doctorNameTxt" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
-                                          </Group>
-                                      </Group>
-                                  </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
+                                      <EmptySpace min="-2" pref="165" max="-2" attributes="0"/>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="cmbPharmacy" min="-2" pref="144" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
                                           <Group type="102" attributes="0">
-                                              <Group type="103" groupAlignment="1" attributes="0">
-                                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                              </Group>
+                                              <EmptySpace min="-2" pref="142" max="-2" attributes="0"/>
+                                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                           </Group>
                                           <Group type="102" alignment="1" attributes="0">
-                                              <Component id="jLabel6" min="-2" pref="62" max="-2" attributes="0"/>
+                                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                               <EmptySpace type="separate" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="patientNameTxt" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
+                                          <Component id="doctorNameTxt" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="medicneCmb" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
                                               <Component id="dosageTxt" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
-                                              <Component id="patientHistoryTxt" alignment="1" min="-2" pref="144" max="-2" attributes="0"/>
                                           </Group>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabel6" min="-2" pref="62" max="-2" attributes="0"/>
+                                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                                          <Component id="patientHistoryTxt" min="-2" pref="144" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                          <Component id="quantityTxt" min="-2" pref="144" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -117,6 +122,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -139,20 +145,25 @@
                           <Component id="dosageTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="quantityTxt" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="patientHistoryTxt" min="-2" pref="84" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="97" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
               <Component id="btnPrescribe" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="247" max="32767" attributes="0"/>
+              <EmptySpace pref="251" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -220,13 +231,19 @@
         <Component class="javax.swing.JTable" name="PrescriptionTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="0">
+              <Table columnCount="3" rowCount="0">
                 <Column editable="false" title="Medicines prescribed" type="java.lang.Object"/>
                 <Column editable="false" title="Dosage" type="java.lang.Object"/>
+                <Column editable="false" title="Quantity" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
                 <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
@@ -306,6 +323,13 @@
           <Image iconType="3" name="/icon/Mediciness.PNG"/>
         </Property>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel9">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Quantity :"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="quantityTxt">
     </Component>
   </SubComponents>
 </Form>

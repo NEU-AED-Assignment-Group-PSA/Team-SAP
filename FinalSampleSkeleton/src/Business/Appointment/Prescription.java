@@ -23,6 +23,7 @@ public class Prescription {
     LabTestDirectory labTestList;
     //MedicineDirectory medicineList;
     Map<Medicine, Double> medicinePrescribed;
+    Map<Medicine, Integer> medicineListquanity;
     
     private Date createdOn;
     Employee doctor;
@@ -51,14 +52,19 @@ public class Prescription {
         this.medicinePrescribed = medicinePrescribed;
     }
 
+    public Map<Medicine, Integer> getMedicineListquanity() {
+        return medicineListquanity;
+    }
+
+    public void setMedicineListquanity(Map<Medicine, Integer> medicineListquanity) {
+        this.medicineListquanity = medicineListquanity;
+    }
+
     
 
     public Date getCreatedOn() {
         return createdOn;
     }
-
-   
-    
 
     public Employee getDoctor() {
         return doctor;
