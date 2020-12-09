@@ -27,8 +27,13 @@ public class PharmacyManageAreaJPanel extends javax.swing.JPanel {
     private Employee doctor;
     private Enterprise enterprise;
     
-    public PharmacyManageAreaJPanel() {
+    public PharmacyManageAreaJPanel(JPanel userProcessContainer,Patient patient,Appointment appointment,Employee doctor,Enterprise enterprise ) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.patient = patient;
+        this.appointment = appointment;
+        this.doctor = doctor;
+        this.enterprise = enterprise;
     }
 
     /**
