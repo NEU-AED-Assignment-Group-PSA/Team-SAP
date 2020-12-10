@@ -382,7 +382,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         prescription.setPatient(patient);
         prescription.setDoctor(doctor);
         
-        //patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
+        patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
         
         //pharmacy work request created--todo
         PharmacyWorkRequest phWr = new PharmacyWorkRequest();
@@ -398,6 +398,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                 //Appointment appointment = (Appointment) 
                 Pharmacy pharEnterprise =(Pharmacy) cmbPharmacy.getSelectedItem();
                 pharEnterprise.getWorkQueue().getWorkRequestList().add(phWr);
+                prescription.setPhmacy(pharEnterprise);
                 //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
@@ -412,7 +413,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         dosageTxt.setText("");
         remarksTxt.setText("");
         quantityTxt.setText("");
-        //appointment.setPrescription(prescription);
+        appointment.setPrescription(prescription);
        // JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
         populate();
         }
@@ -433,7 +434,13 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(patientNameTxt.getText().equals(""))
+        {
+             JOptionPane.showMessageDialog(null, "Please fill all entries");
         
+            
+            return;
+        }
         populatePrescribedMedicineTable();
         
         

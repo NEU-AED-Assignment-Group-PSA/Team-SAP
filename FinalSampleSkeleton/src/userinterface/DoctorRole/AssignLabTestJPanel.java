@@ -17,7 +17,7 @@ import Business.Person.Person;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.LabTechnicianWorkRequest;
 import java.awt.CardLayout;
-import java.util.ArrayList;
+import java.awt.Component;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -99,17 +99,17 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
 
         assignTestTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Date", "Test type", "Lab ", "Patient Name"
+                "Date", "Test Name", "Lab ", "Patient Name", "Test Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -247,6 +247,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 labTest.setPatient(patient);
                 labTest.setName(testType);
                 labTest.setDoctor(appointment.getDoctor());
+                labTest.setStatus("New");
                 //labTest.setType(testType);
                 workreq.setLabTest(labTest);
                 appointment.getLabTestList().addLabTest(labTest);
@@ -286,11 +287,12 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         }
         if(labTestList.getLabTestList() != null && !labTestList.getLabTestList().isEmpty()){
         for (LabTest labTest : labTestList.getLabTestList()) {
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             row[0] = new Date();
             row[1] = labTest.getName();
             row[2] = labTest.getLab();
             row[3] = labTest.getPatient();
+            row[4] = (labTest.getStatus().equals("") == true ) ? "New" :labTest.getStatus() ;
             model.addRow(row);
             
         }
@@ -298,6 +300,11 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     }
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
+          Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        DoctorWorkAreaJPanel ms = (DoctorWorkAreaJPanel) c;
+        ms.populateRequestTable();
+
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed

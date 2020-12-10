@@ -84,6 +84,7 @@ public class Appointment {
         this.appointmentId = count;
         prescription= new Prescription();
         labTestList = new LabTestDirectory();
+        appoitmentHistory="";
     }
 
     public int getAppointmentId() {
@@ -132,7 +133,7 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status =  status; //this.status + ", " +
-        this.appoitmentHistory += " ,"+ this.status;
+        this.appoitmentHistory += " "+ this.status;
     }
 
     public String getLocation() {

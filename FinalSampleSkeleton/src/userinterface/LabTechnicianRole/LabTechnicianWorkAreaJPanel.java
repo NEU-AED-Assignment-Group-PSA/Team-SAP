@@ -85,8 +85,12 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
       //System.out.println("Current date: "+currentDate);
       testDateTxt.setText(currentDate);
         
-        
-        
+        if(labTest.getStatus().equals("Completed"))
+        {
+            cmbStatusType.setSelectedIndex(1);
+            cmbStatusType.setEnabled(false);
+        }
+        txtDrRemarks.setText(request.getMessage());
     }
     
      public void populatecbox(){
@@ -145,6 +149,9 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtDrRemarks = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -177,7 +184,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(labTestTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 450, 810, 96));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 530, 810, 96));
 
         processJButton.setText("Process for Billing");
         processJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +192,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, -1, -1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 650, -1, -1));
 
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -196,13 +203,13 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
 
         jLabel1.setText("Test Date :");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 170, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, -1, -1));
 
-        jLabel4.setText("Test name :");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+        jLabel4.setText("Doctor Remarks: ");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, -1, -1));
 
         jLabel2.setText("Test charges :");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, -1, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel3.setText("Reporting and Testing");
@@ -215,13 +222,13 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
-        add(testDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 160, -1));
+        add(testDateTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 160, -1));
         add(testNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 160, -1));
-        add(testChargeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 160, -1));
+        add(testChargeTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 310, 160, -1));
 
         jLabel5.setText("Status :");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, -1, -1));
-        add(technicianNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 160, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, -1, -1));
+        add(technicianNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 160, -1));
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -229,8 +236,8 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 410, -1, -1));
-        add(lblFileUpload, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 460, 20));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, -1, -1));
+        add(lblFileUpload, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 400, 360, 20));
 
         cmbStatusType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         cmbStatusType.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +245,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 cmbStatusTypeActionPerformed(evt);
             }
         });
-        add(cmbStatusType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 160, -1));
+        add(cmbStatusType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 160, -1));
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/laboratory.jpg"))); // NOI18N
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 290, 180));
@@ -285,10 +292,19 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(112, 112, 112))
         );
 
-        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 280, 170, 70));
+        add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 170, 70));
 
         jLabel9.setText("Technician Name :");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 170, -1, -1));
+
+        jLabel6.setText("Test name :");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 110, -1, -1));
+
+        txtDrRemarks.setColumns(20);
+        txtDrRemarks.setRows(5);
+        jScrollPane2.setViewportView(txtDrRemarks);
+
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 160, 70));
     }// </editor-fold>//GEN-END:initComponents
 
     private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
@@ -307,10 +323,11 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);
-                //workreq.setDoctor(doctor);
+                workreq.setDoctor(userAccount.getEmployee());
                 //workreq.setReceiver(userAccount);
                 Lab lab = (Lab) enterprise;
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
+                request.setStatus("Sent for Billing");
                 //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
@@ -497,11 +514,13 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable labTestTbl;
     private javax.swing.JLabel lblFileUpload;
     private javax.swing.JButton processJButton;
@@ -510,5 +529,6 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField testChargeTxt;
     private javax.swing.JTextField testDateTxt;
     private javax.swing.JTextField testNameTxt;
+    private javax.swing.JTextArea txtDrRemarks;
     // End of variables declaration//GEN-END:variables
 }

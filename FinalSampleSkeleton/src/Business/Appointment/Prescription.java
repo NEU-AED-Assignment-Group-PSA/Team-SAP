@@ -7,7 +7,9 @@ package Business.Appointment;
 
 import Business.Medicine.MedicineDirectory;
 import Business.Employee.Employee;
+//import static Business.Enterprise.Enterprise.EnterpriseType.Pharmacy;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
+import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Medicine.Medicine;
 import Business.Patient.Patient;
 import java.util.Date;
@@ -24,7 +26,15 @@ public class Prescription {
     //MedicineDirectory medicineList;
     Map<Medicine, Double> medicinePrescribed;
     Map<Medicine, Integer> medicineListquanity;
-    
+    private Pharmacy phmacy;
+
+    public Pharmacy getPhmacy() {
+        return phmacy;
+    }
+
+    public void setPhmacy(Pharmacy phmacy) {
+        this.phmacy = phmacy;
+    }
     private Date createdOn;
     Employee doctor;
     Patient patient;

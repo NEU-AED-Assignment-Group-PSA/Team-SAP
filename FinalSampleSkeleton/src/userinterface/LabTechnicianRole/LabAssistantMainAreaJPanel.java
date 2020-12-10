@@ -198,6 +198,13 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please assign request before processing!");
             return;
         }
+        
+        if(request.getStatus().equals("Sent for Billing"))
+        {
+           JOptionPane.showMessageDialog(null, "Request is already processed");
+           return;
+       }
+        
         //request.setStatus("Processing");
         LabTest labtest = (LabTest) workRequestJTable.getValueAt(selectedRow, 4);
         LabTechnicianWorkAreaJPanel processWorkRequestJPanel = 
