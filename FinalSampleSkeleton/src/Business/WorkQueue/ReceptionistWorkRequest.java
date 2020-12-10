@@ -25,8 +25,11 @@ public class ReceptionistWorkRequest extends WorkRequest{
     
     
     */
+    
+    //set its parameter
     private Appointment app;
     private Patient patient;
+ private Employee doctor;
 
     public Appointment getApp() {
         return app;
@@ -51,8 +54,7 @@ public class ReceptionistWorkRequest extends WorkRequest{
     public void setDoctor(Employee doctor) {
         this.doctor = doctor;
     }
-    private Employee doctor;
-
+   
     
     
    

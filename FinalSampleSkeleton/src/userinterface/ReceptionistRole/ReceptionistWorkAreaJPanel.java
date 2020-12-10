@@ -11,7 +11,10 @@ import Business.Organization.DoctorOrganization;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.ReceptionistWorkRequest;
+import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +47,24 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.userAccount = account;
         this.system = business;
-        populatePatients();
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Hospital"))
+        {
+           populatePatients();
+        }
+        
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Lab"))
+        {
+            populateTest();
+        }
+        
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Pharmacy"))
+        {
+            populateTest();
+        }
+        
     }
 
     public void populatePatients() {
@@ -61,6 +81,35 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
             }
         }
     }
+    
+    
+    
+     public void populateTest() {
+        DefaultTableModel model = (DefaultTableModel) PatientDataJTable.getModel();
+        model.setRowCount(0);
+        if(enterprise.getWorkQueue() != null ){
+            List<WorkRequest> wrList = enterprise.getWorkQueue().getWorkRequestList();
+            for (WorkRequest wr : wrList) {
+                if(wr instanceof ReceptionistWorkRequest)
+                {
+                
+                Patient patient = ((ReceptionistWorkRequest)wr).getPatient();
+                if(patient!=null)
+                {
+                
+                    Object[] row = new Object[4];
+                    row[0] = patient.getId();
+                    row[1] = patient.getName();
+                    row[2] = patient.getPhoneNum();
+                    row[3] = patient.getBloodGroup();
+                    model.addRow(row); 
+                }
+                }
+            }
+        }
+    }
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,6 +127,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         jButton2 = new javax.swing.JButton();
         btnBookAppointment = new javax.swing.JButton();
         btnViewAppointment = new javax.swing.JButton();
+        refreshJButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -134,6 +184,13 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -147,7 +204,9 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnViewAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(218, 218, 218))
+                .addGap(27, 27, 27)
+                .addComponent(refreshJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(81, 81, 81))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,7 +214,8 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(65, 65, 65)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManagePatient)
-                    .addComponent(jButton2))
+                    .addComponent(jButton2)
+                    .addComponent(refreshJButton))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnViewAppointment)
@@ -252,6 +312,25 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnViewAppointmentActionPerformed
 
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+      if(enterprise.getEnterpriseType().getValue().equals("Hospital"))
+        {
+           populatePatients();
+        }
+        
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Lab"))
+        {
+            populateTest();
+        }
+        
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Pharmacy"))
+        {
+            populateTest();
+        }
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable PatientDataJTable;
     private javax.swing.JButton btnBookAppointment;
@@ -262,6 +341,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshJButton;
     // End of variables declaration//GEN-END:variables
 
     
