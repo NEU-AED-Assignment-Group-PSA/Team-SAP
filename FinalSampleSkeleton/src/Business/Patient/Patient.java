@@ -7,14 +7,15 @@ package Business.Patient;
 
 import Business.Appointment.Appointment;
 import Business.Appointment.AppointmentDirectory;
+import Business.Appointment.PatientHistoryDetails;
 import Business.Bill.Bill;
 import Business.Employee.Employee;
+import Business.Enterprise.InsuranceEnterprise.Insurance;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
 import Business.Location.LocationPoint;
-import Business.Person.Person;
 import Business.UserAccount.UserAccount;
+import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  *
@@ -30,7 +31,40 @@ public class Patient extends Employee{
     private LocationPoint address;
     private String bloodGroup;
     //private String emailId;
+    private String insuranceId;
+    private Insurance insuranceE;
+    private ArrayList<PatientHistoryDetails> patHistorydtls;
 
+    public Patient()
+    {
+        super();
+        patHistorydtls= new ArrayList<>();
+    }
+    
+    
+    public ArrayList<PatientHistoryDetails> getPatHistorydtls() {
+        return patHistorydtls;
+    }
+
+    public void setPatHistorydtls(ArrayList<PatientHistoryDetails> patHistorydtls) {
+        this.patHistorydtls = patHistorydtls;
+    }
+    
+    public String getInsuranceId() {
+        return insuranceId;
+    }
+
+    public Insurance getInsuranceE() {
+        return insuranceE;
+    }
+
+    public void setInsuranceE(Insurance insuranceE) {
+        this.insuranceE = insuranceE;
+    }
+
+    public void setInsuranceId(String insuranceId) {
+        this.insuranceId = insuranceId;
+    }
     
     private UserAccount userAccount;
 

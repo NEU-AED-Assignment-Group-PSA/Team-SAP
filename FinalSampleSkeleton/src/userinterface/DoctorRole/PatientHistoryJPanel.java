@@ -12,6 +12,7 @@ import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -41,7 +42,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         this.ecosystem = ecosystem;
         this.patient = patient;
         patientNameTxt.setText(patient.getName());
-        
+        populatePatientDetails();
     }
 
     /**
@@ -71,6 +72,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         patientNameTxt = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
+        btnViewDetails = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -130,14 +132,14 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient Name", "Previous Visit details", "Medicine Allergies"
+                "Medicine Allergies", "Allergies", "Previous Visit", "Family History", "Surgery History", "Details ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -149,11 +151,6 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(patientDetailsTbl);
-        if (patientDetailsTbl.getColumnModel().getColumnCount() > 0) {
-            patientDetailsTbl.getColumnModel().getColumn(0).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(1).setResizable(false);
-            patientDetailsTbl.getColumnModel().getColumn(2).setResizable(false);
-        }
 
         jLabel8.setText("Patient Name :");
 
@@ -165,14 +162,21 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/prescroption.PNG"))); // NOI18N
 
+        btnViewDetails.setText("View Details");
+        btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewDetailsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(85, Short.MAX_VALUE)
+                        .addGap(72, 72, 72)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
@@ -180,44 +184,44 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(previousDiagnosisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(32, 32, 32))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel2)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jLabel3)))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(familyHistoryTxt)
-                            .addComponent(surgeryHistoryTxt)
-                            .addComponent(alergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAddPatientDetails)
-                        .addGap(160, 160, 160))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(34, 34, 34)
-                        .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(274, 274, 274))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(57, 57, 57)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(surgeryHistoryTxt)
+                                    .addComponent(alergiesTxt)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(btnAddPatientDetails))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(familyHistoryTxt)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnViewDetails)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(backJButton)
                         .addGap(310, 310, 310)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addGap(377, 377, 377))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(159, 159, 159)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -234,11 +238,9 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel8))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(previousDiagnosisTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 57, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(previousDiagnosisTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -248,19 +250,22 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
                             .addComponent(surgeryHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(familyHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(29, 29, 29)
-                        .addComponent(btnAddPatientDetails)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                        .addGap(37, 37, 37)
+                        .addComponent(btnAddPatientDetails)
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
+                        .addComponent(btnViewDetails)
+                        .addGap(0, 69, Short.MAX_VALUE)))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -287,7 +292,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddPatientDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientDetailsActionPerformed
-       /*
+       
         
         String patientName=patientNameTxt.getText();
         String previousDiagnosis = previousDiagnosisTxt.getText();
@@ -297,49 +302,56 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty, Please fill in all fields"); 
         }
         else{
-        {PatientHistoryDetails patientHistoryDetails = prescriptionList.addPrescription();
+        {PatientHistoryDetails patientHistoryDetails = new PatientHistoryDetails();
+                if(patient.getPatHistorydtls() == null)
+                {
+                    ArrayList<PatientHistoryDetails> pdh = new ArrayList<>();
+                    patient.setPatHistorydtls(pdh);
+                }
+                patient.getPatHistorydtls().add(patientHistoryDetails);
         //prescription.setDate(date);
-        prescription.setPatient(patient);
-        prescription.setDoctor(doctor);
-        prescription.setMedicineList(medicineList);
+        patientHistoryDetails.setMedAlergies(medsalergies);
+        patientHistoryDetails.setPreviousDiagnosis(previousDiagnosis);
+        patientHistoryDetails.setPatient(patient);
+        patientHistoryDetails.setFamilyHistory(familyHistoryTxt.getText());
+        patientHistoryDetails.setSurgeryHistory(surgeryHistoryTxt.getText());
+        patientHistoryDetails.setAlergy(alergiesTxt.getText());
         //dateTxt.setText("");
         patientNameTxt.setText("");
-        doctorNameTxt.setText("");
-        medsPrescribedTxt.setText("");
-        appointment.setPrescription(prescription);
-        JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
+        previousDiagnosisTxt.setText("");
+        medAlergiesTxt.setText("");
+        alergiesTxt.setText("");
+        surgeryHistoryTxt.setText("");
+        familyHistoryTxt.setText("");
+        //appointment.setPrescription(prescription);
+        JOptionPane.showMessageDialog(null, "History sucessfully added"); 
         populatePatientDetails();
         }
         }
-        int select=diagnosistable.getSelectedRow();
-        if(select<0){
-            JOptionPane.showMessageDialog(null, "please select");
-            return;
-        }else{
-            Diagnosis date=(Diagnosis)diagnosistable.getValueAt(select, 0);
-//            String detail=(String)diagnosistable.getValueAt(select, 1);
-//            String medicine=(String)diagnosistable.getValueAt(select, 2);
-            System.out.println("to patient detail:"+date);
-            CardLayout layout=(CardLayout)jpanel.getLayout();
-            jpanel.add("patient detail",new PatientDetailJPanel(jpanel,date));
-            layout.next(jpanel);
-        }
-
-*/
+        
     }//GEN-LAST:event_btnAddPatientDetailsActionPerformed
 
     public void populatePatientDetails(){
         DefaultTableModel model = (DefaultTableModel) patientDetailsTbl.getModel();
         model.setRowCount(0);
+        if(patient.getPatHistorydtls() == null )
+        {
+            PatientHistoryDetails patientHistoryDetails = new PatientHistoryDetails();
+                
+                patient.getPatHistorydtls().add(patientHistoryDetails);
+        }
+        for(PatientHistoryDetails phd : patient.getPatHistorydtls())
+        {
+        
             Object[] row = new Object[6];
-            row[0] = patient.getName();
-            row[1] = previousDiagnosisTxt.getText();
-            row[2] = medAlergiesTxt.getText();
-            row[3] = alergiesTxt.getText();
-            row[4] = surgeryHistoryTxt.getText();
-            row[5] = familyHistoryTxt.getText();
+            row[0] = phd.getMedAlergies();
+            row[1] = phd.getAlergy();
+            row[2] =phd.getPreviousDiagnosis();
+            row[3] = phd.getFamilyHistory();
+            row[4] = phd.getSurgeryHistory();
+            row[5] = phd;//.getId();
             model.addRow(row);
-            
+        }   
     }
     
     
@@ -347,11 +359,33 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_patientNameTxtActionPerformed
 
+    private void btnViewDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewDetailsActionPerformed
+        // TODO add your handling code here:
+        int row = patientDetailsTbl.getSelectedRow();
+        if(row<0){
+            JOptionPane.showMessageDialog(null, "Please select a row!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+         PatientHistoryDetails fsch= (PatientHistoryDetails)  patientDetailsTbl.getValueAt(row,5);
+        
+        
+        patientNameTxt.setText(patient.getName());
+        previousDiagnosisTxt.setText(fsch.getPreviousDiagnosis());
+        medAlergiesTxt.setText(fsch.getMedAlergies());
+        alergiesTxt.setText(fsch.getAlergy());
+        surgeryHistoryTxt.setText(fsch.getSurgeryHistory());
+        familyHistoryTxt.setText(fsch.getFamilyHistory());
+        
+        
+    }//GEN-LAST:event_btnViewDetailsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField alergiesTxt;
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnAddPatientDetails;
+    private javax.swing.JButton btnViewDetails;
     private javax.swing.JTextField familyHistoryTxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

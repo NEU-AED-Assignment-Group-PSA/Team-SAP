@@ -166,6 +166,12 @@ public class Validation {
             return match;
         } 
     
+   public static boolean validateDouble(String s)
+    {
+        boolean match = match = s.matches("^(-?)(0|([1-9][0-9]*))(\\\\.[0-9]+)?$");//"[0-9]+.[0-9][0-9]");
+        
+            return match;
+        } 
     
     /*public static void integerValidator(KeyEvent evt, JTextField field) {
         char c = evt.getKeyChar();

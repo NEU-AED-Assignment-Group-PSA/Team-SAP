@@ -65,6 +65,12 @@ public class OrganizationDirectory {
             organization = new MedicalStoreDept();
             organizationList.add(organization);   
         }
+        
+        else if (type.getValue().equals(Type.Insurance.getValue())){
+            organization = new InsuranceOrganization();
+            organizationList.add(organization);
+        }
+        
         //else if (type.getValue().equals(Type.Inventory.getValue())){
         //    organization = new InventoryManagementDept();
        //     organizationList.add(organization);   

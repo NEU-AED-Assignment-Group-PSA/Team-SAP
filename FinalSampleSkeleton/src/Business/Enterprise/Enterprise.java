@@ -36,7 +36,8 @@ public abstract class Enterprise extends Organization{
         Hospital("Hospital"),
         Clinic("Clinic"),
         Pharmacy("Pharmacy"),
-        Lab("Lab");
+        Lab("Lab"),
+        Insurance("Insurance");
         
         private String value;
         

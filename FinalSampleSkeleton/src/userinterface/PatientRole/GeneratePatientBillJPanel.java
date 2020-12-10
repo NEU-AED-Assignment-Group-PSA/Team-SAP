@@ -10,11 +10,18 @@ import Business.Bill.Bill;
 import Business.Bill.BillDirectory;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.InsuranceEnterprise.Insurance;
+import Business.Enterprise.LabEnterprise.Lab;
+import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
+import Business.UserAccount.UserAccount;
+import Business.WorkQueue.InsuranceWorkRequest;
+import Business.WorkQueue.InsuranceWorkRequest;
 import java.awt.CardLayout;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -34,7 +41,8 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     EcoSystem system;
     Patient patient;
     Appointment appointment;
-    GeneratePatientBillJPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, EcoSystem system, Patient patient, Appointment appointment) {
+    UserAccount useraccount;
+    GeneratePatientBillJPanel(JPanel userProcessContainer, Organization organization, Enterprise enterprise, EcoSystem system, Patient patient, Appointment appointment, UserAccount useraccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.organization = organization;
@@ -42,6 +50,7 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         this.system = system;
         this.patient = patient;
         this.appointment = appointment;
+        this.useraccount= useraccount;
         populatePatientData();
         disableFields();
     }
@@ -55,6 +64,8 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         txtVisingCharge.setEditable(false);
         txtOperationCharge.setEditable(false);
         txtTotalCharge.setEditable(false);
+        txtInsuranceE.setEditable(false);
+        txtInsuranceId.setEditable(false);
     }
     
     public void populatePatientData(){
@@ -74,6 +85,19 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         txtVisingCharge.setText(String.valueOf(visitingCharge));
         txtOperationCharge.setText(String.valueOf(operationCharge));
         txtTotalCharge.setText(String.valueOf(totalCharge));
+        txtInsuranceE.setText(patient.getInsuranceE().getName() == null ? "" : patient.getInsuranceE().getName());
+        txtInsuranceId.setText(patient.getInsuranceId() == null ? "" : patient.getInsuranceId() );
+        txtApptnmtStatus.setText(appointment.getStatus());
+        
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance))
+        {
+            txtInsuranceStatus.setText(appointment.getStatus());
+        }
+        else{
+            txtInsuranceStatus.setText("Not approved");
+            
+    }
+        
     }
 
     /**
@@ -104,6 +128,14 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         txtTotalCharge = new javax.swing.JTextField();
         txtDoctor = new javax.swing.JTextField();
         txtAppointmentType = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtInsuranceId = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtInsuranceE = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtInsuranceStatus = new javax.swing.JTextField();
+        jLabel13 = new javax.swing.JLabel();
+        txtApptnmtStatus = new javax.swing.JTextField();
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Appointment Type:");
@@ -158,44 +190,73 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Total Charge:");
 
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Insurance ID:");
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Insurance Company:");
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Insurance Status:");
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("Appointment Status:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jButton1)
+                            .addGap(174, 174, 174)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(181, 181, 181)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtAppointmetId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(txtGenerateBill)
+                                        .addComponent(txtPatientName, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                                        .addComponent(txtAppointmetDate)
+                                        .addComponent(txtVisingCharge)
+                                        .addComponent(txtOperationCharge)
+                                        .addComponent(txtTotalCharge)
+                                        .addComponent(txtDoctor)
+                                        .addComponent(txtAppointmentType)))))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(149, 149, 149)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtInsuranceId)))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton1)
-                        .addGap(174, 174, 174)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtAppointmetId, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtGenerateBill)
-                                    .addComponent(txtPatientName, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                    .addComponent(txtAppointmetDate)
-                                    .addComponent(txtVisingCharge)
-                                    .addComponent(txtOperationCharge)
-                                    .addComponent(txtTotalCharge)
-                                    .addComponent(txtDoctor)
-                                    .addComponent(txtAppointmentType))))))
-                .addContainerGap(263, Short.MAX_VALUE))
+                        .addGap(149, 149, 149)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtApptnmtStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
+                            .addComponent(txtInsuranceE)
+                            .addComponent(txtInsuranceStatus))))
+                .addContainerGap(425, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,9 +297,25 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtTotalCharge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(txtInsuranceId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInsuranceE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtInsuranceStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(txtApptnmtStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(txtGenerateBill)
-                .addContainerGap(113, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -267,6 +344,13 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Appointment is cancelled so bill will not generate","Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance)){
+            JOptionPane.showMessageDialog(null, "Bill is sent to insurance company already","Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
         if(enterprise.getBillDirectory() == null){
             enterprise.setBillDirectory(new BillDirectory());
             enterprise.getBillDirectory().setBillList(new ArrayList<>());
@@ -276,18 +360,53 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         bill.setAppointment(appointment);
         bill.setPatient(patient);
         bill.setDoctor(appointment.getDoctor());
-        bill.setStatus("Paid");
+        bill.setStatus("Pending approval from Insurance");
         bill.setTotalCharges(Double.valueOf(txtTotalCharge.getText()));
+        bill.setEnterprise(enterprise);
         bills.add(bill);
-        appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
+        appointment.setHospitalbill(bill);
+        appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
         for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
             if(appointment.getAppointmentId() == this.appointment.getAppointmentId()){
-                appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
+                appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
             }
         }
         txtGenerateBill.setEnabled(false);
         JOptionPane.showMessageDialog(null, "Bill generated successfully!","Information", JOptionPane.INFORMATION_MESSAGE);
         //return;
+        
+        //Insurance request
+        InsuranceWorkRequest workreq = new InsuranceWorkRequest();
+                workreq.setStatus("New");
+                appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
+                workreq.setMessage("Patient requested insurance amount, please approve");
+                workreq.setStatus("New");
+                workreq.setAppointment(appointment);
+               // workreq.setMessage("Please conduct lab test!");
+                workreq.setRequestDate(new Date());
+                //workreq.setDoctorUserAccount(userAccount);
+                workreq.setSender(useraccount);
+                workreq.setPatient(patient);
+                workreq.setAmount(txtTotalCharge.getText());
+                workreq.setHospitalBill(bill);
+                //workreq.setDoctor(doctor);
+                //workreq.setReceiver(userAccount);
+                Insurance lab = patient.getInsuranceE();
+                lab.getWorkQueue().getWorkRequestList().add(workreq);
+                //LabTest labTest= new LabTest();
+                //labTest.setLab(lab);
+                //labTest.setLabTechnician(null);
+                //labTest.setPatient(patient);
+                //labTest.setName(testType);
+                //labTest.setDoctor(appointment.getDoctor());
+                //labTest.setType(testType);
+                //workreq.setLabTest(labTest);
+                //appointment.getLabTestList().addLabTest(labTest);
+                appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
+        
+        
+        
+        
     }//GEN-LAST:event_txtGenerateBillActionPerformed
 
     private void txtAppointmetIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAppointmetIdActionPerformed
@@ -298,6 +417,10 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -309,8 +432,12 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtAppointmentType;
     private javax.swing.JTextField txtAppointmetDate;
     private javax.swing.JTextField txtAppointmetId;
+    private javax.swing.JTextField txtApptnmtStatus;
     private javax.swing.JTextField txtDoctor;
     private javax.swing.JButton txtGenerateBill;
+    private javax.swing.JTextField txtInsuranceE;
+    private javax.swing.JTextField txtInsuranceId;
+    private javax.swing.JTextField txtInsuranceStatus;
     private javax.swing.JTextField txtOperationCharge;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTextField txtTotalCharge;

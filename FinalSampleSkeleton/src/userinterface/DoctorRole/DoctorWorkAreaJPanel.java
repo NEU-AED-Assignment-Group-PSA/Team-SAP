@@ -514,7 +514,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
     private void btnAddPatientHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientHistoryActionPerformed
         int selectedRow = DoctorWorkAreaTable.getSelectedRow();
         if(selectedRow >= 0){
-            //Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
+            Patient patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow,0);
             //            Order order = (Order)OrderJTable.getValueAt(selectedRow, 0);
             PatientHistoryJPanel patientHistoryJPanel = new PatientHistoryJPanel(userProcessContainer, userAccount, organization, enterprise, ecosystem, patient);
             userProcessContainer.add("patientHistoryJPanel",patientHistoryJPanel);
