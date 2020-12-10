@@ -7,6 +7,7 @@ package Business.Bill;
 
 import Business.Appointment.Appointment;
 import Business.Employee.Employee;
+import Business.Enterprise.Enterprise;
 import Business.Patient.Patient;
 
 /**
@@ -23,6 +24,15 @@ public class Bill {
     String status;//paid, unpaid
     //int invoiceNumber;
     private static int count = 1;
+    private Enterprise enterprise;
+
+    public Enterprise getEnterprise() {
+        return enterprise;
+    }
+
+    public void setEnterprise(Enterprise enterprise) {
+        this.enterprise = enterprise;
+    }
     
     public Bill() {
         billId = count;
@@ -79,7 +89,10 @@ public class Bill {
     
     
     
-    
+    @Override 
+    public String toString(){
+        return ("Bill" + this.getBillId());
+    } 
     
     
 }

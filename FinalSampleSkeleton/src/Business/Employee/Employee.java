@@ -4,9 +4,11 @@
  */
 package Business.Employee;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -22,15 +24,16 @@ public class Employee {
     private String emailID;
     private String role;
     private String carrier;
+   // private Integer[] time;
 
-    public Map<Date, Integer> getSchedule() {
+    public Map<Date, ArrayList<Integer>> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(Map<Date, Integer> schedule) {
+    public void setSchedule(Map<Date, ArrayList<Integer>> schedule) {
         this.schedule = schedule;
     }
-    private Map<Date, Integer> schedule;
+    private Map<Date, ArrayList<Integer>> schedule;
     
    
     //private double visitingCharge;
@@ -88,7 +91,11 @@ public class Employee {
     public Employee() {
         id = count;
         count++;
+        //time = new Integer[6];
         schedule = new HashMap<>();
+        //schedule.
+        //schedule.
+                
     }
 
     public int getId() {
@@ -132,6 +139,49 @@ public class Employee {
     }
     
     
+   public  void addSchedule(Date date, Integer time){
+        Map<Date,ArrayList<Integer>> schedules = this.getSchedule();
+      
+        
+        for(Map.Entry<Date,ArrayList<Integer>> sch : schedules.entrySet()){
+           
+            
+            if(sch.getKey().equals(date) )
+            {
+                sch.getValue().add(time);
+                return;
+                    }
+        }
+        
+        ArrayList<Integer> arr = new ArrayList<>();
+        arr.add(time);
+        schedules.put(date,arr);
+        
+        
+    }
     
+    
+   public  boolean checkScheduleIsAvaible(Date date, Integer time){
+        Map<Date,ArrayList<Integer>> schedules = this.getSchedule();
+        
+        for(Map.Entry<Date,ArrayList<Integer>> sch : schedules.entrySet()){
+            
+            
+            
+            if(sch.getKey().equals(date) )
+            {
+                ArrayList<Integer> arr= sch.getValue();
+                    
+                if(arr.contains(time))
+                {
+                    return false;
+                }
+            
+            }
+        }
+        
+        return true;
+    }
+ 
    
 }

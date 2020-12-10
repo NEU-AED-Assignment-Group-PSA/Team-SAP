@@ -83,6 +83,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         txtAppointmentType.setEnabled(false);
         txtAppointmentStatus.setEditable(false);
         txtPatientId.setEditable(false);
+        txtInsuranceE.setEditable(false);
+        txtInsuranceId.setEditable(false);
+        txtInsuranceStatus.setEditable(false);
     }
 
     private void populatePatientVisits(String status) {
@@ -143,6 +146,14 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         btnGenerateBill = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         txtPatientId = new javax.swing.JTextField();
+        btnClose = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
+        txtInsuranceStatus = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtInsuranceId = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txtInsuranceE = new javax.swing.JTextField();
+        btnViewBill = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -240,6 +251,29 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("PatientId:");
 
+        btnClose.setText("Close Bill");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel12.setText("Insurance Status:");
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("Insurance ID:");
+
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel11.setText("Insurance Company:");
+
+        btnViewBill.setText("View Bill");
+        btnViewBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewBillActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -264,34 +298,55 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                         .addGap(103, 103, 103)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(13, 13, 13)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel8))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(395, 395, 395)
-                        .addComponent(btnGenerateBill, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(224, Short.MAX_VALUE))
+                        .addGap(262, 262, 262)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtInsuranceId, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtInsuranceE))))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(284, 284, 284)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtInsuranceStatus))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(43, 43, 43)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jLabel8))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtPatientName, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtPatientId, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(164, 164, 164)
+                                    .addComponent(btnGenerateBill, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(70, 70, 70)
+                                    .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnViewBill, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addGap(82, 82, 82)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 671, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(131, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,8 +395,23 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                             .addComponent(txtAppointmentStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnGenerateBill)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(txtInsuranceStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(txtInsuranceId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtInsuranceE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGenerateBill)
+                    .addComponent(btnClose)
+                    .addComponent(btnViewBill))
+                .addGap(23, 23, 23))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -363,7 +433,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        btnGenerateBill.setVisible(false);
+        btnGenerateBill.setVisible(true);
         int selectedRow = viewAppointmentJTable.getSelectedRow();
         if(selectedRow >= 0){
             
@@ -380,7 +450,25 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             txtAppointmetDate.setText(formatter1.format(appointment.getDate()));
             txtAppointmentType.setSelectedItem(appointment.getType());
             txtAppointmentStatus.setText(appointment.getStatus());
+            txtInsuranceE.setText(patient.getInsuranceE().getName());
+            txtInsuranceId.setText(patient.getInsuranceId());
             
+            String insuranceStatus="Pending";
+            if(appointment.getHospitalbill() == null)
+            {
+                insuranceStatus = "Not claimed";
+                
+            }
+            else if(appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance))
+            {
+                insuranceStatus = "Approved";
+            }
+            else if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance))
+            {
+                insuranceStatus = "Pending";
+            }
+            
+            txtInsuranceStatus.setText(insuranceStatus);
             if(appointment.getStatus().equals(AppointmentStatus.Markforbilling.getValue())){
                 btnGenerateBill.setVisible(true);
             }else{
@@ -418,11 +506,22 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private void btnGenerateBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateBillActionPerformed
         //Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
         
+        if(appointment == null )
+        {
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(appointment != null && appointment.getHospitalbill() != null)
+        {
+            JOptionPane.showMessageDialog(null, "Bill is already generated", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         if(appointment != null){
             Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
             
-            userinterface.PatientRole.GeneratePatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.GeneratePatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment);
+            userinterface.PatientRole.GeneratePatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.GeneratePatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
             userProcessContainer.add("generatePatientBillJPanel",generatePatientBillJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -430,15 +529,77 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnGenerateBillActionPerformed
 
+    private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
+        // TODO add your handling code here:
+        
+        if(appointment == null )
+        {
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(appointment != null && appointment.getHospitalbill() == null)
+        {
+            JOptionPane.showMessageDialog(null, "Bill is not generated", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(appointment != null &&
+                !appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance.getValue()))
+        {
+            JOptionPane.showMessageDialog(null, "Cannot close as appointment is not approved insurance", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+        appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
+        appointment.getHospitalbill().setStatus("Close");
+        txtAppointmentStatus.setText("Close");
+        
+    }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void btnViewBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBillActionPerformed
+        // TODO add your handling code here:
+        
+        
+        if(appointment == null )
+        {
+            JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        if(appointment != null && appointment.getHospitalbill() == null)
+        {
+            JOptionPane.showMessageDialog(null, "Bill not generated, please generate bill.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        
+        
+        if(appointment != null){
+            Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
+            
+            userinterface.PatientRole.ViewPatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.ViewPatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
+            userProcessContainer.add("ViewPatientBillJPanel",generatePatientBillJPanel);
+            CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+            layout.next(userProcessContainer);
+        }
+    }//GEN-LAST:event_btnViewBillActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnClose;
     private javax.swing.JButton btnGenerateBill;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnViewBill;
     private javax.swing.JComboBox<String> cmbAppointmentStatus;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -452,6 +613,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox txtAppointmentType;
     private javax.swing.JTextField txtAppointmetDate;
     private javax.swing.JTextField txtDoctor;
+    private javax.swing.JTextField txtInsuranceE;
+    private javax.swing.JTextField txtInsuranceId;
+    private javax.swing.JTextField txtInsuranceStatus;
     private javax.swing.JTextField txtPatientId;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTable viewAppointmentJTable;

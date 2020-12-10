@@ -89,7 +89,8 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        }
        
         cmbDoctor.removeAllItems();
-        //cmbDoctor.add("Select");
+        //Employee emp = new Employee();
+        cmbDoctor.addItem("Select");
         for (Employee doc : empList){
             cmbDoctor.addItem(doc);
         }
@@ -160,9 +161,27 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Appointment Date:");
 
+        txtAppointmetDate.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtAppointmetDateFocusLost(evt);
+            }
+        });
+        txtAppointmetDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtAppointmetDateMouseExited(evt);
+            }
+        });
         txtAppointmetDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtAppointmetDateActionPerformed(evt);
+            }
+        });
+        txtAppointmetDate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAppointmetDateKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtAppointmetDateKeyTyped(evt);
             }
         });
 
@@ -315,7 +334,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         jpnael12Layout.setVerticalGroup(
             jpnael12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnael12Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel12)
                 .addGap(24, 24, 24))
         );
@@ -364,6 +383,9 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtBookAppointment)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 384, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtPatientName)
                                     .addComponent(cmbDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,11 +399,11 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jpnael11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jpnael15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(55, 55, 55)
+                                .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jpnael16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jpnael12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(txtBookAppointment)))
+                                    .addComponent(jpnael12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jButton1)
@@ -406,29 +428,33 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(cmbDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jpnael10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jpnael12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jpnael11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jpnael15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpnael1014, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpnael16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(13, 13, 13)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(cmbDoctor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(txtAppointmetDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtAppointmentType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jpnael10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jpnael11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jpnael15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jpnael1014, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(13, 13, 13))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jpnael12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jpnael16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(txtBookAppointment)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -438,10 +464,15 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
 
     private void txtAppointmetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAppointmetDateActionPerformed
         // TODO add your handling code here:
+      //  setPanelTime();
+        
+        
+        
     }//GEN-LAST:event_txtAppointmetDateActionPerformed
 
     private void txtBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBookAppointmentActionPerformed
-        if(txtPatientName.getText().isEmpty() || txtAppointmetDate.getText().isEmpty() || txtAppointmentType.getSelectedIndex() == 0)
+        if(txtPatientName.getText().isEmpty() || txtAppointmetDate.getText().isEmpty() || txtAppointmentType.getSelectedIndex() == 0
+                || cmbDoctor.getSelectedIndex() == 0)
         {
             JOptionPane.showMessageDialog(null, "All fields are mandatory", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
@@ -470,12 +501,14 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             }
         }
         
-        for(Map.Entry<Date,Integer> sch : doctor.getSchedule().entrySet()){
-            if(sch.getKey().equals(date1) && sch.getValue().equals(time)){
+       
+        boolean check = doctor.checkScheduleIsAvaible(date1, time);
+        if(check ==false)
+        {
                 JOptionPane.showMessageDialog(null, "Doctor has other appointment already, please select other time!", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
             }
-        }
+        
         
         
         
@@ -494,7 +527,11 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
               break;
            }
        }
-         doctor.getSchedule().put(date1, time);
+       //Integer [] arr = null;
+       
+       
+       
+         doctor.addSchedule(date1, time);
         txtPatientName.setText("");
         cmbDoctor.setSelectedIndex(0);
         txtAppointmetDate.setText("");
@@ -526,7 +563,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         //registrationRequest.setContactCarrierName(contact);
         sendEmailMessageAppointment(uEmail, account, statusString);//.getText());
         sendTextMessage(phonecontact);      
-        
+        setPanelTime();
         
         //return;
     }//GEN-LAST:event_txtBookAppointmentActionPerformed
@@ -546,6 +583,24 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
 
     private void cmbDoctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDoctorActionPerformed
         // TODO add your handling code here:
+        setPanelTime();
+        
+    }//GEN-LAST:event_cmbDoctorActionPerformed
+
+    void setPanelTime()
+    {
+        if(cmbDoctor.getSelectedIndex() ==0)
+        {
+        resetLblColor(jpnael11);
+        resetLblColor(jpnael12);
+        resetLblColor(jpnael1014);
+        resetLblColor(jpnael15);
+        resetLblColor(jpnael16);
+        resetLblColor(jpnael10);
+        return;
+        }
+        
+        
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
         if(doctor !=null)
         {
@@ -561,51 +616,60 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         }
         if(doctor.getSchedule() == null)
         {
-            Map<Date,Integer> schedule = new HashMap<>();
+            Map<Date,ArrayList<Integer>> schedule = new HashMap<>();
             doctor.setSchedule(schedule);
+            //schedule.put()
         }
         
-        for(Map.Entry<Date,Integer> sch : doctor.getSchedule().entrySet()){
+        for(Map.Entry<Date,ArrayList<Integer>> sch : doctor.getSchedule().entrySet()){
             if(sch.getKey().equals(date1) )
             {
-                if(sch.getValue() == 10)
+                ArrayList<Integer> arr = sch.getValue();
+                //for(int i=0;1<arr.length;i++){
+                if( arr.contains(10))
                 {
                     jpnael10.setEnabled(false);
                     setLblColor(jpnael10);
-                    
+                    //continue;
                 }
-                if(sch.getValue() == 11)
+                if(arr.contains(11))
                 {
                     jpnael11.setEnabled(false);
                     setLblColor(jpnael11);
+                    //continue;
                 }
-                if(sch.getValue() == 12)
+                if(arr.contains(12))
                 {
                     jpnael12.setEnabled(false);
                     setLblColor(jpnael12);
+                    //continue;
                 }
-               if(sch.getValue() == 14)
+               if(arr.contains(14))
                 {
                     jpnael1014.setEnabled(false);
                     setLblColor(jpnael1014);
+                    //continue;
                 }
-                if(sch.getValue() == 15)
+                if(arr.contains(15))
                 {
                     jpnael15.setEnabled(false);
                     setLblColor(jpnael15);
+                    //continue;
                 }
-                if(sch.getValue() == 16)
+                if(arr.contains(16))
                 {
                     jpnael16.setEnabled(false);
                     setLblColor(jpnael16);
+                    //continue;
                 }
+               // }
             }
         }
         
         }
-        
-    }//GEN-LAST:event_cmbDoctorActionPerformed
-
+    }
+    
+    
     private void jpnael10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnael10MouseClicked
         // TODO add your handling code here:
         setLblColor(jpnael10);
@@ -672,6 +736,29 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         resetLblColor(jpnael10);
         time=16;
     }//GEN-LAST:event_jpnael16MouseClicked
+
+    private void txtAppointmetDateKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAppointmetDateKeyReleased
+        // TODO add your handling code here:
+        //setPanelTime();
+    }//GEN-LAST:event_txtAppointmetDateKeyReleased
+
+    private void txtAppointmetDateKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAppointmetDateKeyTyped
+        // TODO add your handling code here:
+        
+      //  setPanelTime();
+    }//GEN-LAST:event_txtAppointmetDateKeyTyped
+
+    private void txtAppointmetDateMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtAppointmetDateMouseExited
+        // TODO add your handling code here:
+        
+       // setPanelTime();
+    }//GEN-LAST:event_txtAppointmetDateMouseExited
+
+    private void txtAppointmetDateFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtAppointmetDateFocusLost
+        // TODO add your handling code here:
+        
+        setPanelTime();
+    }//GEN-LAST:event_txtAppointmetDateFocusLost
 
     public void setLblColor(JPanel lbl)
     {

@@ -33,6 +33,7 @@ public class Prescription {
     public Prescription() {
         this.createdOn = new Date();
         medicinePrescribed = new HashMap<>();
+        medicineListquanity = new HashMap<>();
     }
 
     

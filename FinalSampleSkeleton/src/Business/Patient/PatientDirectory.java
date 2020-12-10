@@ -5,6 +5,7 @@
  */
 package Business.Patient;
 
+import Business.Enterprise.InsuranceEnterprise.Insurance;
 import Business.Location.LocationPoint;
 import Business.UserAccount.UserAccount;
 import java.util.List;
@@ -26,7 +27,8 @@ public class PatientDirectory {
     
     
 
-    public Patient createPatient(String patientName, String phoneNumber, String gender, String bloodGroup, UserAccount userAccount, LocationPoint locationPoint, String email) {
+    public Patient createPatient(String patientName, String phoneNumber, String gender, String bloodGroup, UserAccount userAccount, LocationPoint locationPoint, String email,
+            Insurance insuranceE, String insuranceId) {
         Patient patient = new Patient();
         patient.setName(patientName);
         patient.setPhoneNum(phoneNumber);
@@ -39,6 +41,8 @@ public class PatientDirectory {
         patient.setEmailID(email);
         patientList.add(patient);
         patient.createNewAppointmentDirectory();
+        patient.setInsuranceId(insuranceId);
+        patient.setInsuranceE(insuranceE);
         return patient;
     }
 

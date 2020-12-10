@@ -7,6 +7,7 @@ package Business.Enterprise;
 
 import Business.Enterprise.ClinicEnterprise.Clinic;
 import Business.Enterprise.HospitalEnterprise.Hospital;
+import Business.Enterprise.InsuranceEnterprise.Insurance;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Organization.OrganizationDirectory;
@@ -51,6 +52,11 @@ public class EnterpriseDirectory {
             enterprise=new Lab(name);
             enterpriseList.add(enterprise);
         }
+        else if(type==Enterprise.EnterpriseType.Insurance){
+            enterprise=new Insurance(name);
+            enterpriseList.add(enterprise);
+        }
+        
         return enterprise;
     }
 }
