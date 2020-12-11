@@ -50,7 +50,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         
         model.setRowCount(0);
-        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
+        for (WorkRequest request : enterprise.getWorkQueue().getWorkRequestList()){
             
             if(request instanceof NurseWorkRequest){
             Object[] row = new Object[11];
@@ -174,7 +174,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                         .addGap(35, 35, 35)
                         .addComponent(nameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(refreshTestJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(257, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         buttonPanelLayout.setVerticalGroup(
             buttonPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,25 +223,24 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(viewDetailsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnManageBedAssngmt)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAssignToMe, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
-                        .addComponent(requestTestJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(buttonPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(32, 32, 32)
+                                .addComponent(viewDetailsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnManageBedAssngmt)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAssignToMe, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(26, 26, 26)
+                                .addComponent(requestTestJButton))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(174, 174, 174)
+                                .addComponent(jLabel1)))
+                        .addGap(0, 507, Short.MAX_VALUE))
+                    .addComponent(buttonPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -259,7 +258,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnAssignToMe))
                 .addGap(27, 27, 27)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(249, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -280,7 +279,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
     private void viewReqBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewReqBtnActionPerformed
         // TODO add your handling code here:
         //show all new request
-        if(userAccount.getWorkQueue().getWorkRequestList().isEmpty())
+        if(enterprise.getWorkQueue().getWorkRequestList().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "No request!");
             return;
@@ -290,9 +289,11 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         
         model.setRowCount(0);
-        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
-            if(request.getStatus().equals("New"))
+        for (WorkRequest request : enterprise.getWorkQueue().getWorkRequestList()){
+            if((request.getStatus().equals("New")) && (request instanceof NurseWorkRequest) )
+                              
             {
+                
             //sender, receiver, pateint,status, message
             Object[] row = new Object[11];
             row[0] = request.getSender();
@@ -329,6 +330,8 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
+       
+        
         UserAccount doctor =(UserAccount) workRequestJTable.getValueAt(row, 0);
         
         Patient patient = (Patient) workRequestJTable.getValueAt(row, 2);
@@ -338,7 +341,11 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         UserAccount nurseUserAccount = userAccount;
         WorkRequest workreq= (WorkRequest) workRequestJTable.getValueAt(row, 5);
         
-        
+        if(workreq.getReceiver()==null)
+        {
+             JOptionPane.showMessageDialog(null, "Please assign request!!", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         AssignBedJPanel manageOrganizationJPanel = new AssignBedJPanel(userProcessContainer, enterprise, appointment, patient, doctor, nurseUserAccount, workreq);
         userProcessContainer.add("AssignBedJPanel", manageOrganizationJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
@@ -360,19 +367,15 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = workRequestJTable.getSelectedRow();
         
         if (selectedRow < 0){
+            JOptionPane.showMessageDialog(null, "Please select a row");
             return;
         }
         
         WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 5);
         
-        if(request.getReceiver().equals(userAccount) )
-        {
-             JOptionPane.showMessageDialog(null, "Already assigned!");
-            return;
-
-        }
         
-        else if( request.getReceiver()!=null &&request.getReceiver().equals(userAccount) )
+        
+         if( request.getReceiver()!=null &&request.getReceiver().equals(userAccount) )
         {
               JOptionPane.showMessageDialog(null, "Already handled, cannot assign!");
             return;
@@ -381,6 +384,8 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         request.setReceiver(userAccount);
         request.setStatus("Pending");
         populateRequestTable();
+        
+        JOptionPane.showMessageDialog(null, "Assignment successful!");
         
     }//GEN-LAST:event_btnAssignToMeActionPerformed
 

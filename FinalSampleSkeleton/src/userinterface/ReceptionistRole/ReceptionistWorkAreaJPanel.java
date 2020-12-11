@@ -5,6 +5,7 @@
  */
 package userinterface.ReceptionistRole;
 
+import Business.Appointment.Appointment;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Organization.DoctorOrganization;
@@ -63,7 +64,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         
         if(enterprise.getEnterpriseType().getValue().equals("Pharmacy"))
         {
-            populateTest();
+            populatepharmacyReceptionist();
         }
         
         
@@ -100,8 +101,14 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
             for (WorkRequest wr : wrList) {
                 if(wr instanceof ReceptionistWorkRequest)
                 {
-                
+                    Appointment app = ((ReceptionistWorkRequest) wr).getApp();
                 Patient patient = ((ReceptionistWorkRequest)wr).getPatient();
+                if(patient == null && app !=null){
+                    patient= ((ReceptionistWorkRequest) wr).getApp().getPatient();
+                            
+                }
+                
+                
                 if(patient!=null)
                 {
                 

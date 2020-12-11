@@ -154,7 +154,7 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 860, 540));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel2.setText("Pharmacy Worker Are");
+        jLabel2.setText("Pharmacy Worker Area");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 10, 270, 30));
     }// </editor-fold>//GEN-END:initComponents
 

@@ -4,12 +4,16 @@
  */
 package Business.Role;
 
+import Business.Appointment.Appointment;
 import Business.EcoSystem;
+import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
 import Business.Network.Network;
 import Business.Organization.Organization;
+import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import PharmacyWorkerMainWorkArea.PharmacyMainWorkAreaJPanel;
+import PharmacyWorkerMainWorkArea.PharmacyManageAreaJPanel;
 import userinterface.LabTechnicianRole.LabAssistantMainAreaJPanel;
 import javax.swing.JPanel;
 
@@ -21,7 +25,8 @@ public class PharmacyWorkerRole extends Role {
 
     @Override
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
-        return new PharmacyMainWorkAreaJPanel(userProcessContainer, account, organization, business, enterprise);
+        return new PharmacyManageAreaJPanel( userProcessContainer,account,organization,  enterprise ,business);
+        
     }
     
     @Override

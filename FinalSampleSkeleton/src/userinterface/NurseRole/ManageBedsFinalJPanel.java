@@ -113,6 +113,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 255, 255));
 
+        assignJPanel.setBackground(new java.awt.Color(153, 204, 255));
         assignJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Manage Bed"));
         assignJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -216,9 +217,9 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
                 .addComponent(assignJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(167, 167, 167))
+                .addGap(114, 114, 114))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,7 +444,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     for(Appointment app : appnmtList)
                     {
                         Bed appBed = app.getOperation().getBedAssigned() ;
-                        if(appBed.equals(selectedBed))
+                        if(appBed !=null && appBed.equals(selectedBed))
                         {
                             //app.getOperation().getBedAssigned().setStatus(newBedStatus);
                             Operation opr= app.getOperation();
@@ -459,6 +460,8 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
             //opr.setPerson(nurseUserAccount.getEmployee());
             //set opeartion status to complete
             opr.setStatus(Operation.OperationStatus.Completed.getValue());
+             JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
+            
                         }
                     }
                     
@@ -479,8 +482,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     
                     
                     
-            JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
+           
 
         } catch (ParseException ex) {
             Logger.getLogger(AssignBedJPanel.class.getName()).log(Level.SEVERE, null, ex);
