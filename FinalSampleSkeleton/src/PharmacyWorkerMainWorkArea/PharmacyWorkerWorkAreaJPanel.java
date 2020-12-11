@@ -163,10 +163,6 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        labTestTbl = new javax.swing.JTable();
-        processJButton = new javax.swing.JButton();
-        refreshJButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         backJButton = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -179,58 +175,14 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
         medicineQuantityTbl = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         totalPriceTxt = new javax.swing.JTextField();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labTestTbl.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Test Name", "Test charge", "Date", "Technician Name", "Status", "Patient"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(labTestTbl);
-
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 450, 810, 96));
-
-        processJButton.setText("Process for Billing");
-        processJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                processJButtonActionPerformed(evt);
-            }
-        });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 580, -1, -1));
-
-        refreshJButton.setText("Refresh");
-        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButtonActionPerformed(evt);
-            }
-        });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel3.setText("Order Completion");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 40, -1, -1));
 
         backJButton.setText("<< Back");
@@ -239,8 +191,9 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setText("Status :");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 340, -1, 20));
         add(technicianNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 300, 160, 30));
@@ -261,12 +214,14 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(cmbStatusType, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 340, 160, 30));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/laboratory.jpg"))); // NOI18N
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 290, 180));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BillingPayment.PNG"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 300, 290, 180));
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel9.setText("Worker Name :");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 310, -1, 20));
 
+        medicineQuantityTbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         medicineQuantityTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -285,8 +240,9 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(medicineQuantityTbl);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, -1, 180));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 720, 180));
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel6.setText("Total Price :");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 90, -1));
 
@@ -296,51 +252,41 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
         add(totalPriceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 380, 160, -1));
+
+        jPanel14.setBackground(new java.awt.Color(232, 201, 232));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 91, Short.MAX_VALUE)
+        );
+
+        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel13.setBackground(new java.awt.Color(96, 83, 150));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel2.setText("Order Completion");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 30));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
-        
-        int selectedRow = labTestTbl.getSelectedRow();
-        
-        if (selectedRow < 0){
-            JOptionPane.showMessageDialog(null, "Please select a row!");
-            return;
-        }
-        else{
-            ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
-                workreq.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
-                appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
-                workreq.setMessage("Test completed for Patient, make bill");
-                
-                workreq.setSender(userAccount);
-                workreq.setPatient(patient);
-                workreq.setDoctor(userAccount.getEmployee());
-                //workreq.setReceiver(userAccount);
-                Lab lab = (Lab) enterprise;
-                lab.getWorkQueue().getWorkRequestList().add(workreq);
-                request.setStatus("Sent for Billing");
-                //UserAccount recepUseracc = null;
-                //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
-                //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
-                //workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
-        }
-        
-        JOptionPane.showMessageDialog(null, "Request completed, sent for billing!");
-        
-//        LabTestWorkRequest request = (LabTestWorkRequest)labTestTbl.getValueAt(selectedRow, 0);
-//     
-//        request.setStatus("Processing");
-//        
-//        ProcessWorkRequestJPanel processWorkRequestJPanel = new ProcessWorkRequestJPanel(userProcessContainer, request);
-//        userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
-        
-    }//GEN-LAST:event_processJButtonActionPerformed
-
-    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-        //populateTable();
-    }//GEN-LAST:event_refreshJButtonActionPerformed
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
        
@@ -464,17 +410,16 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton backJButton;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JComboBox<String> cmbStatusType;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable labTestTbl;
     private javax.swing.JTable medicineQuantityTbl;
-    private javax.swing.JButton processJButton;
-    private javax.swing.JButton refreshJButton;
     private javax.swing.JTextField technicianNameTxt;
     private javax.swing.JTextField totalPriceTxt;
     // End of variables declaration//GEN-END:variables

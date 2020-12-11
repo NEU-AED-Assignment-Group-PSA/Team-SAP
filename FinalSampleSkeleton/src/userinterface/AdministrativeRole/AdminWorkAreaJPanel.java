@@ -101,6 +101,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         userJButton = new javax.swing.JButton();
         manageBedBtn = new javax.swing.JButton();
         manageMedicineInvtry = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -130,22 +133,25 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        manageOrganizationJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageOrganizationJButton.setText("Manage Department");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 manageOrganizationJButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 30, -1, 60));
+        jPanel1.add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, 60));
 
+        userJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         userJButton.setText("Manage Staff");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 userJButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 150, 60));
+        jPanel1.add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 150, 60));
 
+        manageBedBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageBedBtn.setText("Manage Bed");
         manageBedBtn.setEnabled(false);
         manageBedBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -153,8 +159,9 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageBedBtnActionPerformed(evt);
             }
         });
-        jPanel1.add(manageBedBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 30, 150, 60));
+        jPanel1.add(manageBedBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 150, 60));
 
+        manageMedicineInvtry.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageMedicineInvtry.setText("Manage Inventory");
         manageMedicineInvtry.setEnabled(false);
         manageMedicineInvtry.addActionListener(new java.awt.event.ActionListener() {
@@ -162,9 +169,44 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
                 manageMedicineInvtryActionPerformed(evt);
             }
         });
-        jPanel1.add(manageMedicineInvtry, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 150, 60));
+        jPanel1.add(manageMedicineInvtry, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 170, 60));
 
         add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 840, 130));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(96, 83, 150));
+        jLabel5.setText("Welcome back!");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
+
+        jPanel14.setBackground(new java.awt.Color(232, 201, 232));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 91, Short.MAX_VALUE)
+        );
+
+        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jPanel13.setBackground(new java.awt.Color(96, 83, 150));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void userJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userJButtonActionPerformed
@@ -229,7 +271,10 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel enterpriseLabel1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JLabel lblEnterprise;
     private javax.swing.JLabel lblEnterpriseImage;
     private javax.swing.JLabel lblHeadName;
