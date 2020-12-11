@@ -34,6 +34,15 @@ public class BedDirectory {
         
         }
         
+        
+        for(int i=0;i<count;i++){
+        
+            Bed bed = new Bed();
+            bed.setBedType(Bed.BedType.Delux);
+            bedList.add(bed);
+        
+        }
+        
     }
     
     public void addBeds(int count){

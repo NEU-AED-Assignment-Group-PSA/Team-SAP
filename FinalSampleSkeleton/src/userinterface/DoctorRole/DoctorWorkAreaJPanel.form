@@ -62,7 +62,7 @@
                       </Group>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="114" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                       <Component id="scheduleSurgeryJPanel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -113,9 +113,9 @@
               </Group>
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="btnCompleted" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
               <Component id="scheduleSurgeryJPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="384" max="32767" attributes="0"/>
+              <EmptySpace pref="345" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

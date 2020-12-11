@@ -66,6 +66,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         this.appointment = ((LabTechnicianWorkRequest)request).getAppointment();
         this.request=request;
         this.enterprise = enterprise;
+        this.patient= appointment.getPatient();
         populatecbox();
         //populateTable();
         testNameTxt.setText(labTest.getName());
@@ -316,11 +317,19 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         else{
+            if(request.getStatus().equals("Sent for Billing"))
+            {
+                JOptionPane.showMessageDialog(null, "Already processed!");
+            return;
+            }
+            
+            
             ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
                 workreq.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
-                appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                appointment.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
                 workreq.setMessage("Test completed for Patient, make bill");
-                
+                workreq.setApp(appointment);
+               // workreq.setPatient(patient);
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);
                 workreq.setDoctor(userAccount.getEmployee());

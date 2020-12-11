@@ -385,7 +385,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel6)
                             .addComponent(lblDrName, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
+                        .addGap(80, 80, 80)
                         .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(265, Short.MAX_VALUE))
         );
@@ -423,9 +423,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(btnScheduleLabTest))))
                 .addGap(6, 6, 6)
                 .addComponent(btnCompleted)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(46, 46, 46)
                 .addComponent(scheduleSurgeryJPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
+                .addContainerGap(345, Short.MAX_VALUE))
         );
 
         scheduleSurgeryJPanel.getAccessibleContext().setAccessibleName("Add Surgery");
@@ -574,17 +574,17 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 workreq.setStatus("New");
                 UserAccount nurseUserAcc =null;
                 //need employee list of the doctor's department -> organization
-                List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
+               // List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
-                for(UserAccount account: userAccDir)
-                {
-                    if(account.getRole().roleValue().equals("Nurse Role"))
-                    {
-                        workreq.setReceiver(account);
-                        account.getWorkQueue().getWorkRequestList().add(workreq);
-                    }
+                //for(UserAccount account: userAccDir)
+               // {
+                //    if(account.getRole().roleValue().equals("Nurse Role"))
+                //    {
+                        workreq.setReceiver(null);
+                        enterprise.getWorkQueue().getWorkRequestList().add(workreq);
+              //      }
                     
-                }
+              //  }
                 
               
                 
@@ -629,12 +629,14 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         }
             appointment = (Appointment) DoctorWorkAreaTable.getValueAt(selectedrow, 1);
             patient = (Patient) DoctorWorkAreaTable.getValueAt(selectedrow, 0);
-           scheduleSurgeryJPanel.setVisible(true);        
-           appoinmtntDTxt.setText(String.valueOf(appointment.getAppointmentId()));
-           patientNameTxt.setText(patient.getName());
+          // scheduleSurgeryJPanel.setVisible(true);        
+         //  appoinmtntDTxt.setText(String.valueOf(appointment.getAppointmentId()));
+         //  patientNameTxt.setText(patient.getName());
             //populate operation types
-           populateOperationType();
-          
+         //  populateOperationType();
+           CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        userProcessContainer.add("ScheduleSurgeryJPanel", new ScheduleSurgeryJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem, enterprise, userAccount));
+        layout.next(userProcessContainer);
         
         
     }//GEN-LAST:event_btnScheduleSurgeryActionPerformed

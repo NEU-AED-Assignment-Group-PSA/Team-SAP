@@ -55,7 +55,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private EcoSystem ecosystem;
     
 
-    PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor,
+   public PrescriptionJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Employee doctor,
             MedicineDirectory medicineList,EcoSystem ecosystem, Enterprise enterprise, UserAccount userAccount) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
