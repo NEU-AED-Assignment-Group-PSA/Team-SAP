@@ -34,7 +34,16 @@ public class Patient extends Employee{
     private String insuranceId;
     private Insurance insuranceE;
     private ArrayList<PatientHistoryDetails> patHistorydtls;
+    private String SSN;
 
+    public String getSSN() {
+        return SSN;
+    }
+
+    public void setSSN(String SSN) {
+        this.SSN = SSN;
+    }
+    
     public Patient()
     {
         super();
