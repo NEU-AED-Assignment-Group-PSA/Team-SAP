@@ -338,4 +338,18 @@ public class Validation {
     
     
     
+    public static  boolean checkSNNValidAndUnique(String ssn)
+    {
+        if(ssn.length()!=9)
+        {
+            return false;
+        }
+        
+        return (validateNumeric(ssn));
+        
+        
+    }
+    
+    
+    
 }

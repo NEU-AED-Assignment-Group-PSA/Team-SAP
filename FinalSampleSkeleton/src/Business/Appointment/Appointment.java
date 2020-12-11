@@ -187,6 +187,7 @@ public class Appointment {
         Cancel("Cancel"),
         GeneratedReport("Generated Report"),
         MarkForInsurance("Mark For Insurance"),
+        BedAssigned("Bed Assigned"),
         ApprovedInsurance("ApprovedInsurance");
         private String value;
         private AppointmentStatus(String value){

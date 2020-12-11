@@ -135,7 +135,6 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        refreshJButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -154,17 +153,11 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
         txtApprovedAmt = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
+        jPanel14 = new javax.swing.JPanel();
+        jPanel13 = new javax.swing.JPanel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        refreshJButton.setText("Refresh");
-        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                refreshJButtonActionPerformed(evt);
-            }
-        });
-        add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
 
         jLabel1.setText("Requested Amount:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
@@ -185,7 +178,7 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
-        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, -1, -1));
         add(txtRequestedAmt, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 160, -1));
         add(txtInsuID, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, 160, -1));
         add(txtPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 140, 160, -1));
@@ -210,8 +203,8 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(cmbStatusType, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 160, -1));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/laboratory.jpg"))); // NOI18N
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 290, 180));
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/insurance2.PNG"))); // NOI18N
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 690, 350));
 
         jLabel9.setText("Enterprise :");
         add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 210, -1, -1));
@@ -223,11 +216,37 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
         jLabel8.setText("Date:");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, -1, -1));
         add(txtDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 160, -1));
-    }// </editor-fold>//GEN-END:initComponents
 
-    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
-        //populateTable();
-    }//GEN-LAST:event_refreshJButtonActionPerformed
+        jPanel14.setBackground(new java.awt.Color(232, 201, 232));
+
+        javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
+        jPanel14.setLayout(jPanel14Layout);
+        jPanel14Layout.setHorizontalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+        jPanel14Layout.setVerticalGroup(
+            jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 91, Short.MAX_VALUE)
+        );
+
+        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
+
+        jPanel13.setBackground(new java.awt.Color(96, 83, 150));
+
+        javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
+        jPanel13.setLayout(jPanel13Layout);
+        jPanel13Layout.setHorizontalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+        jPanel13Layout.setVerticalGroup(
+            jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 40, Short.MAX_VALUE)
+        );
+
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, -1));
+    }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
        
@@ -346,7 +365,8 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JButton refreshJButton;
+    private javax.swing.JPanel jPanel13;
+    private javax.swing.JPanel jPanel14;
     private javax.swing.JTextField txtApprovedAmt;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtEnterprise;
