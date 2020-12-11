@@ -656,6 +656,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 //bloodGrpTxt.setText("");
                 dateTxt.setText("");
                 txtOprDescptn.setText("");
+                 populateRequestTable();
             }
             catch(Exception e)
             {
@@ -691,7 +692,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
            patientNameTxt.setText(patient.getName());
             //populate operation types
            populateOperationType();
-           populateRequestTable();
+          
         
         
     }//GEN-LAST:event_btnScheduleSurgeryActionPerformed

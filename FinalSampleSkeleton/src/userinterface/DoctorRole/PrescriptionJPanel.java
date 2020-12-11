@@ -21,6 +21,7 @@ import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.WorkQueue.PharmacyWorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -359,6 +360,12 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
+          Component [] componentArray = userProcessContainer.getComponents();
+        Component c = componentArray[componentArray.length-1];
+        DoctorWorkAreaJPanel ms = (DoctorWorkAreaJPanel) c;
+        ms.populateRequestTable();
+
+        
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
@@ -388,7 +395,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         PharmacyWorkRequest phWr = new PharmacyWorkRequest();
          phWr.setStatus("New");
                 //appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
-                phWr.setMessage("Prescribe medicines for this Patient");
+                phWr.setMessage("Please provide the Prescribed medicines for this Patient");
                 phWr.setSender(userAccount);
                 phWr.setAppointment(appointment);
                 phWr.setDoctor(doctor);
