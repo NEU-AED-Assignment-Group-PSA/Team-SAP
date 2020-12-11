@@ -99,6 +99,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         cmbInsuranceCompany = new javax.swing.JComboBox();
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -248,6 +249,9 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         );
 
         add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, -1));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/createPatient2.PNG"))); // NOI18N
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 550, 710, 330));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPatientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPatientNameActionPerformed
@@ -403,6 +407,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JLabel lblGender;
