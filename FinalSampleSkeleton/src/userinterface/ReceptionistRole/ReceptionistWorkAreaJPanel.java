@@ -11,6 +11,7 @@ import Business.Organization.DoctorOrganization;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
+import Business.WorkQueue.PharmacyWorkRequest;
 import Business.WorkQueue.ReceptionistWorkRequest;
 import Business.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
@@ -65,6 +66,13 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
             populateTest();
         }
         
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Insurance"))
+        {
+            populateTest();
+        }
+        
+        
     }
 
     public void populatePatients() {
@@ -109,6 +117,34 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         }
     }
     
+     
+     public void populatepharmacyReceptionist() {
+        DefaultTableModel model = (DefaultTableModel) PatientDataJTable.getModel();
+        model.setRowCount(0);
+        if(enterprise.getWorkQueue() != null ){
+            List<WorkRequest> wrList = enterprise.getWorkQueue().getWorkRequestList();
+            for (WorkRequest wr : wrList) {
+                if(wr instanceof ReceptionistWorkRequest)
+                {
+                
+                Patient patient = ((ReceptionistWorkRequest)wr).getPatient();
+                if(patient!=null)
+                {
+                
+                    Object[] row = new Object[4];
+                    row[0] = patient.getId();
+                    row[1] = patient.getName();
+                    row[2] = patient.getPhoneNum();
+                    row[3] = patient.getBloodGroup();
+                    model.addRow(row); 
+                }
+                }
+            }
+        }
+    }
+     
+     
+     
     
     /**
      * This method is called from within the constructor to initialize the form.

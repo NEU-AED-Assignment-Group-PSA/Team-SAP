@@ -51,6 +51,8 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
+            
+            if(request instanceof NurseWorkRequest){
             Object[] row = new Object[11];
             row[0] = request.getSender();
             row[1] = request.getReceiver();
@@ -66,6 +68,7 @@ public class NurseWorkAreaJPanel extends javax.swing.JPanel {
             row[9] = opr.getOprType();
             row[10] = opr.getOperationDate() == null ? "" : opr.getOperationDate();
             model.addRow(row);
+        }
         }
     }
 

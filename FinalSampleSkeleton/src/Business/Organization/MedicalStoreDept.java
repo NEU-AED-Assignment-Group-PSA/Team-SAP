@@ -12,6 +12,7 @@ import Business.Appointment.Prescription;
 import Business.Enterprise.PharmacyEnterprise.Pharmacy;
 import Business.Role.DoctorRole;
 import Business.Role.NurseRole;
+import Business.Role.PharmacyWorkerRole;
 import Business.Role.ReceptionistRole;
 import Business.Role.Role;
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class MedicalStoreDept extends Organization {
     //@Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-        roles.add(new ReceptionistRole());
+        roles.add(new PharmacyWorkerRole());
         //roles.add(new WorkerRole());
         return roles;
 }
