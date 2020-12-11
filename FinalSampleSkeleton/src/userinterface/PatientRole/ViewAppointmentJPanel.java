@@ -256,7 +256,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 348, 244, 165));
 
         jLabel8.setText("Appointment Status:");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 511, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 510, -1, -1));
 
         txtAppointmentStatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
