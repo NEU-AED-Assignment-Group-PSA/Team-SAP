@@ -99,6 +99,7 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        btnNewInsurance = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,7 +150,7 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
                 processJButtonActionPerformed(evt);
             }
         });
-        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 400, 130, -1));
+        add(processJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 430, 130, -1));
 
         refreshJButton.setBackground(new java.awt.Color(153, 204, 255));
         refreshJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -162,7 +163,7 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 130, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/insuranceMain.PNG"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 250, 860, 540));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 690, 430));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Insurance Dealer Role");
@@ -202,6 +203,16 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(96, 83, 150));
         jLabel5.setText("Welcome back!");
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
+
+        btnNewInsurance.setBackground(new java.awt.Color(153, 204, 255));
+        btnNewInsurance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnNewInsurance.setText("Insurance");
+        btnNewInsurance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewInsuranceActionPerformed(evt);
+            }
+        });
+        add(btnNewInsurance, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 390, 130, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
@@ -248,10 +259,10 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
             return;
         }
         //request.setStatus("Processing");
-        LabTest labtest = (LabTest) workRequestJTable.getValueAt(selectedRow, 4);
+        //LabTest labtest = (LabTest) workRequestJTable.getValueAt(selectedRow, 4);
         InsuranceDWorkAreaJPanel processWorkRequestJPanel = 
                 new InsuranceDWorkAreaJPanel(userProcessContainer, userAccount,  organization,  business,request,  enterprise);
-        userProcessContainer.add("LabTechnicianWorkAreaJPanel", processWorkRequestJPanel);
+        userProcessContainer.add("InsuranceDWorkAreaJPanel", processWorkRequestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
         
@@ -261,8 +272,21 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void btnNewInsuranceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewInsuranceActionPerformed
+        // TODO add your handling code here:
+        
+        
+        ManageInsuranceJPanel processWorkRequestJPanel = 
+                new ManageInsuranceJPanel(userProcessContainer, enterprise.getOrganizationDirectory(),  enterprise, userAccount);
+        userProcessContainer.add("ManageInsuranceJPanel", processWorkRequestJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+        
+    }//GEN-LAST:event_btnNewInsuranceActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton assignJButton;
+    private javax.swing.JButton btnNewInsurance;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

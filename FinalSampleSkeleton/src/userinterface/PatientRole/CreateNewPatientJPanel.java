@@ -100,6 +100,8 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        lblUserName2 = new javax.swing.JLabel();
+        txtSSN = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -167,7 +169,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
                 btnSubmitActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 520, -1, -1));
+        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 540, -1, -1));
 
         txtAddress.setEditable(false);
         add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 166, -1));
@@ -183,7 +185,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         lblemail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblemail.setText("Email:");
         add(lblemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 129, -1));
-        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 230, 166, -1));
+        add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 240, 166, -1));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(25, 56, 82));
@@ -251,7 +253,12 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/createPatient2.PNG"))); // NOI18N
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 550, 710, 330));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 710, 330));
+
+        lblUserName2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblUserName2.setText("SSN:");
+        add(lblUserName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 500, 110, -1));
+        add(txtSSN, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 500, 166, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPatientNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPatientNameActionPerformed
@@ -288,9 +295,17 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
                 || txtAddress.getText().isEmpty()
                 || txtEmail.getText().isEmpty()||
                 txtInsuranceID.getText().isEmpty()
-                
+                || txtSSN.getText().isEmpty()
                 ){
             JOptionPane.showMessageDialog(null, "All fields are mandatory", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        String ssnString = txtSSN.getText();
+        boolean checkSSN = Validation.checkSNNValidAndUnique(ssnString);
+        if(checkSSN == false)
+        {
+            JOptionPane.showMessageDialog(null, "SSN is invalid", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -327,7 +342,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         String insuranceId = txtInsuranceID.getText();
         UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), null, new PatientRole());
         Employee emp= enterprise.getPatientDirectory().createPatient(txtPatientName.getText(), phoneNumberString, txtGender.getSelectedItem().toString(),
-                txtBloodGroup.getSelectedItem().toString(), account, locationPoint, txtEmail.getText(),insuranceE,insuranceId );
+                txtBloodGroup.getSelectedItem().toString(), account, locationPoint, txtEmail.getText(),insuranceE,insuranceId , ssnString);
         
        
         if (contactCarrier.getSelectedItem().equals("ATT")) {
@@ -416,6 +431,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblPhoneNumber;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblUserName1;
+    private javax.swing.JLabel lblUserName2;
     private javax.swing.JLabel lblemail;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JComboBox txtBloodGroup;
@@ -425,6 +441,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtSSN;
     private javax.swing.JTextField txtUserName;
     // End of variables declaration//GEN-END:variables
 }

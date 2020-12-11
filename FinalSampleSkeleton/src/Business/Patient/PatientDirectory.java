@@ -28,7 +28,7 @@ public class PatientDirectory {
     
 
     public Patient createPatient(String patientName, String phoneNumber, String gender, String bloodGroup, UserAccount userAccount, LocationPoint locationPoint, String email,
-            Insurance insuranceE, String insuranceId) {
+            Insurance insuranceE, String insuranceId, String SSN) {
         Patient patient = new Patient();
         patient.setName(patientName);
         patient.setPhoneNum(phoneNumber);
@@ -43,6 +43,7 @@ public class PatientDirectory {
         patient.createNewAppointmentDirectory();
         patient.setInsuranceId(insuranceId);
         patient.setInsuranceE(insuranceE);
+        patient.setSSN(SSN);
         return patient;
     }
 
@@ -68,4 +69,15 @@ public class PatientDirectory {
         }
         return null;
     }
+    
+    
+    public Patient findPatientBySSN(String ssn){
+        for(Patient patient : patientList){
+            if(patient.getSSN().equals(ssn)){
+                return patient;
+            }
+        }
+        return null;
+    }
+    
 }
