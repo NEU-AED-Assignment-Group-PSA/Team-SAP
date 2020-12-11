@@ -5,6 +5,7 @@
  */
 package Business.Appointment;
 
+import Business.Bill.Bill;
 import Business.Employee.Employee;
 import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Enterprise.LabEnterprise.LabTestDirectory;
@@ -32,7 +33,24 @@ public class Appointment {
     private Operation operation;
     LabTestDirectory labTestList;
     Prescription prescription;
+    Integer time;
+    Bill Hospitalbill;
 
+    public Bill getHospitalbill() {
+        return Hospitalbill;
+    }
+
+    public void setHospitalbill(Bill bill) {
+        this.Hospitalbill = bill;
+    }
+
+    public Integer getTime() {
+        return time;
+    }
+
+    public void setTime(Integer time) {
+        this.time = time;
+    }
     String appoitmentHistory;
 
     public String getAppoitmentHistory() {
@@ -66,6 +84,7 @@ public class Appointment {
         this.appointmentId = count;
         prescription= new Prescription();
         labTestList = new LabTestDirectory();
+        appoitmentHistory="";
     }
 
     public int getAppointmentId() {
@@ -114,7 +133,7 @@ public class Appointment {
 
     public void setStatus(String status) {
         this.status =  status; //this.status + ", " +
-        this.appoitmentHistory += " ,"+ this.status;
+        this.appoitmentHistory += " "+ this.status;
     }
 
     public String getLocation() {
@@ -160,14 +179,15 @@ public class Appointment {
     
     public enum AppointmentStatus{
         New("New"),
-        Markforbilling("Markforbilling"),
-        Markforsurgery("Markforsurgery"),
-        MarkforTest("MarkforTest"),
+        Markforbilling("Mark for billing"),
+        Markforsurgery("Mark for Surgery"),
+        MarkforTest("Mark for Test"),
         Close("Close"),
-        AnalyseReport("AnalyseReport"),
+        AnalyseReport("Analyse Report"),
         Cancel("Cancel"),
-        GeneratedReport("GeneratedReport");
-        
+        GeneratedReport("Generated Report"),
+        MarkForInsurance("Mark For Insurance"),
+        ApprovedInsurance("ApprovedInsurance");
         private String value;
         private AppointmentStatus(String value){
             this.value = value;

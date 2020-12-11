@@ -24,7 +24,9 @@ import java.awt.CardLayout;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -147,7 +149,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         patientNameTxt = new javax.swing.JTextField();
         doctorNameTxt = new javax.swing.JTextField();
         dosageTxt = new javax.swing.JTextField();
-        patientHistoryTxt = new javax.swing.JTextField();
+        remarksTxt = new javax.swing.JTextField();
         backJButton = new javax.swing.JButton();
         btnPrescribe = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -284,7 +286,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGap(18, 18, 18)
-                                            .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(remarksTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                             .addComponent(jLabel9)
                                             .addGap(23, 23, 23)
@@ -341,9 +343,9 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(quantityTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(patientHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(remarksTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton1)
@@ -380,7 +382,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         prescription.setPatient(patient);
         prescription.setDoctor(doctor);
         
-        //patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
+        patient.getAppointmentDirectory().getPrescriptionList().add(prescription);
         
         //pharmacy work request created--todo
         PharmacyWorkRequest phWr = new PharmacyWorkRequest();
@@ -396,6 +398,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                 //Appointment appointment = (Appointment) 
                 Pharmacy pharEnterprise =(Pharmacy) cmbPharmacy.getSelectedItem();
                 pharEnterprise.getWorkQueue().getWorkRequestList().add(phWr);
+                prescription.setPhmacy(pharEnterprise);
                 //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
@@ -408,8 +411,10 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         patientNameTxt.setText("");
         doctorNameTxt.setText("");
         dosageTxt.setText("");
-        //appointment.setPrescription(prescription);
-        JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
+        remarksTxt.setText("");
+        quantityTxt.setText("");
+        appointment.setPrescription(prescription);
+       // JOptionPane.showMessageDialog(null, "Prescription sucessfully added"); 
         populate();
         }
         
@@ -429,7 +434,13 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        if(patientNameTxt.getText().equals(""))
+        {
+             JOptionPane.showMessageDialog(null, "Please fill all entries");
         
+            
+            return;
+        }
         populatePrescribedMedicineTable();
         
         
@@ -442,14 +453,25 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
 
     
     void populatePrescribedMedicineTable(){
-        
+        if(patientNameTxt.getText()!=""){
         Medicine med = (Medicine) medicneCmb.getSelectedItem();
         double dosage = Double.parseDouble(dosageTxt.getText());
         int quantity = Integer.parseInt(quantityTxt.getText());
         
         Prescription prescription = appointment.getPrescription();
         
+        if(prescription.getMedicinePrescribed() == null){
+           Map<Medicine, Double>  medicinePrescribed = new HashMap<>();
+           prescription.setMedicinePrescribed(medicinePrescribed);
+        }
         prescription.getMedicinePrescribed().put(med, dosage);
+        
+        if(prescription.getMedicineListquanity() == null){
+           Map<Medicine, Integer>  medicinePrescribed = new HashMap<>();
+           prescription.setMedicineListquanity(medicinePrescribed);
+        }
+        
+        
         prescription.getMedicineListquanity().put(med, quantity);
         
         
@@ -461,6 +483,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                     row[1] = dosage;
                     row[2] = quantity;
                     model.addRow(row);
+        }
     }
     
     
@@ -500,8 +523,8 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox medicneCmb;
-    private javax.swing.JTextField patientHistoryTxt;
     private javax.swing.JTextField patientNameTxt;
     private javax.swing.JTextField quantityTxt;
+    private javax.swing.JTextField remarksTxt;
     // End of variables declaration//GEN-END:variables
 }

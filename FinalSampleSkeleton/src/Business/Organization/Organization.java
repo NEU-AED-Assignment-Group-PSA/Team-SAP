@@ -31,7 +31,7 @@ public abstract class Organization {
     private BillDirectory billDirectory;
     //private BedManagementDepartment 
     private int organizationID;
-    private static int counter=0;
+    private static int counter=1;
     
     public enum Type{
         Admin("Admin"),
@@ -49,6 +49,7 @@ public abstract class Organization {
         Cardiology("Cardiology Department"),
         Billing("Billing Department"),
         Lab("Lab"),
+        Insurance("Insurance"),
         Other("Other Department");
         
         private String value;

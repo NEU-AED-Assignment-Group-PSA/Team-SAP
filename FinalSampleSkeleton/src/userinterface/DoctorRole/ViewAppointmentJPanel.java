@@ -62,7 +62,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         doctorNameTxt.setEditable(false);
         appointmentStatusTxt.setEditable(false);
         appointmentStatusTxt.setText(appointment.getStatus());
-
+        apptHistoryTxt.setText(this.appointment.getAppoitmentHistory());
         //populateAppointmentDetails();
     }
     
@@ -107,6 +107,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         DateTxt = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
         doctorNameTxt = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        apptHistoryTxt = new javax.swing.JTextArea();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -167,6 +170,12 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel15.setText("Appointment History:");
+
+        apptHistoryTxt.setColumns(20);
+        apptHistoryTxt.setRows(5);
+        jScrollPane1.setViewportView(apptHistoryTxt);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,11 +208,17 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel14))
                                 .addGap(195, 195, 195))
                             .addComponent(patientNameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(doctorNameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(26, 26, 26)
-                                .addComponent(appointmentStatusTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(doctorNameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(appointmentStatusTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane1))))))
                 .addContainerGap(397, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -237,7 +252,11 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(appointmentStatusTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12))
-                .addGap(318, 318, 318))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel15)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(149, 149, 149))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -304,16 +323,19 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField appointmentIDTxt;
     private javax.swing.JTextField appointmentStatusTxt;
     private javax.swing.JTextField appointmentTypeTxt;
+    private javax.swing.JTextArea apptHistoryTxt;
     private javax.swing.JButton backJButton1;
     private javax.swing.JTextField doctorNameTxt;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField patientNameTxt;
     // End of variables declaration//GEN-END:variables
 }
