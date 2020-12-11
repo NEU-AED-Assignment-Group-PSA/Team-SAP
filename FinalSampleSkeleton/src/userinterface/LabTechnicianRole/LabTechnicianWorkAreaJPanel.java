@@ -370,7 +370,11 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 Lab lab = (Lab) enterprise;
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
                 request.setStatus("Sent for Billing");
-                //UserAccount recepUseracc = null;
+                if(lab.getPatientDirectory() == null){
+                    
+                }
+                lab.getPatientDirectory().getPatientList().add(patient);
+//UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
                 //workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
