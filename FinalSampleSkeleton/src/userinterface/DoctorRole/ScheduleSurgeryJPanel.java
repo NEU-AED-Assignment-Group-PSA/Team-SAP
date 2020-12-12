@@ -54,14 +54,14 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
         this.medicineList = medicineList;
         this.enterprise= enterprise;
         this.userAccount = userAccount;
-        patientNameTxt.setText(patient.getName());
+        
         //doctorNameTxt.setText(doctor.getName());
         //docotr
         //appointment.
         //appointment.setPrescription(prescription);
         populateSurgery();
         populateOperationType();
-        patientNameTxt.setEditable(false);
+        
     }
 
     
@@ -71,7 +71,14 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
         Operation operatn = appointment.getOperation();
         if(appointment.getOperation() == null)
         {
+            scheduleSurgeryJPanel.setVisible(true);
+            patientNameTxt.setText(patient.getName());
+            appoinmtntDTxt.setText(String.valueOf(appointment.getAppointmentId()));
+            appoinmtntDTxt.setEditable(false);
+            patientNameTxt.setEditable(false);
             return;
+        }else{
+            scheduleSurgeryJPanel.setVisible(false);
         }
         
         //for (Map.Entry<Medicine, Double> entry : appointment.getPrescription().getMedicinePrescribed().entrySet()){

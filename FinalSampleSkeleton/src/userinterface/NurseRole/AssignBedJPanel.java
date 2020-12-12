@@ -496,11 +496,11 @@ void populateDetails(){
 
             },
             new String [] {
-                "Bed ID", "Patient", "Date", "Type"
+                "Bed ID", "Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -605,6 +605,9 @@ void populateDetails(){
 
     private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
         assignJPanel.setVisible(false);
+        if(appointment.getOperation().getBedAssigned() != null){
+            btnviewBed.setEnabled(false);
+        }
     }//GEN-LAST:event_closebtnActionPerformed
 
     private void emailIDTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailIDTxtActionPerformed
@@ -701,20 +704,21 @@ void populateDetails(){
         model.setRowCount(0);
         for(Bed bed: bedList)
         {
-            boolean checkBedAvalibility = bedorg.checkIfBedAvailbleOnDate(date1, bed);
+//            boolean checkBedAvalibility = bedorg.checkIfBedAvailbleOnDate(date1, bed);
         
         
-        if(checkBedAvalibility && bed.getBedType().getBedType().equals(bedType)){
+        if(bed.getBedType().getBedType().equals(bedType) && 
+                (bed.getStatus().getStatus().equals(Bed.BedStatus.Available.getStatus()))){
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
         
-            Object[] row = new Object[4];
+            Object[] row = new Object[2];
             row[0] = bed;//.getBedID();
            // row[1] = bed.getStatus().getStatus();
-            Patient p = bed.getPatient();
-            row[1] = p == null ? "": p;
-            row[2] = "";
-            row[3] = bed.getBedType();
+//            Patient p = bed.getPatient();
+//            row[1] = p == null ? "": p;
+//            row[2] = "";
+            row[1] = bed.getBedType();
             model.addRow(row);
             //row[2] = 
             
@@ -791,7 +795,10 @@ void populateDetails(){
         Date date1;
         try {
             date1 = formatter1.parse(dateString);
-            bedorg.assignBedToPatientOnDate(patient,date1, selectedBed);
+            selectedBed.setPatient(patient);
+            selectedBed.setAppointment(appointment);
+            selectedBed.setStatus(Bed.BedStatus.Occupied);
+//            bedorg.assignBedToPatientOnDate(patient,date1, selectedBed);
             //selectedBed.setStatus(Bed.BedStatus.Occupied);
             JOptionPane.showMessageDialog(null, "Bed Assigned Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
             Operation opr= appointment.getOperation();

@@ -61,7 +61,7 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
            //for(LabTest labTest : labTestList)
            // {
             
-            Object[] row = new Object[8];
+            Object[] row = new Object[7];
             row[0] = request.getSender();
             //row[1] = request.getSender().getEmployee().getName();
             row[1] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
@@ -69,10 +69,16 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
             
             row[3] = request.getStatus();
            // LabTest lt= ((PharmacyWorkRequest)request).getLabTest();
-            row[4] = request.getRequestDate();//.getName();
-            row[5] = ((PharmacyWorkRequest)request).getDoctor();
-            row[6] = request.getMessage();
-            row[7] = request;
+           if(((PharmacyWorkRequest)request).getAppointment().getPrescription().getStatus() == null){
+               row[4] = "New";
+           }else{
+               row[4] = ((PharmacyWorkRequest)request).getAppointment().getPrescription().getStatus();
+           }
+           
+//            row[4] = request.getRequestDate();//.getName();
+//            row[5] = ((PharmacyWorkRequest)request).getDoctor();
+            row[5] = request.getMessage();
+            row[6] = request;
             model.addRow(row);
        // }//inner for
         }//if
@@ -108,14 +114,14 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Sender", "Receiver", "Patient", "Request Status", "Lab Test", "Test Status", "Message", "Request ID"
+                "Sender", "Receiver", "Patient", "Request Status", "Prescription Status", "Message", "Request ID"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -213,7 +219,7 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
-        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 7);
+        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 6);
         
         if(request.getReceiver() != null)
         {
@@ -237,7 +243,7 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
-        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 7);
+        WorkRequest request = (WorkRequest)workRequestJTable.getValueAt(selectedRow, 6);
         if(request.getReceiver()==null)
         {
             JOptionPane.showMessageDialog(null, "Please assign request before processing!");

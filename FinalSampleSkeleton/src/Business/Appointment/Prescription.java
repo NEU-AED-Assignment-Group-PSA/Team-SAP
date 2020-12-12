@@ -27,6 +27,28 @@ public class Prescription {
     Map<Medicine, Double> medicinePrescribed;
     Map<Medicine, Integer> medicineListquanity;
     private Pharmacy phmacy;
+    private String status;
+    private double amount;
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+    
+    
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    
 
     public Pharmacy getPhmacy() {
         return phmacy;

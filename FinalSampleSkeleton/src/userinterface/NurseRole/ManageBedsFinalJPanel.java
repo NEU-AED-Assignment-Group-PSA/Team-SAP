@@ -193,7 +193,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         assignJPanel.add(bedTypeCmb, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 100, 146, -1));
 
         lblBedStatus1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        lblBedStatus1.setText("Bed Status");
+        lblBedStatus1.setText("New Bed Status");
         assignJPanel.add(lblBedStatus1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 430, -1, -1));
 
         bedStatusCmb1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Available", "Occupied", "Assigned Laundry" }));
@@ -202,7 +202,7 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                 bedStatusCmb1ActionPerformed(evt);
             }
         });
-        assignJPanel.add(bedStatusCmb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 146, -1));
+        assignJPanel.add(bedStatusCmb1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 430, 146, -1));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -338,20 +338,26 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
         SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
         Date date1=formatter1.parse(dateString);
        //
-        List<Bed> bedList = null;//bedorg.getBedList().getBedList();
+//        List<Bed> bedList = null;//bedorg.getBedList().getBedList();
         
-        if(status.equals(Bed.BedStatus.AssignedLaundry.getStatus()))
-        {
-        bedList = bedorg.getBedAssignedLaundry();
-        }
-        else if(status.equals(Bed.BedStatus.Available.getStatus()))
-        {
-        bedList = bedorg.getBedAvailableListOnDate(date1);
-        }
-        else if(status.equals(Bed.BedStatus.Occupied.getStatus()))
-        {
-        bedList = bedorg.getBedOccupiedListOnDate(date1);
-        }
+        List<Bed> bedList = bedorg.getBedList().getBedList();
+        
+//        if(status.equals(Bed.BedStatus.AssignedLaundry.getStatus()))
+//        {
+//        bedList = bedorg.getBedAssignedLaundry();
+//        }
+//        else if(status.equals(Bed.BedStatus.Available.getStatus()))
+//        {
+//        bedList = bedorg.getBedAvailableListOnDate(date1);
+//        }
+//        else if(status.equals(Bed.BedStatus.Occupied.getStatus()))
+//        {
+//        bedList = bedorg.getBedOccupiedListOnDate(date1);
+//        }
+        
+        
+        DefaultTableModel model = (DefaultTableModel) bedJTable.getModel();
+        
         
         if(bedList==null || bedList.isEmpty())
         {
@@ -359,17 +365,14 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
             return;
 
         }
-        DefaultTableModel model = (DefaultTableModel) bedJTable.getModel();
-        
-        
-        
         
         
         
         model.setRowCount(0);
         for(Bed bed: bedList)
         {
-            if(bed.getBedType().getBedType().equals(bedType))
+            if((bed.getBedType().getBedType().equals(bedType)) && 
+                    bed.getStatus().getStatus().equals(status))
             {
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
@@ -468,7 +471,13 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Cannot assign status available, first assign to laundry!");
                     return;
                 }
-                
+                if(currentBedStatus.equals(Bed.BedStatus.AssignedLaundry.getStatus()))
+                {
+                    //selectedBed.getPatient().
+                    selectedBed.setStatus(Bed.BedStatus.Available);
+                    JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
                 
                
                         
@@ -490,32 +499,36 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                 {
                     //selectedBed.getPatient().
                     //free patient
-                    Patient pat= bedorg.getPatientByBedNDate(selectedBed,date1);
-                    List<Appointment> appnmtList = pat.getAppointmentDirectory().getAppointmentList();
-                    //add appouintmt in patient app dir also when creating
-                    for(Appointment app : appnmtList)
-                    {
-                        Bed appBed = app.getOperation().getBedAssigned() ;
-                        if(appBed !=null && appBed.equals(selectedBed))
-                        {
-                            //app.getOperation().getBedAssigned().setStatus(newBedStatus);
-                            Operation opr= app.getOperation();
-            //opr.setBedAssigned(null);
-            BedPatient bp = new BedPatient();
-            bp.setPatient(pat);
-            bp.setBed(appBed);
-            //remove entry from assignedBedtoPatient map
-            bedorg.getAssignedBedMap().remove(opr.getOperationDate(), bp);
-            //add bed to assign laundry list
-            bedorg.getBedAssignedLaundry().add(selectedBed);
-            //opr.set(dateString);
-            //opr.setPerson(nurseUserAccount.getEmployee());
-            //set opeartion status to complete
-            opr.setStatus(Operation.OperationStatus.Completed.getValue());
-             JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
-            
-                        }
-                    }
+                    Patient pat= selectedBed.getPatient();
+                    Appointment appointment = selectedBed.getAppointment();
+                    selectedBed.setStatus(Bed.BedStatus.AssignedLaundry);
+                    appointment.getOperation().setStatus(Operation.OperationStatus.Completed.getValue());
+                    JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
+//                    Patient pat= bedorg.getPatientByBedNDate(selectedBed,date1);
+//                    List<Appointment> appnmtList = pat.getAppointmentDirectory().getAppointmentList();
+//                    //add appouintmt in patient app dir also when creating
+//                    for(Appointment app : appnmtList)
+//                    {
+//                        Bed appBed = app.getOperation().getBedAssigned() ;
+//                        if(appBed !=null && appBed.equals(selectedBed))
+//                        {
+//                            //app.getOperation().getBedAssigned().setStatus(newBedStatus);
+//                            Operation opr= app.getOperation();
+//                            //opr.setBedAssigned(null);
+////                            BedPatient bp = new BedPatient();
+////                            bp.setPatient(pat);
+////                            bp.setBed(appBed);
+//                            //remove entry from assignedBedtoPatient map
+////                            bedorg.getAssignedBedMap().remove(opr.getOperationDate(), bp);
+//                            //add bed to assign laundry list
+////                            bedorg.getBedAssignedLaundry().add(selectedBed);
+//                            //opr.set(dateString);
+//                            //opr.setPerson(nurseUserAccount.getEmployee());
+//                            //set opeartion status to complete
+//                            opr.setStatus(Operation.OperationStatus.Completed.getValue());
+//                             JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
+//                        }
+//                    }
                     
                     
                     

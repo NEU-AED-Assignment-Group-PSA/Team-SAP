@@ -22,6 +22,11 @@ public class Operation {
     private double operationCharge;
     private String status; //new -by doctor, success - by doctor, on-going, scheduled- by nurse after bed confirmation
     private String oprType;
+    private Patient patient;
+    private Employee doctor;
+    private Employee person;  // for nurse??
+    private static int count =0;
+    private Bed bedAssigned;
 
     public String getOprType() {
         return oprType;
@@ -30,11 +35,7 @@ public class Operation {
     public void setOprType(String oprType) {
         this.oprType = oprType;
     }
-    private Patient patient;
-    private Employee doctor;
-    private Employee person;  // for nurse??
-    private static int count =0;
-    private Bed bedAssigned;
+    
 
     public static int getCount() {
         return count;
