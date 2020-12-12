@@ -67,6 +67,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     public void setAppointmentStatus(){
         cmbAppointmentStatus.removeAllItems();
         cmbAppointmentStatus.addItem("--Select--");
+        
         for(AppointmentStatus status : AppointmentStatus.values()){
             if(status.getValue().equals(AppointmentStatus.New.getValue()) ||
                     status.getValue().equals(AppointmentStatus.Cancel.getValue()) ||
@@ -96,27 +97,35 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private void populatePatientVisits(String status) {
         DefaultTableModel model = (DefaultTableModel) viewAppointmentJTable.getModel();
         model.setRowCount(0);
-        if(patient.getAppointmentDirectory() != null && patient.getAppointmentDirectory().getAppointmentList() != null){
-            List<Appointment> appointments = patient.getAppointmentDirectory().getAppointmentList();
-            SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
-            for(Appointment appointment : appointments){
-                if(appointment.getStatus().equals(status) || (appointment.getLabRecStatus() != null &&
-                        appointment.getLabRecStatus().equals(AppointmentStatus.Markforbilling.getValue()))){
-                    Object[] row = new Object[7];
-                    row[0] = patient.getId();
-                    row[1] = patient.getName();
-                    row[2] = appointment.getAppointmentId();
-                    if(appointment.getDoctor().getSpecialization() != null){
-                        row[3] = appointment.getDoctor().getName() + "-" + appointment.getDoctor().getSpecialization().getValue();
-                    }else{
-                        row[3] = appointment.getDoctor().getName();
-                    }
-                    row[4] = formatter1.format(appointment.getDate());
-                    row[5] = appointment.getType();
-                    row[6] = appointment.getStatus();
-                    model.addRow(row); 
-                }
+        List<Appointment> appointments = null;
+        if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            if(patient.getAppointmentDirectory() != null && patient.getAppointmentDirectory().getAppointmentList() != null){
+                appointments = patient.getAppointmentDirectory().getAppointmentList();
             }
+        }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+            if(patient.getLabAppointmentDirectory()!= null && patient.getLabAppointmentDirectory().getAppointmentList() != null){
+                appointments = patient.getLabAppointmentDirectory().getAppointmentList();
+            }
+        }
+           
+        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
+        for(Appointment appointment : appointments){
+            if(appointment.getStatus().equals(status)){
+                Object[] row = new Object[7];
+                row[0] = patient.getId();
+                row[1] = patient.getName();
+                row[2] = appointment.getAppointmentId();
+                if(appointment.getDoctor().getSpecialization() != null){
+                    row[3] = appointment.getDoctor().getName() + "-" + appointment.getDoctor().getSpecialization().getValue();
+                }else{
+                    row[3] = appointment.getDoctor().getName();
+                }
+                row[4] = formatter1.format(appointment.getDate());
+                row[5] = appointment.getType();
+                row[6] = appointment.getStatus();
+                model.addRow(row); 
+            }
+            
         }
     }
     
@@ -291,7 +300,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 btnCloseActionPerformed(evt);
             }
         });
-        add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 652, 162, -1));
+        add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 650, 162, -1));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Insurance Status:");
@@ -314,7 +323,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 btnViewBillActionPerformed(evt);
             }
         });
-        add(btnViewBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(607, 652, 162, -1));
+        add(btnViewBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 650, 162, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -375,7 +384,20 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         if(selectedRow >= 0){
             
             int appointmentId = (int)viewAppointmentJTable.getValueAt(selectedRow, 2);
-            List<Appointment> appointments = patient.getAppointmentDirectory().getAppointmentList();
+            
+          
+                List<Appointment> appointments = null;
+                if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+                    if(patient.getAppointmentDirectory() != null && patient.getAppointmentDirectory().getAppointmentList() != null){
+                        appointments = patient.getAppointmentDirectory().getAppointmentList();
+                    }
+                }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+                    if(patient.getLabAppointmentDirectory()!= null && patient.getLabAppointmentDirectory().getAppointmentList() != null){
+                        appointments = patient.getLabAppointmentDirectory().getAppointmentList();
+                    }
+                }
+           
+            
             Appointment appointment = null;
             for(Appointment a : appointments){
                 if(a.getAppointmentId() == appointmentId){

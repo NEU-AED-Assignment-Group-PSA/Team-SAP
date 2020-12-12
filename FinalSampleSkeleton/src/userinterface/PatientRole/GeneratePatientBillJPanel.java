@@ -196,7 +196,7 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
                 txtGenerateBillActionPerformed(evt);
             }
         });
-        add(txtGenerateBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 570, -1, -1));
+        add(txtGenerateBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, -1, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Appointment Id:");

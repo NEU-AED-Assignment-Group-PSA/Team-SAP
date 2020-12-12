@@ -35,15 +35,6 @@ public class Appointment {
     Prescription prescription;
     Integer time;
     Bill Hospitalbill;
-    String labRecStatus;
-
-    public String getLabRecStatus() {
-        return labRecStatus;
-    }
-
-    public void setLabRecStatus(String labRecStatus) {
-        this.labRecStatus = labRecStatus;
-    }
 
     public Bill getHospitalbill() {
         return Hospitalbill;

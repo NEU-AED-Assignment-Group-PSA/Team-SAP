@@ -487,12 +487,22 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             System.out.println("expection in Book appointmentJPanel");
         }
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
-        for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
-            if((appointment.getDate().compareTo(date1) == 0) && (appointment.getDoctor().getId() == doctor.getId())){
-                JOptionPane.showMessageDialog(null, "Patient has already booked appointment!", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
+        if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
+                if((appointment.getDate().compareTo(date1) == 0) && (appointment.getDoctor().getId() == doctor.getId())){
+                    JOptionPane.showMessageDialog(null, "Patient has already booked appointment!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+            }
+        }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+            for(Appointment appointment : patient.getLabAppointmentDirectory().getAppointmentList()){
+                if((appointment.getDate().compareTo(date1) == 0) && (appointment.getDoctor().getId() == doctor.getId())){
+                    JOptionPane.showMessageDialog(null, "Patient has already booked appointment!", "Warning", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
             }
         }
+        
         
        
         boolean check = doctor.checkScheduleIsAvaible(date1, time);
@@ -503,10 +513,15 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
             }
         
         
+        Appointment appoint = null;
+        if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            appoint = patient.getAppointmentDirectory().createAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
+            appoint.setTime(time);
+        }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+            appoint = patient.getLabAppointmentDirectory().createLabAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
+            appoint.setTime(time);
+        }
         
-        
-        Appointment appoint = patient.getAppointmentDirectory().createAppointment(patient, doctor, date1 , (String)txtAppointmentType.getSelectedItem());
-        appoint.setTime(time);
         //get user accout of dcotor selected
         
        
@@ -516,7 +531,13 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        for(Organization dept : deptList)
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
-           drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
+                drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
+              break;
+           }else if(dept instanceof Business.Organization.PathologyOrganization){
+               drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
+              break;
+           }else if(dept instanceof Business.Organization.RadiologyOrganization){
+               drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
               break;
            }
        }
@@ -524,7 +545,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        
        
        
-         doctor.addSchedule(date1, time);
+        doctor.addSchedule(date1, time);
         txtPatientName.setText("");
         cmbDoctor.setSelectedIndex(0);
         txtAppointmetDate.setText("");
