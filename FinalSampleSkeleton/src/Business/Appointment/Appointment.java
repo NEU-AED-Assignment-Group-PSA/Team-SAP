@@ -188,7 +188,8 @@ public class Appointment {
         GeneratedReport("Generated Report"),
         MarkForInsurance("Mark For Insurance"),
         BedAssigned("Bed Assigned"),
-        ApprovedInsurance("ApprovedInsurance");
+        ApprovedInsurance("ApprovedInsurance"),
+        DisapprovedInsurance("DisapprovedInsurance");
         private String value;
         private AppointmentStatus(String value){
             this.value = value;

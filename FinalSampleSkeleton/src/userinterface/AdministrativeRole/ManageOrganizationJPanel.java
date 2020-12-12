@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author raunak
+ * @author aditi
  */
 public class ManageOrganizationJPanel extends javax.swing.JPanel {
 
@@ -91,7 +91,8 @@ public class ManageOrganizationJPanel extends javax.swing.JPanel {
                     !type.getValue().equals(Type.Lab.getValue()) &&
                     !type.getValue().equals(Type.Pathology.getValue()) &&
                     !type.getValue().equals(Type.Radiology.getValue()) &&
-                    !type.getValue().equals(Type.MedicalStore.getValue())
+                    !type.getValue().equals(Type.MedicalStore.getValue()) &&
+                    !type.getValue().equals(Type.Insurance.getValue())
                     )
                 organizationJComboBox.addItem(type);
         }

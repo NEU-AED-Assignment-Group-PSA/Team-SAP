@@ -32,6 +32,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private EcoSystem ecosystem;
     private Patient patient;
+    private PatientHistoryDetails previuous;
 
     PatientHistoryJPanel(JPanel userProcessContainer, UserAccount userAccount, Organization organization, Enterprise enterprise, EcoSystem ecosystem, Patient patient) {
         initComponents();
@@ -41,7 +42,9 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.ecosystem = ecosystem;
         this.patient = patient;
+         patientNameTxt.setEditable(false);
         patientNameTxt.setText(patient.getName());
+        txtpatientHistoryId.setVisible(false);
         populatePatientDetails();
     }
 
@@ -75,45 +78,58 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         btnViewDetails = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
+        txtpatientHistoryId = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
         jLabel1.setText("Patient Details");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 21, -1, -1));
 
         jLabel3.setText("Family History :");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 163, -1, -1));
 
         jLabel4.setText("Medicine Allergies :");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(483, 198, -1, -1));
 
         jLabel5.setText("Allergies :");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(533, 99, -1, -1));
 
         jLabel6.setText("Surgery History :");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 125, -1, -1));
 
         jLabel7.setText("Previous visit diagnosis :");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        add(previousDiagnosisTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 157, 137));
 
         medAlergiesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 medAlergiesTxtActionPerformed(evt);
             }
         });
+        add(medAlergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 198, 365, -1));
 
         familyHistoryTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 familyHistoryTxtActionPerformed(evt);
             }
         });
+        add(familyHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 160, 365, -1));
 
         alergiesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alergiesTxtActionPerformed(evt);
             }
         });
+        add(alergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 96, 375, -1));
 
         surgeryHistoryTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surgeryHistoryTxtActionPerformed(evt);
             }
         });
+        add(surgeryHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 122, 375, -1));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +137,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 backJButtonActionPerformed(evt);
             }
         });
+        add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 46, -1, -1));
 
         btnAddPatientDetails.setText("Add Details");
         btnAddPatientDetails.addActionListener(new java.awt.event.ActionListener() {
@@ -128,6 +145,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 btnAddPatientDetailsActionPerformed(evt);
             }
         });
+        add(btnAddPatientDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 285, -1, -1));
 
         patientDetailsTbl.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         patientDetailsTbl.setModel(new javax.swing.table.DefaultTableModel(
@@ -155,15 +173,20 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(patientDetailsTbl);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 350, 521, 148));
+
         jLabel8.setText("Patient Name :");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
 
         patientNameTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 patientNameTxtActionPerformed(evt);
             }
         });
+        add(patientNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 161, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/prescroption.PNG"))); // NOI18N
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 303, -1, -1));
 
         btnViewDetails.setText("View Details");
         btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +194,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 btnViewDetailsActionPerformed(evt);
             }
         });
+        add(btnViewDetails, new org.netbeans.lib.awtextra.AbsoluteConstraints(428, 537, -1, -1));
 
         jPanel13.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -185,6 +209,8 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
             .addGap(0, 40, Short.MAX_VALUE)
         );
 
+        add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, -1, -1));
+
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
         javax.swing.GroupLayout jPanel14Layout = new javax.swing.GroupLayout(jPanel14);
@@ -198,123 +224,14 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
             .addGap(0, 91, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(72, 72, 72)
-                                .addComponent(jLabel7))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel8)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(previousDiagnosisTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(57, 57, 57)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(alergiesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                                            .addComponent(surgeryHistoryTxt)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel4))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(medAlergiesTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
-                                            .addComponent(familyHistoryTxt)))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(239, 239, 239)
-                                .addComponent(btnViewDetails))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addComponent(jLabel2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 521, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(btnAddPatientDetails))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(backJButton))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(293, 293, 293)
-                        .addComponent(jLabel1)))
-                .addContainerGap(54, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(backJButton)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(84, 84, 84)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 70, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(patientNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(previousDiagnosisTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel5)
-                                    .addComponent(alergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel6)
-                                    .addComponent(surgeryHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(familyHistoryTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(medAlergiesTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4))
-                                .addGap(19, 19, 19)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(btnAddPatientDetails)
-                        .addGap(42, 42, 42)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(btnViewDetails)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        txtpatientHistoryId.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtpatientHistoryIdActionPerformed(evt);
+            }
+        });
+        add(txtpatientHistoryId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 161, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void medAlergiesTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medAlergiesTxtActionPerformed
@@ -340,23 +257,34 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_backJButtonActionPerformed
 
     private void btnAddPatientDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPatientDetailsActionPerformed
-       
-        
+         
+         PatientHistoryDetails patientHistoryDetails = null;
+        if(previuous != null){
+            patientHistoryDetails = previuous;
+            previuous = null;
+        }
         String patientName=patientNameTxt.getText();
         String previousDiagnosis = previousDiagnosisTxt.getText();
         String medsalergies = medAlergiesTxt.getText();
-        if(patientName.equals("") || previousDiagnosis.equals("") || medsalergies.equals(""))
+        if(patientName.equals("") || previousDiagnosis.equals("") || medsalergies.equals("") ||
+                alergiesTxt.getText().isEmpty() || surgeryHistoryTxt.getText().isEmpty() || 
+                familyHistoryTxt.getText().isEmpty())
         {
            JOptionPane.showMessageDialog(null, "Fields cannot be empty, Please fill in all fields"); 
         }
         else{
-        {PatientHistoryDetails patientHistoryDetails = new PatientHistoryDetails();
-                if(patient.getPatHistorydtls() == null)
-                {
-                    ArrayList<PatientHistoryDetails> pdh = new ArrayList<>();
-                    patient.setPatHistorydtls(pdh);
-                }
-                patient.getPatHistorydtls().add(patientHistoryDetails);
+            
+        if(patientHistoryDetails == null){
+            patientHistoryDetails = new PatientHistoryDetails();
+            patient.getPatHistorydtls().add(patientHistoryDetails);
+        }
+        
+        if(patient.getPatHistorydtls() == null)
+        {
+            ArrayList<PatientHistoryDetails> pdh = new ArrayList<>();
+            patient.setPatHistorydtls(pdh);
+        }
+        
         //prescription.setDate(date);
         patientHistoryDetails.setMedAlergies(medsalergies);
         patientHistoryDetails.setPreviousDiagnosis(previousDiagnosis);
@@ -365,7 +293,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         patientHistoryDetails.setSurgeryHistory(surgeryHistoryTxt.getText());
         patientHistoryDetails.setAlergy(alergiesTxt.getText());
         //dateTxt.setText("");
-        patientNameTxt.setText("");
+//        patientNameTxt.setText("");
         previousDiagnosisTxt.setText("");
         medAlergiesTxt.setText("");
         alergiesTxt.setText("");
@@ -374,7 +302,6 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         //appointment.setPrescription(prescription);
         JOptionPane.showMessageDialog(null, "History sucessfully added"); 
         populatePatientDetails();
-        }
         }
         
     }//GEN-LAST:event_btnAddPatientDetailsActionPerformed
@@ -417,7 +344,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
 
          PatientHistoryDetails fsch= (PatientHistoryDetails)  patientDetailsTbl.getValueAt(row,5);
         
-        
+        previuous = fsch;
         patientNameTxt.setText(patient.getName());
         previousDiagnosisTxt.setText(fsch.getPreviousDiagnosis());
         medAlergiesTxt.setText(fsch.getMedAlergies());
@@ -427,6 +354,10 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         
         
     }//GEN-LAST:event_btnViewDetailsActionPerformed
+
+    private void txtpatientHistoryIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtpatientHistoryIdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtpatientHistoryIdActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -451,5 +382,6 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField patientNameTxt;
     private javax.swing.JTextField previousDiagnosisTxt;
     private javax.swing.JTextField surgeryHistoryTxt;
+    private javax.swing.JTextField txtpatientHistoryId;
     // End of variables declaration//GEN-END:variables
 }

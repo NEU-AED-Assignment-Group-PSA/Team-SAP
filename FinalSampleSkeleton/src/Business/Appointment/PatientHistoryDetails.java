@@ -23,7 +23,7 @@ public class PatientHistoryDetails {
     private String familyHistory;
     private String alergy;
     private int id;
-    private int count=10;
+    private static int count=10;
     
     public int getId() {
         return id;
@@ -32,7 +32,7 @@ public class PatientHistoryDetails {
     
     public PatientHistoryDetails()
     {
-        this.id = id + count++;
+        this.id = id + ++count;
     }
     
     @Override 

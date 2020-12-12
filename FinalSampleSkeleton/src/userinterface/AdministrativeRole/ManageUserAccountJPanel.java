@@ -178,7 +178,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         nameJTextField = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        passwordJTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         organizationJComboBox = new javax.swing.JComboBox();
@@ -192,6 +191,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel17 = new javax.swing.JLabel();
         specializationlbl = new javax.swing.JLabel();
         cmbSpecialization = new javax.swing.JComboBox();
+        passwordJTextField = new javax.swing.JPasswordField();
         viewStaffPanel = new javax.swing.JPanel();
         closebtn1 = new javax.swing.JButton();
         empNameJTextField2 = new javax.swing.JTextField();
@@ -201,7 +201,6 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         nameJTextField2 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        passwordJTextField2 = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         organizationJComboBox2 = new javax.swing.JComboBox();
@@ -214,6 +213,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         cmbSpecialization1 = new javax.swing.JComboBox();
         specializationlbl1 = new javax.swing.JLabel();
+        passwordJTextField2 = new javax.swing.JPasswordField();
         viewStaff1 = new javax.swing.JButton();
         selectDeptCmb = new javax.swing.JComboBox();
         jLabel16 = new javax.swing.JLabel();
@@ -399,15 +399,16 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(createStaffPanelLayout.createSequentialGroup()
                                 .addGap(1, 1, 1)
                                 .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(phoneNumberTxt, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(contactCarrier, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(empNameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(passwordJTextField)))
+                            .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(passwordJTextField, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(nameJTextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createStaffPanelLayout.createSequentialGroup()
                         .addGroup(createStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(specializationlbl)
@@ -591,32 +592,31 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewStaffPanelLayout.createSequentialGroup()
                 .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(viewStaffPanelLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
                         .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewStaffPanelLayout.createSequentialGroup()
-                                    .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel14)))
-                                    .addGap(32, 32, 32)
-                                    .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(uEmailTxt1)
-                                        .addComponent(nameJTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                        .addComponent(empNameJTextField2)
-                                        .addComponent(roleJComboBox2, 0, 176, Short.MAX_VALUE)
-                                        .addComponent(passwordJTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
-                                        .addComponent(organizationJComboBox2, 0, 176, Short.MAX_VALUE)))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewStaffPanelLayout.createSequentialGroup()
-                                    .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel10)
-                                        .addComponent(jLabel8))
-                                    .addGap(15, 15, 15)
-                                    .addComponent(phoneNumberTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(specializationlbl1))
+                            .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel14)))
+                                .addGap(32, 32, 32)
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(uEmailTxt1)
+                                    .addComponent(nameJTextField2)
+                                    .addComponent(empNameJTextField2)
+                                    .addComponent(roleJComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(organizationJComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(passwordJTextField2)))
+                            .addGroup(viewStaffPanelLayout.createSequentialGroup()
+                                .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel8))
+                                .addGap(15, 15, 15)
+                                .addComponent(phoneNumberTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(specializationlbl1, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbSpecialization1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(viewStaffPanelLayout.createSequentialGroup()
                         .addContainerGap()
@@ -656,7 +656,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
                 .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(passwordJTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(viewStaffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(phoneNumberTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1548,8 +1548,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField nameJTextField2;
     private javax.swing.JComboBox organizationJComboBox;
     private javax.swing.JComboBox organizationJComboBox2;
-    private javax.swing.JTextField passwordJTextField;
-    private javax.swing.JTextField passwordJTextField2;
+    private javax.swing.JPasswordField passwordJTextField;
+    private javax.swing.JPasswordField passwordJTextField2;
     private javax.swing.JTextField phoneNumberTxt;
     private javax.swing.JTextField phoneNumberTxt1;
     private javax.swing.JComboBox roleJComboBox;

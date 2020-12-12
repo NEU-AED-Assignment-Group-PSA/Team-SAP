@@ -5,6 +5,7 @@
 package userinterface.LabTechnicianRole;
 
 import Business.Appointment.Appointment;
+import Business.Appointment.AppointmentDirectory;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -27,7 +28,9 @@ import java.awt.Component;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -356,12 +359,23 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             return;
             }
             
+            Appointment labAppointment = null;
+            if(request.getSender().getEmployee().getRole().equals("Doctor Role")){
+                labAppointment = patient.getLabAppointmentDirectory().createLabAppointment(patient, userAccount.getEmployee(), appointment.getDate(), appointment.getType());
+                labAppointment.getLabTestList().addLabTest(labTest);
+//                patient.getLabAppointmentDirectory().getAppointmentList().add(labAppointment);
+                appointment.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
+//                labAppointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+            }else{
+                labAppointment = appointment;
+            }
+            
             
             ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
                 workreq.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
-                appointment.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
+                labAppointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
                 workreq.setMessage("Test completed for Patient, make bill");
-                workreq.setApp(appointment);
+                workreq.setApp(labAppointment);
                // workreq.setPatient(patient);
                 workreq.setSender(userAccount);
                 workreq.setPatient(patient);
@@ -369,8 +383,23 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 //workreq.setReceiver(userAccount);
                 Lab lab = (Lab) enterprise;
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
-                request.setStatus("Sent for Billing");
-                //UserAccount recepUseracc = null;
+                request.setStatus("Close");
+                
+//                boolean isAdd = true;
+//                if(lab.getPatientDirectory() != null && 
+//                        lab.getPatientDirectory().getPatientList() != null){
+//                    for(Patient p : lab.getPatientDirectory().getPatientList()){
+//                        if(p.getId() == patient.getId()){
+//                            isAdd = false;
+//                            break;
+//                        }
+//                    }
+//                }
+//                if(isAdd){
+//                    lab.getPatientDirectory().getPatientList().add(patient);
+//                }
+                
+//UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
                 //workreq.setReceiver(lab.getUserAccountDirectory().getUserAccountList().get(0));
@@ -464,7 +493,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         drWorkReq.setRequestDate(new Date());
         //drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
-        JOptionPane.showMessageDialog(null, "Lab Test reports submitted, sending email to doctor.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Lab Test reports submitted, sending reports through email.", "Information", JOptionPane.INFORMATION_MESSAGE);
        // txtPatientName.setText("");
        // txtAppointmetDate.setText("");
         //txtAppointmentType.setSelectedIndex(0);

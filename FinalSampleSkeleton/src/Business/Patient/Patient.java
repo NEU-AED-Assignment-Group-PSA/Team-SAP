@@ -25,6 +25,7 @@ public class Patient extends Employee{
     
     //String phoneNum;
     AppointmentDirectory appointmentDirectory;
+    AppointmentDirectory labAppointmentDirectory;
     LabTestDirectory labTestList;
     String patientSex;
     //private String address;
@@ -35,6 +36,16 @@ public class Patient extends Employee{
     private Insurance insuranceE;
     private ArrayList<PatientHistoryDetails> patHistorydtls;
     private String SSN;
+
+    public AppointmentDirectory getLabAppointmentDirectory() {
+        return labAppointmentDirectory;
+    }
+
+    public void setLabAppointmentDirectory(AppointmentDirectory labAppointmentDirectory) {
+        this.labAppointmentDirectory = labAppointmentDirectory;
+    }
+    
+    
 
     public String getSSN() {
         return SSN;
@@ -47,7 +58,10 @@ public class Patient extends Employee{
     public Patient()
     {
         super();
-        patHistorydtls= new ArrayList<>();
+        this.patHistorydtls= new ArrayList<>();
+        this.appointmentDirectory = new AppointmentDirectory();
+        this.labAppointmentDirectory = new AppointmentDirectory();
+        this.labTestList = new LabTestDirectory();
     }
     
     

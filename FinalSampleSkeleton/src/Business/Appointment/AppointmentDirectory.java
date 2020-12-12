@@ -26,6 +26,7 @@ public class AppointmentDirectory {
     public AppointmentDirectory(){
         appointmentList = new ArrayList<>();
         prescriptionList = new ArrayList<>();
+        patientHistoryList = new ArrayList<>();
         
     }
     
@@ -88,14 +89,7 @@ public class AppointmentDirectory {
         return app;
     }
 
-    public Appointment createAppointment(Patient patient, Employee doctor, Date appointmetDate, String appointmentType) {
-       if(patient.getAppointmentDirectory()== null){
-            AppointmentDirectory appointmentDirectory = new AppointmentDirectory();
-            //List<Appointment> appointmentList = new ArrayList<Appointment>();
-            //appointmentDirectory.setAppointmentList(appointmentList);
-            patient.setAppointmentDirectory(appointmentDirectory);
-        }
-        
+    public Appointment createAppointment(Patient patient, Employee doctor, Date appointmetDate, String appointmentType) { 
         Appointment appointment = new Appointment(count++);
         appointment.setDate(appointmetDate);
         appointment.setDoctor(doctor);
@@ -103,6 +97,17 @@ public class AppointmentDirectory {
         appointment.setPatient(patient);
         appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
         patient.getAppointmentDirectory().getAppointmentList().add(appointment);
+       return appointment;
+    }
+    
+    public Appointment createLabAppointment(Patient patient, Employee doctor, Date appointmetDate, String appointmentType) { 
+        Appointment appointment = new Appointment(count++);
+        appointment.setDate(appointmetDate);
+        appointment.setDoctor(doctor);
+        appointment.setType(appointmentType);
+        appointment.setPatient(patient);
+        appointment.setStatus(Appointment.AppointmentStatus.New.getValue());
+        patient.getLabAppointmentDirectory().getAppointmentList().add(appointment);
        return appointment;
     }
     
