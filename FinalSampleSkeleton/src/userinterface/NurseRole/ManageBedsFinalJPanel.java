@@ -471,7 +471,13 @@ public class ManageBedsFinalJPanel extends javax.swing.JPanel {
                     JOptionPane.showMessageDialog(null, "Cannot assign status available, first assign to laundry!");
                     return;
                 }
-                
+                if(currentBedStatus.equals(Bed.BedStatus.AssignedLaundry.getStatus()))
+                {
+                    //selectedBed.getPatient().
+                    selectedBed.setStatus(Bed.BedStatus.Available);
+                    JOptionPane.showMessageDialog(null, "Bed status changed Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    return;
+                }
                 
                
                         
