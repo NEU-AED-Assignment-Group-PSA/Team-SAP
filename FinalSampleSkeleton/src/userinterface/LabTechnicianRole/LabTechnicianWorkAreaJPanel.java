@@ -359,7 +359,13 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             
             ReceptionistWorkRequest workreq = new ReceptionistWorkRequest();
                 workreq.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
-                appointment.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
+                if(request.getSender().getEmployee().getRole().equals("Receptionist Role")){
+                    appointment.setStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                }else{ 
+                    appointment.setStatus(Appointment.AppointmentStatus.GeneratedReport.getValue());
+                    appointment.setLabRecStatus(Appointment.AppointmentStatus.Markforbilling.getValue());
+                }
+                
                 workreq.setMessage("Test completed for Patient, make bill");
                 workreq.setApp(appointment);
                // workreq.setPatient(patient);
@@ -369,11 +375,22 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
                 //workreq.setReceiver(userAccount);
                 Lab lab = (Lab) enterprise;
                 lab.getWorkQueue().getWorkRequestList().add(workreq);
-                request.setStatus("Sent for Billing");
-                if(lab.getPatientDirectory() == null){
-                    
+                request.setStatus("Close");
+                
+                boolean isAdd = true;
+                if(lab.getPatientDirectory() != null && 
+                        lab.getPatientDirectory().getPatientList() != null){
+                    for(Patient p : lab.getPatientDirectory().getPatientList()){
+                        if(p.getId() == patient.getId()){
+                            isAdd = false;
+                            break;
+                        }
+                    }
                 }
-                lab.getPatientDirectory().getPatientList().add(patient);
+                if(isAdd){
+                    lab.getPatientDirectory().getPatientList().add(patient);
+                }
+                
 //UserAccount recepUseracc = null;
                 //List<UserAccount> userAccDir=  organization.getUserAccountDirectory().getUserAccountList();
                 //List<UserAccount> nurseList = enterprise.getUserAccountDirectory().getUserAccountList();
@@ -468,7 +485,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         drWorkReq.setRequestDate(new Date());
         //drWorkReq.setResolveDate(new Date());
         drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
-        JOptionPane.showMessageDialog(null, "Lab Test reports submitted, sending email to doctor.", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Lab Test reports submitted, sending reports through email.", "Information", JOptionPane.INFORMATION_MESSAGE);
        // txtPatientName.setText("");
        // txtAppointmetDate.setText("");
         //txtAppointmentType.setSelectedIndex(0);

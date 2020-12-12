@@ -126,7 +126,7 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         });
         add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
-        lblPatientName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblPatientName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPatientName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPatientName.setText("Patient Name:");
         add(lblPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(129, 130, 130, -1));
@@ -138,7 +138,7 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         });
         add(txtPatientName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 130, 194, -1));
 
-        lblGender.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblGender.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblGender.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblGender.setText("Gender:");
         add(lblGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 89, -1));
@@ -146,25 +146,25 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         txtGender.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "Male", "Female", "Other" }));
         add(txtGender, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 170, 194, -1));
 
-        lblPhoneNumber.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblPhoneNumber.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPhoneNumber.setText("Phone Number:");
-        add(lblPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 210, 140, -1));
-        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 194, -1));
+        add(lblPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 240, 140, -1));
+        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 194, -1));
 
-        lblUserName.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblUserName.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName.setText("UserName:");
         add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 280, 89, -1));
         add(txtUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 280, 199, -1));
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Password:");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 350, 86, -1));
         add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 350, 200, -1));
 
-        jLabel4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Blood Group:");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
@@ -172,7 +172,7 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         txtBloodGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "A+", "A-", "B+", "B-", "O+", "O-", "AB+", "AB-" }));
         add(txtBloodGroup, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 390, 194, -1));
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Patient Address:");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 124, -1));
@@ -204,16 +204,16 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
         });
         add(btnSetLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 440, 166, -1));
 
-        lblemail.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        lblemail.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         lblemail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblemail.setText("Email:");
         add(lblemail, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 310, 66, -1));
         add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 310, 200, -1));
 
-        jLabel11.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(25, 56, 82));
         jLabel11.setText("Carrier:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, -1, 20));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, 20));
 
         contactCarrier.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         contactCarrier.setForeground(new java.awt.Color(25, 56, 82));
@@ -228,7 +228,7 @@ public class ViewPatientJPanel extends javax.swing.JPanel {
                 contactCarrierKeyTyped(evt);
             }
         });
-        add(contactCarrier, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 194, -1));
+        add(contactCarrier, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, 194, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BedMangmt.PNG"))); // NOI18N
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 160, 271, 217));

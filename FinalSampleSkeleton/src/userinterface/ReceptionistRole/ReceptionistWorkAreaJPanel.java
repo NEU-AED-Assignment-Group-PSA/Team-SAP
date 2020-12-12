@@ -140,7 +140,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
                 
                     Object[] row = new Object[4];
                     row[0] = patient.getId();
-                    row[1] = patient.getName();
+                    row[1] = patient;
                     row[2] = patient.getPhoneNum();
                     row[3] = patient.getBloodGroup();
                     model.addRow(row); 
@@ -344,8 +344,15 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
     private void btnBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookAppointmentActionPerformed
         int selectedRow = PatientDataJTable.getSelectedRow();
         if(selectedRow >= 0){
-            Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
-            BookAppointmentJPanel appointmentJPanel = new BookAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, patient);
+            int patientId = (int) PatientDataJTable.getValueAt(selectedRow, 0);
+            Patient temp = null;
+            for(Patient patient : enterprise.getPatientDirectory().getPatientList()){
+                if(patient.getId() == patientId){
+                    temp = patient;
+                    break;
+                }
+            }
+            BookAppointmentJPanel appointmentJPanel = new BookAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, temp);
             userProcessContainer.add("appointmentJPanel",appointmentJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
             layout.next(userProcessContainer);
@@ -358,8 +365,15 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
        int selectedRow = PatientDataJTable.getSelectedRow();
         if(selectedRow >= 0){
-            Patient patient = (Patient)enterprise.getPatientDirectory().getPatientList().get(selectedRow);
-            userinterface.PatientRole.ViewAppointmentJPanel viewAppointmentJPanel = new userinterface.PatientRole.ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, patient);
+            int patientId = (int) PatientDataJTable.getValueAt(selectedRow, 0);
+            Patient temp = null;
+            for(Patient patient : enterprise.getPatientDirectory().getPatientList()){
+                if(patient.getId() == patientId){
+                    temp = patient;
+                    break;
+                }
+            }
+            userinterface.PatientRole.ViewAppointmentJPanel viewAppointmentJPanel = new userinterface.PatientRole.ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, temp);
             userProcessContainer.add("viewAppointmentJPanel",viewAppointmentJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

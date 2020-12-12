@@ -6,23 +6,20 @@
 package userinterface.PatientRole;
 
 import Business.Appointment.Appointment;
-import Business.Appointment.AppointmentDirectory;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
-import Business.Organization.GeneralOrganization;
+import Business.Enterprise.LabEnterprise.Lab;
+import Business.Enterprise.LabEnterprise.LabTest;
 import Business.Organization.Organization;
 import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
-import Business.Utility.EmailClass;
-import static Business.Utility.EmailClass.sendEmailMessage;
 import static Business.Utility.EmailClass.sendEmailMessageAppointment;
 import static Business.Utility.EmailClass.sendTextMessage;
 import Business.WorkQueue.DoctorWorkRequest;
-import com.teamdev.jxbrowser.deps.com.google.protobuf.MapEntry;
+import Business.WorkQueue.LabTechnicianWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -32,10 +29,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import userinterface.ReceptionistRole.ReceptionistWorkAreaJPanel;
 
 /**
  *
@@ -66,9 +61,15 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         
         time=0;
         //populate doctor
+        if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            txtTestName.setEnabled(false);
+            lblTestName.setEnabled(false);
+        }else{
+            txtTestName.setEnabled(true);
+            lblTestName.setEnabled(true);
+        }
         
         populateDoctor(); //-- todo now
-        
         
     }
 
@@ -76,17 +77,33 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        List<Employee> empList= new ArrayList<>();//enterprise.getEmployeeDirectory().getDoctorList();
        
        ArrayList<Organization> deptList = enterprise.getOrganizationDirectory().getOrganizationList();
-       for(Organization dept : deptList)
-       {
-           if(dept instanceof Business.Organization.GeneralOrganization){
-           for(Employee emp : dept.getEmployeeDirectory().getEmployeeList()){
-               if(emp.getRole()!= null && emp.getRole().equals("Doctor Role"))
-               {
-                   empList.add(emp);
-               }
-           }
-           }
+       if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+           for(Organization dept : deptList)
+                {
+                    if(dept instanceof Business.Organization.GeneralOrganization){
+                    for(Employee emp : dept.getEmployeeDirectory().getEmployeeList()){
+                        if(emp.getRole()!= null && (emp.getRole().equals("Doctor Role")))
+                        {
+                            empList.add(emp);
+                        }
+                    }
+                    }
+                }
+       }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+           for(Organization dept : deptList)
+                {
+                    if((dept instanceof Business.Organization.PathologyOrganization) || 
+                            (dept instanceof Business.Organization.RadiologyOrganization)){
+                    for(Employee emp : dept.getEmployeeDirectory().getEmployeeList()){
+                        if(emp.getRole()!= null && (emp.getRole().equals("Lab Technician Role")))
+                        {
+                            empList.add(emp);
+                        }
+                    }
+                    }
+                }
        }
+       
        
         cmbDoctor.removeAllItems();
         //Employee emp = new Employee();
@@ -134,6 +151,8 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        lblTestName = new javax.swing.JLabel();
+        txtTestName = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -427,6 +446,11 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/SMS.PNG"))); // NOI18N
         add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 560, 497));
+
+        lblTestName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        lblTestName.setText("Test Name:");
+        add(lblTestName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 330, 120, -1));
+        add(txtTestName, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtAppointmetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAppointmetDateActionPerformed
@@ -439,11 +463,13 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
 
     private void txtBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBookAppointmentActionPerformed
         if(txtPatientName.getText().isEmpty() || txtAppointmetDate.getText().isEmpty() || txtAppointmentType.getSelectedIndex() == 0
-                || cmbDoctor.getSelectedIndex() == 0)
+                || cmbDoctor.getSelectedIndex() == 0 || (txtTestName.isEnabled() && txtTestName.getText().isEmpty()))
         {
             JOptionPane.showMessageDialog(null, "All fields are mandatory", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        
+        
         //|| cmbDoctor.getSelectedIndex() == 0
         if(time==0)
         {
@@ -503,18 +529,52 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         cmbDoctor.setSelectedIndex(0);
         txtAppointmetDate.setText("");
         txtAppointmentType.setSelectedIndex(0);
+        
         //add in work queue for assigned doctor
-        DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
-        drWorkReq.setMessage("New Appointment");
-        drWorkReq.setReceiver(drUserAcc);
-        drWorkReq.setSender(userAccount);
-        drWorkReq.setStatus("New");
-        drWorkReq.setPatient(patient);
-        drWorkReq.setAppointment(appoint);
-        drWorkReq.setRequestDate(new Date());
-        drWorkReq.setResolveDate(new Date());
-        drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
+        if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+            LabTechnicianWorkRequest workreq = new LabTechnicianWorkRequest();
+                workreq.setStatus("New");
+                appoint.setStatus(Appointment.AppointmentStatus.MarkforTest.getValue());
+                workreq.setMessage("New Patient for Lab test, please confirm a Test Date");
+                workreq.setStatus("New");
+                workreq.setAppointment(appoint);
+                workreq.setMessage("Please conduct lab test!");
+                workreq.setRequestDate(date1 == null ? new Date() : date1);
+                //workreq.setDoctorUserAccount(userAccount);
+                workreq.setSender(userAccount);
+                workreq.setPatient(patient);
+                //workreq.setDoctor(doctor);
+                //workreq.setReceiver(userAccount);
+                Lab lab = (Lab) enterprise;
+                lab.getWorkQueue().getWorkRequestList().add(workreq);
+                LabTest labTest= new LabTest();
+                labTest.setLab(lab);
+                labTest.setLabTechnician(null);
+                labTest.setPatient(patient);
+                labTest.setName(txtTestName.getText());
+                labTest.setDoctor(appoint.getDoctor());
+                labTest.setStatus("New");
+                //labTest.setType(testType);
+                workreq.setLabTest(labTest);
+                appoint.getLabTestList().addLabTest(labTest);
+                appoint.setStatus(Appointment.AppointmentStatus.MarkforTest.getValue());
+        }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            DoctorWorkRequest drWorkReq = new DoctorWorkRequest();
+            drWorkReq.setMessage("New Appointment");
+            drWorkReq.setReceiver(drUserAcc);
+            drWorkReq.setSender(userAccount);
+            drWorkReq.setStatus("New");
+            drWorkReq.setPatient(patient);
+            drWorkReq.setAppointment(appoint);
+            drWorkReq.setRequestDate(new Date());
+            drWorkReq.setResolveDate(new Date());
+            drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
+        }
+        if(txtTestName.isEnabled()){
+            txtTestName.setText("");
+        }
         JOptionPane.showMessageDialog(null, "Appointment added", "Information", JOptionPane.INFORMATION_MESSAGE);
+        
         
         //send sms and email to patient for appointment book status
         
@@ -571,11 +631,10 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         Employee doctor = (Employee)cmbDoctor.getSelectedItem();
         if(doctor !=null)
         {
-        
-        String sDate = txtAppointmetDate.getText().equals("") ? "2020-12-15" :txtAppointmetDate.getText() ;
-        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
-        Date date1= new Date();  
+        Date date1= new Date();
         try {
+        String sDate = txtAppointmetDate.getText().equals("") ? "2020-12-20" :txtAppointmetDate.getText() ;
+        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
             date1 = formatter1.parse(sDate);
         } catch (ParseException ex) {
             Logger.getLogger(BookAppointmentJPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -772,9 +831,11 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jpnael12;
     private javax.swing.JPanel jpnael15;
     private javax.swing.JPanel jpnael16;
+    private javax.swing.JLabel lblTestName;
     private javax.swing.JComboBox txtAppointmentType;
     private javax.swing.JTextField txtAppointmetDate;
     private javax.swing.JButton txtBookAppointment;
     private javax.swing.JTextField txtPatientName;
+    private javax.swing.JTextField txtTestName;
     // End of variables declaration//GEN-END:variables
 }

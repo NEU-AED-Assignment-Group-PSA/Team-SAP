@@ -25,6 +25,7 @@ public class Patient extends Employee{
     
     //String phoneNum;
     AppointmentDirectory appointmentDirectory;
+    AppointmentDirectory labAppointmentDirectory;
     LabTestDirectory labTestList;
     String patientSex;
     //private String address;

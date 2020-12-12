@@ -19,6 +19,7 @@ import Business.Patient.Patient;
 import Business.UserAccount.UserAccount;
 import Business.Utility.Validation;
 import Business.WorkQueue.DoctorWorkRequest;
+import Business.WorkQueue.InsuranceWorkRequest;
 import Business.WorkQueue.LabTechnicianWorkRequest;
 import Business.WorkQueue.LabTestWorkRequest;
 import Business.WorkQueue.ReceptionistWorkRequest;
@@ -64,9 +65,10 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
         this.userAccount = account;
         this.business = business;
         //this.labOrganization = (LabOrganization)organization;
-        this.patient= appointment.getPatient();
+        
         //this.insurnceAprrover = insurnceAprrover;
-        this.appointment = ((LabTechnicianWorkRequest)request).getAppointment();
+        this.appointment = ((InsuranceWorkRequest)request).getAppointment();
+        this.patient= appointment.getPatient();
         this.request=request;
         this.enterprise = enterprise;
         this.bill= appointment.getHospitalbill();
@@ -84,7 +86,7 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
         
         txtRequestedAmt.setEditable(false);
         txtApprovedAmt.setEditable(true);
-                
+          txtPatientName.setText(patient.getName());
         
         Date date = new Date();
      // String timeFormatString = "hh:mm:ss a";
@@ -267,17 +269,29 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
                    if(index==0)
                    {
                        JOptionPane.showMessageDialog(null, "Please select Status!");
-            return;
+                        return;
                    }
-                   
+                   if(index==2)
+                   {
+                       JOptionPane.showMessageDialog(null, "Request is disapproved!");
+                       appointment.setStatus(Appointment.AppointmentStatus.DisapprovedInsurance.getValue());
+                       bill.setStatus("Disapproved Insurance");    
+                       
+                       request.setStatus("Close");
+                       
+                        Validation.sendEmailMessage(patient.getEmailID(),"Insurance Approval Report",
+                       "Insurance is not approved, please pay amount! "  );       
+                        return;
+                       
+                   }
                   
                    
            Date date1=new Date();        
                    String dateFormatString = "YYYY-MM-dd";
-      DateFormat dateFormat = new SimpleDateFormat(dateFormatString);
-      String currentDate = dateFormat.format(date1);
-        double testCharge = Double.parseDouble(txtPatientName.getText());
-        String testDate = txtRequestedAmt.getText();
+//      DateFormat dateFormat = new SimpleDateFormat(dateFormatString);
+//      String currentDate = dateFormat.format(date1);
+//        double testCharge = Double.parseDouble(txtApprovedAmt.getText());
+        String testDate = txtDate.getText();
         try{   SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
          date1=formatter1.parse(testDate);
         }
@@ -286,15 +300,24 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter date properly!");
             return;
         }
-        String appAmt= txtApprovedAmt.getText();
         
-        if(appAmt.equals("") || !Validation.validateDouble(appAmt))
-        {
+        Double appAmt = 0d;
+        try{
+            appAmt= Double.parseDouble(txtApprovedAmt.getText());
+        }catch(Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, "Please enter approved amount properly!");
             return;
         }
+        
+        
+//        if(appAmt.equals("") || !Validation.validateDouble(appAmt))
+//        {
+//            JOptionPane.showMessageDialog(null, "Please enter approved amount properly!");
+//            return;
+//        }
         Double reqAmtDouble = bill.getTotalCharges();
-        Double appAmtDouble = Double.parseDouble(appAmt);
+        Double appAmtDouble = appAmt;
         
         if(appAmtDouble >reqAmtDouble  )
         {
@@ -306,7 +329,7 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
         
         //String technicianName = technicianNameTxt.getText();
         //if(testName.equals("") || testDate.equals("") || technicianName.equals(""))
-       Appointment app= appointment; //(Appointment)cmbStatusType.getSelectedItem();
+//       Appointment app= appointment; //(Appointment)cmbStatusType.getSelectedItem();
        appointment.setStatus(Appointment.AppointmentStatus.ApprovedInsurance.getValue());
         bill.setStatus("Approved Insurance");
         JOptionPane.showMessageDialog(null, "Insurance approved, sending email to patient for remaining amount if any.", "Information", JOptionPane.INFORMATION_MESSAGE);
@@ -331,6 +354,7 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
        }
        catch (Exception e)
        {
+           e.printStackTrace();
            JOptionPane.showMessageDialog(null, "Please fill in all fields properly");
        }
        
