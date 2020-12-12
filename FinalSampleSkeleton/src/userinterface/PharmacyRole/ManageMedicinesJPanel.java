@@ -855,7 +855,18 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         dosageJTextField1.setText(med.getDosage());
       availableQtyTxt1.setText(String.valueOf(med.getQuantity()));
        cmbMedicineType1.setSelectedItem(med.getType());
-        expDate1.setText(med.getExpiryDate().toString());       
+       
+        String date1=null;
+        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+           date1 =formatter1.format(med.getExpiryDate());
+        } catch (Exception ex) {
+            System.out.println("Error in ManageMedicineJPanel view panel for date paring");
+            Logger.getLogger(ManageMedicinesJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+       
+        expDate1.setText(date1);       
          priceTxt1.setText(String.valueOf(med.getPrice()));
         
         cmbMedicineType1.setEnabled(false);
