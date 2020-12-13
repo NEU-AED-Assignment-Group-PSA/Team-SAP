@@ -16,6 +16,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import userinterface.PatientLogin.CreateNewPatientSelfJPanel;
+import userinterface.PatientLogin.PatientMainWorkAreaJPanel;
 
 /**
  *
@@ -62,6 +64,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        registerBtn = new javax.swing.JButton();
         container = new javax.swing.JPanel();
         kGradientPanel1 = new userinterface.KGradientPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -96,7 +99,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 loginJButtonActionPerformed(evt);
             }
         });
-        jPanel1.add(loginJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 490, 138, 32));
+        jPanel1.add(loginJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 138, 32));
 
         userNameJTextField.setBackground(new java.awt.Color(153, 204, 255));
         userNameJTextField.setForeground(new java.awt.Color(255, 255, 255));
@@ -167,6 +170,17 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user (6).png"))); // NOI18N
         jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 310, 30, 30));
 
+        registerBtn.setBackground(new java.awt.Color(255, 255, 255));
+        registerBtn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        registerBtn.setText("REGISTER");
+        registerBtn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
+        registerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registerBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(registerBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 600, 138, 32));
+
         jSplitPane1.setLeftComponent(jPanel1);
 
         container.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -196,7 +210,7 @@ public class MainJFrame extends javax.swing.JFrame {
         kGradientPanel1Layout.setHorizontalGroup(
             kGradientPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, kGradientPanel1Layout.createSequentialGroup()
-                .addContainerGap(334, Short.MAX_VALUE)
+                .addGap(38, 344, Short.MAX_VALUE)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 614, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(278, 278, 278))
             .addGroup(kGradientPanel1Layout.createSequentialGroup()
@@ -288,6 +302,7 @@ public class MainJFrame extends javax.swing.JFrame {
         logoutJButton.setEnabled(true);
         userNameJTextField.setEnabled(false);
         passwordField.setEnabled(false);
+        registerBtn.setEnabled(false);
     }//GEN-LAST:event_loginJButtonActionPerformed
 
     private void logoutJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutJButtonActionPerformed
@@ -296,6 +311,7 @@ public class MainJFrame extends javax.swing.JFrame {
         passwordField.setEnabled(true);
         loginJButton.setEnabled(true);
 
+        registerBtn.setEnabled(true);
         userNameJTextField.setText("");
         passwordField.setText("");
 
@@ -372,6 +388,24 @@ int xx1;
         this.setLocation(x-xx1,y-xy1);
     }//GEN-LAST:event_jPanel1MouseDragged
 
+    private void registerBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerBtnActionPerformed
+        // TODO add your handling code here:
+        registerBtn.setEnabled(true);
+            loginJButton.setEnabled(true);
+        logoutJButton.setEnabled(false);
+        userNameJTextField.setEnabled(true);
+        passwordField.setEnabled(true);
+       // registerBtn.setEnabled(false);
+        CardLayout layout=(CardLayout)container.getLayout();
+        container.add(new CreateNewPatientSelfJPanel(container,dB4OUtil,system));
+           // container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
+            //System.out.println("In network-> "+ assignedNetwork.getName());
+            layout.next(container);
+            
+            
+            
+    }//GEN-LAST:event_registerBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -427,6 +461,7 @@ int xx1;
     private javax.swing.JButton logoutJButton;
     private javax.swing.JLabel maximizer;
     private javax.swing.JPasswordField passwordField;
+    private javax.swing.JButton registerBtn;
     private javax.swing.JTextField userNameJTextField;
     // End of variables declaration//GEN-END:variables
 }

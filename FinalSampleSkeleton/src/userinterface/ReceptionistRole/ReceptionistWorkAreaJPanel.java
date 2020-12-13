@@ -65,13 +65,13 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         
         if(enterprise.getEnterpriseType().getValue().equals("Pharmacy"))
         {
-            populatepharmacyReceptionist();
+           // populatepharmacyReceptionist();
         }
         
         
         if(enterprise.getEnterpriseType().getValue().equals("Insurance"))
         {
-            populateTest();
+          //  populateTest();
         }
         
         
@@ -84,7 +84,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
             for (Patient patient : enterprise.getPatientDirectory().getPatientList()) {
                     Object[] row = new Object[4];
                     row[0] = patient.getId();
-                    row[1] = patient.getName();
+                    row[1] = patient;//.getName();
                     row[2] = patient.getPhoneNum();
                     row[3] = patient.getBloodGroup();
                     model.addRow(row); 
@@ -115,7 +115,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
                 
                     Object[] row = new Object[4];
                     row[0] = patient.getId();
-                    row[1] = patient.getName();
+                    row[1] = patient;//getName();
                     row[2] = patient.getPhoneNum();
                     row[3] = patient.getBloodGroup();
                     model.addRow(row); 
@@ -260,28 +260,29 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(btnBookAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(refreshJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnViewAppointment, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(refreshJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnManagePatient)
-                    .addComponent(jButton2)
-                    .addComponent(refreshJButton))
-                .addGap(24, 24, 24)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBookAppointment)
-                    .addComponent(btnViewAppointment))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnManagePatient, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(refreshJButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnViewAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                    .addComponent(btnBookAppointment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
-        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, 90));
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, -1, 110));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/receptionist.jpg"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 20, -1, 230));
@@ -350,14 +351,8 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
     private void btnBookAppointmentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookAppointmentActionPerformed
         int selectedRow = PatientDataJTable.getSelectedRow();
         if(selectedRow >= 0){
-            int patientId = (int) PatientDataJTable.getValueAt(selectedRow, 0);
-            Patient temp = null;
-            for(Patient patient : enterprise.getPatientDirectory().getPatientList()){
-                if(patient.getId() == patientId){
-                    temp = patient;
-                    break;
-                }
-            }
+            //int patientId = (int) PatientDataJTable.getValueAt(selectedRow, 0);
+            Patient temp = (Patient)  PatientDataJTable.getValueAt(selectedRow, 1);
             BookAppointmentJPanel appointmentJPanel = new BookAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, temp);
             userProcessContainer.add("appointmentJPanel",appointmentJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
@@ -371,14 +366,9 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
        int selectedRow = PatientDataJTable.getSelectedRow();
         if(selectedRow >= 0){
-            int patientId = (int) PatientDataJTable.getValueAt(selectedRow, 0);
-            Patient temp = null;
-            for(Patient patient : enterprise.getPatientDirectory().getPatientList()){
-                if(patient.getId() == patientId){
-                    temp = patient;
-                    break;
-                }
-            }
+             
+            Patient temp = (Patient) PatientDataJTable.getValueAt(selectedRow, 1);
+           
             userinterface.PatientRole.ViewAppointmentJPanel viewAppointmentJPanel = new userinterface.PatientRole.ViewAppointmentJPanel(userProcessContainer, userAccount, organization, enterprise, system, temp);
             userProcessContainer.add("viewAppointmentJPanel",viewAppointmentJPanel);
             CardLayout layout=(CardLayout)userProcessContainer.getLayout();
@@ -404,7 +394,7 @@ public class ReceptionistWorkAreaJPanel extends javax.swing.JPanel {
         
         if(enterprise.getEnterpriseType().getValue().equals("Pharmacy"))
         {
-            populateTest();
+           // populateTest();
         }
     }//GEN-LAST:event_refreshJButtonActionPerformed
 

@@ -99,6 +99,13 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
       //System.out.println("Current date: "+currentDate);
       txtDate.setText(currentDate);
         
+                   if(request.getStatus().equalsIgnoreCase("Close"))
+                   {
+                      // JOptionPane.showMessageDialog(null, "Request is already completed!");
+                      // return;
+                       btnSubmit.setEnabled(false);
+                   }
+                   
         
         
     }
@@ -266,6 +273,13 @@ public class InsuranceDWorkAreaJPanel extends javax.swing.JPanel {
                try{
                    //String testName = testNameTxt.getText();
                    int index = cmbStatusType.getSelectedIndex();
+                   
+                   if(request.getStatus().equalsIgnoreCase("Close"))
+                   {
+                       JOptionPane.showMessageDialog(null, "Request is already completed!");
+                        return;
+                   }
+                   
                    if(index==0)
                    {
                        JOptionPane.showMessageDialog(null, "Please select Status!");

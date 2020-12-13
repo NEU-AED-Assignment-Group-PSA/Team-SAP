@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
+import userinterface.PatientLogin.CreateNewPatientSelfJPanel;
 import userinterface.PatientRole.CreateNewPatientJPanel;
 import userinterface.PatientRole.ViewPatientJPanel;
 
@@ -142,7 +143,10 @@ public class AddressJPanel extends javax.swing.JPanel {
                 ViewPatientJPanel viewPatientJPanel = (ViewPatientJPanel) userProcessContainer.getComponent(componentArray.length - 1);
                 viewPatientJPanel.populateLongituteLatitude(locationPoint);
             }
-            
+            else if(userProcessContainer.getComponent(componentArray.length - 1) instanceof CreateNewPatientSelfJPanel){
+                CreateNewPatientSelfJPanel viewPatientJPanel = (CreateNewPatientSelfJPanel) userProcessContainer.getComponent(componentArray.length - 1);
+                viewPatientJPanel.populateLongituteLatitude(locationPoint);
+            }
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.previous(userProcessContainer);
         } catch (Exception e) {
