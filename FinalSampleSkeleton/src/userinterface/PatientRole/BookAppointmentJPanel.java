@@ -292,7 +292,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
 
-        add(jpnael1014, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 290, -1, -1));
+        add(jpnael1014, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, -1, -1));
 
         jpnael15.setBackground(new java.awt.Color(153, 204, 255));
         jpnael15.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -322,7 +322,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
 
-        add(jpnael15, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 290, -1, -1));
+        add(jpnael15, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, -1, -1));
 
         jpnael11.setBackground(new java.awt.Color(153, 204, 255));
         jpnael11.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -382,7 +382,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        add(jpnael12, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 210, -1, 60));
+        add(jpnael12, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 300, -1, 60));
 
         jpnael16.setBackground(new java.awt.Color(153, 204, 255));
         jpnael16.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -412,7 +412,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24))
         );
 
-        add(jpnael16, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 290, -1, 60));
+        add(jpnael16, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 380, -1, 60));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -445,7 +445,7 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
         add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/SMS.PNG"))); // NOI18N
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 380, 560, 497));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 180, 560, 497));
 
         lblTestName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblTestName.setText("Test Name:");

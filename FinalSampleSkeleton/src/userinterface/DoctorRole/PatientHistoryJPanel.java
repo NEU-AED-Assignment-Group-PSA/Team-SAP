@@ -101,35 +101,35 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
 
         jLabel7.setText("Previous visit diagnosis :");
         add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
-        add(previousDiagnosisTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 110, 157, 137));
+        add(previousDiagnosisTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 157, 137));
 
         medAlergiesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 medAlergiesTxtActionPerformed(evt);
             }
         });
-        add(medAlergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 198, 365, -1));
+        add(medAlergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 380, -1));
 
         familyHistoryTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 familyHistoryTxtActionPerformed(evt);
             }
         });
-        add(familyHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(609, 160, 365, -1));
+        add(familyHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 380, -1));
 
         alergiesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alergiesTxtActionPerformed(evt);
             }
         });
-        add(alergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 96, 375, -1));
+        add(alergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 375, -1));
 
         surgeryHistoryTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surgeryHistoryTxtActionPerformed(evt);
             }
         });
-        add(surgeryHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(615, 122, 375, -1));
+        add(surgeryHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 375, -1));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -183,7 +183,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 patientNameTxtActionPerformed(evt);
             }
         });
-        add(patientNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 80, 161, -1));
+        add(patientNameTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 161, -1));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/prescroption.PNG"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 303, -1, -1));

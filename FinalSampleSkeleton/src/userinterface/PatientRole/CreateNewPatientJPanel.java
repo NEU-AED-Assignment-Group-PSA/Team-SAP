@@ -208,7 +208,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         add(contactCarrier, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 165, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/CreatePatient.png"))); // NOI18N
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 299, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 299, -1));
 
         lblUserName1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName1.setText("Insurance ID:");
@@ -220,7 +220,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         add(lblGender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 130, -1));
 
         cmbInsuranceCompany.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "Male", "Female", "Other" }));
-        add(cmbInsuranceCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 150, -1));
+        add(cmbInsuranceCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 160, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -253,7 +253,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/createPatient2.PNG"))); // NOI18N
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 710, 330));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 640, 340));
 
         lblUserName2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName2.setText("SSN:");

@@ -219,8 +219,8 @@ public class ViewPatientBillJPanel extends javax.swing.JPanel {
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Insurance ID:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 430, 166, -1));
-        add(txtInsuranceId, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 430, 140, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 166, -1));
+        add(txtInsuranceId, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, 150, -1));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Insurance Company:");
@@ -273,7 +273,7 @@ public class ViewPatientBillJPanel extends javax.swing.JPanel {
         add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BillingPayment.PNG"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 120, 340, 310));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 60, 340, 310));
 
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel15.setText("Lab Test Charge:");

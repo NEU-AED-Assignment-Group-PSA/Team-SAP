@@ -248,7 +248,7 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        add(scheduleSurgeryJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 300, -1, -1));
+        add(scheduleSurgeryJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
         tblSurgeyDetails.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         tblSurgeyDetails.setModel(new javax.swing.table.DefaultTableModel(
@@ -269,7 +269,7 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblSurgeyDetails);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(154, 98, 1010, 162));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 1010, 162));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -314,7 +314,7 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 212, 35));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/patientOnBed.PNG"))); // NOI18N
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(770, 290, 330, 290));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 290, 330, 290));
     }// </editor-fold>//GEN-END:initComponents
 
     private void appoinmtntDTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_appoinmtntDTxtActionPerformed
