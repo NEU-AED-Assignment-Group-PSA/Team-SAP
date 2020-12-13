@@ -186,7 +186,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(292, 74, 709, 260));
 
+        refreshTestJButton.setBackground(new java.awt.Color(255, 255, 255));
         refreshTestJButton.setText("Refresh");
+        refreshTestJButton.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         refreshTestJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 refreshTestJButtonActionPerformed(evt);
@@ -201,7 +203,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         valueLabel.setText("<value>");
         add(valueLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 10, 158, 26));
 
+        btnViewAppointments.setBackground(new java.awt.Color(255, 255, 255));
         btnViewAppointments.setText(" View Appointment");
+        btnViewAppointments.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnViewAppointments.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewAppointmentsActionPerformed(evt);
@@ -209,7 +213,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnViewAppointments, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 354, 190, -1));
 
+        btnAddPatientHistory.setBackground(new java.awt.Color(255, 255, 255));
         btnAddPatientHistory.setText("Add Patient History");
+        btnAddPatientHistory.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnAddPatientHistory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddPatientHistoryActionPerformed(evt);
@@ -217,7 +223,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnAddPatientHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(34, 397, 190, -1));
 
+        btnViewPrescription.setBackground(new java.awt.Color(255, 255, 255));
         btnViewPrescription.setText("View Prescription");
+        btnViewPrescription.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnViewPrescription.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewPrescriptionActionPerformed(evt);
@@ -225,7 +233,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnViewPrescription, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 520, 200, -1));
 
+        btnCompleted.setBackground(new java.awt.Color(255, 255, 255));
         btnCompleted.setText("Appointment Completed");
+        btnCompleted.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnCompleted.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCompletedActionPerformed(evt);
@@ -233,7 +243,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnCompleted, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 600, 200, -1));
 
+        btnPrescribeMeds.setBackground(new java.awt.Color(255, 255, 255));
         btnPrescribeMeds.setText("Prescribe Medicines");
+        btnPrescribeMeds.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnPrescribeMeds.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPrescribeMedsActionPerformed(evt);
@@ -241,7 +253,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnPrescribeMeds, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 480, 200, -1));
 
+        btnScheduleSurgery.setBackground(new java.awt.Color(255, 255, 255));
         btnScheduleSurgery.setText("Schedule Surgery");
+        btnScheduleSurgery.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnScheduleSurgery.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnScheduleSurgeryActionPerformed(evt);
@@ -249,7 +263,9 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         });
         add(btnScheduleSurgery, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 560, 200, -1));
 
+        btnScheduleLabTest.setBackground(new java.awt.Color(255, 255, 255));
         btnScheduleLabTest.setText("Schedule Test");
+        btnScheduleLabTest.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         btnScheduleLabTest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnScheduleLabTestActionPerformed(evt);

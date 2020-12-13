@@ -557,7 +557,7 @@ void populateDetails(){
         jLabel17.setText("Search");
         assignJPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 410, 610));
+        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 440, 610));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -577,10 +577,10 @@ void populateDetails(){
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 91, Short.MAX_VALUE)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
 
-        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
+        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 80));
 
         jPanel13.setBackground(new java.awt.Color(96, 83, 150));
 

@@ -11,6 +11,9 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+import userinterface.AdministrativeRole.AppointmentStatusGraphALLENTERPISE;
+import userinterface.AdministrativeRole.AppointmentTypeGraph;
+import userinterface.AdministrativeRole.TotalBedCountGraph1;
 
 /**
  *
@@ -65,6 +68,9 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
+        btnViewGraph = new javax.swing.JButton();
+        btnViewGraph1 = new javax.swing.JButton();
+        btnViewApptntStatus = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -72,10 +78,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         networkJTable.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         networkJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null}
+
             },
             new String [] {
                 "Network Name"
@@ -166,6 +169,30 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         jLabel12.setForeground(new java.awt.Color(96, 83, 150));
         jLabel12.setText("Manage Network");
         add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 270, 30));
+
+        btnViewGraph.setText("View Bed Graph");
+        btnViewGraph.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewGraphActionPerformed(evt);
+            }
+        });
+        add(btnViewGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 180, -1));
+
+        btnViewGraph1.setText("View Appointment Graph");
+        btnViewGraph1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewGraph1ActionPerformed(evt);
+            }
+        });
+        add(btnViewGraph1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
+
+        btnViewApptntStatus.setText("View Appointment Status");
+        btnViewApptntStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewApptntStatusActionPerformed(evt);
+            }
+        });
+        add(btnViewApptntStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed
@@ -205,8 +232,38 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_backJButtonActionPerformed
 
+    private void btnViewGraphActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewGraphActionPerformed
+        // TODO add your handling code here:
+
+        TotalBedCountGraph1 manageOrganizationJPanel = new TotalBedCountGraph1(userProcessContainer, system,null);
+        userProcessContainer.add("TotalBedCountGraph1", manageOrganizationJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnViewGraphActionPerformed
+
+    private void btnViewGraph1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewGraph1ActionPerformed
+        // TODO add your handling code here:
+
+        AppointmentTypeGraph manageOrganizationJPanel = new AppointmentTypeGraph(userProcessContainer, system );
+        userProcessContainer.add("AppointmentTypeGraph", manageOrganizationJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnViewGraph1ActionPerformed
+
+    private void btnViewApptntStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewApptntStatusActionPerformed
+        // TODO add your handling code here:
+
+        AppointmentStatusGraphALLENTERPISE manageOrganizationJPanel = new AppointmentStatusGraphALLENTERPISE(userProcessContainer, system );
+        userProcessContainer.add("AppointmentStatusGraphALLENTERPISE", manageOrganizationJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnViewApptntStatusActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
+    private javax.swing.JButton btnViewApptntStatus;
+    private javax.swing.JButton btnViewGraph;
+    private javax.swing.JButton btnViewGraph1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;

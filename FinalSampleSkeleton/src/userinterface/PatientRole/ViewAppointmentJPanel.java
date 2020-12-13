@@ -173,6 +173,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -359,6 +360,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(96, 83, 150));
         jLabel13.setText("View Appointment");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/receptionist.jpg"))); // NOI18N
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 290, 280));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtAppointmetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAppointmetDateActionPerformed
@@ -572,6 +576,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
