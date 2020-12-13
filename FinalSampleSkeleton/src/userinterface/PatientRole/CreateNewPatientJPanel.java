@@ -390,7 +390,19 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         Component[] componentArray =userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         ReceptionistWorkAreaJPanel sysAdminwajp = (ReceptionistWorkAreaJPanel) component;
-        sysAdminwajp.populatePatients();
+        
+         if(enterprise.getEnterpriseType().getValue().equals("Hospital"))
+        {
+           sysAdminwajp.populatePatients();
+        }
+        
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Lab"))
+        {
+           sysAdminwajp.populateTest();
+        }
+        
+       // .populatePatients();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed

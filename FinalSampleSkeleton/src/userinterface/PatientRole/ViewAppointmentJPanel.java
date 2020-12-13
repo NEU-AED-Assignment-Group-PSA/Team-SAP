@@ -120,7 +120,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 }else{
                     row[3] = appointment.getDoctor().getName();
                 }
-                row[4] = formatter1.format(appointment.getDate());
+                row[4] = appointment;//formatter1.format(appointment.getDate());
                 row[5] = appointment.getType();
                 row[6] = appointment.getStatus();
                 model.addRow(row); 
@@ -227,7 +227,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, true, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -387,29 +387,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         int selectedRow = viewAppointmentJTable.getSelectedRow();
         if(selectedRow >= 0){
             
-            int appointmentId = (int)viewAppointmentJTable.getValueAt(selectedRow, 2);
+            appointment = (Appointment)viewAppointmentJTable.getValueAt(selectedRow, 4);
             
           
-                List<Appointment> appointments = null;
-                if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
-                    if(patient.getAppointmentDirectory() != null && patient.getAppointmentDirectory().getAppointmentList() != null){
-                        appointments = patient.getAppointmentDirectory().getAppointmentList();
-                    }
-                }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
-                    if(patient.getLabAppointmentDirectory()!= null && patient.getLabAppointmentDirectory().getAppointmentList() != null){
-                        appointments = patient.getLabAppointmentDirectory().getAppointmentList();
-                    }
-                }
-           
-            
-            Appointment appointment = null;
-            for(Appointment a : appointments){
-                if(a.getAppointmentId() == appointmentId){
-                    appointment = a;
-                    break;
-                }
-            }
-            this.appointment = appointment;
             txtPatientId.setText(String.valueOf(appointment.getPatient().getId()));
             txtPatientName.setText(appointment.getPatient().getName());
             if(appointment.getDoctor().getSpecialization() != null){
@@ -453,11 +433,14 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selectedRow = viewAppointmentJTable.getSelectedRow();
         if(selectedRow >= 0){
-            Appointment appointment = (Appointment)patient.getAppointmentDirectory().getAppointmentList().get(selectedRow);
-            if(appointment.getStatus().equals(AppointmentStatus.New.getValue())){
+           appointment =(Appointment) viewAppointmentJTable.getValueAt(selectedRow, 4);  if(appointment.getStatus().equals(AppointmentStatus.New.getValue())){
                 appointment.setStatus(AppointmentStatus.Cancel.getValue());
                 JOptionPane.showMessageDialog(null, "Appointment Cancelled", "Info", JOptionPane.WARNING_MESSAGE);
                 populatePatientVisits(AppointmentStatus.Cancel.getValue());
+                
+                ArrayList<Integer> arrlistime=appointment.getDoctor().getSchedule().get(appointment.getDate());
+                arrlistime.remove(appointment.getTime());
+                
             }else{
                 JOptionPane.showMessageDialog(null, "Appointment can not be cancelled", "Warning", JOptionPane.WARNING_MESSAGE);
             }
@@ -494,7 +477,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         }
         
         if(appointment != null){
-            Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
+            //Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
             
             userinterface.PatientRole.GeneratePatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.GeneratePatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
             userProcessContainer.add("generatePatientBillJPanel",generatePatientBillJPanel);
@@ -530,7 +513,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
         appointment.getHospitalbill().setStatus("Close");
         txtAppointmentStatus.setText("Close");
-        
+        populatePatientVisits("Close");
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnViewBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBillActionPerformed
@@ -552,7 +535,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         
         
         if(appointment != null){
-            Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
+          //  Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
             
             userinterface.PatientRole.ViewPatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.ViewPatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
             userProcessContainer.add("ViewPatientBillJPanel",generatePatientBillJPanel);

@@ -95,6 +95,27 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             cmbStatusType.setEnabled(false);
         }
         txtDrRemarks.setText(request.getMessage());
+        
+        testChargeTxt.setText(labTest.getTestCharge() == 0d ? "" :String.valueOf(labTest.getTestCharge()) );
+        
+        
+        
+        if(labTest.getStatus().equals("Completed"))
+        {
+            DefaultTableModel dtm = (DefaultTableModel)labTestTbl.getModel();
+       dtm.setRowCount(0);        
+       //for (Appointment.AppointmentStatus type : Appointment.AppointmentStatus.values()){
+            Object[] row = new Object[6];
+            row[0]= labTest.getName();
+            row[1]= labTest.getTestCharge();
+            row[2]= currentDate;
+            row[3]= labTest.getLabTechnician().getName();
+            row[4]= cmbStatusType.getSelectedItem();
+            row[5]= appointment.getPatient().getName();
+            dtm.addRow(row);
+        }
+        
+        
     }
     
      public void populatecbox(){
@@ -353,7 +374,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
             return;
         }
         else{
-            if(request.getStatus().equals("Sent for Billing"))
+            if(request.getStatus().equals("Close"))
             {
                 JOptionPane.showMessageDialog(null, "Already processed!");
             return;
