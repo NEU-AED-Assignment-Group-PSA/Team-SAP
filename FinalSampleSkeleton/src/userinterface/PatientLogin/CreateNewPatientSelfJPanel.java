@@ -377,7 +377,7 @@ public class CreateNewPatientSelfJPanel extends javax.swing.JPanel {
         }
         emp.setCarrier(phoneNumberString);
         
-        JOptionPane.showMessageDialog(null, "Patient added successfully!","Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Registered successfully!","Information", JOptionPane.INFORMATION_MESSAGE);
         
         txtPatientName.setText("");
         txtPhoneNumber.setText("");

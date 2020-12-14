@@ -579,13 +579,13 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
                 drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
-              break;
+              if(drUserAcc!=null ) {break;}
            }else if(dept instanceof Business.Organization.PathologyOrganization){
                drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
-              break;
+              if(drUserAcc!=null ) {break;}
            }else if(dept instanceof Business.Organization.RadiologyOrganization){
                drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
-              break;
+             if(drUserAcc!=null ) {break;}
            }
        }
        //Integer [] arr = null;
@@ -593,7 +593,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
        
        
         doctor.addSchedule(date1, time);
-        txtPatientName.setText("");
+        //txtPatientName.setText("");
         cmbDoctor.setSelectedIndex(0);
         txtAppointmetDate.setText("");
         txtAppointmentType.setSelectedIndex(0);
@@ -639,7 +639,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
             drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
         }
         
-        JOptionPane.showMessageDialog(null, "Appointment added", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Appointment booked successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
         
         
         //send sms and email to patient for appointment book status

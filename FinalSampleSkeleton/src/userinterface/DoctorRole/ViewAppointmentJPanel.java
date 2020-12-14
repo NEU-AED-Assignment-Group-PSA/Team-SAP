@@ -63,6 +63,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         appointmentStatusTxt.setEditable(false);
         appointmentStatusTxt.setText(appointment.getStatus());
         apptHistoryTxt.setText(this.appointment.getAppoitmentHistory());
+        apptHistoryTxt.setEditable(false);
         //populateAppointmentDetails();
     }
     

@@ -58,8 +58,21 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         //visitingChargeTxt.setEnabled(false);
         //visitingChargeLbl.setVisible(false);
         //visitingChargeTxt.setVisible(false);
+        
+        
+        
     }
 
+    
+    
+    void autopopulate(){
+        empNameJTextField.setText("");
+        passwordJTextField.setText("Abcd@1234");
+        visitingChargeTxt.setText("");
+        nameJTextField.setText("");
+        phoneNumberTxt.setText("6623605219");
+        uEmailTxt.setText("aditijain2025@gmail.com");
+    }
     public void popOrganizationComboBox() {
         organizationJComboBox.removeAllItems();
         //organizationJComboBox2.removeAllItems();
@@ -397,7 +410,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         createStaffPanel.add(cmbSpecialization, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 332, 180, -1));
         createStaffPanel.add(passwordJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 174, 178, -1));
 
-        add(createStaffPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 260, 362, 455));
+        add(createStaffPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 250, 362, 455));
 
         viewStaffPanel.setBackground(new java.awt.Color(255, 255, 255));
         viewStaffPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "View Staff", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(153, 204, 255))); // NOI18N
@@ -536,7 +549,7 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         viewStaffPanel.add(specializationlbl1, new org.netbeans.lib.awtextra.AbsoluteConstraints(17, 302, -1, -1));
         viewStaffPanel.add(passwordJTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(116, 179, 180, -1));
 
-        add(viewStaffPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 260, 330, 455));
+        add(viewStaffPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 250, 330, 455));
 
         viewStaff1.setBackground(new java.awt.Color(153, 204, 255));
         viewStaff1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -948,6 +961,8 @@ public class ManageUserAccountJPanel extends javax.swing.JPanel {
         popOrganizationComboBox();
         populateMobileCarrierComboBox();
         populateSpecializationCMB();
+        
+       // autopopulate();
         //populateRoleComboBox();
     }//GEN-LAST:event_addStaffBtnActionPerformed
 

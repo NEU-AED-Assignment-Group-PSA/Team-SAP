@@ -532,13 +532,13 @@ public class BookAppointmentJPanel extends javax.swing.JPanel {
        {
            if(dept instanceof Business.Organization.GeneralOrganization){
                 drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
-              break;
+             if(drUserAcc!=null ) {break;}
            }else if(dept instanceof Business.Organization.PathologyOrganization){
                drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
-              break;
+              if(drUserAcc!=null ) {break;}
            }else if(dept instanceof Business.Organization.RadiologyOrganization){
                drUserAcc = dept.getUserAccountDirectory().getUserAccByEMployee(doctor);
-              break;
+             if(drUserAcc!=null ) {break;}
            }
        }
        //Integer [] arr = null;
