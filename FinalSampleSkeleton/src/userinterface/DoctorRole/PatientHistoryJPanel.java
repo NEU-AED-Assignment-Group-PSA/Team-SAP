@@ -83,7 +83,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Lucida Grande", 3, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel1.setText("Patient Details");
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(413, 21, -1, -1));
 
@@ -100,7 +100,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(498, 125, -1, -1));
 
         jLabel7.setText("Previous visit diagnosis :");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
         add(previousDiagnosisTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 157, 137));
 
         medAlergiesTxt.addActionListener(new java.awt.event.ActionListener() {
@@ -108,28 +108,28 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 medAlergiesTxtActionPerformed(evt);
             }
         });
-        add(medAlergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 380, -1));
+        add(medAlergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 190, 270, -1));
 
         familyHistoryTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 familyHistoryTxtActionPerformed(evt);
             }
         });
-        add(familyHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 380, -1));
+        add(familyHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 160, 270, -1));
 
         alergiesTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 alergiesTxtActionPerformed(evt);
             }
         });
-        add(alergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 375, -1));
+        add(alergiesTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 100, 270, -1));
 
         surgeryHistoryTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 surgeryHistoryTxtActionPerformed(evt);
             }
         });
-        add(surgeryHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 375, -1));
+        add(surgeryHistoryTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 130, 270, -1));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -139,6 +139,8 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         });
         add(backJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 46, -1, -1));
 
+        btnAddPatientDetails.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnAddPatientDetails.setForeground(new java.awt.Color(153, 204, 255));
         btnAddPatientDetails.setText("Add Details");
         btnAddPatientDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -173,7 +175,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(patientDetailsTbl);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 350, 521, 148));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(426, 350, 570, 148));
 
         jLabel8.setText("Patient Name :");
         add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, -1, -1));
@@ -188,6 +190,8 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/prescroption.PNG"))); // NOI18N
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(29, 303, -1, -1));
 
+        btnViewDetails.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        btnViewDetails.setForeground(new java.awt.Color(153, 204, 255));
         btnViewDetails.setText("View Details");
         btnViewDetails.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +235,7 @@ public class PatientHistoryJPanel extends javax.swing.JPanel {
                 txtpatientHistoryIdActionPerformed(evt);
             }
         });
-        add(txtpatientHistoryId, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 260, 161, -1));
+        add(txtpatientHistoryId, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 161, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void medAlergiesTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medAlergiesTxtActionPerformed

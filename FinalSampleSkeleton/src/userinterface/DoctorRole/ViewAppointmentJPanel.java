@@ -228,13 +228,13 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 290, -1, 370));
 
         jLabel15.setText("Appointment History:");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 92, 130, -1));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 92, 160, -1));
 
         apptHistoryTxt.setColumns(20);
         apptHistoryTxt.setRows(5);
         jScrollPane1.setViewportView(apptHistoryTxt);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(628, 140, 448, 121));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 130, 310, 121));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButton1ActionPerformed
