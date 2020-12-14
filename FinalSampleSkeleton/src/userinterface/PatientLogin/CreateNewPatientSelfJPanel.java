@@ -194,7 +194,7 @@ public class CreateNewPatientSelfJPanel extends javax.swing.JPanel {
                 btnSetLocationActionPerformed(evt);
             }
         });
-        add(btnSetLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 380, 166, -1));
+        add(btnSetLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 390, 166, -1));
 
         lblemail.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblemail.setText("Email:");

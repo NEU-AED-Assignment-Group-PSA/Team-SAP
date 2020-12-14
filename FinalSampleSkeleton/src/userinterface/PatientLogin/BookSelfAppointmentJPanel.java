@@ -191,7 +191,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
                 cmbDoctorActionPerformed(evt);
             }
         });
-        add(cmbDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 210, 148, -1));
+        add(cmbDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, 150, -1));
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Appointment Date:");
@@ -220,7 +220,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
                 txtAppointmetDateKeyTyped(evt);
             }
         });
-        add(txtAppointmetDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 250, 148, -1));
+        add(txtAppointmetDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 148, -1));
 
         txtBookAppointment.setText("Book Appointment");
         txtBookAppointment.addActionListener(new java.awt.event.ActionListener() {
@@ -235,7 +235,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
         add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(92, 293, -1, -1));
 
         txtAppointmentType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "In-Person", "Online" }));
-        add(txtAppointmentType, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 290, 148, -1));
+        add(txtAppointmentType, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 148, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bookAppomnt.png"))); // NOI18N
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, -1, 145));
@@ -462,7 +462,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
                 networkJComboBox1ActionPerformed(evt);
             }
         });
-        add(networkJComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 140, -1));
+        add(networkJComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 140, 150, -1));
 
         jLabel17.setText("Enterprise:");
         add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 170, -1, -1));
@@ -473,8 +473,9 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
                 enterpriseJComboBox1ActionPerformed(evt);
             }
         });
-        add(enterpriseJComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 140, -1));
+        add(enterpriseJComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 150, -1));
 
+        txtPatientName.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txtPatientName.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtPatientNameActionPerformed(evt);
@@ -760,7 +761,7 @@ public class BookSelfAppointmentJPanel extends javax.swing.JPanel {
         }
     }
     
-    
+    boolean b10,b11,b12,b14,b15,b16;
     private void jpnael10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpnael10MouseClicked
         // TODO add your handling code here:
         setLblColor(jpnael10);

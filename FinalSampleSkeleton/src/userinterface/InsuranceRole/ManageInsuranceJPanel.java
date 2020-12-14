@@ -308,10 +308,10 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
 
         lblUserName2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName2.setText("SSN");
-        addMedicineJPanel.add(lblUserName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 40, -1));
+        addMedicineJPanel.add(lblUserName2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 40, -1));
         addMedicineJPanel.add(txtSSN, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 230, 120, -1));
 
-        add(addMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 340, 339));
+        add(addMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 310, 340, 360));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -413,7 +413,7 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
         viewMedicineJPanel.add(lblUserName3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, 40, -1));
         viewMedicineJPanel.add(txtSSN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 120, -1));
 
-        add(viewMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 320, 310, 340));
+        add(viewMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 310, 310, 360));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 

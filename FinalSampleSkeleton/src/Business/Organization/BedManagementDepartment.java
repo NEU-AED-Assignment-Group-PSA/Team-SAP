@@ -62,7 +62,7 @@ public class BedManagementDepartment extends Organization {
     
     public BedDirectory createBedList(int count){
         this.bedList = new BedDirectory(count);
-        this.bedCount=count;
+        this.bedCount=count * 2;
         return bedList;
     }
     
