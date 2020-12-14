@@ -284,11 +284,11 @@ public class ManageBedJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void bedStatusCmbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bedStatusCmbActionPerformed
-        Organization organization = (Organization) bedStatusCmb.getSelectedItem();
-        if (organization != null){
+       // Organization organization = (Organization) bedStatusCmb.getSelectedItem();
+        //if (organization != null){
             //populateEmployeeComboBox(organization);
            // populateRoleComboBox(organization);
-        }
+        //}
     }//GEN-LAST:event_bedStatusCmbActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed

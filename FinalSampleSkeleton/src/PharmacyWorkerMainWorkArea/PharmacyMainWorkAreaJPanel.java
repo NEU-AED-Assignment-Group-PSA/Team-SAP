@@ -199,7 +199,7 @@ public class PharmacyMainWorkAreaJPanel extends javax.swing.JPanel {
         jLabel15.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(96, 83, 150));
         jLabel15.setText("Patient Request Management ");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 310, 37));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {

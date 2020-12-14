@@ -250,7 +250,6 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
 
         add(scheduleSurgeryJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
-        tblSurgeyDetails.setBorder(javax.swing.BorderFactory.createCompoundBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 204, 255), null), javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 204, 255), null)));
         tblSurgeyDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
