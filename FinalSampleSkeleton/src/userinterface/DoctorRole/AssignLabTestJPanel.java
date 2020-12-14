@@ -6,6 +6,7 @@
 package userinterface.DoctorRole;
 
 import Business.Appointment.Appointment;
+import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
@@ -43,8 +44,9 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
     private UserAccount userAccount;
     private Organization organization;
     private Date createdOn;
+    private EcoSystem system;
 
-    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Network network, UserAccount userAccount, Organization organization) {
+    public AssignLabTestJPanel(JPanel userProcessContainer, Patient patient, Appointment appointment, Network network, UserAccount userAccount, Organization organization, EcoSystem system) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.patient = patient;
@@ -53,15 +55,23 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
         this.network = network;
         this.userAccount = userAccount;
         this.organization = organization;
+        this.system= system;
         populateNetworkLabs();
         populateLabTest();
     }
 
     void populateNetworkLabs() {
         cmbLabs.removeAllItems();;
+        if(system.getNetworkList() == null)
+        {
+            return;
+        }
+        for(Network network1: system.getNetworkList())
+        {
+         
 
-        List<Enterprise> enterprsList = network.getEnterpriseDirectory().getEnterpriseList();
-        if (enterprsList.isEmpty() || enterprsList == null) {
+        List<Enterprise> enterprsList = network1.getEnterpriseDirectory().getEnterpriseList();
+        if (enterprsList == null || enterprsList.isEmpty()) {
             //nothing
         } else {
             for (Enterprise enterprise : enterprsList) {
@@ -72,6 +82,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
                 }
             }
 
+        }
         }
     }
 
@@ -334,7 +345,7 @@ public class AssignLabTestJPanel extends javax.swing.JPanel {
             row[1] = labTest.getName();
             row[2] = labTest.getLab();
             row[3] = labTest.getPatient();
-            row[4] = (labTest.getStatus().equals("") == true ) ? "New" :labTest.getStatus() ;
+            row[4] = (labTest.getStatus().equals("") ) ? "New" :labTest.getStatus() ;
             model.addRow(row);
             
         }

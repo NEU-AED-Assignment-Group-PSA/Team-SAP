@@ -143,8 +143,8 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
 
         lblPhoneNumber.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblPhoneNumber.setText("Phone Number:");
-        add(lblPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 124, -1));
-        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 166, -1));
+        add(lblPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 124, -1));
+        add(txtPhoneNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 166, -1));
 
         lblUserName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName.setText("UserName:");
@@ -190,7 +190,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(25, 56, 82));
         jLabel11.setText("Carrier:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 200, -1, 20));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 160, -1, 20));
 
         contactCarrier.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         contactCarrier.setForeground(new java.awt.Color(25, 56, 82));
@@ -205,10 +205,10 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
                 contactCarrierKeyTyped(evt);
             }
         });
-        add(contactCarrier, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 200, 165, -1));
+        add(contactCarrier, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 160, 165, -1));
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/CreatePatient.png"))); // NOI18N
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 150, 299, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 80, 299, -1));
 
         lblUserName1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName1.setText("Insurance ID:");
@@ -220,7 +220,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         add(lblGender1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 460, 130, -1));
 
         cmbInsuranceCompany.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "--Select--", "Male", "Female", "Other" }));
-        add(cmbInsuranceCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 150, -1));
+        add(cmbInsuranceCompany, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, 160, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -253,7 +253,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 100, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/createPatient2.PNG"))); // NOI18N
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 710, 330));
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 340, 640, 340));
 
         lblUserName2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblUserName2.setText("SSN:");
@@ -338,6 +338,11 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
               }
         String phoneNumberString = txtPhoneNumber.getText();
         
+        if(phoneNumberString.length() != 10){
+            JOptionPane.showMessageDialog(null, "Phone number is not proper!");
+            return;
+        }
+        
         Insurance insuranceE =(Insurance)cmbInsuranceCompany.getSelectedItem();
         String insuranceId = txtInsuranceID.getText();
         UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(txtUserName.getText(), txtPassword.getText(), null, new PatientRole());
@@ -367,6 +372,7 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         txtAddress.setText("");
         txtEmail.setText("");
         txtInsuranceID.setText("");
+        txtSSN.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     
@@ -384,7 +390,19 @@ public class CreateNewPatientJPanel extends javax.swing.JPanel {
         Component[] componentArray =userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
         ReceptionistWorkAreaJPanel sysAdminwajp = (ReceptionistWorkAreaJPanel) component;
-        sysAdminwajp.populatePatients();
+        
+         if(enterprise.getEnterpriseType().getValue().equals("Hospital"))
+        {
+           sysAdminwajp.populatePatients();
+        }
+        
+        
+        if(enterprise.getEnterpriseType().getValue().equals("Lab"))
+        {
+           sysAdminwajp.populateTest();
+        }
+        
+       // .populatePatients();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed

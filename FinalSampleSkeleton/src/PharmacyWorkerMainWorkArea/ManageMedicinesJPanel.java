@@ -84,7 +84,8 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) organizationJTable.getModel();
         
         model.setRowCount(0);
-        
+        String date1=null;
+        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
         for (Medicine med : medicineDir.getMedicineList()){
             if(med.getType().equals(medType))
             {
@@ -95,7 +96,16 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
             row[2] = med.getDosage();
             row[3] = med.getQuantity();
             row[4] = med.getType();
-            row[5] = med.getExpiryDate();
+            
+            
+            try {
+               date1 =formatter1.format(med.getExpiryDate());
+            } catch (Exception ex) {
+                System.out.println("Error in ManageMedicineJPanel view panel for date paring");
+                Logger.getLogger(ManageMedicinesJPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+            row[5] = date1;
             model.addRow(row);
         }
         }
@@ -857,7 +867,18 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         dosageJTextField1.setText(med.getDosage());
       availableQtyTxt1.setText(String.valueOf(med.getQuantity()));
        cmbMedicineType1.setSelectedItem(med.getType());
-        expDate1.setText(med.getExpiryDate().toString());       
+       
+       String date1=null;
+        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
+        try {
+           date1 =formatter1.format(med.getExpiryDate());
+        } catch (Exception ex) {
+            System.out.println("Error in ManageMedicineJPanel for date paring");
+            Logger.getLogger(ManageMedicinesJPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+        expDate1.setText(date1);       
          priceTxt1.setText(String.valueOf(med.getPrice()));
         
         cmbMedicineType1.setEnabled(false);

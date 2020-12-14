@@ -72,7 +72,12 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         
         SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
         txtPatientName.setText(patient.getName());
-        txtDoctor.setText(appointment.getDoctor().getName() + " - " + appointment.getDoctor().getSpecialization().getValue());
+        if(appointment.getDoctor().getSpecialization() == null){
+            txtDoctor.setText(appointment.getDoctor().getName() + " - Lab Technician");
+        }else{
+            txtDoctor.setText(appointment.getDoctor().getName() + " - " + appointment.getDoctor().getSpecialization().getValue());
+        }
+        
         txtAppointmetId.setText(String.valueOf(appointment.getAppointmentId()));
         txtAppointmetDate.setText(formatter1.format(appointment.getDate()));
         txtAppointmentType.setText(appointment.getType());
@@ -81,9 +86,17 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         if(appointment.getOperation() != null){
             operationCharge = appointment.getOperation().getOperationCharge();
         }
-        double totalCharge = visitingCharge + operationCharge;
+        
         txtVisingCharge.setText(String.valueOf(visitingCharge));
         txtOperationCharge.setText(String.valueOf(operationCharge));
+        Double labtestCharge = 0d;
+        if(appointment.getLabTestList() != null && appointment.getLabTestList().getLabTestList() != null){
+            for(LabTest labTest : appointment.getLabTestList().getLabTestList()){
+                labtestCharge += labTest.getTestCharge();
+            }
+        }
+        txtLabTestCharge.setText(String.valueOf(labtestCharge));
+        double totalCharge = visitingCharge + operationCharge + labtestCharge;
         txtTotalCharge.setText(String.valueOf(totalCharge));
         txtInsuranceE.setText(patient.getInsuranceE().getName() == null ? "" : patient.getInsuranceE().getName());
         txtInsuranceId.setText(patient.getInsuranceId() == null ? "" : patient.getInsuranceId() );
@@ -139,6 +152,8 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         jPanel13 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        txtLabTestCharge = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -181,7 +196,7 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
                 txtGenerateBillActionPerformed(evt);
             }
         });
-        add(txtGenerateBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 535, -1, -1));
+        add(txtGenerateBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 580, -1, -1));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Appointment Id:");
@@ -205,30 +220,30 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
 
         jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel9.setText("Total Charge:");
-        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(206, 353, 109, -1));
-        add(txtTotalCharge, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 350, 148, -1));
+        add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 390, 109, -1));
+        add(txtTotalCharge, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 390, 148, -1));
         add(txtDoctor, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 107, 148, -1));
         add(txtAppointmentType, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 230, 148, -1));
 
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel10.setText("Insurance ID:");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 391, 166, -1));
-        add(txtInsuranceId, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 391, 148, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 430, 166, -1));
+        add(txtInsuranceId, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 430, 148, -1));
 
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel11.setText("Insurance Company:");
-        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(149, 423, 166, -1));
-        add(txtInsuranceE, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 420, 148, -1));
+        add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 460, 166, -1));
+        add(txtInsuranceE, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 460, 148, -1));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Insurance Status:");
-        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 463, 143, -1));
-        add(txtInsuranceStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 460, 148, -1));
+        add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 500, 143, -1));
+        add(txtInsuranceStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 500, 148, -1));
 
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel13.setText("Appointment Status:");
-        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(172, 498, 143, -1));
-        add(txtApptnmtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 495, 148, -1));
+        add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 540, 143, -1));
+        add(txtApptnmtStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 530, 148, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -267,6 +282,17 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/BillingPayment.PNG"))); // NOI18N
         add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 160, 240, 330));
+
+        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel15.setText("Lab Test Charge:");
+        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 350, 130, -1));
+
+        txtLabTestCharge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLabTestChargeActionPerformed(evt);
+            }
+        });
+        add(txtLabTestCharge, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 350, 150, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -363,6 +389,10 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAppointmetIdActionPerformed
 
+    private void txtLabTestChargeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLabTestChargeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLabTestChargeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -372,6 +402,7 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -391,6 +422,7 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtInsuranceE;
     private javax.swing.JTextField txtInsuranceId;
     private javax.swing.JTextField txtInsuranceStatus;
+    private javax.swing.JTextField txtLabTestCharge;
     private javax.swing.JTextField txtOperationCharge;
     private javax.swing.JTextField txtPatientName;
     private javax.swing.JTextField txtTotalCharge;

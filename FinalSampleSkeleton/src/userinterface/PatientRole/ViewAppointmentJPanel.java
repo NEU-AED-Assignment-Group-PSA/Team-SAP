@@ -67,10 +67,16 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     public void setAppointmentStatus(){
         cmbAppointmentStatus.removeAllItems();
         cmbAppointmentStatus.addItem("--Select--");
+        
         for(AppointmentStatus status : AppointmentStatus.values()){
             if(status.getValue().equals(AppointmentStatus.New.getValue()) ||
                     status.getValue().equals(AppointmentStatus.Cancel.getValue()) ||
-                    status.getValue().equals(AppointmentStatus.Markforbilling.getValue())){
+                    status.getValue().equals(AppointmentStatus.Markforbilling.getValue()) ||
+                    status.getValue().equals(AppointmentStatus.MarkForInsurance.getValue()) ||
+                    status.getValue().equals(AppointmentStatus.Close.getValue()) ||
+                    status.getValue().equals(AppointmentStatus.ApprovedInsurance.getValue()) ||
+                    status.getValue().equals(AppointmentStatus.DisapprovedInsurance.getValue())||
+                    status.getValue().equals(AppointmentStatus.MarkforTest.getValue())){
                 cmbAppointmentStatus.addItem(status.getValue());
             }
         }
@@ -91,25 +97,35 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private void populatePatientVisits(String status) {
         DefaultTableModel model = (DefaultTableModel) viewAppointmentJTable.getModel();
         model.setRowCount(0);
-        if(patient.getAppointmentDirectory() != null && patient.getAppointmentDirectory().getAppointmentList() != null){
-            List<Appointment> appointments = patient.getAppointmentDirectory().getAppointmentList();
-            SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
-            for(Appointment appointment : appointments){
-                if(appointment.getStatus().equals(status)){
-                    Object[] row = new Object[6];
-                    row[0] = patient.getId();
-                    row[1] = patient.getName();
-                    if(appointment.getDoctor().getSpecialization() != null){
-                        row[2] = appointment.getDoctor().getName() + "-" + appointment.getDoctor().getSpecialization().getValue();
-                    }else{
-                        row[2] = appointment.getDoctor().getName();
-                    }
-                    row[3] = formatter1.format(appointment.getDate());
-                    row[4] = appointment.getType();
-                    row[5] = appointment.getStatus();
-                    model.addRow(row); 
-                }
+        List<Appointment> appointments = null;
+        if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Hospital.getValue())){
+            if(patient.getAppointmentDirectory() != null && patient.getAppointmentDirectory().getAppointmentList() != null){
+                appointments = patient.getAppointmentDirectory().getAppointmentList();
             }
+        }else if(enterprise.getEnterpriseType().getValue().equals(Enterprise.EnterpriseType.Lab.getValue())){
+            if(patient.getLabAppointmentDirectory()!= null && patient.getLabAppointmentDirectory().getAppointmentList() != null){
+                appointments = patient.getLabAppointmentDirectory().getAppointmentList();
+            }
+        }
+           
+        SimpleDateFormat formatter1=new SimpleDateFormat("yyyy-MM-dd");
+        for(Appointment appointment : appointments){
+            if(appointment.getStatus().equals(status)){
+                Object[] row = new Object[7];
+                row[0] = patient.getId();
+                row[1] = patient.getName();
+                row[2] = appointment.getAppointmentId();
+                if(appointment.getDoctor().getSpecialization() != null){
+                    row[3] = appointment.getDoctor().getName() + "-" + appointment.getDoctor().getSpecialization().getValue();
+                }else{
+                    row[3] = appointment.getDoctor().getName();
+                }
+                row[4] = appointment;//formatter1.format(appointment.getDate());
+                row[5] = appointment.getType();
+                row[6] = appointment.getStatus();
+                model.addRow(row); 
+            }
+            
         }
     }
     
@@ -157,6 +173,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jPanel14 = new javax.swing.JPanel();
         jPanel13 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -206,11 +223,11 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Patient Id", "Patient Name", "Doctor", "Appointment Date", "Appointment Type", "Status"
+                "Patient Id", "Patient Name", "Appointment Id", "Doctor", "Appointment Date", "Appointment Type", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -284,7 +301,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 btnCloseActionPerformed(evt);
             }
         });
-        add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(396, 652, 162, -1));
+        add(btnClose, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 650, 162, -1));
 
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel12.setText("Insurance Status:");
@@ -307,7 +324,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 btnViewBillActionPerformed(evt);
             }
         });
-        add(btnViewBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(607, 652, 162, -1));
+        add(btnViewBill, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 650, 162, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 
@@ -343,6 +360,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         jLabel13.setForeground(new java.awt.Color(96, 83, 150));
         jLabel13.setText("View Appointment");
         add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/receptionist.jpg"))); // NOI18N
+        add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 320, 290, 280));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtAppointmetDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAppointmetDateActionPerformed
@@ -367,8 +387,9 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         int selectedRow = viewAppointmentJTable.getSelectedRow();
         if(selectedRow >= 0){
             
-            Appointment appointment = (Appointment)patient.getAppointmentDirectory().getAppointmentList().get(selectedRow);
-            this.appointment = appointment;
+            appointment = (Appointment)viewAppointmentJTable.getValueAt(selectedRow, 4);
+            
+          
             txtPatientId.setText(String.valueOf(appointment.getPatient().getId()));
             txtPatientName.setText(appointment.getPatient().getName());
             if(appointment.getDoctor().getSpecialization() != null){
@@ -389,11 +410,11 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
                 insuranceStatus = "Not claimed";
                 
             }
-            else if(appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance))
+            else if(appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance.getValue()))
             {
                 insuranceStatus = "Approved";
             }
-            else if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance))
+            else if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance.getValue()))
             {
                 insuranceStatus = "Pending";
             }
@@ -412,10 +433,17 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         int selectedRow = viewAppointmentJTable.getSelectedRow();
         if(selectedRow >= 0){
-            Appointment appointment = (Appointment)patient.getAppointmentDirectory().getAppointmentList().get(selectedRow);
-            appointment.setStatus(AppointmentStatus.Cancel.getValue());
-            JOptionPane.showMessageDialog(null, "Appointment Cancelled", "Warning", JOptionPane.WARNING_MESSAGE);
-            populatePatientVisits(AppointmentStatus.New.getValue());
+           appointment =(Appointment) viewAppointmentJTable.getValueAt(selectedRow, 4);  if(appointment.getStatus().equals(AppointmentStatus.New.getValue())){
+                appointment.setStatus(AppointmentStatus.Cancel.getValue());
+                JOptionPane.showMessageDialog(null, "Appointment Cancelled", "Info", JOptionPane.WARNING_MESSAGE);
+                populatePatientVisits(AppointmentStatus.Cancel.getValue());
+                
+                ArrayList<Integer> arrlistime=appointment.getDoctor().getSchedule().get(appointment.getDate());
+                arrlistime.remove(appointment.getTime());
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "Appointment can not be cancelled", "Warning", JOptionPane.WARNING_MESSAGE);
+            }
             return;
         }else{
             JOptionPane.showMessageDialog(null, "Please select a row", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -449,7 +477,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         }
         
         if(appointment != null){
-            Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
+            //Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
             
             userinterface.PatientRole.GeneratePatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.GeneratePatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
             userProcessContainer.add("generatePatientBillJPanel",generatePatientBillJPanel);
@@ -485,7 +513,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         appointment.setStatus(Appointment.AppointmentStatus.Close.getValue());
         appointment.getHospitalbill().setStatus("Close");
         txtAppointmentStatus.setText("Close");
-        
+        populatePatientVisits("Close");
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnViewBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewBillActionPerformed
@@ -507,7 +535,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         
         
         if(appointment != null){
-            Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
+          //  Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
             
             userinterface.PatientRole.ViewPatientBillJPanel generatePatientBillJPanel = new userinterface.PatientRole.ViewPatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
             userProcessContainer.add("ViewPatientBillJPanel",generatePatientBillJPanel);
@@ -531,6 +559,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

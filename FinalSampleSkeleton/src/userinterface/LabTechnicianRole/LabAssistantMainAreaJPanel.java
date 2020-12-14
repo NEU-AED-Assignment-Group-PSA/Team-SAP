@@ -157,7 +157,7 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 120, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/diagnosis.PNG"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 860, 540));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 860, 370));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Lab Technician Area");
@@ -241,11 +241,11 @@ public class LabAssistantMainAreaJPanel extends javax.swing.JPanel {
             return;
         }
         
-        if(request.getStatus().equals("Sent for Billing"))
-        {
-           JOptionPane.showMessageDialog(null, "Request is already processed");
-           return;
-       }
+        //if(request.getStatus().equals("Close") || request.getStatus().equals("Close"))
+       // {
+       //    JOptionPane.showMessageDialog(null, "Request is already processed");
+       //    return;
+      // }
         
         //request.setStatus("Processing");
         LabTest labtest = (LabTest) workRequestJTable.getValueAt(selectedRow, 4);

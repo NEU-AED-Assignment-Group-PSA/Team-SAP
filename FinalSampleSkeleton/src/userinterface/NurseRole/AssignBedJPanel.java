@@ -496,11 +496,11 @@ void populateDetails(){
 
             },
             new String [] {
-                "Bed ID", "Patient", "Date", "Type"
+                "Bed ID", "Type"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -557,7 +557,7 @@ void populateDetails(){
         jLabel17.setText("Search");
         assignJPanel.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 410, 610));
+        add(assignJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 80, 440, 610));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -577,10 +577,10 @@ void populateDetails(){
         );
         jPanel14Layout.setVerticalGroup(
             jPanel14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 91, Short.MAX_VALUE)
+            .addGap(0, 80, Short.MAX_VALUE)
         );
 
-        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, -1));
+        add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 40, 80));
 
         jPanel13.setBackground(new java.awt.Color(96, 83, 150));
 
@@ -605,6 +605,9 @@ void populateDetails(){
 
     private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed
         assignJPanel.setVisible(false);
+        if(appointment.getOperation().getBedAssigned() != null){
+            btnviewBed.setEnabled(false);
+        }
     }//GEN-LAST:event_closebtnActionPerformed
 
     private void emailIDTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailIDTxtActionPerformed
@@ -701,20 +704,21 @@ void populateDetails(){
         model.setRowCount(0);
         for(Bed bed: bedList)
         {
-            boolean checkBedAvalibility = bedorg.checkIfBedAvailbleOnDate(date1, bed);
+//            boolean checkBedAvalibility = bedorg.checkIfBedAvailbleOnDate(date1, bed);
         
         
-        if(checkBedAvalibility && bed.getBedType().getBedType().equals(bedType)){
+        if(bed.getBedType().getBedType().equals(bedType) && 
+                (bed.getStatus().getStatus().equals(Bed.BedStatus.Available.getStatus()))){
         
         //String bedStatus = (String)bedStatusCmb.getSelectedItem();
         
-            Object[] row = new Object[4];
+            Object[] row = new Object[2];
             row[0] = bed;//.getBedID();
            // row[1] = bed.getStatus().getStatus();
-            Patient p = bed.getPatient();
-            row[1] = p == null ? "": p;
-            row[2] = "";
-            row[3] = bed.getBedType();
+//            Patient p = bed.getPatient();
+//            row[1] = p == null ? "": p;
+//            row[2] = "";
+            row[1] = bed.getBedType();
             model.addRow(row);
             //row[2] = 
             
@@ -791,7 +795,10 @@ void populateDetails(){
         Date date1;
         try {
             date1 = formatter1.parse(dateString);
-            bedorg.assignBedToPatientOnDate(patient,date1, selectedBed);
+            selectedBed.setPatient(patient);
+            selectedBed.setAppointment(appointment);
+            selectedBed.setStatus(Bed.BedStatus.Occupied);
+//            bedorg.assignBedToPatientOnDate(patient,date1, selectedBed);
             //selectedBed.setStatus(Bed.BedStatus.Occupied);
             JOptionPane.showMessageDialog(null, "Bed Assigned Successfully!", "Information", JOptionPane.INFORMATION_MESSAGE);
             Operation opr= appointment.getOperation();

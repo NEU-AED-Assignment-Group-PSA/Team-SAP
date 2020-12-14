@@ -4,6 +4,7 @@
  */
 package userinterface.InsuranceRole;
 
+import Business.EcoSystem;
 import PharmacyWorkerMainWorkArea.*;
 import userinterface.PharmacyRole.*;
 import userinterface.AdministrativeRole.*;
@@ -54,7 +55,7 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
     private PatientDirectory  patientDir;
     
     private UserAccount useraccount;
-    
+    private EcoSystem system;
     
     /**
      * Creates new form ManageOrganizationJPanel
@@ -66,13 +67,13 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
         this.organizationDir = organizationDir;
         this.enterprise= enterprise;
         this.useraccount= useraccount;
-        this.patientDir= ((Insurance)enterprise).getPatientDirectory();
-        //populateMainMedicineComboBox();
+        this.patientDir= ((Insurance)enterprise).getPatientDirectory();  //system.getPatientDirectory();//
+        //populateMainMedicinesComboBox();
         //populateOrganizationEmpComboBox();
         populateOrganizationComboBox();
         viewMedicineJPanel.setVisible(false);
         addMedicineJPanel.setVisible(false);
-        
+        //this.system= system;
         
         populateTableALL();//(TOOL_TIP_TEXT_KEY);
     }
@@ -492,7 +493,7 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
                ||
                priceString ==  null || priceString.equals("")
                ||
-               txtSSN.equals("")
+               txtSSN.getText().equals("")
                )
        {
             JOptionPane.showMessageDialog(null, "Please enter all details","Warning",JOptionPane.WARNING_MESSAGE);
@@ -556,7 +557,7 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
         }
         Patient patient = new Patient();
         enterprise.getPatientDirectory().getPatientList().add(patient);
-        
+        //system.getPatientDirectory().getPatientList().add(patient);
         patient.setName(custName);
         patient.setSSN(ssnString);
         //patient.set
@@ -685,7 +686,7 @@ public class ManageInsuranceJPanel extends javax.swing.JPanel {
                ||
                priceString ==  null || priceString.equals("")
                ||
-               txtSSN1.equals("")
+               txtSSN1.getText().equals("")
                )
        {
             JOptionPane.showMessageDialog(null, "Please enter all details","Warning",JOptionPane.WARNING_MESSAGE);

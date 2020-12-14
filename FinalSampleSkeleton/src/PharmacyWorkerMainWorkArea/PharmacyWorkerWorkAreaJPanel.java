@@ -6,6 +6,7 @@ package PharmacyWorkerMainWorkArea;
 
 import userinterface.LabTechnicianRole.*;
 import Business.Appointment.Appointment;
+import Business.Appointment.Prescription;
 import Business.EcoSystem;
 import Business.Employee.Employee;
 import Business.Enterprise.Enterprise;
@@ -330,11 +331,15 @@ public class PharmacyWorkerWorkAreaJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please enter date properly!");
             return;
         }
+        
+        Prescription prescription = appointment.getPrescription();
+        prescription.setStatus("Processed");
+        prescription.setAmount(Double.parseDouble(totalPriceTxt.getText()));
         //labTest.setStatus("Completed");
         //labTest.setTestCharge(testCharge);
         //String technicianName = technicianNameTxt.getText();
         //if(testName.equals("") || testDate.equals("") || technicianName.equals(""))
-       Appointment app= appointment; //(Appointment)cmbStatusType.getSelectedItem();
+//       Appointment app= appointment; //(Appointment)cmbStatusType.getSelectedItem();
        //to do work request to send to doctor
         //add in work queue for assigned doctor
        

@@ -163,7 +163,7 @@ public class InsuranceDMainAreaJPanel extends javax.swing.JPanel {
         add(refreshJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 350, 130, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/insuranceMain.PNG"))); // NOI18N
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, 690, 430));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 260, 690, 430));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel2.setText("Insurance Dealer Role");

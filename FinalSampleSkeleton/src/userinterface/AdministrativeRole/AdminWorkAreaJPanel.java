@@ -131,6 +131,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         lblEnterpriseImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/admin.png"))); // NOI18N
         add(lblEnterpriseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 560, 350));
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         manageOrganizationJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -253,7 +254,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         
         if(flag == true){
         ManageBedJPanel manageOrganizationJPanel = new ManageBedJPanel(userProcessContainer, 
-                orgDir, organization, bedOrg);
+                orgDir, organization, bedOrg, enterprise,system);
         userProcessContainer.add("ManageBedJPanel", manageOrganizationJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
