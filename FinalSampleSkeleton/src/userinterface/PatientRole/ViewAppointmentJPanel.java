@@ -94,7 +94,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
         txtInsuranceStatus.setEditable(false);
     }
 
-    private void populatePatientVisits(String status) {
+    public void populatePatientVisits(String status) {
         DefaultTableModel model = (DefaultTableModel) viewAppointmentJTable.getModel();
         model.setRowCount(0);
         List<Appointment> appointments = null;
@@ -113,7 +113,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             if(appointment.getStatus().equals(status)){
                 Object[] row = new Object[7];
                 row[0] = patient.getId();
-                row[1] = patient.getName();
+                row[1] = patient;//.getName();
                 row[2] = appointment.getAppointmentId();
                 if(appointment.getDoctor().getSpecialization() != null){
                     row[3] = appointment.getDoctor().getName() + "-" + appointment.getDoctor().getSpecialization().getValue();
@@ -470,7 +470,7 @@ public class ViewAppointmentJPanel extends javax.swing.JPanel {
             return;
         }
         
-        if(appointment != null && appointment.getHospitalbill() != null)
+        if(appointment != null && appointment.getHospitalbill() != null && appointment.getHospitalbill().getStatus().equals("Pending approval from Insurance"))
         {
             JOptionPane.showMessageDialog(null, "Bill is already generated", "Warning", JOptionPane.WARNING_MESSAGE);
             return;

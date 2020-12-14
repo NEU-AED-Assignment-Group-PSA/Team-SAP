@@ -10,6 +10,7 @@ import Business.Bill.Bill;
 import Business.Bill.BillDirectory;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise.Hospital;
 import Business.Enterprise.InsuranceEnterprise.Insurance;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
@@ -19,6 +20,7 @@ import Business.UserAccount.UserAccount;
 import Business.WorkQueue.InsuranceWorkRequest;
 import Business.WorkQueue.InsuranceWorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -83,11 +85,13 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         txtAppointmentType.setText(appointment.getType());
         double visitingCharge = appointment.getDoctor().getVisitingCharge();
         Double operationCharge = 0d;
-        if(appointment.getOperation() != null){
+        if((appointment.getOperation() != null)){
             operationCharge = appointment.getOperation().getOperationCharge();
         }
         
         txtVisingCharge.setText(String.valueOf(visitingCharge));
+       
+        
         txtOperationCharge.setText(String.valueOf(operationCharge));
         Double labtestCharge = 0d;
         if(appointment.getLabTestList() != null && appointment.getLabTestList().getLabTestList() != null){
@@ -96,6 +100,14 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
             }
         }
         txtLabTestCharge.setText(String.valueOf(labtestCharge));
+        
+        
+         if(enterprise instanceof Hospital)
+        {
+           txtLabTestCharge.setText(""); 
+           labtestCharge=0d;
+        }
+       
         double totalCharge = visitingCharge + operationCharge + labtestCharge;
         txtTotalCharge.setText(String.valueOf(totalCharge));
         txtInsuranceE.setText(patient.getInsuranceE().getName() == null ? "" : patient.getInsuranceE().getName());
@@ -298,10 +310,10 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         userProcessContainer.remove(this);
-        //Component[] componentArray =userProcessContainer.getComponents();
-        //Component component = componentArray[componentArray.length - 1];
-        //ReceptionistWorkAreaJPanel sysAdminwajp = (ReceptionistWorkAreaJPanel) component;
-        //sysAdminwajp.populatePatients();
+        Component[] componentArray =userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ViewAppointmentJPanel sysAdminwajp = (ViewAppointmentJPanel) component;
+        sysAdminwajp.populatePatientVisits("New");
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton1ActionPerformed

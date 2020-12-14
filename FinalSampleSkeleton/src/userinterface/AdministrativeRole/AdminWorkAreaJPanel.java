@@ -131,9 +131,11 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         lblEnterpriseImage.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/admin.png"))); // NOI18N
         add(lblEnterpriseImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 230, 560, 350));
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        manageOrganizationJButton.setBackground(new java.awt.Color(255, 255, 255));
         manageOrganizationJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageOrganizationJButton.setText("Manage Department");
         manageOrganizationJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -143,6 +145,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(manageOrganizationJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 30, -1, 60));
 
+        userJButton.setBackground(new java.awt.Color(255, 255, 255));
         userJButton.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         userJButton.setText("Manage Staff");
         userJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -152,6 +155,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(userJButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 30, 150, 60));
 
+        manageBedBtn.setBackground(new java.awt.Color(255, 255, 255));
         manageBedBtn.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageBedBtn.setText("Manage Bed");
         manageBedBtn.setEnabled(false);
@@ -162,6 +166,7 @@ public class AdminWorkAreaJPanel extends javax.swing.JPanel {
         });
         jPanel1.add(manageBedBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 150, 60));
 
+        manageMedicineInvtry.setBackground(new java.awt.Color(255, 255, 255));
         manageMedicineInvtry.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         manageMedicineInvtry.setText("Manage Inventory");
         manageMedicineInvtry.setEnabled(false);

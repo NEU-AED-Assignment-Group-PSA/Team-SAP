@@ -204,7 +204,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
                 btnPrescribeActionPerformed(evt);
             }
         });
-        add(btnPrescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 390, -1, -1));
+        add(btnPrescribe, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 360, -1, -1));
 
         PrescriptionTable.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         PrescriptionTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -230,7 +230,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
             PrescriptionTable.getColumnModel().getColumn(2).setResizable(false);
         }
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 190, 504, 185));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 150, 504, 185));
 
         medicneCmb.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         medicneCmb.addActionListener(new java.awt.event.ActionListener() {
@@ -298,8 +298,7 @@ public class PrescriptionJPanel extends javax.swing.JPanel {
         add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/DoctorRole/prescription-56ad9f2a5f9b58b7d00b43f8.jpg"))); // NOI18N
-        jLabel10.setText("jLabel10");
-        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
+        add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 100, 950, 580));
     }// </editor-fold>//GEN-END:initComponents
 
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed

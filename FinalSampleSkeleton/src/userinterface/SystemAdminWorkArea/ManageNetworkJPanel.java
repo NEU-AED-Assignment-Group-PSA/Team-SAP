@@ -176,7 +176,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 btnViewGraphActionPerformed(evt);
             }
         });
-        add(btnViewGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 180, -1));
+        add(btnViewGraph, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 120, 200, -1));
 
         btnViewGraph1.setText("View Appointment Graph");
         btnViewGraph1.addActionListener(new java.awt.event.ActionListener() {
@@ -184,7 +184,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 btnViewGraph1ActionPerformed(evt);
             }
         });
-        add(btnViewGraph1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, -1, -1));
+        add(btnViewGraph1, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 170, 200, -1));
 
         btnViewApptntStatus.setText("View Appointment Status");
         btnViewApptntStatus.addActionListener(new java.awt.event.ActionListener() {
@@ -192,7 +192,7 @@ public class ManageNetworkJPanel extends javax.swing.JPanel {
                 btnViewApptntStatusActionPerformed(evt);
             }
         });
-        add(btnViewApptntStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, -1, -1));
+        add(btnViewApptntStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 220, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void submitJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitJButtonActionPerformed

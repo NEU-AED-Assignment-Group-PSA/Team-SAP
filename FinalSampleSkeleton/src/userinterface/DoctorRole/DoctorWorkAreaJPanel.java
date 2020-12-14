@@ -479,7 +479,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
             return;
        
         }
-        if(appointment.getStatus().equals("Complete") || appointment.getStatus().equals(Appointment.AppointmentStatus.Markforbilling.getValue())){
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue()) || appointment.getStatus().equals(Appointment.AppointmentStatus.Markforbilling.getValue())){
             JOptionPane.showMessageDialog(null, "Request cannot be completed since already processed");
             return;
         }
@@ -636,6 +636,24 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
          //  patientNameTxt.setText(patient.getName());
             //populate operation types
          //  populateOperationType();
+         
+           if(appointment.getStatus().equals(Appointment.AppointmentStatus.Markforbilling.getValue())
+                               
+                ||
+                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())
+                ||
+                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())
+                )
+        {
+            JOptionPane.showMessageDialog(null, "Request is already processed");
+            return;
+        }
+         
+         
+         
+         
            CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("ScheduleSurgeryJPanel", new ScheduleSurgeryJPanel(userProcessContainer, patient, appointment, doctor, medicineList, ecosystem, enterprise, userAccount));
         layout.next(userProcessContainer);
@@ -672,6 +690,21 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         }
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
+        
+        
+          if(appointment.getStatus().equals(Appointment.AppointmentStatus.Markforbilling.getValue())
+                               
+                ||
+                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())
+                ||
+                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())
+                )
+        {
+            JOptionPane.showMessageDialog(null, "Request is already processed");
+            return;
+        }
         
         if(appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue()))
         {
@@ -710,6 +743,21 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         }
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
+        
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Markforbilling.getValue())
+                               
+                ||
+                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())
+                ||
+                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())
+                )
+        {
+            JOptionPane.showMessageDialog(null, "Request is already processed");
+            return;
+        }
+        
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment,network, userAccount, organization, ecosystem));
         layout.next(userProcessContainer);

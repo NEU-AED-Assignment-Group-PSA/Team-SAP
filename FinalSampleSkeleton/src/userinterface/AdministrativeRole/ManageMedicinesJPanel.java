@@ -167,10 +167,7 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         organizationJTable.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         organizationJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Dosage", "Quantity", "Type", "Expiry Date"
@@ -186,7 +183,7 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(organizationJTable);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(192, 205, 641, 177));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 641, 177));
 
         cmbMainMedicineType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Liquid", "Tablet", "Gel", "Injection", "Other" }));
         cmbMainMedicineType.addActionListener(new java.awt.event.ActionListener() {
@@ -194,11 +191,11 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 cmbMainMedicineTypeActionPerformed(evt);
             }
         });
-        add(cmbMainMedicineType, new org.netbeans.lib.awtextra.AbsoluteConstraints(475, 165, 179, -1));
+        add(cmbMainMedicineType, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 150, 179, -1));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Medicine Type");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(308, 167, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 150, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel4.setText("Manage Medicine Inventory");
@@ -206,10 +203,16 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
 
         addMedicineJPanel.setBackground(new java.awt.Color(255, 255, 255));
         addMedicineJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Add Medicine", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(153, 204, 255))); // NOI18N
+        addMedicineJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        addMedicineJPanel.add(dosageJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 105, 122, -1));
 
         jLabel7.setText("Price");
+        addMedicineJPanel.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 188, -1, -1));
 
         jLabel2.setText("Name");
+        addMedicineJPanel.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 70, -1, -1));
+        addMedicineJPanel.add(priceTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 185, 122, -1));
+        addMedicineJPanel.add(nameJTextField, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 67, 122, -1));
 
         cmbMedicineType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Liquid", "Tablet", "Gel", "Injection", "Other" }));
         cmbMedicineType.addActionListener(new java.awt.event.ActionListener() {
@@ -217,12 +220,17 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 cmbMedicineTypeActionPerformed(evt);
             }
         });
+        addMedicineJPanel.add(cmbMedicineType, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 32, 122, -1));
 
         jLabel3.setText("Type");
+        addMedicineJPanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 38, -1, -1));
 
         jLabel5.setText("Dosage");
+        addMedicineJPanel.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 108, -1, -1));
 
         jLabel6.setText("Available Unit");
+        addMedicineJPanel.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 148, -1, -1));
+        addMedicineJPanel.add(availableQtyTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 145, 122, -1));
 
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
@@ -230,6 +238,7 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
+        addMedicineJPanel.add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 260, 63, -1));
 
         closebtn.setText("Close");
         closebtn.addActionListener(new java.awt.event.ActionListener() {
@@ -237,81 +246,13 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 closebtnActionPerformed(evt);
             }
         });
+        addMedicineJPanel.add(closebtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 260, -1, -1));
 
         jLabel8.setText("Expiry Date");
+        addMedicineJPanel.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 223, -1, -1));
+        addMedicineJPanel.add(expDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 122, -1));
 
-        javax.swing.GroupLayout addMedicineJPanelLayout = new javax.swing.GroupLayout(addMedicineJPanel);
-        addMedicineJPanel.setLayout(addMedicineJPanelLayout);
-        addMedicineJPanelLayout.setHorizontalGroup(
-            addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addMedicineJPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(addMedicineJPanelLayout.createSequentialGroup()
-                        .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7))
-                        .addGap(33, 33, 33)
-                        .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(availableQtyTxt)
-                            .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addMedicineJPanelLayout.createSequentialGroup()
-                        .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel5))
-                        .addGap(68, 68, 68)
-                        .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(nameJTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dosageJTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbMedicineType, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, addMedicineJPanelLayout.createSequentialGroup()
-                        .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel8)
-                            .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(closebtn)
-                            .addComponent(expDate, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 36, Short.MAX_VALUE))
-        );
-        addMedicineJPanelLayout.setVerticalGroup(
-            addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(addMedicineJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(addMedicineJPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel3))
-                    .addComponent(cmbMedicineType, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(dosageJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(availableQtyTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(priceTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(expDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(18, 18, 18)
-                .addGroup(addMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(closebtn)
-                    .addComponent(btnSave))
-                .addContainerGap(47, Short.MAX_VALUE))
-        );
-
-        add(addMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 416, -1, -1));
+        add(addMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 416, 310, 320));
 
         jPanel1.setBackground(new java.awt.Color(153, 204, 255));
 
@@ -367,10 +308,16 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
 
         viewMedicineJPanel.setBackground(new java.awt.Color(255, 255, 255));
         viewMedicineJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "View Medicine", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14), new java.awt.Color(153, 204, 255))); // NOI18N
+        viewMedicineJPanel.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        viewMedicineJPanel.add(dosageJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 105, 122, -1));
 
         jLabel9.setText("Price");
+        viewMedicineJPanel.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 188, -1, -1));
 
         jLabel10.setText("Name");
+        viewMedicineJPanel.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 70, -1, -1));
+        viewMedicineJPanel.add(priceTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 185, 122, -1));
+        viewMedicineJPanel.add(nameJTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 67, 122, -1));
 
         cmbMedicineType1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Select", "Liquid", "Tablet", "Gel", "Injection", "Other" }));
         cmbMedicineType1.addActionListener(new java.awt.event.ActionListener() {
@@ -378,12 +325,17 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 cmbMedicineType1ActionPerformed(evt);
             }
         });
+        viewMedicineJPanel.add(cmbMedicineType1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 32, 122, -1));
 
         jLabel11.setText("Type");
+        viewMedicineJPanel.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 38, -1, -1));
 
         jLabel12.setText("Dosage");
+        viewMedicineJPanel.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 108, -1, -1));
 
         jLabel13.setText("Available Unit");
+        viewMedicineJPanel.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 148, -1, -1));
+        viewMedicineJPanel.add(availableQtyTxt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 145, 122, -1));
 
         btnSave1.setText("Save");
         btnSave1.addActionListener(new java.awt.event.ActionListener() {
@@ -391,6 +343,7 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 btnSave1ActionPerformed(evt);
             }
         });
+        viewMedicineJPanel.add(btnSave1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 256, 63, -1));
 
         btnUpdate1.setText("Update Details");
         btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
@@ -398,6 +351,7 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 btnUpdate1ActionPerformed(evt);
             }
         });
+        viewMedicineJPanel.add(btnUpdate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 256, 124, -1));
 
         closebtn1.setText("Close");
         closebtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -405,85 +359,13 @@ public class ManageMedicinesJPanel extends javax.swing.JPanel {
                 closebtn1ActionPerformed(evt);
             }
         });
+        viewMedicineJPanel.add(closebtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 294, -1, -1));
 
         jLabel14.setText("Expiry Date");
+        viewMedicineJPanel.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(42, 223, -1, -1));
+        viewMedicineJPanel.add(expDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 220, 122, -1));
 
-        javax.swing.GroupLayout viewMedicineJPanelLayout = new javax.swing.GroupLayout(viewMedicineJPanel);
-        viewMedicineJPanel.setLayout(viewMedicineJPanelLayout);
-        viewMedicineJPanelLayout.setHorizontalGroup(
-            viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewMedicineJPanelLayout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(viewMedicineJPanelLayout.createSequentialGroup()
-                        .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel13)
-                            .addComponent(jLabel9))
-                        .addGap(33, 33, 33)
-                        .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(availableQtyTxt1)
-                            .addComponent(priceTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewMedicineJPanelLayout.createSequentialGroup()
-                        .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel11)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel12))
-                        .addGap(68, 68, 68)
-                        .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(nameJTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dosageJTextField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbMedicineType1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, viewMedicineJPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel14)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(expDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(viewMedicineJPanelLayout.createSequentialGroup()
-                        .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(closebtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnSave1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(45, 45, 45)
-                        .addComponent(btnUpdate1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(0, 36, Short.MAX_VALUE))
-        );
-        viewMedicineJPanelLayout.setVerticalGroup(
-            viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(viewMedicineJPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(viewMedicineJPanelLayout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel11))
-                    .addComponent(cmbMedicineType1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(nameJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(dosageJTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(availableQtyTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(priceTxt1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(expDate1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addGap(14, 14, 14)
-                .addGroup(viewMedicineJPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave1)
-                    .addComponent(btnUpdate1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(closebtn1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        add(viewMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 416, -1, -1));
+        add(viewMedicineJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 416, 300, -1));
 
         jPanel14.setBackground(new java.awt.Color(232, 201, 232));
 

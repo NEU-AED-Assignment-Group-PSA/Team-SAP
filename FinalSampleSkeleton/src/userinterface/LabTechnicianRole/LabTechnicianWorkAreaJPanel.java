@@ -513,7 +513,7 @@ public class LabTechnicianWorkAreaJPanel extends javax.swing.JPanel {
         drWorkReq.setAppointment(lwr.getAppointment());
         drWorkReq.setRequestDate(new Date());
         //drWorkReq.setResolveDate(new Date());
-        drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
+        //drUserAcc.getWorkQueue().getWorkRequestList().add(drWorkReq);
         JOptionPane.showMessageDialog(null, "Lab Test reports submitted, sending reports through email.", "Information", JOptionPane.INFORMATION_MESSAGE);
        // txtPatientName.setText("");
        // txtAppointmetDate.setText("");
