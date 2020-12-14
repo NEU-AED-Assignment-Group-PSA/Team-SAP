@@ -142,7 +142,7 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        scheduleSurgeryJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule"));
+        scheduleSurgeryJPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Add Schedule", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Lucida Grande", 0, 13), new java.awt.Color(153, 204, 255))); // NOI18N
 
         appoinmtntDTxt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +250,6 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
 
         add(scheduleSurgeryJPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 300, -1, -1));
 
-        tblSurgeyDetails.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 204, 255)));
         tblSurgeyDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -309,7 +308,7 @@ public class ScheduleSurgeryJPanel extends javax.swing.JPanel {
 
         add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel4.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
         jLabel4.setText("Surgery Scheduling");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 10, 212, 35));
 

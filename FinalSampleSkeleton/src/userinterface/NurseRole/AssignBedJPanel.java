@@ -600,7 +600,7 @@ void populateDetails(){
         jLabel18.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(96, 83, 150));
         jLabel18.setText("View Request - Bed Assignment");
-        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 270, 37));
+        add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 320, 37));
     }// </editor-fold>//GEN-END:initComponents
 
     private void closebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closebtnActionPerformed

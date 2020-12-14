@@ -67,7 +67,7 @@ public class ViewPrescriptionJPanel extends javax.swing.JPanel {
         backJButton = new javax.swing.JButton();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -91,11 +91,11 @@ public class ViewPrescriptionJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(viewPrescriptionTbl);
 
-        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 121, 416, 430));
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(316, 140, 420, 370));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Prescription");
-        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 50, -1, -1));
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 50, -1, -1));
 
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,8 +135,9 @@ public class ViewPrescriptionJPanel extends javax.swing.JPanel {
 
         add(jPanel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/Mediciness.PNG"))); // NOI18N
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 320, 310));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/userinterface/DoctorRole/prescription.png"))); // NOI18N
+        jLabel3.setText("jLabel3");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 700, 590));
     }// </editor-fold>//GEN-END:initComponents
 
     public void populatePrescription(){
@@ -166,7 +167,7 @@ public class ViewPrescriptionJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton backJButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JScrollPane jScrollPane3;
