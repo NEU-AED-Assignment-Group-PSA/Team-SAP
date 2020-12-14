@@ -703,7 +703,7 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
         patient = (Patient)DoctorWorkAreaTable.getValueAt(selectedRow, 0);
         appointment= (Appointment)DoctorWorkAreaTable.getValueAt(selectedRow, 1);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-        userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment,network, userAccount, organization));
+        userProcessContainer.add("AssignLabTestJPanel", new AssignLabTestJPanel(userProcessContainer, patient, appointment,network, userAccount, organization, ecosystem));
         layout.next(userProcessContainer);
         populateRequestTable();
     }//GEN-LAST:event_btnScheduleLabTestActionPerformed
