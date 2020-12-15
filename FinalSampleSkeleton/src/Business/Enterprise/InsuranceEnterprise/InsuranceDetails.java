@@ -38,7 +38,7 @@ private Employee insuranceDealer;
     public void setSSN(String SSN) {
         this.SSN = SSN;
     }
-   static int count =10010;
+   static int count =10020;
    
    public InsuranceDetails(){
        this.id = "INSUR" + count ++;

@@ -17,7 +17,7 @@ import javax.swing.JTextField;
  * @author aditi
  */
 public class AppointmentDirectory {
-    private int count = 1;
+    private int count = 11;
     List<Appointment> appointmentList;
     //private Prescription prescription;
     List<Prescription> prescriptionList;
