@@ -10,6 +10,7 @@ import Business.Bill.Bill;
 import Business.Bill.BillDirectory;
 import Business.EcoSystem;
 import Business.Enterprise.Enterprise;
+import Business.Enterprise.HospitalEnterprise.Hospital;
 import Business.Enterprise.InsuranceEnterprise.Insurance;
 import Business.Enterprise.LabEnterprise.Lab;
 import Business.Enterprise.LabEnterprise.LabTest;
@@ -97,6 +98,13 @@ public class ViewPatientBillJPanel extends javax.swing.JPanel {
             }
         }
         txtLabTestCharge.setText(String.valueOf(labtestCharge));
+         if(enterprise instanceof Hospital)
+        {
+           txtLabTestCharge.setText(""); 
+           labtestCharge=0d;
+        }
+        
+        
         double totalCharge = visitingCharge + operationCharge + labtestCharge;
         txtTotalCharge.setText(String.valueOf(totalCharge));
         txtInsuranceE.setText(patient.getInsuranceE().getName() == null ? "" : patient.getInsuranceE().getName());

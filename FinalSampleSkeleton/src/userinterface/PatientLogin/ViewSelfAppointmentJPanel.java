@@ -431,7 +431,7 @@ public class ViewSelfAppointmentJPanel extends javax.swing.JPanel {
         
         
         if(appointment != null){
-            Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
+            //Patient patient = enterprise.getPatientDirectory().findPatientById(Integer.parseInt(txtPatientId.getText()));
             
             ViewSelfPatientBillJPanel generatePatientBillJPanel = new ViewSelfPatientBillJPanel(userProcessContainer, organization, enterprise, system, patient, appointment, userAccount);
             userProcessContainer.add("ViewSelfPatientBillJPanel",generatePatientBillJPanel);
