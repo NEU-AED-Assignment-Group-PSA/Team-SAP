@@ -114,7 +114,7 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         txtInsuranceId.setText(patient.getInsuranceId() == null ? "" : patient.getInsuranceId() );
         txtApptnmtStatus.setText(appointment.getStatus());
         
-        if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance))
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance.getValue()))
         {
             txtInsuranceStatus.setText(appointment.getStatus());
         }
@@ -323,17 +323,17 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtAppointmetDateActionPerformed
 
     private void txtGenerateBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGenerateBillActionPerformed
-        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Close)){
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())){
             JOptionPane.showMessageDialog(null, "Bill is already generated","Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel)){
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())){
             JOptionPane.showMessageDialog(null, "Appointment is cancelled so bill will not generate","Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
-        if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance)){
+        if(appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance.getValue())){
             JOptionPane.showMessageDialog(null, "Bill is sent to insurance company already","Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -354,11 +354,11 @@ public class GeneratePatientBillJPanel extends javax.swing.JPanel {
         bills.add(bill);
         appointment.setHospitalbill(bill);
         appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
-        for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
-            if(appointment.getAppointmentId() == this.appointment.getAppointmentId()){
-                appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
-            }
-        }
+       // for(Appointment appointment : patient.getAppointmentDirectory().getAppointmentList()){
+         //   if(appointment.getAppointmentId() == this.appointment.getAppointmentId()){
+           //     appointment.setStatus(Appointment.AppointmentStatus.MarkForInsurance.getValue());
+           // }
+       // }
         txtGenerateBill.setEnabled(false);
         JOptionPane.showMessageDialog(null, "Bill generated successfully!","Information", JOptionPane.INFORMATION_MESSAGE);
         //return;

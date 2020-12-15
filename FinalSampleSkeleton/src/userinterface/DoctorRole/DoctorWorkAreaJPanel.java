@@ -643,7 +643,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 
                 appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())
                 ||
-                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance.getValue())
+                ||
+                appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance.getValue())
+                ||
                 appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())
                 )
         {
@@ -698,7 +701,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 
                 appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())
                 ||
-                
+                appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance.getValue())
+                ||
+                appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance.getValue())
+                ||
                 appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())
                 )
         {
@@ -749,6 +755,10 @@ public class DoctorWorkAreaJPanel extends javax.swing.JPanel {
                 ||
                 
                 appointment.getStatus().equals(Appointment.AppointmentStatus.Close.getValue())
+                ||
+                appointment.getStatus().equals(Appointment.AppointmentStatus.MarkForInsurance.getValue())
+                ||
+                appointment.getStatus().equals(Appointment.AppointmentStatus.ApprovedInsurance.getValue())
                 ||
                 
                 appointment.getStatus().equals(Appointment.AppointmentStatus.Cancel.getValue())
