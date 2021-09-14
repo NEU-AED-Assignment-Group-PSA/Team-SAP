@@ -14,12 +14,6 @@ Team members:
 ### * Notification Broadcasted to relevant authority for response in Ecosystem platform
 ### * View a report graph of all the appointments type and beds availability in an enterprise as well as across all enterprises in the system
 
-![image](https://user-images.githubusercontent.com/71220629/133337897-25da842a-29b6-4bc2-bd2f-865ac425409f.png)
-
-### Learned to create graphs as well \ 
-!![BarChart](https://user-images.githubusercontent.com/71220629/133337536-9ea9b7dc-6c1e-4796-8352-75bccca4d0ff.jpeg)
-
-
 ### Screen shots:
 
 User login
@@ -33,4 +27,10 @@ Patient Registration
 
 Google Map Location to find near by address
 !![image](https://user-images.githubusercontent.com/71220629/133339326-9d4fc8bf-3c02-4cfe-9d5b-3528d4b78139.png)
+
+Book Appointment
+![image](https://user-images.githubusercontent.com/71220629/133348601-76d973a4-d4d7-41b2-962f-e814c50aa224.png)
+
+## Learned to create graphs as well \ 
+!![BarChart](https://user-images.githubusercontent.com/71220629/133337536-9ea9b7dc-6c1e-4796-8352-75bccca4d0ff.jpeg)
 
