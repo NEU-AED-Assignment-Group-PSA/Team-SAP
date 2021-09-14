@@ -4,8 +4,7 @@ Team members:
 * Suhani Shah - 001567040
 * Prerana Urs Praveen Kumar Urs - 001553207
 
-## This repository contains group project work.
-## This is a Java Swing application for Health Management and Doctor Appointment booking.
+## This repository contains group assignments and group project work.
+## This is a Java Swing application and comcepts repo.
 
-We have created graphs as well 
-!![BarChart](https://user-images.githubusercontent.com/71220629/133337536-9ea9b7dc-6c1e-4796-8352-75bccca4d0ff.jpeg)
+
