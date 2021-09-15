@@ -32,6 +32,7 @@ Book Appointment
 ![image](https://user-images.githubusercontent.com/71220629/133348601-76d973a4-d4d7-41b2-962f-e814c50aa224.png)
 
 Learned to create graphs as well 
+
 ![BarChart](https://user-images.githubusercontent.com/71220629/133337536-9ea9b7dc-6c1e-4796-8352-75bccca4d0ff.jpeg)
 
 View Appointment
@@ -45,6 +46,7 @@ Doctor Workflow
 
 
 Appointment Details
+
 ![image](https://user-images.githubusercontent.com/71220629/133350719-c445f982-8b15-40d7-af59-77e7141549a8.png)
 
 ![image](https://user-images.githubusercontent.com/71220629/133350743-25b6646e-8dbf-4b0c-87d5-cfd3bc14d210.png)
@@ -60,6 +62,7 @@ Lab Technician
 
 
 Pharmacy
+
 ![image](https://user-images.githubusercontent.com/71220629/133350808-11b14797-269a-4a43-be22-b07ff0d80a77.png)
 ![image](https://user-images.githubusercontent.com/71220629/133350926-0b518890-e497-4038-98d5-d2821c414ff1.png)
 
